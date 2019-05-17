@@ -21,16 +21,24 @@
 void testSuperAlgorithm() {
     Timer<true, false> t(true);
 
-    int numOfVertices = 50;
+
+
+    int numOfVertices = 30;
     int faspSize = 10;
-    int reps = 2;
+    int reps = 60;
 
     DataHdf5<double> f("/tmp/out.h5");
 
-    for (int nv = 1; nv < 30 ; nv += 1) {
+    for (int nv = 1; nv < 20 ; nv += 1) {
+        std::cout << "FASP SIZE: " << nv << std::endl;
         for (int r = 0; r < reps; r++) {
             using EDGE_PROP_TYPE = int;
-            auto[g, c] = Graph::Fasp::generateGraphWithKnownFasp<EDGE_PROP_TYPE, int, Graph::GraphMap>(numOfVertices, nv, 100, true);
+            auto[g, c] = Graph::Fasp::generateGraphWithKnownFasp<EDGE_PROP_TYPE, int, Graph::GraphMap>(numOfVertices, nv, 60, true);
+
+            Tools::printType<decltype(g)>();
+            std::cout << Tools::demangle(typeid(g).name()) << std::endl;
+            std::cout << typeid(g).name() << std::endl;
+
             f.put("vertices", g.getNumOfVertices());
             f.put("edges", g.getNumOfEdges());
 
@@ -51,8 +59,64 @@ void testSuperAlgorithm() {
 
 }
 
+void testIncreasingSizeOfFaspWithConstVE(int v, int e) {
+    Timer<true, false> t(true);
+
+
+
+    int numOfVertices = v;
+    int numOfEdges = e;
+    int reps = 30;
+
+    DataHdf5<double> f("/tmp/out.h5");
+
+    for (int faspSize = 1; faspSize < 40 ; faspSize += 1) {
+        std::cout << "FASP SIZE: " << faspSize << std::endl;
+        for (int r = 0; r < reps; r++) {
+            using EDGE_PROP_TYPE = int;
+            auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(numOfVertices, faspSize, numOfEdges);
+
+            f.put("vertices", g.getNumOfVertices());
+            f.put("edges", g.getNumOfEdges());
+
+            f.put("gr", Graph::Fasp::GR(g, c));
+            f.put("delta", Graph::FaspFast::deltaFASP(g, c));
+            f.put("random", Graph::FaspFast::randomFASP(g, c));
+
+            f.put("exact", faspSize);
+        }
+    }
+
+    f.save();
+//    t.start_timer("1");
+//    t.stop_timer();
+
+}
+
+void test() {
+    using EDGE_PROP_TYPE = int;
+    int v = 60;
+    int f = 10;
+    int e = 120;
+
+    int maxEdges = v * (v - 1) / 2 + f;
+    e = e > maxEdges ? maxEdges : e;
+    auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<EDGE_PROP_TYPE, int, Graph::GraphMap>(v, f, e);
+    std::cout << c << std::endl;
+    std::cout << g << std::endl;
+    std::cout << g.getStrRepresentationOfGraph() << std::endl;
+    std::cout << "V/E/F: " << v << " " << e << " " << f << std::endl;
+
+    Graph::Fasp::GR(g, c);
+    Graph::FaspFast::deltaFASP(g, c);
+    Graph::FaspFast::randomFASP(g, c);
+}
+
 void runGraph() {
-    testSuperAlgorithm();
+//    test();
+//    testSuperAlgorithm();
+
+    testIncreasingSizeOfFaspWithConstVE(40, 120);
 
     //Graph::Graph gv = Graph::IO::graphFromFile<int, Graph::GraphMap>("/Users/gonciarz/Documents/MOSAIC/work/repo/GraphsStuff/test/graphDelaun4/elo.txt");
 //    Graph::Graph gv = Graph::IO::graphFromFile<int, Graph::GraphMap>("/home/gonciarz/fasp/test/graphDelaun4/planar_73_213_336.graph.txt");
@@ -195,10 +259,13 @@ void runGraph() {
 //    t.start_timer("1");
 //    for (int i = 0; i < 1; ++i)
 //        for (const auto &g : v) {
-//            auto r = Graph::Tools::stronglyConnectedComponents(g);
-//            int cnt = 0;
-//            for (auto x : r) if (r.size() > 1) cnt++;
-//            if (Graph::Tools::stronglyConnectedComponents(g).size() > 1) std::cout << cnt << "\n";
+//        auto weights = Graph::Ext::getEdgeProperties<int>(g, 1);
+//            auto c = Graph::FaspFast::randomFASP(g, weights);
+//
+////            auto r = Graph::Tools::stronglyConnectedComponents(g);
+////            int cnt = 0;
+////            for (auto x : r) if (r.size() > 1) cnt++;
+////            if (Graph::Tools::stronglyConnectedComponents(g).size() > 1) std::cout << cnt << "\n";
 //        }
 //    t.stop_timer();
 

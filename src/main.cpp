@@ -21,13 +21,11 @@ void configureLogger() {
 }
 
 int main() {
-    std::cout << std::endl;
     configureLogger();
+
     LOG(INFO) << "--- Application begin ---";
-
     runGraph();
-
     LOG(INFO) << "---  Application end  ---";
-    std::cout << std::endl;
+
     return 0;
 }

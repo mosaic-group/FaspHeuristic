@@ -471,7 +471,6 @@ namespace Graph::FaspFast {
             if (Tools::isAcyclic(g)) break;
 
             // if we are here there are still cycles not handled by SA
-
             std::unordered_map<typename Graph<VERTEX_TYPE>::Edge, int, Ext::EdgeHasher<VERTEX_TYPE>> edgesCnt;
 
             std::future<typename Graph<VERTEX_TYPE>::Edges> tasks[numOfReps];

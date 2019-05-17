@@ -16,6 +16,7 @@
 #include <cstdint>
 #include <functional>
 
+
 namespace Graph::Tools {
     /**
      * Finds all vertices accessible from start vertex using DFS method
@@ -275,7 +276,7 @@ namespace Graph::Tools {
         auto g{aGraph};
         int edgesRemovedCnt = 0;
         typename Graph<VERTEX_TYPE>::Edges edges;
-
+        bool once = true;
         while (edgesRemovedCnt < aNumEdgesToRemove) {
             auto edgesWithCycles = Tools::findEdgesWithCycles(g);
             auto n = edgesWithCycles.size();
