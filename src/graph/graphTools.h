@@ -392,6 +392,24 @@ namespace Graph::Tools {
 //        std::cout << "SCC: " << result << std::endl;
         return result;
     }
+
+    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
+    auto getRandomWeights(const Graph<VERTEX_TYPE, GRAPH_TYPE> &graph, const EDGE_PROP_TYPE min, const EDGE_PROP_TYPE max) {
+        // helper for easier generation of random ints - gives rand int in range [min, max]
+        auto randInt = [](int min, int max) -> int {
+            static std::mt19937 mt(std::random_device{}());
+            return std::uniform_int_distribution<>(min, max)(mt);
+        };
+
+        std::cout << graph.getNumOfEdges() << std::endl;
+
+        auto c = Ext::getEdgeProperties(graph, 0);
+        for (auto& [k, v] : c) {
+            v = randInt(min, max);
+        }
+
+        return c;
+    }
 }
 
 

@@ -68,34 +68,39 @@ void testIncreasingSizeOfFaspWithConstVE(int v, int e) {
     int numOfEdges = e;
     int reps = 30;
 
-    DataHdf5<double> f("/tmp/out.h5");
+    DataHdf5<double> f1("/tmp/out.h5");
+    DataHdf5<double> f2("/tmp/outr.h5");
 
     for (int faspSize = 1; faspSize < 40 ; faspSize += 1) {
         std::cout << "FASP SIZE: " << faspSize << std::endl;
         for (int r = 0; r < reps; r++) {
             using EDGE_PROP_TYPE = int;
             auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(numOfVertices, faspSize, numOfEdges);
+            auto rc = Graph::Tools::getRandomWeights(g, 1, 10);
 
-            f.put("vertices", g.getNumOfVertices());
-            f.put("edges", g.getNumOfEdges());
+            f1.put("vertices", g.getNumOfVertices());
+            f1.put("edges", g.getNumOfEdges());
+            f1.put("gr", Graph::Fasp::GR(g, c));
+            f1.put("delta", Graph::FaspFast::deltaFASP(g, c));
+            f1.put("random", Graph::FaspFast::randomFASP(g, c));
+            f1.put("exact", faspSize);
 
-            f.put("gr", Graph::Fasp::GR(g, c));
-            f.put("delta", Graph::FaspFast::deltaFASP(g, c));
-            f.put("random", Graph::FaspFast::randomFASP(g, c));
-
-            f.put("exact", faspSize);
+            f2.put("vertices", g.getNumOfVertices());
+            f2.put("edges", g.getNumOfEdges());
+            f2.put("gr", Graph::Fasp::GR(g, rc));
+            f2.put("delta", Graph::FaspFast::deltaFASP(g, rc));
+            f2.put("random", Graph::FaspFast::randomFASP(g, rc));
+            f2.put("exact", faspSize);
         }
     }
 
-    f.save();
-//    t.start_timer("1");
-//    t.stop_timer();
-
+    f1.save();
+    f2.save();
 }
 
 void test() {
     using EDGE_PROP_TYPE = int;
-    int v = 60;
+    int v = 50;
     int f = 10;
     int e = 120;
 
@@ -116,7 +121,7 @@ void runGraph() {
 //    test();
 //    testSuperAlgorithm();
 
-    testIncreasingSizeOfFaspWithConstVE(40, 120);
+    testIncreasingSizeOfFaspWithConstVE(50, 120);
 
     //Graph::Graph gv = Graph::IO::graphFromFile<int, Graph::GraphMap>("/Users/gonciarz/Documents/MOSAIC/work/repo/GraphsStuff/test/graphDelaun4/elo.txt");
 //    Graph::Graph gv = Graph::IO::graphFromFile<int, Graph::GraphMap>("/home/gonciarz/fasp/test/graphDelaun4/planar_73_213_336.graph.txt");

@@ -435,6 +435,7 @@ namespace Graph::Fasp {
                 g.addEdge(std::move(e1));
                 g.addEdge(std::move(e2));
                 g.removeEdge({verticesShuffle[j], verticesShuffle[i]});
+                c.erase({verticesShuffle[j], verticesShuffle[i]});
                 ++numOfArcs; // one edge removed and two added so +1
                 j = k;
             }
