@@ -17,6 +17,7 @@
 
 namespace Tools {
 
+    [[maybe_unused]]
     static std::string demangle(const char* name) {
         int status = -4; // some arbitrary value to eliminate the compiler warning
         std::unique_ptr<char, void(*)(void*)> res {

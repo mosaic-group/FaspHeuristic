@@ -70,6 +70,7 @@ namespace Graph::IO {
      * @param aFileName full (with path) filename
      * @return capacity of cut edges
      */
+    [[maybe_unused]]
     static int solutionFromFile(const std::string &aFileName) {
         std::ifstream infile(aFileName);
 
@@ -96,6 +97,7 @@ namespace Graph::IO {
      * @param aFileType type of file (regular or directory)
      * @return list of found files (empty if there is no files of given type or directory path does not exist)
      */
+    [[maybe_unused]]
     auto getFilesInDir(const std::string &aDir, const FileType aFileType = FT_REGULAR_FILE) {
         std::vector<std::string> files;
 

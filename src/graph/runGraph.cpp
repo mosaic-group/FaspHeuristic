@@ -24,7 +24,6 @@ void testSuperAlgorithm() {
 
 
     int numOfVertices = 30;
-    int faspSize = 10;
     int reps = 60;
 
     DataHdf5<double> f("/tmp/out.h5");
@@ -74,7 +73,6 @@ void testIncreasingSizeOfFaspWithConstVE(int v, int e) {
     for (int faspSize = 1; faspSize < 40 ; faspSize += 1) {
         std::cout << "FASP SIZE: " << faspSize << std::endl;
         for (int r = 0; r < reps; r++) {
-            using EDGE_PROP_TYPE = int;
             auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(numOfVertices, faspSize, numOfEdges);
             auto rc = Graph::Tools::getRandomWeights(g, 1, 10);
 
