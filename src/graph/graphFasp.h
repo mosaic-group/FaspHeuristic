@@ -268,9 +268,28 @@ namespace Graph::Fasp {
      * @return generated graph
      */
     template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
-    static auto generateGraphWithKnownFasp(int aNumOfVertices, int aFaspCapacity, int aLowerBondOfNumOfEdges, bool aOnlyNewEdges = false) {
+    static auto generateGraphWithKnownFasp(int aNumOfVertices, int aFaspCapacity, int aLowerBondOfNumOfEdges, int aMaxRandomFaspValue = 10, bool aAddRandomFaspWeights = false, bool aOnlyNewEdges = true) {
         Graph<VERTEX_TYPE, GRAPH_TYPE> g;
         Ext::EdgeProperties<EDGE_PROP_TYPE, VERTEX_TYPE> c;
+
+        // helper for easier generation of random ints - gives rand int in range [min, max]
+        auto randInt = [](int min, int max) -> int {
+            static std::mt19937 mt(std::random_device{}());
+            return std::uniform_int_distribution<>(min, max)(mt);
+        };
+
+        auto randWeights = [&randInt](unsigned int numOfEdges, int capacity) {
+            std::vector<EDGE_PROP_TYPE> v(numOfEdges);
+            int edgeIdx = 0;
+            while (capacity > 0) {
+                if (edgeIdx == numOfEdges - 1) { v[edgeIdx] = capacity; break; }
+
+                int c = randInt(0, capacity);
+                v[edgeIdx++] = c;
+                capacity -= c;
+            }
+            return v;
+        };
 
         // add vertices in range: 0..aNumOfVertices-1
         for (int i = 0; i < aNumOfVertices; ++i) g.addVertex(i);
@@ -278,34 +297,44 @@ namespace Graph::Fasp {
         // generate mapping to random order of generated vertices
         std::vector<VERTEX_TYPE> verticesShuffle(aNumOfVertices);
         for (size_t i = 0; i < verticesShuffle.size(); ++i) verticesShuffle[i] = i;
-        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-        std::shuffle (verticesShuffle.begin(), verticesShuffle.end(), std::default_random_engine(seed));
+//        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+//        std::shuffle (verticesShuffle.begin(), verticesShuffle.end(), std::default_random_engine(seed));
+
 
         int numOfArcs = 0;
-        std::random_device rd;
-        std::mt19937 mt(rd());
+        EDGE_PROP_TYPE finalCapacity = aFaspCapacity;
 
         // add requested number of feedback arcs
         for (int f = 0; f < aFaspCapacity; ++f) {
             // add random leftward arc (arcs to be cut) from i to j
             int i, j;
+            int randomValueDelta = 0;
 
             while (true) {
-                i = std::uniform_int_distribution<>(1, aNumOfVertices - 1)(mt);
-                j = std::uniform_int_distribution<>(0, i - 1)(mt);
+                i = randInt(1, aNumOfVertices - 1);
+                j = randInt(0, i - 1);
 
                 typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge newEdge = {verticesShuffle[i], verticesShuffle[j]};
                 if (g.hasEdge(newEdge)) continue; // make sure we add new arc
                 c[newEdge] = 1;
                 g.addEdge(std::move(newEdge));
                 numOfArcs++;
+                if (aAddRandomFaspWeights) {
+                    // increase randomly weight of edge
+                    randomValueDelta = randInt(0, aMaxRandomFaspValue - 1);
+                    c[newEdge] += randomValueDelta;
+                    finalCapacity += randomValueDelta;
+                }
                 break;
             }
 
+
             // finish the cycle by adding rightward arc(s) from j to i
+            std::vector<typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge> backEdges;
             while (j != i) {
-                int k = std::uniform_int_distribution<>(j + 1, i)(mt);
+                int k = randInt(j + 1, i);
                 typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge e = {verticesShuffle[j], verticesShuffle[k]};
+                if (aAddRandomFaspWeights) backEdges.push_back(e);
                 if (g.hasEdge(e)) {
                     c.at(e) += 1;
                 }
@@ -316,12 +345,18 @@ namespace Graph::Fasp {
                 }
                 j = k;
             }
+
+            if (aAddRandomFaspWeights) {
+                auto deltaWeights = randWeights(backEdges.size(), randomValueDelta);
+                int idx = 0;
+                for (const auto &e : backEdges) c[e] += deltaWeights[idx++];
+            }
         }
 
         // add additional rightward arcs (till lower bond is reached)
         while (numOfArcs < aLowerBondOfNumOfEdges) {
-            int i = std::uniform_int_distribution<>(0, aNumOfVertices - 2)(mt);
-            int j = std::uniform_int_distribution<>(i + 1, aNumOfVertices - 1)(mt);
+            int i = randInt(0, aNumOfVertices - 2);
+            int j = randInt(i + 1, aNumOfVertices - 1);
 
             typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge e = {verticesShuffle[i], verticesShuffle[j]};
             if (g.hasEdge(e)) {
@@ -335,7 +370,7 @@ namespace Graph::Fasp {
             }
         }
 
-        return std::pair{g, c};
+        return std::tuple{g, c, finalCapacity};
     }
 
 

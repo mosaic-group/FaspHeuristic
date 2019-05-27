@@ -392,15 +392,24 @@ namespace Graph::Tools {
         return result;
     }
 
+
+    /**
+     * Generates property container with integer random weights in range [min, max]
+     * @tparam EDGE_PROP_TYPE
+     * @tparam VERTEX_TYPE
+     * @tparam GRAPH_TYPE
+     * @param graph input graph
+     * @param min minimum weight value
+     * @param max maximum weight value
+     * @return container with random weights for every edge
+     */
     template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
     auto getRandomWeights(const Graph<VERTEX_TYPE, GRAPH_TYPE> &graph, const EDGE_PROP_TYPE min, const EDGE_PROP_TYPE max) {
-        // helper for easier generation of random ints - gives rand int in range [min, max]
-        auto randInt = [](int min, int max) -> int {
+        // helper for easier generation of random values in range [min, max]
+        auto randInt = [](EDGE_PROP_TYPE min, EDGE_PROP_TYPE max) -> EDGE_PROP_TYPE {
             static std::mt19937 mt(std::random_device{}());
-            return std::uniform_int_distribution<>(min, max)(mt);
+            return std::uniform_int_distribution<EDGE_PROP_TYPE>(min, max)(mt);
         };
-
-        std::cout << graph.getNumOfEdges() << std::endl;
 
         auto c = Ext::getEdgeProperties(graph, 0);
         for (auto& [k, v] : c) {

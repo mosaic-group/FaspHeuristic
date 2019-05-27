@@ -32,7 +32,7 @@ void testSuperAlgorithm() {
         std::cout << "FASP SIZE: " << nv << std::endl;
         for (int r = 0; r < reps; r++) {
             using EDGE_PROP_TYPE = int;
-            auto[g, c] = Graph::Fasp::generateGraphWithKnownFasp<EDGE_PROP_TYPE, int, Graph::GraphMap>(numOfVertices, nv, 60, true);
+            auto[g, c, _] = Graph::Fasp::generateGraphWithKnownFasp<EDGE_PROP_TYPE, int, Graph::GraphMap>(numOfVertices, nv, 60, true);
 
             Tools::printType<decltype(g)>();
             std::cout << Tools::demangle(typeid(g).name()) << std::endl;
@@ -61,16 +61,20 @@ void testSuperAlgorithm() {
 void testIncreasingSizeOfFaspWithConstVE(int v, int e) {
     Timer<true, false> t(true);
 
-
-
+    for (int i = 0 ; i < 30; ++i) {
+        auto[g, c, fc] = Graph::Fasp::generateGraphWithKnownFasp<int, int, Graph::GraphMap>(5, 2, 5, 3, true);
+        std::cout << g.getStrRepresentationOfGraph() << std::endl;
+        std::cout << c << std::endl;
+        std::cout << fc << std::endl;
+    }
     int numOfVertices = v;
     int numOfEdges = e;
-    int reps = 30;
+    int reps = 1;
 
     DataHdf5<double> f1("/tmp/out.h5");
     DataHdf5<double> f2("/tmp/outr.h5");
 
-    for (int faspSize = 1; faspSize < 40 ; faspSize += 1) {
+    for (int faspSize = 1; faspSize < 2 ; faspSize += 1) {
         std::cout << "FASP SIZE: " << faspSize << std::endl;
         for (int r = 0; r < reps; r++) {
             auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(numOfVertices, faspSize, numOfEdges);
@@ -116,6 +120,8 @@ void test() {
 }
 
 void runGraph() {
+
+
 //    test();
 //    testSuperAlgorithm();
 
