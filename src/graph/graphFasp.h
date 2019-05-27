@@ -280,7 +280,7 @@ namespace Graph::Fasp {
 
         auto randWeights = [&randInt](unsigned int numOfEdges, int capacity) {
             std::vector<EDGE_PROP_TYPE> v(numOfEdges);
-            int edgeIdx = 0;
+            unsigned int edgeIdx = 0;
             while (capacity > 0) {
                 if (edgeIdx == numOfEdges - 1) { v[edgeIdx] = capacity; break; }
 
