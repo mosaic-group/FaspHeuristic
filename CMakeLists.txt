@@ -29,6 +29,7 @@ endif()
 
 # Define sources
 include_directories(src)
+include_directories(src/tools)
 set(SOURCE_FILES
         src/graph/runGraph.cpp
         src/tools/easylogging++.cc

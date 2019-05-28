@@ -5,6 +5,6 @@
 #ifndef RUNGRAPH_H
 #define RUNGRAPH_H
 
-void runGraph();
+void runGraph(int argc, char **argv);
 
 #endif

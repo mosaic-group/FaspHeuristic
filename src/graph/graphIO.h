@@ -116,6 +116,70 @@ namespace Graph::IO {
         return files;
     }
 
+    template<typename VERTEX_TYPE = uint16_t, template<typename> class GRAPH_TYPE = GraphMap, typename EDGE_PROP_TYPE>
+    void graphWithWeightsToFile(const std::string &aFileName, const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
+        std::ofstream outfile(aFileName, std::ios_base::out); // overwrite output file if exists
+
+        // In a case of map implementation (or any other using unordered containter) output files  look
+        // bad without sorting - do it so!
+        auto allVertices = aGraph.getVertices();
+        std::sort(allVertices.begin(), allVertices.end());
+
+        for (auto &v : allVertices) {
+            bool hasEdges = false;
+            for (auto &ov : aGraph.getOutVertices(v)) {
+                hasEdges = true;
+                outfile << v;
+                outfile << "\t" << ov << "\t" << aWeights.at({v, ov}) << "\n";
+            }
+            if (!hasEdges) {
+                // vertex without edges
+                outfile << v << "\n";
+            }
+        }
+    }
+
+    /**
+* Reads data provided as adjacency list (fist number in a line is a src vertex,
+* and next number(s) are outgoing veritces)
+*
+* <b>NOTE:</b> no error handlihng is implemented, if file is not correct this function will fail
+*
+* @param aFileName inputFileName
+* @return created graph
+*/
+    template<typename VERTEX_TYPE = uint16_t, template<typename> class GRAPH_TYPE = GraphMap, typename EDGE_PROP_TYPE>
+    static auto graphWithWeightsFromFile(const std::string &aFileName) {
+        std::ifstream infile(aFileName);
+        Graph<VERTEX_TYPE, GRAPH_TYPE> graph;
+        Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> weights;
+        std::string line;
+        while (std::getline(infile, line)) {
+            std::istringstream iss(line);
+            std::vector<std::string> tokens;
+            std::copy(std::istream_iterator<std::string>(iss), std::istream_iterator<std::string>(), back_inserter(tokens));
+
+            // We expect 1 (just vertex) or 3 numbers in line (srcVertex dstVertex edgeWeight)
+            if (tokens.size() == 1 || tokens.size() == 3) {
+                // Read vertices and create edge
+                typename Graph<VERTEX_TYPE>::VertexId src = std::stoi(tokens[0]);
+                graph.addVertexSafe(src);
+
+                if (tokens.size() == 3) {
+                    typename Graph<VERTEX_TYPE>::VertexId dst = std::stoi(tokens[1]);
+                    graph.addVertexSafe(dst);
+                    graph.addEdge(src, dst);
+
+                    // Read weight and update properites of graph
+                    EDGE_PROP_TYPE w = static_cast<EDGE_PROP_TYPE>(std::stod(tokens[2]));
+                    weights[{src, dst}] = w;
+                }
+            }
+        }
+
+        return std::pair{graph, weights};
+    }
+
 }
 
 

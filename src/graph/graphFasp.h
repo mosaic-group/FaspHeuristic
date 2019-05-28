@@ -297,8 +297,8 @@ namespace Graph::Fasp {
         // generate mapping to random order of generated vertices
         std::vector<VERTEX_TYPE> verticesShuffle(aNumOfVertices);
         for (size_t i = 0; i < verticesShuffle.size(); ++i) verticesShuffle[i] = i;
-//        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-//        std::shuffle (verticesShuffle.begin(), verticesShuffle.end(), std::default_random_engine(seed));
+        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+        std::shuffle (verticesShuffle.begin(), verticesShuffle.end(), std::default_random_engine(seed));
 
 
         int numOfArcs = 0;
@@ -347,9 +347,9 @@ namespace Graph::Fasp {
             }
 
             if (aAddRandomFaspWeights) {
-                auto deltaWeights = randWeights(backEdges.size(), randomValueDelta);
-                int idx = 0;
-                for (const auto &e : backEdges) c[e] += deltaWeights[idx++];
+                // we need to increase weights of righward arcs to be sure that cutting them is not
+                // better option than FASP arcs which is our goal.
+                for (const auto &e : backEdges) c[e] += randomValueDelta;
             }
         }
 

@@ -1,0 +1,10 @@
+[2019-05-28 12:45:56,2, main.cpp:81] Argument y numberOfVertices1 number of vertices in graph is required!
+[2019-05-28 12:46:34,0, main.cpp:81] Argument: -y -numberOfVertices1 number of vertices in graph is required!
+[2019-05-28 12:47:25,4, main.cpp:81] Argument: -y 0 --numberOfVertices1 number of vertices in graph is required!
+[2019-05-28 12:49:40,2, main.cpp:81] Argument: -y  --numberOfVertices1 number of vertices in graph is required!
+[2019-05-28 12:51:24,5, main.cpp:81] Argument: --y <numberOfVertices>,  --numberOfVertices1 <numberOfVertices> number of vertices in graph is required!
+[2019-05-28 12:53:38,8, main.cpp:81] Argument: [-y <numberOfVertices>,  --numberOfVertices1 <numberOfVertices> number of vertices in graph] is required!
+[2019-05-28 12:59:37,6, main.cpp:81] Argument: [-y <numberOfVertices>,  --numberOfVertices1 <numberOfVertices> number of vertices in graph] is required!
+[2019-05-28 13:02:56,0, main.cpp:81] Argument: [-y <numberOfVertices>,  --numberOfVertices1 <numberOfVertices> number of vertices in graph] is required!
+[2019-05-28 13:06:13,6, main.cpp:82] Argument: [-y <#vertices>,  --numberOfVertices1 <#vertices> number of vertices in graph] is required!
+[2019-05-28 13:07:17,9, main.cpp:79] Argument: [-y <#vertices>,  --numberOfVertices1 <#vertices> number of vertices in graph] is required!
