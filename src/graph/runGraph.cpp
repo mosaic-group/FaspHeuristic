@@ -68,55 +68,37 @@ std::string getFilenameOfBenchmarkFaspWithConstVE(int v, int e, int f) {
 }
 
 void testIncreasingSizeOfFaspWithConstVE(int v, int e) {
-    Timer<true, false> t(true);
-
-    for (int i = 0 ; i < 1; ++i) {
-        auto[g, c, fc] = Graph::Fasp::generateGraphWithKnownFasp<int, int, Graph::GraphMap>(139, 4, 133, 4, true, false);
-        std::cout << g << std::endl;
-        std::cout << g.getStrRepresentationOfGraph() << std::endl;
-        std::cout << c << std::endl;
-        std::cout << fc << std::endl;
-        Graph::Fasp::GR(g, c);
-        Graph::FaspFast::deltaFASP(g, c);
-        Graph::FaspFast::randomFASP(g, c);
-
-        Graph::IO::graphWithWeightsToFile("/tmp/" + getFilenameOfBenchmarkFaspWithConstVE(v, e, fc), g, c);
-        auto [gn, cn] = Graph::IO::graphWithWeightsFromFile<int, Graph::GraphMap, int>("/tmp/" + getFilenameOfBenchmarkFaspWithConstVE(v, e, fc));
-        std::cout << gn << std::endl;
-        std::cout << gn.getStrRepresentationOfGraph() << std::endl;
-        std::cout << cn << std::endl;
-    }
     int numOfVertices = v;
     int numOfEdges = e;
     int reps = 1;
-//
-//    DataHdf5<double> f1("/tmp/out.h5");
-//    DataHdf5<double> f2("/tmp/outr.h5");
-//
-//    for (int faspSize = 1; faspSize < 2 ; faspSize += 1) {
-//        std::cout << "FASP SIZE: " << faspSize << std::endl;
-//        for (int r = 0; r < reps; r++) {
-//            auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(numOfVertices, faspSize, numOfEdges);
-//            auto rc = Graph::Tools::getRandomWeights(g, 1, 10);
-//
-//            f1.put("vertices", g.getNumOfVertices());
-//            f1.put("edges", g.getNumOfEdges());
-//            f1.put("gr", Graph::Fasp::GR(g, c));
-//            f1.put("delta", Graph::FaspFast::deltaFASP(g, c));
-//            f1.put("random", Graph::FaspFast::randomFASP(g, c));
-//            f1.put("exact", faspSize);
-//
-//            f2.put("vertices", g.getNumOfVertices());
-//            f2.put("edges", g.getNumOfEdges());
-//            f2.put("gr", Graph::Fasp::GR(g, rc));
-//            f2.put("delta", Graph::FaspFast::deltaFASP(g, rc));
-//            f2.put("random", Graph::FaspFast::randomFASP(g, rc));
-//            f2.put("exact", faspSize);
-//        }
-//    }
-//
-//    f1.save();
-//    f2.save();
+
+    DataHdf5<double> f1("/tmp/out.h5");
+    DataHdf5<double> f2("/tmp/outr.h5");
+
+    for (int faspSize = 1; faspSize < 2 ; faspSize += 1) {
+        std::cout << "FASP SIZE: " << faspSize << std::endl;
+        for (int r = 0; r < reps; r++) {
+            auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(numOfVertices, faspSize, numOfEdges);
+            auto rc = Graph::Tools::getRandomWeights(g, 1, 10);
+
+            f1.put("vertices", g.getNumOfVertices());
+            f1.put("edges", g.getNumOfEdges());
+            f1.put("gr", Graph::Fasp::GR(g, c));
+            f1.put("delta", Graph::FaspFast::deltaFASP(g, c));
+            f1.put("random", Graph::FaspFast::randomFASP(g, c));
+            f1.put("exact", faspSize);
+
+            f2.put("vertices", g.getNumOfVertices());
+            f2.put("edges", g.getNumOfEdges());
+            f2.put("gr", Graph::Fasp::GR(g, rc));
+            f2.put("delta", Graph::FaspFast::deltaFASP(g, rc));
+            f2.put("random", Graph::FaspFast::randomFASP(g, rc));
+            f2.put("exact", faspSize);
+        }
+    }
+
+    f1.save();
+    f2.save();
 }
 
 void test() {

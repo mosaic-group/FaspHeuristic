@@ -395,11 +395,13 @@ namespace Graph::Fasp {
 
         // If requested parameters are wrong, return empty graph.
         const int maxNumOfEdges = aNumOfVertices * (aNumOfVertices - 1);
-        if (aFaspCapacity > maxNumOfEdges/2 ||                   // max number of leftward edges
-            aNumOfEdges < 2 * aFaspCapacity ||                   // requested num of edges lower than needed to generate fasp
-            aNumOfEdges > maxNumOfEdges/2 + aFaspCapacity) {     // requested num of edges higher than sum of leftward edges and max number of rightward edges
+        bool wrongMaxNumberOfLeftwardEdges = aFaspCapacity > maxNumOfEdges/2; // max number of leftward edges
+        bool wrongNumOfRequestedEdgesTooLow = aNumOfEdges < 2 * aFaspCapacity; // requested num of edges lower than needed to generate fasp
+        bool wrongNumOfRequestedEdgesTooHigh = aNumOfEdges > maxNumOfEdges/2 + aFaspCapacity; // requested num of edges higher than sum of leftward edges and max number of rightward edges
+        if (wrongMaxNumberOfLeftwardEdges || wrongNumOfRequestedEdgesTooLow || wrongNumOfRequestedEdgesTooHigh) {
+                LOG(ERROR) << "Graph not generated!!! " << wrongMaxNumberOfLeftwardEdges << "/" << wrongNumOfRequestedEdgesTooLow << "/" << wrongNumOfRequestedEdgesTooHigh;
                 return std::pair{g, c};
-            }
+        }
 
         // add vertices in range: 0..aNumOfVertices-1
         for (int i = 0; i < aNumOfVertices; ++i) g.addVertex(i);

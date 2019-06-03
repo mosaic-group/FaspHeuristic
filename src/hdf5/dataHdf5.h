@@ -41,6 +41,7 @@ template<> struct Hdf5Type<double> {static hid_t type() {return H5T_NATIVE_DOUBL
  */
 template <typename T>
 class DataHdf5 {
+    static constexpr char DUMMY[] = "";
 
     const hid_t Hdf5DataType = Hdf5Type<T>::type();
     using ContainerType = std::vector<T>;
@@ -66,7 +67,8 @@ class DataHdf5 {
     }
 
 public:
-    explicit  DataHdf5(const std::string &aFileName) {
+    explicit  DataHdf5(const std::string &aFileName, bool aDummyRun = false) {
+        if (aDummyRun) return;
         fileId = H5Fcreate(aFileName.c_str(), H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
         if (fileId == -1) {
             std::cerr << "Could not create file [" << aFileName << "]" << std::endl;

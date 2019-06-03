@@ -9,6 +9,8 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <vector>
+#include <stdexcept>
 
 #include <typeinfo>
 #include <cxxabi.h>
@@ -86,6 +88,81 @@ namespace Tools {
             str.replace(start_pos, from.length(), to);
             start_pos += to.length(); // In case 'to' contains 'from', like replacing 'x' with 'yx'
         }
+    }
+
+
+    /**
+     * Generates equally distributed and unique values in range [aMin, aMax]
+     * @tparam T - type of generated elements
+     * @param aMin - min value (first element of output)
+     * @param aMax - max value (last element of output)
+     * @param aNoOfSteps - requested number of steps (might be lower in output if elements repeats)
+     * @return generated vector with values
+     */
+    template <typename T>
+    auto linspace(T aMin, T aMax, int aNoOfSteps) {
+        std::vector<T> result(aNoOfSteps);
+
+        if (aNoOfSteps < 1) {
+            throw std::runtime_error("Number of steps must be >= 1");
+        }
+
+        if (aNoOfSteps > 1) {
+            double step = (static_cast<double>(aMax) - aMin) / (aNoOfSteps - 1);
+            for (int i = 0; i < aNoOfSteps - 1; ++i) {
+                result[i] = static_cast<T>(i * step + aMin);
+
+            }
+        }
+        result[aNoOfSteps - 1] = aMax;
+
+        // Make values in container unique
+        auto it = std::unique(result.begin(), result.end());
+        result.resize(distance(result.begin(), it));
+
+        return result;
+    }
+
+
+    /**
+ * Generates equally distributed and unique values in range [aMin, aMax]
+ * @tparam T - type of generated elements
+ * @param aMin - min value (first element of output)
+ * @param aMax - max value (last element of output)
+ * @param aNoOfSteps - requested number of steps (might be lower in output if elements repeats)
+ * @return generated vector with values
+ */
+    template <typename T>
+    auto logspace(T start, T stop, int num) {
+
+        double middle = (stop - start) * 1.0 / 3.0;
+
+        const double base = pow(2, 2.0/num);
+        double value = base;
+        std::cout << "BASE:" << base << std::endl;
+
+        std::vector<double> retval; retval.reserve(num);
+        std::generate_n(std::back_inserter(retval), num, [&](){double ret = value; value *= base; return ret;});
+        std::cout << retval <<std::endl;
+
+        std::vector<T> result(num);
+
+        double b = retval[0];
+        double e = retval[num- 1];
+
+        std::cout << b << " " << e << " " << pow(base, num/2) << std::endl;
+        for (int i = 0; i < retval.size(); ++i) {
+            auto v = retval[i];
+            result[i] = static_cast<T>( (v - b) * (stop - start) / (e - b) + start );
+        }
+
+        std::cout << result <<std::endl;
+
+        // Make values in container unique
+        auto it = std::unique(result.begin(), result.end());
+        result.resize(distance(result.begin(), it));
+
+        return result;
     }
 }
 #endif
