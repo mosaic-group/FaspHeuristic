@@ -3,9 +3,8 @@
 //
 
 
-#ifndef FASPHEURISTIC_BENCHSUPERALGORITHM_H
-#define FASPHEURISTIC_BENCHSUPERALGORITHM_H
-
+#ifndef FASPHEURISTIC_BENCHHEURISTICS_H
+#define FASPHEURISTIC_BENCHHEURISTICS_H
 
 #include "tools.h"
 #include "prettyprint.h"
@@ -17,8 +16,8 @@
 #include "graph/graphFaspFast.h"
 
 
-std::string getFilenameOfBenchmarkSAFaspWithConstVE(int v, int e, int fmin, int fmax, int steps, int reps, bool logDistr) {
-    return std::string("SuperAlgorithmConstWeightVarFaspConstVE") +
+std::string getFilenameOfBenchmarkHeuristicsFaspWithConstVE(int v, int e, int fmin, int fmax, int steps, int reps, bool logDistr) {
+    return std::string("HeuristicsConstWeightVarFaspConstVE") +
            "_v_" + std::to_string(v) +
            "_e_" + std::to_string(e) +
            "_f_" + std::to_string(fmin) + "-" + std::to_string(fmax) +
@@ -28,12 +27,12 @@ std::string getFilenameOfBenchmarkSAFaspWithConstVE(int v, int e, int fmin, int 
 }
 
 
-void benchSuperAlgorithmConstWeightVarFaspConstVE(const std::string &outputDir, int numOfVertices, int numOfEdges, int minFasp, int maxFasp, int numOfSteps, int numOfReps, bool logDistribution) {
+void benchHeuristicsConstWeightVarFaspConstVE(const std::string &outputDir, int numOfVertices, int numOfEdges, int minFasp, int maxFasp, int numOfSteps, int numOfReps, bool logDistribution) {
 
-    LOG(TRACE) << "Running benchSuperAlgorithm. Params: v=" << numOfVertices << " e=" << numOfEdges << " fmin=" << minFasp << " fmax=" << maxFasp << " steps=" << numOfSteps << " reps=" << numOfReps;
+    LOG(TRACE) << "Running benchHeuristicsConstWeightVarFaspConstVE. Params: v=" << numOfVertices << " e=" << numOfEdges << " fmin=" << minFasp << " fmax=" << maxFasp << " steps=" << numOfSteps << " reps=" << numOfReps;
 
 
-    auto outputFile = outputDir + "/" + getFilenameOfBenchmarkSAFaspWithConstVE(numOfVertices, numOfEdges, minFasp, maxFasp, numOfSteps, numOfReps, logDistribution);
+    auto outputFile = outputDir + "/" + getFilenameOfBenchmarkHeuristicsFaspWithConstVE(numOfVertices, numOfEdges, minFasp, maxFasp, numOfSteps, numOfReps, logDistribution);
     DataHdf5<double> f1(outputFile, /* create output file (dummy run) */ (outputDir == "" ? true : false));
 
     auto faspValues =  logDistribution ? Tools::logspace(minFasp, maxFasp, numOfSteps) : Tools::linspace(minFasp, maxFasp, numOfSteps);
@@ -47,7 +46,9 @@ void benchSuperAlgorithmConstWeightVarFaspConstVE(const std::string &outputDir, 
 
             f1.put("vertices", g.getNumOfVertices());
             f1.put("edges", g.getNumOfEdges());
-            f1.put("sa", Graph::FaspFast::superAlgorithm(g, c, path).size());
+            f1.put("gr", Graph::Fasp::GR(g, c));
+            f1.put("delta", Graph::FaspFast::deltaFASP(g, c));
+            f1.put("random", Graph::FaspFast::randomFASP(g, c));
             f1.put("exact", faspSize);
         }
     }
@@ -56,4 +57,4 @@ void benchSuperAlgorithmConstWeightVarFaspConstVE(const std::string &outputDir, 
 }
 
 
-#endif //FASPHEURISTIC_BENCHSUPERALGORITHM_H
+#endif

@@ -5,6 +5,7 @@
 
 
 #include "benchmarks/benchSuperAlgorithm/benchSuperAlgorithm.h"
+#include "benchmarks/benchHeuristics/benchHeuristics.h"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -41,7 +42,7 @@ int main(int argc, char **argv) {
         std::vector<std::string> allowedBenchmarks;
         allowedBenchmarks.push_back("playground");
         allowedBenchmarks.push_back("benchSuperAlgorithmConstWeightVarFaspConstVE");
-        allowedBenchmarks.push_back("benchConstVEvarFASP");
+        allowedBenchmarks.push_back("benchHeuristicsConstWeightVarFaspConstVE");
         TCLAP::ValuesConstraint<std::string> allowedVals( allowedBenchmarks );
         TCLAP::UnlabeledValueArg<std::string>  benchmarkName("benchmarkName", "name of benchmark to run", true, "", &allowedVals);
         cmd.add(benchmarkName);
@@ -106,7 +107,7 @@ int main(int argc, char **argv) {
             benchSuperAlgorithmConstWeightVarFaspConstVE(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else {
-            LOG(ERROR) << "Unknown benchmark [" << benchmarkName.getValue() << "]";
+            benchHeuristicsConstWeightVarFaspConstVE(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
     }
     catch (TCLAP::ArgException &e) {
