@@ -133,30 +133,20 @@ namespace Tools {
  * @return generated vector with values
  */
     template <typename T>
-    auto logspace(T start, T stop, int num) {
+    auto logspace(T start, T stop, int num, double logBase = 3.0) {
 
-        double middle = (stop - start) * 1.0 / 3.0;
-
-        const double base = pow(2, 2.0/num);
-        double value = base;
-        std::cout << "BASE:" << base << std::endl;
-
+        const double base = pow(logBase, 2.0/num);
+        double value = 1.0;
         std::vector<double> retval; retval.reserve(num);
         std::generate_n(std::back_inserter(retval), num, [&](){double ret = value; value *= base; return ret;});
-        std::cout << retval <<std::endl;
 
         std::vector<T> result(num);
-
-        double b = retval[0];
-        double e = retval[num- 1];
-
-        std::cout << b << " " << e << " " << pow(base, num/2) << std::endl;
+        double b = retval.front();
+        double e = retval.back();
         for (int i = 0; i < retval.size(); ++i) {
             auto v = retval[i];
-            result[i] = static_cast<T>( (v - b) * (stop - start) / (e - b) + start );
+            result[i] = static_cast<T>( floor( (stop-start) * (v-b) / (e-b) + start + 0.5) );
         }
-
-        std::cout << result <<std::endl;
 
         // Make values in container unique
         auto it = std::unique(result.begin(), result.end());

@@ -34,10 +34,6 @@ auto PrintAppArgs = [](int argc, char **argv) {std::cout << argc; for (int i = 0
 int main(int argc, char **argv) {
     configureLogger();
 
-    std::cout << Tools::linspace(1, 45, 8) << std::endl;
-    std::cout << Tools::logspace(1, 100, 20) << std::endl;
-    if (true) return 0;
-
     try {
         TCLAP::CmdLine cmd("FASP heuristic benchamarks", ' ', "1.0", true);
 
@@ -68,6 +64,8 @@ int main(int argc, char **argv) {
         TCLAP::ValueArg<int> stepsArg("z", "steps", "number of steps to be taken in given range of v/e/f", false, 0, "#steps");
         TCLAP::ValueArg<int> repsArg("r", "reps", "number of repetitions for each step", false, 0, "#repetitions");
 
+        TCLAP::SwitchArg logArg("l", "logScale", "Use log distributed range", false);
+
         cmd.add(dirArg);
 
         cmd.add(vArg);
@@ -84,6 +82,8 @@ int main(int argc, char **argv) {
 
         cmd.add(stepsArg);
         cmd.add(repsArg);
+
+        cmd.add(logArg);
 
         cmd.parse( argc, argv );
 
@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
             playgound(reqArgHdl(vArg));
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[1]) {
-            benchSuperAlgorithmConstWeightVarFaspConstVE(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg));
+            benchSuperAlgorithmConstWeightVarFaspConstVE(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else {
             LOG(ERROR) << "Unknown benchmark [" << benchmarkName.getValue() << "]";

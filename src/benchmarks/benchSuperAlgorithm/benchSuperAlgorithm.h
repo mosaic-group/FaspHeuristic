@@ -28,7 +28,7 @@ std::string getFilenameOfBenchmarkFaspWithConstVE(int v, int e, int fmin, int fm
 }
 
 
-void benchSuperAlgorithmConstWeightVarFaspConstVE(const std::string &outputDir, int numOfVertices, int numOfEdges, int minFasp, int maxFasp, int numOfSteps, int numOfReps) {
+void benchSuperAlgorithmConstWeightVarFaspConstVE(const std::string &outputDir, int numOfVertices, int numOfEdges, int minFasp, int maxFasp, int numOfSteps, int numOfReps, bool logDistribution) {
 
     LOG(TRACE) << "Running benchSuperAlgorithm. Params: v=" << numOfVertices << " e=" << numOfEdges << " fmin=" << minFasp << " fmax=" << maxFasp << " steps=" << numOfSteps << " reps=" << numOfReps;
 
@@ -36,7 +36,7 @@ void benchSuperAlgorithmConstWeightVarFaspConstVE(const std::string &outputDir, 
     auto outputFile = outputDir + "/" + getFilenameOfBenchmarkFaspWithConstVE(numOfVertices, numOfEdges, minFasp, maxFasp, numOfSteps, numOfReps);
     DataHdf5<double> f1(outputFile, /* create output file (dummy run) */ (outputDir == "" ? true : false));
 
-    auto faspValues =  Tools::linspace(minFasp, maxFasp, numOfSteps);
+    auto faspValues =  logDistribution ? Tools::logspace(minFasp, maxFasp, numOfSteps) : Tools::linspace(minFasp, maxFasp, numOfSteps);
 
     Graph::FaspFast::PathHero<int> path(numOfVertices + 1); // maxId included
 
