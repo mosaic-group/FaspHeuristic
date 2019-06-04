@@ -454,7 +454,7 @@ namespace Graph::Fasp {
             faspSet.erase(faspSet.begin() + randIdx);
 
             while (j != i) {
-                // Control number of edges 
+                // Control number of edges
                 if (numOfArcs >= aNumOfEdges) break;
 
                 if (j + 1 == i) break; // no more intermediate points
