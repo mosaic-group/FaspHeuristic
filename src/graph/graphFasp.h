@@ -453,9 +453,10 @@ namespace Graph::Fasp {
             auto [i, j] = faspSet[randIdx];
             faspSet.erase(faspSet.begin() + randIdx);
 
-            if (numOfArcs >= aNumOfEdges) break;
-
             while (j != i) {
+                // Control number of edges 
+                if (numOfArcs >= aNumOfEdges) break;
+
                 if (j + 1 == i) break; // no more intermediate points
 
                 int k = randInt(j + 1, i - 1);
