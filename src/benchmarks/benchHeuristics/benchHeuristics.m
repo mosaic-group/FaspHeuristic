@@ -8,17 +8,30 @@ hold on;
 
 legendStr={};
 
-dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_15_e_30_f_1-15_s_15_log__r_100.h5');
-data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=30 gr', 'v=15 e=30 delta', 'v=15 e=30 random'];
+% dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_15_e_30_f_1-15_s_15_log__r_1000.h5');
+% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=30 gr', 'v=15 e=30 delta', 'v=15 e=30 random'];
+% plotOne(data.exact, [data.gr, data.delta, data.random]);
+% dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_15_e_55_f_1-15_s_15_log__r_1000.h5');
+% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=55 gr', 'v=15 e=55 delta', 'v=15 e=55 random'];
+% plotOne(data.exact, [data.gr, data.delta, data.random]);
+% dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_15_e_80_f_1-15_s_15_log__r_1000.h5');
+% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=80 gr', 'v=15 e=80 delta', 'v=15 e=80 random'];
+% plotOne(data.exact, [data.gr, data.delta, data.random]);
+% dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_15_e_105_f_1-15_s_15_log__r_1000.h5');
+% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=105 gr', 'v=15 e=105 delta', 'v=15 e=105 random'];
+% plotOne(data.exact, [data.gr, data.delta, data.random]);
+
+
+
+dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_30_e_60_f_1-30_s_20_log__r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=60 gr', 'v=30 e=60 delta', 'v=30 e=60 random'];
 plotOne(data.exact, [data.gr, data.delta, data.random]);
-dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_15_e_55_f_1-15_s_15_log__r_100.h5');
-data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=55 gr', 'v=15 e=55 delta', 'v=15 e=55 random'];
+dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_30_e_120_f_1-30_s_20_log__r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=120 gr', 'v=30 e=120 delta', 'v=30 e=120 random'];
 plotOne(data.exact, [data.gr, data.delta, data.random]);
-dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_15_e_80_f_1-15_s_15_log__r_100.h5');
-data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=80 gr', 'v=15 e=80 delta', 'v=15 e=80 random'];
-plotOne(data.exact, [data.gr, data.delta, data.random]);
-dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_15_e_105_f_1-15_s_15_log__r_100.h5');
-data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=105 gr', 'v=15 e=105 delta', 'v=15 e=105 random'];
+
+dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_50_e_100_f_1-30_s_20_log__r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=50 e=100 gr', 'v=50 e=100 delta', 'v=50 e=100 random'];
 plotOne(data.exact, [data.gr, data.delta, data.random]);
 
 
