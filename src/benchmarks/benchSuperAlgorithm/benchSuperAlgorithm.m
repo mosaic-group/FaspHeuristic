@@ -8,37 +8,37 @@ hold on;
 
 legendStr={};
 
-% dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_30_e_60_f_1-30_s_20_r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=60'];
-% plotOne(data.exact, [data.sa]);
-% dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_30_e_120_f_1-30_s_20_r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=120'];
-% plotOne(data.exact, [data.sa]);
-% dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_30_e_180_f_1-30_s_20_r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=180'];
-% plotOne(data.exact, [data.sa]);
-% dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_30_e_240_f_1-30_s_20_r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=240'];
-% plotOne(data.exact, [data.sa]);
-% dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_30_e_300_f_1-30_s_20_r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=300'];
-% plotOne(data.exact, [data.sa]);
+dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_30_e_60_f_1-30_s_20_r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=60'];
+plotOne(data.exact, [data.sa]);
+dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_30_e_120_f_1-30_s_20_r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=120'];
+plotOne(data.exact, [data.sa]);
+dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_30_e_180_f_1-30_s_20_r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=180'];
+plotOne(data.exact, [data.sa]);
+dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_30_e_240_f_1-30_s_20_r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=240'];
+plotOne(data.exact, [data.sa]);
+dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_30_e_300_f_1-30_s_20_r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=300'];
+plotOne(data.exact, [data.sa]);
 
 
-% dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_15_e_30_f_1-15_s_15_r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=30'];
-% plotOne(data.exact, [data.sa]);
-% dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_15_e_55_f_1-15_s_15_r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=55'];
-% plotOne(data.exact, [data.sa]);
-% dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_15_e_80_f_1-15_s_15_r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=80'];
-% plotOne(data.exact, [data.sa]);
-% dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_15_e_105_f_1-15_s_15_r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=105'];
-% plotOne(data.exact, [data.sa]);
-
-
+dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_15_e_30_f_1-15_s_15_r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=30'];
+plotOne(data.exact, [data.sa]);
+dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_15_e_55_f_1-15_s_15_r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=55'];
+plotOne(data.exact, [data.sa]);
+dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_15_e_80_f_1-15_s_15_r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=80'];
+plotOne(data.exact, [data.sa]);
+dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_15_e_105_f_1-15_s_15_r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=105'];
+plotOne(data.exact, [data.sa]);
+% 
+% 
 dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_50_e_100_f_1-30_s_20_r_1000.h5');
 data = dataFile.Analysis_data; legendStr=[legendStr, 'v=50 e=100'];
 plotOne(data.exact, [data.sa]);
