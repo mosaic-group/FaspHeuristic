@@ -6,7 +6,8 @@
 
 #include "benchmarks/benchSuperAlgorithm/benchSuperAlgorithm.h"
 #include "benchmarks/benchHeuristics/benchHeuristics.h"
-#include "benchamrks/bench
+#include "benchmarks/benchBruijnGraphs/benchBruijnGraphs.h"
+
 INITIALIZE_EASYLOGGINGPP
 
 void configureLogger() {
@@ -43,6 +44,7 @@ int main(int argc, char **argv) {
         allowedBenchmarks.push_back("playground");
         allowedBenchmarks.push_back("benchSuperAlgorithmConstWeightVarFaspConstVE");
         allowedBenchmarks.push_back("benchHeuristicsConstWeightVarFaspConstVE");
+        allowedBenchmarks.push_back("benchBruijnGraphs");
         TCLAP::ValuesConstraint<std::string> allowedVals( allowedBenchmarks );
         TCLAP::UnlabeledValueArg<std::string>  benchmarkName("benchmarkName", "name of benchmark to run", true, "", &allowedVals);
         cmd.add(benchmarkName);
@@ -106,8 +108,15 @@ int main(int argc, char **argv) {
         else if (benchmarkName.getValue() == allowedBenchmarks[1]) {
             benchSuperAlgorithmConstWeightVarFaspConstVE(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
-        else {
+        else if (benchmarkName.getValue() == allowedBenchmarks[2]) {
             benchHeuristicsConstWeightVarFaspConstVE(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
+        }
+        else if (benchmarkName.getValue() == allowedBenchmarks[3]) {
+            benchBruijnGraphs(dirArgHdl(dirArg));
+        }
+        else {
+
+            std::cerr << "Not known name of benchmark! \n";
         }
     }
     catch (TCLAP::ArgException &e) {
