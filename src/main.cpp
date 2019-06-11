@@ -6,7 +6,7 @@
 
 #include "benchmarks/benchSuperAlgorithm/benchSuperAlgorithm.h"
 #include "benchmarks/benchHeuristics/benchHeuristics.h"
-
+#include "benchamrks/bench
 INITIALIZE_EASYLOGGINGPP
 
 void configureLogger() {
