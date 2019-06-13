@@ -269,7 +269,7 @@ namespace Graph::FaspFast {
          * @param aEdge  - edge that will be used as a starting place for cleaning
          */
         template<template <typename> class GRAPH_TYPE>
-        void GStar2(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge) {
+        void GStar(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge) {
             auto vFrom = aEdge.dst;
             auto vTo = aEdge.src;
 
@@ -321,7 +321,7 @@ namespace Graph::FaspFast {
         }
 
         template<template <typename> class GRAPH_TYPE>
-        void GStar(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge) {
+        void GStar2(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge) {
             auto vFrom = aEdge.dst;
             auto vTo = aEdge.src;
 
@@ -332,13 +332,20 @@ namespace Graph::FaspFast {
             auto scc = Tools::stronglyConnectedComponents(aGraph);
 //            std::cout << scc.size() << std::endl;
 
-            for (auto &s : scc) {
+            for (const auto &s : scc) {
                 if (s.size() == 1) continue;
 
+                    std::cout << "SIZE: " << s.size() << std::endl;
                 for (auto &v : s) {
                     for (auto &vo : aGraph.getOutVertices(v)) {
                         if (std::find(s.begin(), s.end(), vo) == s.end()) continue;
+                        std::cout << v << "," << vo << std::endl;
                         aGraph.removeEdge({v, vo});
+                    }
+                    for (auto &vi : aGraph.getInVertices(v)) {
+                        if (std::find(s.begin(), s.end(), vi) == s.end()) continue;
+                        std::cout << vi << "," << v << std::endl;
+                        aGraph.removeEdge({vi, v});
                     }
                 }
             }
