@@ -72,6 +72,7 @@ namespace Graph {
 
         // -------- Type defnitions -----------------------------------------------
         using GraphDef = std::unordered_map<VERTEX_TYPE, NeighborVertices>;
+//        using GraphDef = std::map<VERTEX_TYPE, NeighborVertices>;
 
     private:
         // -------- Internal data -------------------------------------------------

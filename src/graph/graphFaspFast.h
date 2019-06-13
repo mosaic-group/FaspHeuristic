@@ -320,86 +320,6 @@ namespace Graph::FaspFast {
             }
         }
 
-        template<template <typename> class GRAPH_TYPE>
-        void GStar2(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge) {
-            auto vFrom = aEdge.dst;
-            auto vTo = aEdge.src;
-
-            // Run cleanup phase 'G' which will remove not reachable edges/vertices.
-            // NOTE: G() will remove aEdge from aGraph
-            G(aGraph, {vFrom, vTo});
-
-            auto scc = Tools::stronglyConnectedComponents(aGraph);
-//            std::cout << scc.size() << std::endl;
-
-            for (const auto &s : scc) {
-                if (s.size() == 1) continue;
-
-                    std::cout << "SIZE: " << s.size() << std::endl;
-                for (auto &v : s) {
-                    for (auto &vo : aGraph.getOutVertices(v)) {
-                        if (std::find(s.begin(), s.end(), vo) == s.end()) continue;
-                        std::cout << v << "," << vo << std::endl;
-                        aGraph.removeEdge({v, vo});
-                    }
-                    for (auto &vi : aGraph.getInVertices(v)) {
-                        if (std::find(s.begin(), s.end(), vi) == s.end()) continue;
-                        std::cout << vi << "," << v << std::endl;
-                        aGraph.removeEdge({vi, v});
-                    }
-                }
-            }
-
-
-
-
-//            while (true) {
-//                // Run cleanup phase 'G' which will remove not reachable edges/vertices.
-//                // NOTE: G() will remove aEdge from aGraph
-//                G(aGraph, {vFrom, vTo});
-//                bool wasGraphModified = false;
-//
-//                // For every edge in a graph remove:
-//                // - all edges 'e' which after removing its input edges does not have a path
-//                //   from e.dst to vTo (so this are loops through which we would need to go back)
-//                // - all edges 'e' which after removing its output edges does not have a path
-//                //   from vFrom to e.src
-//                for (const auto &e : aGraph.getEdges()) {
-//                    bool wasCurrentEdgeRemoved = false;
-//                    const auto &inVertices = aGraph.getInVertices(e.src);
-//                    inEdges.clear();
-//                    for (const auto &v : inVertices) {
-//                        typename Graph<VERTEX_TYPE>::Edge inEdge{v, e.src};
-//                        if (e != inEdge) inEdges.emplace_back(std::move(inEdge));
-//                    }
-//                    aGraph.removeEdges(inEdges);
-//                    if (e.src == e.dst || !pathExistsDFS(aGraph, e.dst, vTo)) {
-//                        aGraph.removeEdge(e);
-//                        wasGraphModified = true;
-//                        wasCurrentEdgeRemoved = true;
-//                    }
-//                    aGraph.addEdges(inEdges);
-//
-//                    if (!wasCurrentEdgeRemoved) {
-//                        const auto &outVertices = aGraph.getOutVertices(e.dst);
-//                        outEdges.clear();
-//                        for (const auto &v : outVertices) {
-//                            typename Graph<VERTEX_TYPE>::Edge outEdge{e.dst, v};
-//                            if (e != outEdge) outEdges.emplace_back(std::move(outEdge));
-//                        }
-//                        aGraph.removeEdges(outEdges);
-//                        if (e.src == e.dst || !pathExistsDFS(aGraph, vFrom, e.src)) {
-//                            aGraph.removeEdge(e);
-//                            wasGraphModified = true;
-//                        }
-//                        aGraph.addEdges(outEdges);
-//                    }
-//                }
-//
-//                if (!wasGraphModified) break;
-//            }
-        }
-
         /**
          * step2b - cleaning graph phase (Yes! we need better name for it).
          * Finds all edges which are part of other cycle (not only cycle going through aEdge).
@@ -442,7 +362,6 @@ namespace Graph::FaspFast {
                 path.GStar(workGraph, e);
 
                 auto S = path.step2b(outGraph, workGraph, e);
-
                 workGraph.removeEdges(S);
                 path.GStar(workGraph, e);
 
