@@ -39,7 +39,10 @@ namespace Graph::FaspFast {
         typename Graph<VERTEX_TYPE>::Edges outEdges;
         typename Graph<VERTEX_TYPE>::Vertices path;
 
+
+
     public:
+        inline static int cnt = 0;
         explicit PathHero(size_t aN) : iVisited(aN), stack(aN), parents(aN, 0) {
             // both can have at most aN in/outgoing edges
             inEdges.reserve(aN);
@@ -55,6 +58,7 @@ namespace Graph::FaspFast {
                            const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
                            const typename Graph<VERTEX_TYPE>::VertexId &aDst,
                            bool aReversedSearch = false) {
+            cnt++;
             if (aSrc == aDst) return true;
 
             iVisited.clearAll();
@@ -265,7 +269,7 @@ namespace Graph::FaspFast {
          * @param aEdge  - edge that will be used as a starting place for cleaning
          */
         template<template <typename> class GRAPH_TYPE>
-        void GStar(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge) {
+        void GStar2(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge) {
             auto vFrom = aEdge.dst;
             auto vTo = aEdge.src;
 
@@ -314,6 +318,79 @@ namespace Graph::FaspFast {
 
                 if (!wasGraphModified) break;
             }
+        }
+
+        template<template <typename> class GRAPH_TYPE>
+        void GStar(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge) {
+            auto vFrom = aEdge.dst;
+            auto vTo = aEdge.src;
+
+            // Run cleanup phase 'G' which will remove not reachable edges/vertices.
+            // NOTE: G() will remove aEdge from aGraph
+            G(aGraph, {vFrom, vTo});
+
+            auto scc = Tools::stronglyConnectedComponents(aGraph);
+//            std::cout << scc.size() << std::endl;
+
+            for (auto &s : scc) {
+                if (s.size() == 1) continue;
+
+                for (auto &v : s) {
+                    for (auto &vo : aGraph.getOutVertices(v)) {
+                        if (std::find(s.begin(), s.end(), vo) == s.end()) continue;
+                        aGraph.removeEdge({v, vo});
+                    }
+                }
+            }
+
+
+
+
+//            while (true) {
+//                // Run cleanup phase 'G' which will remove not reachable edges/vertices.
+//                // NOTE: G() will remove aEdge from aGraph
+//                G(aGraph, {vFrom, vTo});
+//                bool wasGraphModified = false;
+//
+//                // For every edge in a graph remove:
+//                // - all edges 'e' which after removing its input edges does not have a path
+//                //   from e.dst to vTo (so this are loops through which we would need to go back)
+//                // - all edges 'e' which after removing its output edges does not have a path
+//                //   from vFrom to e.src
+//                for (const auto &e : aGraph.getEdges()) {
+//                    bool wasCurrentEdgeRemoved = false;
+//                    const auto &inVertices = aGraph.getInVertices(e.src);
+//                    inEdges.clear();
+//                    for (const auto &v : inVertices) {
+//                        typename Graph<VERTEX_TYPE>::Edge inEdge{v, e.src};
+//                        if (e != inEdge) inEdges.emplace_back(std::move(inEdge));
+//                    }
+//                    aGraph.removeEdges(inEdges);
+//                    if (e.src == e.dst || !pathExistsDFS(aGraph, e.dst, vTo)) {
+//                        aGraph.removeEdge(e);
+//                        wasGraphModified = true;
+//                        wasCurrentEdgeRemoved = true;
+//                    }
+//                    aGraph.addEdges(inEdges);
+//
+//                    if (!wasCurrentEdgeRemoved) {
+//                        const auto &outVertices = aGraph.getOutVertices(e.dst);
+//                        outEdges.clear();
+//                        for (const auto &v : outVertices) {
+//                            typename Graph<VERTEX_TYPE>::Edge outEdge{e.dst, v};
+//                            if (e != outEdge) outEdges.emplace_back(std::move(outEdge));
+//                        }
+//                        aGraph.removeEdges(outEdges);
+//                        if (e.src == e.dst || !pathExistsDFS(aGraph, vFrom, e.src)) {
+//                            aGraph.removeEdge(e);
+//                            wasGraphModified = true;
+//                        }
+//                        aGraph.addEdges(outEdges);
+//                    }
+//                }
+//
+//                if (!wasGraphModified) break;
+//            }
         }
 
         /**
@@ -438,7 +515,7 @@ namespace Graph::FaspFast {
         for (const auto &e : removedEdges) {
             capacity += aWeights.at(e);
         }
-
+        LOG(DEBUG) << "PATH called: " << path.cnt ;
         // Debug printout and check of solution.
         LOG(DEBUG) << "FASP(DELTA) capacity = " << capacity << " edgeCnt = " << removedEdges.size() << " edgeList = " << removedEdges;
         LOG(TRACE) << "Edges with cycles: " << Tools::findEdgesWithCycles(g);
