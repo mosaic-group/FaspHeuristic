@@ -25,6 +25,20 @@ void benchBruijnGraphs(const std::string &outputDir) {
 //
 //    std::cout << " ======================= Processing [" << file << "] " << std::endl;
 
+    Graph::Graph<int, Graph::GraphMap> g{};
+    for (int i = 0; i < 6; ++i) g.addVertex(i);
+    g.addEdge({0,3});
+    g.addEdge({0,5});
+    g.addEdge({4,1});
+    g.addEdge({4,3});
+    auto c = Graph::Ext::getEdgeProperties<int>(g, 1);
+
+    auto vertices = g.getVertices();
+    auto maxId = std::max_element(vertices.begin(), vertices.end());
+    Graph::FaspFast2::PathHero<int> path(maxId == vertices.end() ? 1 : *maxId + 1);
+
+    std::cout << path.minStCutFordFulkersonBase(g, 5, 4, c) << std::endl;
+
     if (false) {
         auto [gg, cc] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(18, 13, 112);
         Graph::IO::graphToFile<int, Graph::GraphMap>("/tmp/graph.txt", gg);
@@ -50,13 +64,21 @@ void benchBruijnGraphs(const std::string &outputDir) {
 
 
     if (true) {
-        auto [gg, cc] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(30, 13, 150);
-        std::string outF = "/Users/gonciarz/Documents/MOSAIC/work/repo/Fasp/src/benchmarks/benchErdosRenyiGraphs/data/erdos_renyi_n_100_c_5_seed_1.edges";
+//        auto [gg, cc] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(30, 13, 150);
+//        std::string outF = "/Users/gonciarz/Documents/MOSAIC/work/repo/Fasp/src/benchmarks/benchErdosRenyiGraphs/data/erdos_renyi_n_100_c_5_seed_1.edges";
 
 //        Graph::IO::graphToFile<int, Graph::GraphMap>("/tmp/graph.txt", gg); outF = "/tmp/graph.txt";
-        Graph::Graph g = Graph::IO::graphFromFile<int, Graph::GraphMap>(outF);
-        Graph::Graph g2 = Graph::IO::graphFromFile<int, Graph::GraphMap>(outF);
+//        Graph::Graph g = Graph::IO::graphFromFile<int, Graph::GraphMap>(outF);
+//        Graph::Graph g2 = Graph::IO::graphFromFile<int, Graph::GraphMap>(outF);
 
+        auto [gg, cc] = Graph::Tools::generateErdosRenyiGraph<int, int, Graph::GraphMap>(55, 0.1);
+        std::string outF = "/tmp/graph.txt";
+        Graph::IO::graphToFile<int, Graph::GraphMap>("/tmp/graph.txt", gg);
+        Graph::Graph gf = Graph::IO::graphFromFile<int, Graph::GraphMap>(outF);
+        std::cout << gf << std::endl;
+
+        auto g{gf};
+        auto g2{gf};
 
         auto vertices = g.getVertices();
         auto maxId = std::max_element(vertices.begin(), vertices.end());
@@ -68,14 +90,27 @@ void benchBruijnGraphs(const std::string &outputDir) {
         auto c2 = Graph::Ext::getEdgeProperties<int>(g2, 1);
 
         Timer<true, false> t("");
-        t.start_timer("old");
-        Graph::FaspFast::deltaFASP(g, c);
+
+//        t.start_timer("old");
+//        Graph::FaspFast::deltaFASP(g, c);
+//        t.stop_timer();
+//        t.start_timer("new");
+//        Graph::FaspFast2::deltaFASP(g2, c2);
+//        t.stop_timer();
+
+        t.start_timer("old rand");
+        Graph::FaspFast::randomFASP(g, c);
         t.stop_timer();
-        t.start_timer("new");
-        Graph::FaspFast2::deltaFASP(g2, c2);
+        t.start_timer("new rand");
+        Graph::FaspFast2::randomFASP(g2, c2);
         t.stop_timer();
-//        Graph::FaspFast::randomFASP(g, c);
-//        Graph::FaspFast2::randomFASP(g2, c2);
+
+//        t.start_timer("old rand");
+//        std::cout << Graph::FaspFast::superAlgorithm(g, c) << std::endl;
+//        t.stop_timer();
+//        t.start_timer("new rand");
+//        std::cout << Graph::FaspFast2::superAlgorithm(g2, c2) << std::endl;
+//        t.stop_timer();
     }
 
     if (false) {

@@ -121,6 +121,9 @@ namespace Graph::FaspFast2 {
                                           const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
                                           const typename Graph<VERTEX_TYPE>::VertexId &aDst,
                                           const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
+
+//            std::cout << "PP:" << aGraph.getStrRepresentationOfGraph() << std::endl;
+//            std::cout << "PP:" << aWeights << std::endl;
             path.clear();
             if (aGraph.hasVertex(aSrc) && aGraph.hasVertex(aDst)) {
                 if (aSrc == aDst) {
@@ -180,14 +183,22 @@ namespace Graph::FaspFast2 {
             // Copy graph and weights - they will be modified
             auto g{aGraph};
             auto c{aWeights};
+//            std::cout << "MC1:" << aGraph.getStrRepresentationOfGraph() << std::endl;
+//            std::cout << "MC1:" << aWeights << std::endl;
+//            std::cout << "MC2:" << g.getStrRepresentationOfGraph() << std::endl;
+//            std::cout << "MC2:" << c << std::endl;
+
             // Add edges in backwerd direction if not yet exists
             for (const auto &e : g.getEdges()) {
                 auto backwardEdge = typename Graph<VERTEX_TYPE>::Edge{e.dst, e.src};
                 if (!g.hasEdge(backwardEdge)) {
                     g.addEdge(backwardEdge);
-                    c.emplace(std::move(backwardEdge), 0);
+                    c.insert_or_assign(std::move(backwardEdge), 0);
                 }
             }
+
+//            std::cout << "MC3:" << g.getStrRepresentationOfGraph() << std::endl;
+//            std::cout << "MC3:" << c << std::endl;
 
             EDGE_PROP_TYPE maxFlow = 0;
             int cnt = 0;
@@ -198,8 +209,10 @@ namespace Graph::FaspFast2 {
                 // Find edge wiht minimum capacity left
                 EDGE_PROP_TYPE pathFlow = std::numeric_limits<EDGE_PROP_TYPE>::max();
                 for (size_t i = 0; i < path.size() - 1; ++i) {
+//                    std::cout << path[i] << "-" << path[i + 1] << "    ";
                     pathFlow = std::min(pathFlow, c[{path[i], path[i + 1]}]);
                 }
+//                std::cout << "\n";
 
                 // Update max flow and capacities of edges on the found path
                 maxFlow += pathFlow;
@@ -210,6 +223,9 @@ namespace Graph::FaspFast2 {
 
                 if (++cnt > 10000) throw MinCutFailed();
             }
+
+//            std::cout << c << std::endl;
+//            std::cout << g.getStrRepresentationOfGraph() << std::endl;
             return std::tuple{maxFlow, g, c};
         }
 
@@ -263,6 +279,19 @@ namespace Graph::FaspFast2 {
             }
         }
 
+        template<template <typename> class GRAPH_TYPE>
+        void G2(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge aEdge) {
+            // Remove outgoing edges from destination and ingoing to source.
+            auto outv = aGraph.getOutVertices(aEdge.dst);
+            for (const auto &vo : outv) {
+//                if (aEdge.dst == 3) std::cout << "OUTV: " << vo << std::endl;
+                aGraph.removeEdge({aEdge.dst, vo});
+            }
+            auto inv = aGraph.getInVertices(aEdge.src);
+            for (const auto &vi : inv) {
+                aGraph.removeEdge({vi, aEdge.src});
+            }
+        }
         /**
  * G* - cleaning graph phase
  * @param aGraph - input graph (it will be modified!)
@@ -332,8 +361,15 @@ namespace Graph::FaspFast2 {
 
             // Run cleanup phase 'G' which will remove not reachable edges/vertices.
             // NOTE: G() will remove aEdge from aGraph
-            G(aGraph, {vFrom, vTo});
+//            std::cout << aEdge << " BG: " << aGraph.getStrRepresentationOfGraph() << std::endl;
+            G2(aGraph, {vFrom, vTo});
+//            std::cout << aEdge << " AG: " << aGraph.getStrRepresentationOfGraph() << std::endl;
+//            aGraph.removeEdge(aEdge);
             auto scc = Tools::stronglyConnectedComponents(aGraph);
+
+//            if (aEdge.src == 2 && aEdge.dst == 3) {
+//                for (auto s : scc) std::cout << s << std::endl;
+//            }
 
             for (const auto &s : scc) {
                 if (s.size() == 1) continue;
@@ -347,6 +383,8 @@ namespace Graph::FaspFast2 {
                     }
                 }
             }
+
+//            std::cout << "G*: " << aGraph.getStrRepresentationOfGraph() << std::endl;
         }
 
         /**
@@ -383,19 +421,22 @@ namespace Graph::FaspFast2 {
             bool wasGraphModified = false;
 
             for (const auto &e : outGraph.getEdges()) {
-
+//                if (e.src == 2 && e.dst == 3) {
+//                    IO::graphToFile<int, GraphMap>("/tmp/graph302.txt", outGraph);
+//                }
                 // Optimization, if there is no path back from dst to src, then edge has no cycles.
                 if (!path.pathExistsDFS(outGraph, e.dst, e.src)) continue;
 
                 auto workGraph{outGraph};
                 path.GStar(workGraph, e);
+//                std::cout << e << "workGraph1: " << workGraph.getStrRepresentationOfGraph() << std::endl;
 
                 auto S = path.step2b(outGraph, workGraph, e);
                 workGraph.removeEdges(S);
                 path.GStar(workGraph, e);
-
+//                std::cout << e << " workGraph2: " << workGraph.getStrRepresentationOfGraph() << std::endl;
                 auto mc = path.minStCutFordFulkerson(workGraph, e.dst, e.src, aWeights);
-
+//                std::cout << e << " mc: " << mc << std::endl;
                 if (mc >= aWeights.at(e)) {
                     wasGraphModified = true;
                     outGraph.removeEdge(e);
@@ -551,6 +592,7 @@ namespace Graph::FaspFast2 {
             capacity += aWeights.at(e);
         }
 
+        LOG(DEBUG) << "PATH called: " << path.cnt ;
         // Debug printout and check of solution.
         LOG(DEBUG) << "FASP(RAND)  capacity = " << capacity << " edgeCnt = " << removedEdges.size() << " edgeList = " << removedEdges;
         LOG(TRACE) << "Edges with cycles: " << Tools::findEdgesWithCycles(g);

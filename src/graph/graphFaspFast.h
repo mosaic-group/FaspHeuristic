@@ -6,6 +6,7 @@
 #include "graph.h"
 #include "graphExt.h"
 #include "graphTools.h"
+#include "graphIO.h"
 #include "tools/tools.h"
 #include "tools/easylogging++.h"
 #include "tools/prettyprint.h"
@@ -185,7 +186,7 @@ namespace Graph::FaspFast {
                 auto backwardEdge = typename Graph<VERTEX_TYPE>::Edge{e.dst, e.src};
                 if (!g.hasEdge(backwardEdge)) {
                     g.addEdge(backwardEdge);
-                    c.emplace(std::move(backwardEdge), 0);
+                    c.insert_or_assign(std::move(backwardEdge), 0);
                 }
             }
 
@@ -236,10 +237,12 @@ namespace Graph::FaspFast {
         template<template <typename> class GRAPH_TYPE>
         void G(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge aEdge) {
             // Remove outgoing edges from destination and ingoing to source.
-            for (const auto &vo : aGraph.getOutVertices(aEdge.dst)) {
+            auto outv = aGraph.getOutVertices(aEdge.dst);
+            for (const auto &vo : outv) {
                 aGraph.removeEdge({aEdge.dst, vo});
             }
-            for (const auto &vi : aGraph.getInVertices(aEdge.src)) {
+            auto inv = aGraph.getInVertices(aEdge.src);
+            for (const auto &vi : inv) {
                 aGraph.removeEdge({vi, aEdge.src});
             }
 
@@ -318,6 +321,7 @@ namespace Graph::FaspFast {
 
                 if (!wasGraphModified) break;
             }
+//            std::cout << "G*: " << aGraph.getStrRepresentationOfGraph() << std::endl;
         }
 
         /**
@@ -354,17 +358,20 @@ namespace Graph::FaspFast {
             bool wasGraphModified = false;
 
             for (const auto &e : outGraph.getEdges()) {
-
+                if (e.src == 2 && e.dst == 3) {
+                    IO::graphToFile<int, GraphMap>("/tmp/graph301.txt", outGraph);
+                }
                 // Optimization, if there is no path back from dst to src, then edge has no cycles.
                 if (!path.pathExistsDFS(outGraph, e.dst, e.src)) continue;
 
                 auto workGraph{outGraph};
+//                std::cout << e << " workGraph1: " << workGraph.getStrRepresentationOfGraph() << std::endl;
                 path.GStar(workGraph, e);
 
                 auto S = path.step2b(outGraph, workGraph, e);
                 workGraph.removeEdges(S);
                 path.GStar(workGraph, e);
-
+//                std::cout << e << " workGraph2: " << workGraph.getStrRepresentationOfGraph() << std::endl;
                 auto mc = path.minStCutFordFulkerson(workGraph, e.dst, e.src, aWeights);
 
                 if (mc >= aWeights.at(e)) {
@@ -521,6 +528,7 @@ namespace Graph::FaspFast {
             capacity += aWeights.at(e);
         }
 
+        LOG(DEBUG) << "PATH called: " << path.cnt ;
         // Debug printout and check of solution.
         LOG(DEBUG) << "FASP(RAND)  capacity = " << capacity << " edgeCnt = " << removedEdges.size() << " edgeList = " << removedEdges;
         LOG(TRACE) << "Edges with cycles: " << Tools::findEdgesWithCycles(g);
