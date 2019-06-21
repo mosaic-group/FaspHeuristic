@@ -62,6 +62,9 @@ namespace Graph {
     template <typename VERTEX_TYPE>
     class GraphMap : public GraphBase<VERTEX_TYPE> {
     public:
+
+        using MyType = GraphMap<VERTEX_TYPE>;
+
         // Base type aliases
         using typename GraphBase<VERTEX_TYPE>::VertexId;
         using typename GraphBase<VERTEX_TYPE>::Edge;
@@ -107,7 +110,7 @@ namespace Graph {
             return *this;
         }
 
-        GraphMap &operator=(GraphMap &&obj) {
+        GraphMap &operator=(GraphMap &&obj) noexcept {
             iMyId = obj.iMyId;
             graph = std::move(obj.graph);
             if (showConstructorMsg) std::cout << "Graph=Graph&& " << *this << std::endl;
@@ -117,6 +120,8 @@ namespace Graph {
         ~GraphMap() {
             if (showConstructorMsg) std::cout << "~Graph() " << *this << std::endl;
         }
+
+        GraphMap createEmptyInstance() {return GraphMap{};}
 
         /**
          * Adds vertex to graph
@@ -621,6 +626,7 @@ namespace Graph {
 
     template <typename VERTEX_TYPE = uint16_t, template <typename> class GRAPH_TYPE = GraphVector>
     class Graph : public GRAPH_TYPE<VERTEX_TYPE> {};
+//            using Graph = GRAPH_TYPE<VERTEX_TYPE>;
 }
 
 #endif

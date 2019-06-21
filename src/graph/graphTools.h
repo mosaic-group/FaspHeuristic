@@ -344,10 +344,70 @@ namespace Graph::Tools {
     static auto stronglyConnectedComponents(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
 
         int index_counter = 0;
-        Ext::VertexProperties<VERTEX_TYPE, VERTEX_TYPE> lowLinks;
-        Ext::VertexProperties<VERTEX_TYPE, VERTEX_TYPE> index;
-        typename Graph<VERTEX_TYPE>::Vertices stack;
-        std::vector<typename Graph<VERTEX_TYPE>::Vertices> result;
+        const int numOfV = aGraph.getNumOfVertices();
+        Ext::VertexProperties<VERTEX_TYPE, VERTEX_TYPE> lowLinks; lowLinks.reserve(numOfV);
+        Ext::VertexProperties<VERTEX_TYPE, VERTEX_TYPE> index;    index.reserve(numOfV);
+        std::unordered_set<VERTEX_TYPE> stackHelper;    stackHelper.reserve(numOfV);
+        typename Graph<VERTEX_TYPE>::Vertices stack;    stack.reserve(numOfV);
+        std::vector<std::unordered_set<VERTEX_TYPE>> result; result.reserve(numOfV);
+
+        // worker function that is called recursively
+        std::function<void(const VERTEX_TYPE &)> strongconnect = [&](const VERTEX_TYPE &node) {
+            index[node] = index_counter;
+            lowLinks[node] = index_counter;
+            ++index_counter;
+            stack.emplace_back(node);
+            stackHelper.emplace(node);
+
+            for (const auto &successor : aGraph.getOutVertices(node)) {
+                if (lowLinks.find(successor) == lowLinks.end()) {
+                    // successor has not yet been visited; recurse on it
+                    strongconnect(successor);
+                    lowLinks[node] = std::min(lowLinks.at(node), lowLinks.at(successor));
+                }
+//                else if (std::find(stack.begin(), stack.end(), successor) != stack.end()) {
+                else if (stackHelper.find(successor) != stackHelper.end()) {
+                        // the successor is in the stack and hence in the current strongly connected component (SCC)
+                        lowLinks[node] = std::min(lowLinks.at(node), index.at(successor));
+
+                }
+            }
+
+            // If `node` is a root node, pop the stack and generate an SCC
+            if (lowLinks.at(node) == index.at(node)) {
+                std::unordered_set<VERTEX_TYPE> connectedComponent;
+
+                while (true) {
+                    auto successor = stack.back();
+                    stack.pop_back();
+                    stackHelper.erase(successor);
+
+                    connectedComponent.emplace(successor);
+                    if (successor == node) break;
+                }
+                result.emplace_back(std::move(connectedComponent));
+            }
+        };
+
+        for (auto &node : aGraph.getVertices()) {
+            if (lowLinks.find(node) == lowLinks.end()) {
+                strongconnect(node);
+            }
+        }
+
+//        std::cout << "SCC: " << result << std::endl;
+        return result;
+    }
+
+    template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
+    static auto stronglyConnectedComponents2(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
+
+        int index_counter = 0;
+        const int numOfV = aGraph.getNumOfVertices();
+        Ext::VertexProperties<VERTEX_TYPE, VERTEX_TYPE> lowLinks; lowLinks.reserve(numOfV);
+        Ext::VertexProperties<VERTEX_TYPE, VERTEX_TYPE> index;    index.reserve(numOfV);
+        typename Graph<VERTEX_TYPE>::Vertices stack;    stack.reserve(numOfV);
+        std::vector<typename Graph<VERTEX_TYPE>::Vertices> result; result.reserve(numOfV);
 
         // worker function that is called recursively
         std::function<void(const VERTEX_TYPE &)> strongconnect = [&](const VERTEX_TYPE &node) {
@@ -361,9 +421,11 @@ namespace Graph::Tools {
                     // successor has not yet been visited; recurse on it
                     strongconnect(successor);
                     lowLinks[node] = std::min(lowLinks.at(node), lowLinks.at(successor));
-                } else if (std::find(stack.begin(), stack.end(), successor) != stack.end()) {
+                }
+                else if (std::find(stack.begin(), stack.end(), successor) != stack.end()) {
                     // the successor is in the stack and hence in the current strongly connected component (SCC)
                     lowLinks[node] = std::min(lowLinks.at(node), index.at(successor));
+
                 }
             }
 
@@ -388,10 +450,9 @@ namespace Graph::Tools {
             }
         }
 
-//        std::cout << "SCC: " << result << std::endl;
+        std::cout << "SCC: " << result << std::endl;
         return result;
     }
-
 
     /**
      * Generates property container with integer random weights in range [min, max]

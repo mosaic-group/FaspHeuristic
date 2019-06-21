@@ -42,7 +42,8 @@ namespace Graph::FaspFast2 {
 
 
     public:
-        inline static int cnt = 0;
+        volatile inline static int cnt = 0;
+        volatile inline static std::atomic_int saCnt = 0;
         explicit PathHero(size_t aN) : iVisited(aN), stack(aN), parents(aN, 0) {
             // both can have at most aN in/outgoing edges
             inEdges.reserve(aN);
@@ -85,12 +86,27 @@ namespace Graph::FaspFast2 {
         }
 
         /**
+         * Finds all edges with cycles, that is if we have edge a->b there is a path from b to a
+         * @param aGraph input graph
+         * @return true if there are still cycles
+        */
+        template<template<typename> class GRAPH_TYPE>
+        bool isAcyclic(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
+            for (const auto &e : aGraph.getEdges()) {
+                if (pathExistsDFS(aGraph, e.dst, e.src)) return false;
+            }
+
+            return true;
+        }
+
+        /**
          * @return container with all verticess accessible from src vertex (if reverse search is set to true then it goes against edge direction)
          */
         template<template<typename> class GRAPH_TYPE>
         auto depthFirstSearch(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph,
                               const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
                               bool aReversedSearch = false) {
+            cnt++;
             iVisited.clearAll();
 
             stack.clear();
@@ -252,10 +268,12 @@ namespace Graph::FaspFast2 {
         template<template <typename> class GRAPH_TYPE>
         void G(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge aEdge) {
             // Remove outgoing edges from destination and ingoing to source.
-            for (const auto &vo : aGraph.getOutVertices(aEdge.dst)) {
+            auto outv = aGraph.getOutVertices(aEdge.dst);
+            for (const auto &vo : outv) {
                 aGraph.removeEdge({aEdge.dst, vo});
             }
-            for (const auto &vi : aGraph.getInVertices(aEdge.src)) {
+            auto inv = aGraph.getInVertices(aEdge.src);
+            for (const auto &vi : inv) {
                 aGraph.removeEdge({vi, aEdge.src});
             }
 
@@ -284,7 +302,6 @@ namespace Graph::FaspFast2 {
             // Remove outgoing edges from destination and ingoing to source.
             auto outv = aGraph.getOutVertices(aEdge.dst);
             for (const auto &vo : outv) {
-//                if (aEdge.dst == 3) std::cout << "OUTV: " << vo << std::endl;
                 aGraph.removeEdge({aEdge.dst, vo});
             }
             auto inv = aGraph.getInVertices(aEdge.src);
@@ -355,36 +372,57 @@ namespace Graph::FaspFast2 {
          * @param aEdge  - edge that will be used as a starting place for cleaning
          */
         template<template <typename> class GRAPH_TYPE>
-        void GStar(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge) {
+        bool GStar(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge) {
             auto vFrom = aEdge.dst;
             auto vTo = aEdge.src;
 
             // Run cleanup phase 'G' which will remove not reachable edges/vertices.
             // NOTE: G() will remove aEdge from aGraph
 //            std::cout << aEdge << " BG: " << aGraph.getStrRepresentationOfGraph() << std::endl;
-            G2(aGraph, {vFrom, vTo});
+//            G2(aGraph, {vFrom, vTo});
+
 //            std::cout << aEdge << " AG: " << aGraph.getStrRepresentationOfGraph() << std::endl;
-//            aGraph.removeEdge(aEdge);
+            aGraph.removeEdge(aEdge);
+
             auto scc = Tools::stronglyConnectedComponents(aGraph);
-
-//            if (aEdge.src == 2 && aEdge.dst == 3) {
-//                for (auto s : scc) std::cout << s << std::endl;
-//            }
-
             for (const auto &s : scc) {
                 if (s.size() == 1) continue;
 
                 for (auto &v : s) {
                     const auto outV = aGraph.getOutVertices(v);
                     for (const auto &vo : outV) {
-                        if (std::find(s.begin(), s.end(), vo) != s.end()) {
+                        if (s.find(vo) != s.end()) {
                             aGraph.removeEdge({v, vo});
                         }
                     }
                 }
             }
 
-//            std::cout << "G*: " << aGraph.getStrRepresentationOfGraph() << std::endl;
+            aGraph.addEdge(aEdge);
+            auto scc2 = Tools::stronglyConnectedComponents(aGraph);
+            bool first = false;
+            for (const auto &s : scc2) {
+                if (s.size() > 1) {
+                    if (first == true) std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
+                    first =true ;
+                    Graph<VERTEX_TYPE, GRAPH_TYPE> newGraph{};
+                    for (auto &v : s) {
+                        newGraph.addVertexSafe(v);
+                        const auto outV = aGraph.getOutVertices(v);
+                        for (const auto &vo : outV) {
+                            if (s.find(vo) != s.end()) {
+                                newGraph.addVertexSafe(vo);
+                                newGraph.addEdge({v, vo});
+                            }
+                        }
+                    }
+
+                    aGraph = std::move(newGraph);
+                    return true;
+                }
+            }
+            return false;
+
         }
 
         /**
@@ -415,7 +453,7 @@ namespace Graph::FaspFast2 {
     static auto superAlgorithm(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, PathHero<VERTEX_TYPE> &path) {
         assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
         typename Graph<VERTEX_TYPE>::Edges removedEdges;
-
+        path.saCnt++;
         auto outGraph{aGraph}; // eventually acyclic graph
         while(true) {
             bool wasGraphModified = false;
@@ -428,20 +466,21 @@ namespace Graph::FaspFast2 {
                 if (!path.pathExistsDFS(outGraph, e.dst, e.src)) continue;
 
                 auto workGraph{outGraph};
-                path.GStar(workGraph, e);
+                if (!path.GStar(workGraph, e)) continue;
 //                std::cout << e << "workGraph1: " << workGraph.getStrRepresentationOfGraph() << std::endl;
 
-                auto S = path.step2b(outGraph, workGraph, e);
-                workGraph.removeEdges(S);
-                path.GStar(workGraph, e);
+//                auto S = path.step2b(outGraph, workGraph, e);
+//                workGraph.removeEdges(S);
+//                path.GStar(workGraph, e);
 //                std::cout << e << " workGraph2: " << workGraph.getStrRepresentationOfGraph() << std::endl;
-                auto mc = path.minStCutFordFulkerson(workGraph, e.dst, e.src, aWeights);
-//                std::cout << e << " mc: " << mc << std::endl;
-                if (mc >= aWeights.at(e)) {
+
+//                auto mc = path.minStCutFordFulkerson(workGraph, e.dst, e.src, aWeights);
+////                std::cout << e << " mc: " << mc << std::endl;
+//                if (mc >= aWeights.at(e)) {
                     wasGraphModified = true;
                     outGraph.removeEdge(e);
                     removedEdges.emplace_back(e);
-                }
+//                }
             }
 
             if (!wasGraphModified) break;
@@ -522,7 +561,7 @@ namespace Graph::FaspFast2 {
 
     template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
     static auto randomFASP(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
-        constexpr int numOfReps = 20;
+        constexpr int numOfReps = 10;
         auto g{aGraph};
 
         typename Graph<VERTEX_TYPE>::Edges removedEdges;
@@ -541,8 +580,12 @@ namespace Graph::FaspFast2 {
 //        srand(time(NULL));
 
         int numEdgesToRemove = 1;
+        int numCnt = 0;
+        int emptyCnt = 0;
         while (true) {
-            if (Tools::isAcyclic(g)) break;
+            numCnt++;
+
+            if (path.isAcyclic(g)) break;
 
             // if we are here there are still cycles not handled by SA
             std::unordered_map<typename Graph<VERTEX_TYPE>::Edge, int, Ext::EdgeHasher<VERTEX_TYPE>> edgesCnt;
@@ -562,7 +605,9 @@ namespace Graph::FaspFast2 {
                 }
             }
             if (edgesCnt.size() == 0) {
+                emptyCnt++;
                 numEdgesToRemove++;
+
                 continue;
             }
             numEdgesToRemove = 1;
@@ -586,6 +631,7 @@ namespace Graph::FaspFast2 {
             }
 
         }
+        std::cout << "NUMCNT: " << numCnt << " " << emptyCnt << std::endl;
 
         EDGE_PROP_TYPE capacity = 0;
         for (const auto &e : removedEdges) {

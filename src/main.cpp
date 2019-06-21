@@ -7,6 +7,8 @@
 #include "benchmarks/benchSuperAlgorithm/benchSuperAlgorithm.h"
 #include "benchmarks/benchHeuristics/benchHeuristics.h"
 #include "benchmarks/benchBruijnGraphs/benchBruijnGraphs.h"
+#include "benchmarks/benchGraphsFromPaper1/benchGraphsFromPaper1.h"
+#include "benchmarks/benchResultsDistribution/benchResultsDistribution.h"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -45,12 +47,16 @@ int main(int argc, char **argv) {
         allowedBenchmarks.push_back("benchSuperAlgorithmConstWeightVarFaspConstVE");
         allowedBenchmarks.push_back("benchHeuristicsConstWeightVarFaspConstVE");
         allowedBenchmarks.push_back("benchBruijnGraphs");
+        allowedBenchmarks.push_back("benchGraphsFromPaper1");
+        allowedBenchmarks.push_back("benchResultsDistribution");
         TCLAP::ValuesConstraint<std::string> allowedVals( allowedBenchmarks );
         TCLAP::UnlabeledValueArg<std::string>  benchmarkName("benchmarkName", "name of benchmark to run", true, "", &allowedVals);
         cmd.add(benchmarkName);
 
         // Helper fields - they will be checked later on per-benchmark basis (each benchmark may req. different set of those fields)
         TCLAP::ValueArg<std::string> dirArg("d", "outputDirectory", "directory where output files will be saved", false, "", "outputDirectory");
+
+        TCLAP::ValueArg<std::string> dirInArg("i", "inputDirectory", "directory where graphs are stored", false, "", "inputDirectory");
 
         TCLAP::ValueArg<int> vArg("y", "v", "number of vertices in graph", false, 0, "#vertices");
         TCLAP::ValueArg<int> vMinArg("b", "vmin", "min (begin) number of vertices in graph", false, 0, "#minNumberOfVertices");
@@ -70,6 +76,7 @@ int main(int argc, char **argv) {
         TCLAP::SwitchArg logArg("l", "logScale", "Use log distributed range", false);
 
         cmd.add(dirArg);
+        cmd.add(dirInArg);
 
         cmd.add(vArg);
         cmd.add(vMinArg);
@@ -114,6 +121,13 @@ int main(int argc, char **argv) {
         else if (benchmarkName.getValue() == allowedBenchmarks[3]) {
             benchBruijnGraphs(dirArgHdl(dirArg));
         }
+        else if (benchmarkName.getValue() == allowedBenchmarks[4]) {
+            benchGraphsFromPaper1(dirArgHdl(dirArg), dirArgHdl(dirInArg));
+        }
+        else if (benchmarkName.getValue() == allowedBenchmarks[5]) {
+            benchResultsDistr(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
+        }
+
         else {
 
             std::cerr << "Not known name of benchmark! \n";
