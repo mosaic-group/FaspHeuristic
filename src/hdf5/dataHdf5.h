@@ -52,6 +52,7 @@ class DataHdf5 {
     std::map<std::string, ContainerType> iData;
 
     void hdf5WriteData(hid_t obj_id, hid_t type_id, const char *aDataSetName, hsize_t *dims, const void *data) {
+
         hid_t plist_id  = H5Pcreate(H5P_DATASET_CREATE);
         hid_t space_id = H5Screate_simple(/*rank*/ 1, dims, NULL);
         hid_t dset_id = H5Dcreate2(obj_id, aDataSetName, type_id, space_id, H5P_DEFAULT, plist_id, H5P_DEFAULT);
