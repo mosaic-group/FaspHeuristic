@@ -70,4 +70,61 @@ void benchTimingConstWeightVarFaspConstVE(const std::string &outputDir, int numO
 }
 
 
+std::string getFilenameOfBenchmarkConstDensityAndFaspGrowingsize(int vmin, int vmax, int d, int fasp, int steps, int reps, bool logDistr) {
+    return std::string("TimingConstWeightVarFaspConstVE") +
+           "_v_" + std::to_string(vmin) + "-" + std::to_string(vmax) +
+           "_d_" + std::to_string(d) +
+           "_f_" + std::to_string(fasp) +
+           "_s_" + std::to_string(steps) + (logDistr ? "_log_" : "lin") +
+           "_r_" + std::to_string(reps) +
+           ".h5";
+}
+
+
+void benchTimingConstDensityAndFaspGrowingsize(const std::string &outputDir, int minNumOfVertices, int maxNumOfVertices, int density, int fasp, int numOfSteps, int numOfReps, bool logDistribution) {
+
+    LOG(TRACE) << "Running benchTimingConstDensityAndFaspGrowingsize. Params: vmin=" << minNumOfVertices << " vmax=" << maxNumOfVertices << " d=" << density << " f=" << fasp << " steps=" << numOfSteps << " reps=" << numOfReps;
+
+
+    auto outputFile = outputDir + "/" + getFilenameOfBenchmarkConstDensityAndFaspGrowingsize(minNumOfVertices, maxNumOfVertices, density, fasp, numOfSteps, numOfReps, logDistribution);
+    DataHdf5<double> f1(outputFile, /* create output file (dummy run) */ (outputDir == "" ? true : false));
+
+    auto vValues =  logDistribution ? Tools::logspace(minNumOfVertices, maxNumOfVertices, numOfSteps) : Tools::linspace(minNumOfVertices, maxNumOfVertices, numOfSteps);
+
+    Timer<true, false> t("benchTiming");
+
+    for (auto &cv : vValues) {
+        Timer<true, false> t("");
+        for (int r = 0; r < numOfReps; ++r) {
+            LOG(TRACE) << "--- Progress --- V size=" << cv  << "/" << maxNumOfVertices << " Reps=" << r + 1 << "/" << numOfReps << "";
+            auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(cv, fasp, cv * density);
+
+            f1.put("vertices", g.getNumOfVertices());
+            f1.put("edges", g.getNumOfEdges());
+
+            t.start_timer("gr");
+            auto gr = Graph::Fasp::GR(g, c);
+            auto grTime = t.stop_timer();
+
+            t.start_timer("delta");
+            auto delta = Graph::FaspFast::deltaFASP(g, c);
+            auto deltaTime = t.stop_timer();
+
+            t.start_timer("random");
+            auto random = Graph::FaspFast::randomFASP(g, c);
+            auto randomTime = t.stop_timer();
+
+            f1.put("gr", gr);
+            f1.put("grTime", grTime);
+            f1.put("delta", delta);
+            f1.put("deltaTime", deltaTime);
+            f1.put("random", random);
+            f1.put("randomTime", randomTime);
+            f1.put("exact", fasp);
+        }
+    }
+    f1.save();}
+
+
+
 #endif

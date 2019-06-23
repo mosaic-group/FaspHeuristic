@@ -51,6 +51,7 @@ int main(int argc, char **argv) {
         allowedBenchmarks.push_back("benchGraphsFromPaper1");
         allowedBenchmarks.push_back("benchResultsDistribution");
         allowedBenchmarks.push_back("benchTimingConstWeightVarFaspConstVE");
+        allowedBenchmarks.push_back("benchTimingConstDensityAndFaspGrowingsize");
         TCLAP::ValuesConstraint<std::string> allowedVals( allowedBenchmarks );
         TCLAP::UnlabeledValueArg<std::string>  benchmarkName("benchmarkName", "name of benchmark to run", true, "", &allowedVals);
         cmd.add(benchmarkName);
@@ -67,6 +68,10 @@ int main(int argc, char **argv) {
         TCLAP::ValueArg<int> eArg("w", "e", "number of vertices in graph", false, 0, "#edges");
         TCLAP::ValueArg<int> eMinArg("s", "emin", "min (begin) number of edges in graph", false, 0, "#minNumberOfEdges");
         TCLAP::ValueArg<int> eMaxArg("t", "emax", "max (end) number of edges in graph", false, 0, "#maxNumberOfEdges");
+
+        TCLAP::ValueArg<int> dArg("u", "d", "density of graph - ratio e/v", false, 0, "density");
+        TCLAP::ValueArg<int> dMinArg("j", "dmin", "min (begin) density of graph - ratio e/v", false, 0, "minDensity");
+        TCLAP::ValueArg<int> dMaxArg("k", "dmax", "max (end) density of graph - ratio e/v", false, 0, "maxDensity");
 
         TCLAP::ValueArg<int> fArg("f", "f", "size of FASP solution in graph", false, 0, "#faspSize");
         TCLAP::ValueArg<int> fMinArg("m", "fmin", "min (begin) size of FASP solution in graph", false, 0, "#minFaspSize");
@@ -87,6 +92,10 @@ int main(int argc, char **argv) {
         cmd.add(eArg);
         cmd.add(eMinArg);
         cmd.add(eMaxArg);
+
+        cmd.add(dArg);
+        cmd.add(dMinArg);
+        cmd.add(dMaxArg);
 
         cmd.add(fArg);
         cmd.add(fMinArg);
@@ -132,6 +141,10 @@ int main(int argc, char **argv) {
         else if (benchmarkName.getValue() == allowedBenchmarks[6]) {
             benchTimingConstWeightVarFaspConstVE(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
+        else if (benchmarkName.getValue() == allowedBenchmarks[7]) {
+            benchTimingConstDensityAndFaspGrowingsize(dirArgHdl(dirArg), reqArgHdl(vMinArg), reqArgHdl(vMaxArg), reqArgHdl(dArg), reqArgHdl(fArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
+        }
+
 
         else {
 

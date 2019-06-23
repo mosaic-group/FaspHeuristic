@@ -1,4 +1,4 @@
-function benchHeuristics
+function benchTiming
 
 addpath('../matlabHelpers/')
 % create figure to show data
@@ -8,46 +8,22 @@ hold on;
 
 legendStr={};
 
-% dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_15_e_30_f_1-15_s_15_log__r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=30 gr', 'v=15 e=30 delta', 'v=15 e=30 random'];
-% plotOne(data.exact, [data.gr, data.delta, data.random]);
-% dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_15_e_55_f_1-15_s_15_log__r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=55 gr', 'v=15 e=55 delta', 'v=15 e=55 random'];
-% plotOne(data.exact, [data.gr, data.delta, data.random]);
-% dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_15_e_80_f_1-15_s_15_log__r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=80 gr', 'v=15 e=80 delta', 'v=15 e=80 random'];
-% plotOne(data.exact, [data.gr, data.delta, data.random]);
-% dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_15_e_105_f_1-15_s_15_log__r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=15 e=105 gr', 'v=15 e=105 delta', 'v=15 e=105 random'];
-% plotOne(data.exact, [data.gr, data.delta, data.random]);
-
-
-% 
-% dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_30_e_60_f_1-30_s_20_log__r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=60 gr', 'v=30 e=60 delta', 'v=30 e=60 random'];
-% plotOne(data.exact, [data.gr, data.delta, data.random]);
-dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_30_e_120_f_1-30_s_20_log__r_1000.h5');
+dataFile = loadHDF5('data/TimingConstWeightVarFaspConstVE_v_30_e_120_f_1-20_s_20_lin__r_200.h5');
 data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=120 gr', 'v=30 e=120 delta', 'v=30 e=120 random'];
-plotOne(data.exact, [data.gr, data.delta, data.random]);
-dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_30_e_180_f_1-30_s_20_log__r_1000.h5');
-data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=180 gr', 'v=30 e=180 delta', 'v=30 e=180 random'];
-plotOne(data.exact, [data.gr, data.delta, data.random]);
-% dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_30_e_300_f_1-30_s_20_log__r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=120 gr', 'v=30 e=120 delta', 'v=30 e=120 random'];
-% plotOne(data.exact, [data.gr, data.delta, data.random]);
+plotOne(data.exact, [data.grTime, data.deltaTime, data.randomTime]);
+dataFile = loadHDF5('data/TimingConstWeightVarFaspConstVE_v_40_e_120_f_1-20_s_20_lin__r_200.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=40 e=120 gr', 'v=40 e=120 delta', 'v=40 e=120 random'];
+plotOne(data.exact, [data.grTime, data.deltaTime, data.randomTime]);
+dataFile = loadHDF5('data/TimingConstWeightVarFaspConstVE_v_60_e_120_f_1-20_s_20_lin__r_200.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=60 e=120 gr', 'v=60 e=120 delta', 'v=60 e=120 random'];
+plotOne(data.exact, [data.grTime, data.deltaTime, data.randomTime]);
 
-% dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_50_e_100_f_1-30_s_20_log__r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=50 e=100 gr', 'v=50 e=100 delta', 'v=50 e=100 random'];
-% plotOne(data.exact, [data.gr, data.delta, data.random]);
-% dataFile = loadHDF5('data/HeuristicsConstWeightVarFaspConstVE_v_50_e_200_f_1-30_s_20_log__r_1000.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'v=50 e=200 gr', 'v=50 e=200 delta', 'v=50 e=200 random'];
-% plotOne(data.exact, [data.gr, data.delta, data.random]);
 
 l = legend(legendStr);
-l.FontSize = 30;
-title('Super Algorithm efficiency');
+l.FontSize = 10;
+title('Time benchmark');
 xlabel('FASP size');
-ylabel('efficiency');
+ylabel('time(s)');
 
 
 function plotOne(dataRef, dataIn)
@@ -60,14 +36,11 @@ function plotOne(dataRef, dataIn)
     for inputData = 1:size(dataIn, 2)
         currData=dataIn(:, inputData);
 
-        % Calculate how good we ded comparing to exact solution
-        quality = currData ./ dataRef;
-
         % Calculate mean per each x value
         averagec = zeros(length(xVals), 1);
         idx = 1;
         for i = xVals
-            averagec(idx) = mean(quality(dataRef == i));
+            averagec(idx) = mean(currData(dataRef == i));
             idx = idx + 1;
         end
         average(:,inputData) = averagec;
@@ -75,6 +48,8 @@ function plotOne(dataRef, dataIn)
 
     for i = 1:size(average, 2)
         plot(xVals, average(:,i), '-*', 'LineWidth', 4);
+%         f=fit(xVals',average(:,i), 'poly3')
+%         plot(f, xVals, average(:,i));
     end
 end
 
