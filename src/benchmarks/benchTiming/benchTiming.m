@@ -11,9 +11,11 @@ legendStr={};
 dataFile = loadHDF5('data/TimingConstWeightVarFaspConstVE_v_30_e_120_f_1-20_s_20_lin__r_200.h5');
 data = dataFile.Analysis_data; legendStr=[legendStr, 'v=30 e=120 gr', 'v=30 e=120 delta', 'v=30 e=120 random'];
 plotOne(data.exact, [data.grTime, data.deltaTime, data.randomTime]);
+
 dataFile = loadHDF5('data/TimingConstWeightVarFaspConstVE_v_40_e_120_f_1-20_s_20_lin__r_200.h5');
 data = dataFile.Analysis_data; legendStr=[legendStr, 'v=40 e=120 gr', 'v=40 e=120 delta', 'v=40 e=120 random'];
 plotOne(data.exact, [data.grTime, data.deltaTime, data.randomTime]);
+
 dataFile = loadHDF5('data/TimingConstWeightVarFaspConstVE_v_60_e_120_f_1-20_s_20_lin__r_200.h5');
 data = dataFile.Analysis_data; legendStr=[legendStr, 'v=60 e=120 gr', 'v=60 e=120 delta', 'v=60 e=120 random'];
 plotOne(data.exact, [data.grTime, data.deltaTime, data.randomTime]);
