@@ -7,6 +7,7 @@ clf;
 hold on;
 
 
+% dataFile = loadHDF5('../benchHeuristics/data/HeuristicsConstWeightVarFaspConstVE_v_30_e_180_f_1-30_s_20_log__r_1000.h5');
 dataFile = loadHDF5('../benchHeuristics/data/HeuristicsConstWeightVarFaspConstVE_v_50_e_200_f_1-30_s_20_log__r_1000.h5');
 
 data = dataFile.Analysis_data;
@@ -23,10 +24,12 @@ d = data.gr ./ data.exact;
 [min(d), mean(d), max(d)]
 h2 = histogram(d);
 
+
+% ================================ LOG scale ============================
 % set(gca,'YScale','log')
 
-h1.Normalization = 'probability';
-h2.Normalization = 'probability';
+% h1.Normalization = 'probability';
+% h2.Normalization = 'probability';
 h1.BinWidth = 0.1;
 h2.BinWidth = 0.1;
 h1.FaceAlpha = 0.3;

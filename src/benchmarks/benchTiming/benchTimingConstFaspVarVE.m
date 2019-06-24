@@ -22,41 +22,28 @@ plotOne(data.vertices, [data.randomTime]);
 
 
 
-dataFile = loadHDF5('data/TimingConstWeightAndFaspVarVE_v_20-200_d_3_f_5_s_19lin_r_200.h5');
-data = dataFile.Analysis_data; legendStr=[legendStr, 'e=60-600 f=5 random'];
-plotOne(data.vertices, [data.randomTime]);
-
-dataFile = loadHDF5('data/TimingConstWeightAndFaspVarVE_v_20-200_d_3_f_10_s_19lin_r_200.h5');
-data = dataFile.Analysis_data; legendStr=[legendStr, 'e=60-600 f=10 random'];
-plotOne(data.vertices, [data.randomTime]);
-
-% dataFile = loadHDF5('data/TimingConstWeightAndFaspVarVE_v_20-200_d_3_f_15_s_19lin_r_200.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'e=60-600 f=15 random'];
+% dataFile = loadHDF5('data/TimingConstWeightAndFaspVarVE_v_20-200_d_3_f_5_s_19lin_r_200.h5');
+% data = dataFile.Analysis_data; legendStr=[legendStr, 'e=60-600 f=5 random'];
 % plotOne(data.vertices, [data.randomTime]);
-
-
-
-dataFile = loadHDF5('data/TimingConstWeightAndFaspVarVE_v_20-200_d_4_f_5_s_19lin_r_200.h5');
-data = dataFile.Analysis_data; legendStr=[legendStr, 'e=80-800 f=5 random'];
-plotOne(data.vertices, [data.randomTime]);
-
-% dataFile = loadHDF5('data/TimingConstWeightAndFaspVarVE_v_20-200_d_4_f_10_s_19lin_r_200.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'e=80-800 f=10 random'];
+% 
+% dataFile = loadHDF5('data/TimingConstWeightAndFaspVarVE_v_20-200_d_3_f_10_s_19lin_r_200.h5');
+% data = dataFile.Analysis_data; legendStr=[legendStr, 'e=60-600 f=10 random'];
 % plotOne(data.vertices, [data.randomTime]);
-
-% dataFile = loadHDF5('data/TimingConstWeightAndFaspVarVE_v_20-200_d_4_f_15_s_19lin_r_200.h5');
-% data = dataFile.Analysis_data; legendStr=[legendStr, 'e=80-800 f=15 random'];
+% 
+% 
+% 
+% dataFile = loadHDF5('data/TimingConstWeightAndFaspVarVE_v_20-200_d_4_f_5_s_19lin_r_200.h5');
+% data = dataFile.Analysis_data; legendStr=[legendStr, 'e=80-800 f=5 random'];
 % plotOne(data.vertices, [data.randomTime]);
-
-
-
-dataFile = loadHDF5('data/TimingConstWeightAndFaspVarVE_v_20-200_d_5_f_5_s_19lin_r_200.h5');
-data = dataFile.Analysis_data; legendStr=[legendStr, 'e=100-1000 f=5 random'];
-plotOne(data.vertices, [data.randomTime]);
-
-dataFile = loadHDF5('data/TimingConstWeightAndFaspVarVE_v_20-200_d_6_f_5_s_19lin_r_200.h5');
-data = dataFile.Analysis_data; legendStr=[legendStr, 'e=120-1200 f=5 random'];
-plotOne(data.vertices, [data.randomTime]);
+% 
+% 
+% dataFile = loadHDF5('data/TimingConstWeightAndFaspVarVE_v_20-200_d_5_f_5_s_19lin_r_200.h5');
+% data = dataFile.Analysis_data; legendStr=[legendStr, 'e=100-1000 f=5 random'];
+% plotOne(data.vertices, [data.randomTime]);
+% 
+% dataFile = loadHDF5('data/TimingConstWeightAndFaspVarVE_v_20-200_d_6_f_5_s_19lin_r_200.h5');
+% data = dataFile.Analysis_data; legendStr=[legendStr, 'e=120-1200 f=5 random'];
+% plotOne(data.vertices, [data.randomTime]);
 
 l = legend(legendStr);
 l.FontSize = 10;
