@@ -34,7 +34,7 @@ void playgound(int v) {
     std::cout << "Playground " << v << "\n";
 }
 
-auto PrintAppArgs = [](int argc, char **argv) {std::cout << argc; for (int i = 0; i < argc; ++i) std::cout << " [" << argv[i] << "]"; std::cout << "\n";};
+[[maybe_unused]] auto PrintAppArgs = [](int argc, char **argv) {std::cout << argc; for (int i = 0; i < argc; ++i) std::cout << " [" << argv[i] << "]"; std::cout << "\n";};
 
 int main(int argc, char **argv) {
     configureLogger();

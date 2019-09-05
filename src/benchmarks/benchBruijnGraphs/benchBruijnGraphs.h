@@ -11,8 +11,8 @@
 #include "graph/graphTools.h"
 #include "graph/graphFasp.h"
 #include "graph/graphFaspFast.h"
-#include "graph/graphFaspFast2.h"
 #include "graph/graphIO.h"
+#include "graph/graphFaspFast2.h"
 
 
 
@@ -51,18 +51,20 @@ void benchBruijnGraphs(const std::string &outputDir) {
 
     if (true) {
 
-
+        int cntA = 0;
+        int cntB = 0;
+        int cntAB = 0;
         std::vector<double> timesGS;
         std::vector<double> timesGS2;
-        for (int i = 60; i <= 60; i += 30) {
+        for (int i = 50; i <= 50; i += 30) {
             Timer<true, false> t("");
-            int rep = 1;
+            int rep = 15;
             std::vector<double> tsa;
             std::vector<int> sa;
             double ct =0;
             int cn = 0;
             for (int r = 0; r < rep; ++r) {
-                auto[ge, cc] = Graph::Tools::generateErdosRenyiGraph<int, int, Graph::GraphMap>(i, 8 * (double) i / (i * (i-1)));
+                auto[ge, cc] = Graph::Tools::generateErdosRenyiGraph<int, int, Graph::GraphMap>(i, 4 * (double) i / (i * (i-1)));
 
                 Graph::IO::graphToFile<int, Graph::GraphMap>("/tmp/graph.txt", ge);
                 Graph::Graph gg = Graph::IO::graphFromFile<int, Graph::GraphMap>("/tmp/graph.txt");
@@ -82,18 +84,45 @@ void benchBruijnGraphs(const std::string &outputDir) {
 //                std::cout << "CNT1: " << path1.cnt << std::endl;
 //                t.stop_timer();
 
-                t.start_timer("G2");
-                Graph::FaspFast2::randomFASP(g2, c2);
-                std::cout << "CNT2: " << path2.cnt << " " << path2.saCnt << std::endl;
+                t.start_timer("G2 orig");
+                int b = Graph::FaspFast2::randomFASP_orig(g2, c2);
+                std::cout << "CNT SA:" << path2.saCnt << std::endl;
                 tsa.push_back(t.stop_timer());
                 ct += tsa.back();
                 sa.push_back(path2.saCnt);
                 cn += path2.saCnt;
                 path2.saCnt = 0;
+//
+//
+//                t.start_timer("G2 parallel");
+//                int a = Graph::FaspFast2::randomFASP(g2, c2);
+//                std::cout << "CNT SA: " << path2.saCnt << std::endl;
+//                tsa.push_back(t.stop_timer());
+//                ct += tsa.back();
+//                sa.push_back(path2.saCnt);
+//                cn += path2.saCnt;
+//                path2.saCnt = 0;
+
+                t.start_timer("G2 new");
+                int a = Graph::FaspFast2::randomFASP_blueEdges(g1, c1);
+                std::cout << "CNT SA: " << path2.saCnt << std::endl;
+                tsa.push_back(t.stop_timer());
+                ct += tsa.back();
+                sa.push_back(path2.saCnt);
+                cn += path2.saCnt;
+                path2.saCnt = 0;
+
+                if (a > b) cntB++;
+                else if (b > a) cntA++;
+                else cntAB++;
+//
+                std::cout << "======================>      " << cntA << " " << cntB << " " << cntAB << std::endl;
             }
             std::cout << "t = " << tsa << ";\n";
             std::cout << "n = " << sa << ";\n";
             std::cout << "SA time = " << ct / cn << std::endl;
+
+
         }
 //        std::cout << timesSCC << std::endl;
 
@@ -127,12 +156,9 @@ void benchBruijnGraphs(const std::string &outputDir) {
             path1.cnt = 0;
 
             t.start_timer("new rand");
-            Graph::FaspFast2::randomFASP(g2, c2);
+            Graph::FaspFast2::randomFASP_sequential(g2, c2);
             times2.push_back(t.stop_timer());
-            std::cout << "PPPPPPPP : " << path2.cnt << std::endl;
-            x = path2.cnt;
             paths2.push_back(x);
-            path2.cnt = 0;
 
         }
 
@@ -182,7 +208,7 @@ void benchBruijnGraphs(const std::string &outputDir) {
         Graph::FaspFast::randomFASP(g, c);
         t.stop_timer();
         t.start_timer("new rand");
-        Graph::FaspFast2::randomFASP(g2, c2);
+        Graph::FaspFast2::randomFASP_sequential(g2, c2);
         t.stop_timer();
 
 //        t.start_timer("old rand");
@@ -235,11 +261,11 @@ void benchBruijnGraphs(const std::string &outputDir) {
         Graph::FaspFast::PathHero<int> path(maxId == vertices.end() ? 1 : *maxId + 1);
         Graph::FaspFast2::PathHero<int> path2(maxId == vertices.end() ? 1 : *maxId + 1);
 
-        path.GStar(g, {1, 2});
-        std::cout << g.getStrRepresentationOfGraph() << std::endl;
-
-        path2.GStar(g2, {1, 2});
-        std::cout << g2.getStrRepresentationOfGraph() << std::endl;
+//        path.GStar(g, {1, 2});
+//        std::cout << g.getStrRepresentationOfGraph() << std::endl;
+//
+//        path2.GStar(g2, {1, 2});
+//        std::cout << g2.getStrRepresentationOfGraph() << std::endl;
 
 
     }

@@ -11,7 +11,6 @@
 #include <cstring>
 #include <vector>
 #include <stdexcept>
-
 #include <typeinfo>
 #include <cxxabi.h>
 
@@ -143,7 +142,7 @@ namespace Tools {
         std::vector<T> result(num);
         double b = retval.front();
         double e = retval.back();
-        for (int i = 0; i < retval.size(); ++i) {
+        for (uint32_t i = 0; i < retval.size(); ++i) {
             auto v = retval[i];
             result[i] = static_cast<T>( floor( (stop-start) * (v-b) / (e-b) + start + 0.5) );
         }

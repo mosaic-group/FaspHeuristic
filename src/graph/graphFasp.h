@@ -31,7 +31,7 @@ namespace Graph::Fasp {
      * @return capacity of cut edges
      */
     template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
-    static EDGE_PROP_TYPE GR(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const Ext::EdgeProperties<EDGE_PROP_TYPE, VERTEX_TYPE> &aWeights) {
+    static auto GR(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const Ext::EdgeProperties<EDGE_PROP_TYPE, VERTEX_TYPE> &aWeights) {
         assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
 
         typename Graph<VERTEX_TYPE>::Vertices s1, s2;
@@ -99,10 +99,10 @@ namespace Graph::Fasp {
         }
 
         // Debug printout and check of solution.
-        LOG(DEBUG) << "FASP(GR)    capacity = " << capacity << " edgeCnt = " << edges.size() << " edgeList = " << edges;
-        LOG(TRACE) << "Edges with cycles: " << Tools::findEdgesWithCycles(g);
+//        LOG(DEBUG) << "FASP(GR)    capacity = " << capacity << " edgeCnt = " << edges.size() << " edgeList = " << edges;
+//        LOG(TRACE) << "Edges with cycles: " << Tools::findEdgesWithCycles(g);
 
-        return capacity;
+        return std::pair{capacity, edges};
     }
 
     template<typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
@@ -278,18 +278,18 @@ namespace Graph::Fasp {
             return std::uniform_int_distribution<>(min, max)(mt);
         };
 
-        auto randWeights = [&randInt](unsigned int numOfEdges, int capacity) {
-            std::vector<EDGE_PROP_TYPE> v(numOfEdges);
-            unsigned int edgeIdx = 0;
-            while (capacity > 0) {
-                if (edgeIdx == numOfEdges - 1) { v[edgeIdx] = capacity; break; }
-
-                int c = randInt(0, capacity);
-                v[edgeIdx++] = c;
-                capacity -= c;
-            }
-            return v;
-        };
+//        auto randWeights = [&randInt](unsigned int numOfEdges, int capacity) {
+//            std::vector<EDGE_PROP_TYPE> v(numOfEdges);
+//            unsigned int edgeIdx = 0;
+//            while (capacity > 0) {
+//                if (edgeIdx == numOfEdges - 1) { v[edgeIdx] = capacity; break; }
+//
+//                int c = randInt(0, capacity);
+//                v[edgeIdx++] = c;
+//                capacity -= c;
+//            }
+//            return v;
+//        };
 
         // add vertices in range: 0..aNumOfVertices-1
         for (int i = 0; i < aNumOfVertices; ++i) g.addVertex(i);

@@ -83,14 +83,14 @@ void testIncreasingSizeOfFaspWithConstVE(int v, int e) {
 
             f1.put("vertices", g.getNumOfVertices());
             f1.put("edges", g.getNumOfEdges());
-            f1.put("gr", Graph::Fasp::GR(g, c));
+            f1.put("gr", Graph::Fasp::GR(g, c).first);
             f1.put("delta", Graph::FaspFast::deltaFASP(g, c));
             f1.put("random", Graph::FaspFast::randomFASP(g, c));
             f1.put("exact", faspSize);
 
             f2.put("vertices", g.getNumOfVertices());
             f2.put("edges", g.getNumOfEdges());
-            f2.put("gr", Graph::Fasp::GR(g, rc));
+            f2.put("gr", Graph::Fasp::GR(g, rc).first);
             f2.put("delta", Graph::FaspFast::deltaFASP(g, rc));
             f2.put("random", Graph::FaspFast::randomFASP(g, rc));
             f2.put("exact", faspSize);

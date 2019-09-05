@@ -46,9 +46,9 @@ void benchResultsDistr(const std::string &outputDir, int numOfVertices, int numO
 
             f1.put("vertices", g.getNumOfVertices());
             f1.put("edges", g.getNumOfEdges());
-            f1.put("gr", Graph::Fasp::GR(g, c));
+            f1.put("gr", Graph::Fasp::GR(g, c).first);
             f1.put("delta", Graph::FaspFast2::deltaFASP(g, c));
-            f1.put("random", Graph::FaspFast2::randomFASP(g, c));
+            f1.put("random", Graph::FaspFast2::randomFASP_sequential(g, c));
             f1.put("exact", faspSize);
         }
     }

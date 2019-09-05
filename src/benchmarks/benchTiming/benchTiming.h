@@ -57,7 +57,7 @@ void benchTimingConstWeightVarFaspConstVE(const std::string &outputDir, int numO
             auto random = Graph::FaspFast::randomFASP(g, c);
             auto randomTime = t.stop_timer();
 
-            f1.put("gr", gr);
+            f1.put("gr", gr.first);
             f1.put("grTime", grTime);
             f1.put("delta", delta);
             f1.put("deltaTime", deltaTime);
@@ -114,7 +114,7 @@ void benchTimingConstDensityAndFaspGrowingsize(const std::string &outputDir, int
             auto random = Graph::FaspFast::randomFASP(g, c);
             auto randomTime = t.stop_timer();
 
-            f1.put("gr", gr);
+            f1.put("gr", gr.first);
             f1.put("grTime", grTime);
             f1.put("delta", delta);
             f1.put("deltaTime", deltaTime);
