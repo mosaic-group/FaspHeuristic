@@ -58,13 +58,14 @@ void benchBruijnGraphs(const std::string &outputDir) {
         std::vector<double> timesGS2;
         for (int i = 50; i <= 50; i += 30) {
             Timer<true, false> t("");
-            int rep = 15;
+            int rep = 25;
             std::vector<double> tsa;
             std::vector<int> sa;
             double ct =0;
             int cn = 0;
             for (int r = 0; r < rep; ++r) {
-                auto[ge, cc] = Graph::Tools::generateErdosRenyiGraph<int, int, Graph::GraphMap>(i, 4 * (double) i / (i * (i-1)));
+//                auto [ge, cc] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(i, 15, 4 * i);
+                auto[ge, cc] = Graph::Tools::generateErdosRenyiGraph<int, int, Graph::GraphMap>(i, 3.5 * (double) i / (i * (i-1)));
 
                 Graph::IO::graphToFile<int, Graph::GraphMap>("/tmp/graph.txt", ge);
                 Graph::Graph gg = Graph::IO::graphFromFile<int, Graph::GraphMap>("/tmp/graph.txt");
@@ -84,14 +85,19 @@ void benchBruijnGraphs(const std::string &outputDir) {
 //                std::cout << "CNT1: " << path1.cnt << std::endl;
 //                t.stop_timer();
 
+                    int b = 0;
                 t.start_timer("G2 orig");
-                int b = Graph::FaspFast2::randomFASP_orig(g2, c2);
+                b = Graph::FaspFast2::randomFASP_orig(g2, c2);
                 std::cout << "CNT SA:" << path2.saCnt << std::endl;
                 tsa.push_back(t.stop_timer());
                 ct += tsa.back();
                 sa.push_back(path2.saCnt);
                 cn += path2.saCnt;
                 path2.saCnt = 0;
+
+                auto [ca, ed] = Graph::Fasp::GR(g2, c2);
+                std::cout << "GR CAPACITY = " << ca << std::endl;
+
 //
 //
 //                t.start_timer("G2 parallel");

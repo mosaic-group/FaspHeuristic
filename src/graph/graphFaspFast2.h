@@ -526,9 +526,9 @@ namespace Graph::FaspFast2 {
             }
 
             // 1.5 update blue edges
-            for (auto &e : aGraph.getEdges()) {
-                aBlueEdges.emplace(e);
-            }
+//            for (auto &e : aGraph.getEdges()) {
+//                aBlueEdges.emplace(e);
+//            }
 
             // 2. There can be only one (or none) connected component with size > 1, if it is found
             // then it consist aEdge and all its isolated cycles
@@ -657,6 +657,68 @@ namespace Graph::FaspFast2 {
                 }
             }
             if (!wasGraphModified) break;
+        }
+//        std::cout <<" BLUE: " << setOfEdges.size() << " G: " << aGraph.getNumOfEdges() << std::endl;
+        return std::pair{removedEdges, setOfEdges};
+    }
+
+    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
+    static auto superAlgorithmBlue2(Graph<VERTEX_TYPE, GRAPH_TYPE> &outGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, PathHero<VERTEX_TYPE> &path, bool aUseWeights = false) {
+        assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
+        typename Graph<VERTEX_TYPE>::Edges removedEdges;
+        path.saCnt++;
+//        auto outGraph{aGraph}; // eventually acyclic graph
+
+        EdgesSet<VERTEX_TYPE> setOfEdges;
+
+        int cnt = 0;
+        while(true) {
+            cnt++;
+            bool wasGraphModified = false;
+
+            setOfEdges.clear();
+
+            auto ed = Fasp::GR(outGraph, aWeights).second;
+
+            for (const auto &e : outGraph.getEdges()) {
+
+                if (setOfEdges.find(e) != setOfEdges.end()) continue; // e is in 'blue edges' set
+
+                // Optimization, if there is no path back from dst to src, then edge has no cycles.
+                if (!path.pathExistsDFS(outGraph, e.dst, e.src)) continue;
+
+                auto workGraph{outGraph};
+                if (!path.GStarBlue(workGraph, e, setOfEdges)) //continue;
+                {
+                    if (cnt == 1) continue;
+//                    auto [_, ed] = Fasp::GR(workGraph, aWeights);
+                    const auto &itBegin = ed.cbegin();
+                    const auto &itEnd = ed.cend();
+                    if (std::find(itBegin, itEnd, e) == itEnd) continue; // e not in GR set
+//                    continue;
+                }
+
+                // If we have weights assigned to edges then we need to do min-cut, if not it is always safe
+                // to remove current edge
+                bool shouldRemoveCurrentEdge = true;
+                if (aUseWeights) {
+                    auto mc = path.minStCutFordFulkerson(workGraph, e.dst, e.src, aWeights);
+                    if (mc < aWeights.at(e)) {
+                        // Do not remove that edge
+                        shouldRemoveCurrentEdge = false;
+                    }
+                }
+
+                if (shouldRemoveCurrentEdge) {
+                    wasGraphModified = true;
+                    outGraph.removeEdge(e);
+                    removedEdges.emplace_back(e);
+
+                    ed = Fasp::GR(outGraph, aWeights).second;
+                }
+            }
+            if (wasGraphModified) break;
+            if (!wasGraphModified && cnt >= 2) break;
         }
 //        std::cout <<" BLUE: " << setOfEdges.size() << " G: " << aGraph.getNumOfEdges() << std::endl;
         return std::pair{removedEdges, setOfEdges};
@@ -1057,7 +1119,18 @@ namespace Graph::FaspFast2 {
     template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
     static auto randomFASP_blueEdges(const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
         constexpr int numOfReps = 20;
+        int useGrThreshold = 8;
         auto g{aGraph};
+
+
+        // ========= calc threshold ==========
+        auto [_, grEdges] = Fasp::GR(g, aWeights);
+        int faspSize = grEdges.size();
+        double density = g.getNumOfEdges() / g.getNumOfVertices();
+        if (faspSize > 0) useGrThreshold = 2 * faspSize / density;
+        std::cout << ":::::::::THRESHOLD = " << useGrThreshold << std::endl;
+        // ===================================
+
 
         typename Graph<VERTEX_TYPE>::Edges removedEdges;
 
@@ -1067,7 +1140,8 @@ namespace Graph::FaspFast2 {
         PathHero<VERTEX_TYPE> path{static_cast<size_t>(maxId == vertices.end() ? 1 : *maxId + 1)};
 
         // initial run of superAlgorithm (SA)
-        auto [edgesToRemove, blueEdges] = superAlgorithmBlue(g, aWeights, path);
+        auto [edgesToRemove, blueEdgesx] = superAlgorithmBlue(g, aWeights, path);
+        auto blueEdges = blueEdgesx;
         g.removeEdges(edgesToRemove);
         removedEdges.reserve(removedEdges.size() + edgesToRemove.size());
         removedEdges.insert(removedEdges.begin(), edgesToRemove.begin(), edgesToRemove.end());
@@ -1079,6 +1153,7 @@ namespace Graph::FaspFast2 {
         int emptyCnt = 0;
         while (true) {
             numCnt++;
+
 
             if (path.isAcyclic(g)) break;
 
@@ -1095,8 +1170,8 @@ namespace Graph::FaspFast2 {
                                           auto maxId = std::max_element(vertices.begin(), vertices.end());
                                           PathHero<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
 
-                                          path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove, blueEdges);
-                                          return superAlgorithmBlue(workGraph, aWeights, path).first;
+                                          path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove + 2, blueEdges);
+                                          return superAlgorithmBlue2(workGraph, aWeights, path).first;
                                       });
             }
             for (int i = 0; i < numOfReps; ++i) {
@@ -1105,19 +1180,38 @@ namespace Graph::FaspFast2 {
                     edgesCnt.try_emplace(e, 0).first->second++;
                 }
             }
+
+            std::cout << "ITER: " << edgesCnt.size() << " #2R: " << numEdgesToRemove << std::endl;
             if (edgesCnt.size() == 0) {
                 emptyCnt++;
                 numEdgesToRemove++;
+
+                if (numEdgesToRemove >= useGrThreshold/ 2) {
+                    useGrThreshold++;
+                    std::cout << ">>>>>>>> " << useGrThreshold << std::endl;
+                    auto [c, faspEdges] = Fasp::GR(g, aWeights);
+                    int n = faspEdges.size();
+                    auto e = faspEdges[0]; // rand() % n
+                    g.removeEdge(e);
+                    removedEdges.emplace_back(std::move(e));
+                    numEdgesToRemove = 1;
+                }
+                else
                 continue; // reapeat loop - we have not found any solutions
+            }
+            else {
+                if (useGrThreshold > 6) useGrThreshold--;
             }
             numEdgesToRemove = 1;
 
-            auto maxCnt = std::max_element(edgesCnt.begin(), edgesCnt.end(), [](const auto &a, const auto &b) -> bool { return a.second < b.second; });
 
-            // Remove best candidate
-            g.removeEdge(maxCnt->first);
-            removedEdges.emplace_back(std::move(maxCnt->first));
-
+            if (edgesCnt.size() > 0) {
+                auto maxCnt = std::max_element(edgesCnt.begin(), edgesCnt.end(), [](const auto &a, const auto &b) -> bool { return a.second < b.second; });
+                std::cout << "CNT: " << *maxCnt << std::endl;
+                // Remove best candidate
+                g.removeEdge(maxCnt->first);
+                removedEdges.emplace_back(std::move(maxCnt->first));
+            }
             // Try to solve the rest with superAlgoritm - maybe it will now succeed!
             auto [edgesToRemove, blueEdges2] = superAlgorithmBlue(g, aWeights, path);
             blueEdges = blueEdges2;
