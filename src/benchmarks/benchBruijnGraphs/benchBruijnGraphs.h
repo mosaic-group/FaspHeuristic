@@ -56,16 +56,16 @@ void benchBruijnGraphs(const std::string &outputDir) {
         int cntAB = 0;
         std::vector<double> timesGS;
         std::vector<double> timesGS2;
-        for (int i = 50; i <= 50; i += 30) {
+        for (int i = 6; i <= 6; i += 30) {
             Timer<true, false> t("");
-            int rep = 25;
+            int rep = 1;
             std::vector<double> tsa;
             std::vector<int> sa;
             double ct =0;
             int cn = 0;
             for (int r = 0; r < rep; ++r) {
 //                auto [ge, cc] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(i, 15, 4 * i);
-                auto[ge, cc] = Graph::Tools::generateErdosRenyiGraph<int, int, Graph::GraphMap>(i, 3.5 * (double) i / (i * (i-1)));
+                auto[ge, cc] = Graph::Tools::generateErdosRenyiGraph<int, int, Graph::GraphMap>(i, 3 * (double) i / (i * (i-1)));
 
                 Graph::IO::graphToFile<int, Graph::GraphMap>("/tmp/graph.txt", ge);
                 Graph::Graph gg = Graph::IO::graphFromFile<int, Graph::GraphMap>("/tmp/graph.txt");

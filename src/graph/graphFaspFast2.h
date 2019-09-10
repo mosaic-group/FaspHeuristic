@@ -206,6 +206,55 @@ namespace Graph::FaspFast2 {
         }
 
         /**
+         * Finds path from src to dst
+         */
+        template<template<typename> class GRAPH_TYPE>
+        auto findPathDfs(const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph,
+                         const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
+                         const typename Graph<VERTEX_TYPE>::VertexId &aDst) {
+
+            path.clear();
+            if (aGraph.hasVertex(aSrc) && aGraph.hasVertex(aDst)) {
+                if (aSrc == aDst) {
+                    path.emplace_back(aSrc);
+                    return true;
+                }
+
+                iVisited.clearAll();
+
+                stack.clear();
+                stack.push(aSrc);
+                iVisited.set(aSrc);
+
+                while (!stack.empty()) {
+                    auto currentVertex = stack.pop();
+                    if (currentVertex == aDst) {
+                        // Traverse path back to source and build the path
+                        path.emplace_back(currentVertex);
+                        while (true) {
+                            currentVertex = parents[currentVertex];
+                            path.emplace_back(currentVertex);
+                            if (currentVertex == aSrc) break;
+                        }
+                        // Finally reverse it to have path from src to dst
+                        std::reverse(path.begin(), path.end());
+                        return true;
+                    };
+
+                    const auto &vertices = aGraph.getOutVertices(currentVertex);
+                    for (const auto &v : vertices) {
+                        if (iVisited.test(v) == 0) {
+                            parents[v] = currentVertex;
+                            stack.push(v);
+                            iVisited.set(v);
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        /**
          * @return container with all verticess accessible from src vertex (if reverse search is set to true then it goes against edge direction)
          */
         template<template<typename> class GRAPH_TYPE>
@@ -505,11 +554,16 @@ namespace Graph::FaspFast2 {
             return false;
         }
 
-        template<template<typename> class GRAPH_TYPE>
-        bool GStarBlue(Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge, EdgesSet<VERTEX_TYPE> &aBlueEdges) {
+        //, typename EDGE_PROP_TYPE>
+        template<template<typename> class GRAPH_TYPE, typename EDGE_PROP_TYPE>
+        bool GStarBlue(Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge, EdgesSet<VERTEX_TYPE> &aBlueEdges, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph2) {
 
             // 1. Remove an edge of interest 'aEdge' and find all connected components bigger than 1
             //    They consist from edges which are cycles not belonging only to aEdge so remove them.
+
+            auto pathExists = findPathDfs(aGraph, aEdge.dst, aEdge.src);
+            auto somePath = path;
+
             aGraph.removeEdge(aEdge);
             auto scc = Tools::stronglyConnectedComponents(aGraph);
             for (const auto &s : scc) {
@@ -525,10 +579,14 @@ namespace Graph::FaspFast2 {
                 }
             }
 
+
+
+
+
             // 1.5 update blue edges
-//            for (auto &e : aGraph.getEdges()) {
-//                aBlueEdges.emplace(e);
-//            }
+            for (auto &e : aGraph.getEdges()) {
+                aBlueEdges.emplace(e);
+            }
 
             // 2. There can be only one (or none) connected component with size > 1, if it is found
             // then it consist aEdge and all its isolated cycles
@@ -537,6 +595,21 @@ namespace Graph::FaspFast2 {
             for (const auto &s : scc2) {
                 if (s.size() > 1) return true;
             }
+
+            Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> p;
+            int cnt  = 0;
+            for (size_t i = 0; i < somePath.size() - 1; ++i) {
+                typename Graph<VERTEX_TYPE>::Edge e = {somePath[i], somePath[i + 1]};
+
+                if (!aGraph.hasEdge(e)) {
+                    cnt++;
+                    auto d = minStCutFordFulkerson(aGraph2, e.dst, e.src, aWeights);
+                    std::cout << aGraph.getStrRepresentationOfGraph() << std::endl;
+                    if (d > 1) p.emplace(e, d);
+                }
+            }
+            std::cout << pathExists << " Path: " << cnt << "/" << (somePath.size() - 1) << " " << aEdge << " Edges: " << p << std::endl;
+
             return false;
         }
 
@@ -637,7 +710,7 @@ namespace Graph::FaspFast2 {
                 if (!path.pathExistsDFS(outGraph, e.dst, e.src)) continue;
 
                 auto workGraph{outGraph};
-                if (!path.GStarBlue(workGraph, e, setOfEdges)) continue;
+                if (!path.GStarBlue(workGraph, e, setOfEdges, aWeights, outGraph)) continue;
 
                 // If we have weights assigned to edges then we need to do min-cut, if not it is always safe
                 // to remove current edge
@@ -678,7 +751,7 @@ namespace Graph::FaspFast2 {
 
             setOfEdges.clear();
 
-            auto ed = Fasp::GR(outGraph, aWeights).second;
+//            auto ed = Fasp::GR(outGraph, aWeights).second;
 
             for (const auto &e : outGraph.getEdges()) {
 
@@ -688,15 +761,12 @@ namespace Graph::FaspFast2 {
                 if (!path.pathExistsDFS(outGraph, e.dst, e.src)) continue;
 
                 auto workGraph{outGraph};
-                if (!path.GStarBlue(workGraph, e, setOfEdges)) //continue;
-                {
-                    if (cnt == 1) continue;
-//                    auto [_, ed] = Fasp::GR(workGraph, aWeights);
-                    const auto &itBegin = ed.cbegin();
-                    const auto &itEnd = ed.cend();
-                    if (std::find(itBegin, itEnd, e) == itEnd) continue; // e not in GR set
-//                    continue;
-                }
+                if (!path.GStarBlue(workGraph, e, setOfEdges, aWeights, outGraph)) continue;
+//                {
+//                    const auto &itBegin = ed.cbegin();
+//                    const auto &itEnd = ed.cend();
+//                    if (std::find(itBegin, itEnd, e) == itEnd) continue; // e not in GR set
+//                }
 
                 // If we have weights assigned to edges then we need to do min-cut, if not it is always safe
                 // to remove current edge
@@ -714,11 +784,19 @@ namespace Graph::FaspFast2 {
                     outGraph.removeEdge(e);
                     removedEdges.emplace_back(e);
 
-                    ed = Fasp::GR(outGraph, aWeights).second;
+//                    ed = Fasp::GR(outGraph, aWeights).second;
                 }
             }
-            if (wasGraphModified) break;
-            if (!wasGraphModified && cnt >= 2) break;
+            if (!wasGraphModified) break;
+        }
+        if (removedEdges.size() == 0) {
+            {
+                auto ed = Fasp::GR(outGraph, aWeights).second;
+                const auto &itBegin = ed.cbegin();
+                const auto &itEnd = ed.cend();
+                auto n = ed.size();
+                if (n > 0) removedEdges.push_back(ed[0]);
+            }
         }
 //        std::cout <<" BLUE: " << setOfEdges.size() << " G: " << aGraph.getNumOfEdges() << std::endl;
         return std::pair{removedEdges, setOfEdges};
@@ -1127,7 +1205,8 @@ namespace Graph::FaspFast2 {
         auto [_, grEdges] = Fasp::GR(g, aWeights);
         int faspSize = grEdges.size();
         double density = g.getNumOfEdges() / g.getNumOfVertices();
-        if (faspSize > 0) useGrThreshold = 2 * faspSize / density;
+        if (faspSize > 0) useGrThreshold = 2 * g.getNumOfEdges() / faspSize;
+        useGrThreshold = std::min(useGrThreshold, 2 * 5);
         std::cout << ":::::::::THRESHOLD = " << useGrThreshold << std::endl;
         // ===================================
 
@@ -1148,7 +1227,9 @@ namespace Graph::FaspFast2 {
 
         srand(time(NULL));
 
-        int numEdgesToRemove = 1;
+        int numEdgesToRemoveInitVal = 4;
+        int numEdgesToRemove = numEdgesToRemoveInitVal;
+
         int numCnt = 0;
         int emptyCnt = 0;
         while (true) {
@@ -1170,7 +1251,7 @@ namespace Graph::FaspFast2 {
                                           auto maxId = std::max_element(vertices.begin(), vertices.end());
                                           PathHero<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
 
-                                          path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove + 2, blueEdges);
+                                          path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove, blueEdges);
                                           return superAlgorithmBlue2(workGraph, aWeights, path).first;
                                       });
             }
@@ -1181,7 +1262,7 @@ namespace Graph::FaspFast2 {
                 }
             }
 
-            std::cout << "ITER: " << edgesCnt.size() << " #2R: " << numEdgesToRemove << std::endl;
+//            std::cout << "ITER: " << edgesCnt.size() << " #2R: " << numEdgesToRemove << std::endl;
             if (edgesCnt.size() == 0) {
                 emptyCnt++;
                 numEdgesToRemove++;
@@ -1194,7 +1275,7 @@ namespace Graph::FaspFast2 {
                     auto e = faspEdges[0]; // rand() % n
                     g.removeEdge(e);
                     removedEdges.emplace_back(std::move(e));
-                    numEdgesToRemove = 1;
+                    numEdgesToRemove = numEdgesToRemoveInitVal;
                 }
                 else
                 continue; // reapeat loop - we have not found any solutions
@@ -1202,12 +1283,12 @@ namespace Graph::FaspFast2 {
             else {
                 if (useGrThreshold > 6) useGrThreshold--;
             }
-            numEdgesToRemove = 1;
+            numEdgesToRemove = numEdgesToRemoveInitVal;
 
 
             if (edgesCnt.size() > 0) {
                 auto maxCnt = std::max_element(edgesCnt.begin(), edgesCnt.end(), [](const auto &a, const auto &b) -> bool { return a.second < b.second; });
-                std::cout << "CNT: " << *maxCnt << std::endl;
+//                std::cout << "CNT: " << *maxCnt << std::endl;
                 // Remove best candidate
                 g.removeEdge(maxCnt->first);
                 removedEdges.emplace_back(std::move(maxCnt->first));
