@@ -56,12 +56,12 @@ void benchBruijnGraphs(const std::string &outputDir) {
         int cntAB = 0;
         std::vector<double> timesGS;
         std::vector<double> timesGS2;
-        for (int i = 6; i <= 6; i += 30) {
+        for (int i = 70; i <= 70; i += 30) {
             Timer<true, false> t("");
             int rep = 1;
             std::vector<double> tsa;
             std::vector<int> sa;
-            double ct =0;
+            double ct = 0;
             int cn = 0;
             for (int r = 0; r < rep; ++r) {
 //                auto [ge, cc] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(i, 15, 4 * i);
