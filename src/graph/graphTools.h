@@ -339,7 +339,7 @@ namespace Graph::Tools {
         return std::pair{g, c};
     }
 
-
+    // https://en.wikipedia.org/wiki/Tarjan%27s_strongly_connected_components_algorithm
     template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
     static auto stronglyConnectedComponents(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
 

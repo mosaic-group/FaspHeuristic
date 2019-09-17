@@ -1,4 +1,3 @@
-#include "graph/runGraph.h"
 #include "tools/easylogging++.h"
 #include "tools/tclap/CmdLine.h"
 #include "tools/prettyprint.h"
@@ -30,7 +29,7 @@ void configureLogger() {
     el::Loggers::reconfigureLogger("default", defaultConf);
 }
 
-void playgound(int v) {
+void playground(int v) {
     std::cout << "Playground " << v << "\n";
 }
 
@@ -121,7 +120,7 @@ int main(int argc, char **argv) {
 
 
         if (benchmarkName.getValue() == allowedBenchmarks[0]) { // playground
-            playgound(reqArgHdl(vArg));
+            playground(reqArgHdl(vArg));
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[1]) {
             benchSuperAlgorithmConstWeightVarFaspConstVE(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
@@ -144,8 +143,6 @@ int main(int argc, char **argv) {
         else if (benchmarkName.getValue() == allowedBenchmarks[7]) {
             benchTimingConstDensityAndFaspGrowingsize(dirArgHdl(dirArg), reqArgHdl(vMinArg), reqArgHdl(vMaxArg), reqArgHdl(dArg), reqArgHdl(fArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
-
-
         else {
 
             std::cerr << "Not known name of benchmark! \n";

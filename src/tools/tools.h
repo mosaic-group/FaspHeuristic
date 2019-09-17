@@ -13,7 +13,9 @@
 #include <stdexcept>
 #include <typeinfo>
 #include <cxxabi.h>
-
+#include <memory>
+#include <algorithm>
+#include <cmath>
 
 
 namespace Tools {
@@ -134,7 +136,7 @@ namespace Tools {
     template <typename T>
     auto logspace(T start, T stop, int num, double logBase = 3.0) {
 
-        const double base = pow(logBase, 2.0/num);
+        const double base = std::pow(logBase, 2.0/num);
         double value = 1.0;
         std::vector<double> retval; retval.reserve(num);
         std::generate_n(std::back_inserter(retval), num, [&](){double ret = value; value *= base; return ret;});
