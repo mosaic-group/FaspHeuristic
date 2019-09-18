@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <cstdlib>
 #include <vector>
 #include <stdexcept>
 #include <typeinfo>
@@ -16,7 +17,7 @@
 #include <memory>
 #include <algorithm>
 #include <cmath>
-
+#include <random>
 
 namespace Tools {
 
@@ -91,7 +92,6 @@ namespace Tools {
         }
     }
 
-
     /**
      * Generates equally distributed and unique values in range [aMin, aMax]
      * @tparam T - type of generated elements
@@ -154,6 +154,11 @@ namespace Tools {
         result.resize(distance(result.begin(), it));
 
         return result;
+    }
+
+    auto randInt(int min, int max) {
+        static std::mt19937 mt(std::random_device{}());
+        return std::uniform_int_distribution<>(min, max)(mt);
     }
 }
 #endif

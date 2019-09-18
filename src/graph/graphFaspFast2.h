@@ -596,24 +596,24 @@ namespace Graph::FaspFast2 {
             }
 
             // 3. Find 'red edges' when there is no isolated cycles
-            {
-                int cnt = 0;
-                for (size_t i = 0; i < somePath.size() - 1; ++i) {
-                    typename Graph<VERTEX_TYPE>::Edge e = {somePath[i], somePath[i + 1]};
-
-                    if (!aGraph.hasEdge(e)) {
-                        cnt++;
-                        auto d = minStCutFordFulkerson(aGraph2, e.dst, e.src, aWeights);
-                        if (d > maxMcRedEdge) {
-                            maxMcRedEdge = d;
-                            redEdge = e;
-                        }
-                    }
-                }
-//                std::cout << aGraph.getStrRepresentationOfGraph() << std::endl;
-//                std::cout << cnt << "/" << (somePath.size() - 1) << " " << aEdge << " Edges: " << p << std::endl;
-//                std::cout << "-------\n";
-            }
+//            {
+//                int cnt = 0;
+//                for (size_t i = 0; i < somePath.size() - 1; ++i) {
+//                    typename Graph<VERTEX_TYPE>::Edge e = {somePath[i], somePath[i + 1]};
+//
+//                    if (!aGraph.hasEdge(e)) {
+//                        cnt++;
+//                        auto d = minStCutFordFulkerson(aGraph2, e.dst, e.src, aWeights);
+//                        if (d > maxMcRedEdge) {
+//                            maxMcRedEdge = d;
+//                            redEdge = e;
+//                        }
+//                    }
+//                }
+////                std::cout << aGraph.getStrRepresentationOfGraph() << std::endl;
+////                std::cout << cnt << "/" << (somePath.size() - 1) << " " << aEdge << " Edges: " << p << std::endl;
+////                std::cout << "-------\n";
+//            }
 
 
             return false;
@@ -1229,19 +1229,19 @@ namespace Graph::FaspFast2 {
         auto vertices = g.getVertices();
         auto maxId = std::max_element(vertices.begin(), vertices.end());
         PathHero<VERTEX_TYPE> path{static_cast<size_t>(maxId == vertices.end() ? 1 : *maxId + 1)};
-        {
-            Timer<true, false> t(true, "SCC1");
-            t.start_timer("");
-            auto scc = Tools::stronglyConnectedComponents(g);
-            std::cout << scc.size() << "\n";
-            auto numOfScc = std::count_if(scc.begin(), scc.end(), [](auto &in) {
-                if (in.size() > 1) std::cout << in.size() << " ";
-                return in.size() > 1;
-            });
-            std::cout << "NUM OF SCC: " << numOfScc << std::endl;
-            t.stop_timer();
-
-        }
+//        {
+//            Timer<true, false> t(true, "SCC1");
+//            t.start_timer("");
+//            auto scc = Tools::stronglyConnectedComponents(g);
+//            std::cout << scc.size() << "\n";
+//            auto numOfScc = std::count_if(scc.begin(), scc.end(), [](auto &in) {
+//                if (in.size() > 1) std::cout << in.size() << " ";
+//                return in.size() > 1;
+//            });
+//            std::cout << "NUM OF SCC: " << numOfScc << std::endl;
+//            t.stop_timer();
+//
+//        }
         // initial run of superAlgorithm (SA)
         auto [edgesToRemove, blueEdgesx] = superAlgorithmBlue(g, aWeights, path);
         auto blueEdges = blueEdgesx;
@@ -1251,7 +1251,7 @@ namespace Graph::FaspFast2 {
 
         srand(time(NULL));
 
-        int numEdgesToRemoveInitVal = g.getNumOfEdges() / faspSize / 2;
+        int numEdgesToRemoveInitVal = 1; //faspSize == 0 ? 1 : g.getNumOfEdges() / faspSize / 2;
         std::cout << "EDGES TO REMOVE INIT VAL = " << numEdgesToRemoveInitVal << std::endl;
         int numEdgesToRemove = numEdgesToRemoveInitVal;
 
@@ -1334,15 +1334,15 @@ namespace Graph::FaspFast2 {
             removedEdges.reserve(removedEdges.size() + edgesToRemove.size());
             removedEdges.insert(removedEdges.begin(), edgesToRemove.begin(), edgesToRemove.end());
 
-            Timer<true, false> t(true, "SCC");
-            t.start_timer("");
-            auto scc = Tools::stronglyConnectedComponents(g);
-            auto numOfScc = std::count_if(scc.begin(), scc.end(), [](auto &in) {
-                if (in.size() > 1) std::cout << in.size() << " ";
-                return in.size() > 1;
-            });
-            std::cout << "NUM OF SCC: " << numOfScc << std::endl;
-            t.stop_timer();
+//            Timer<true, false> t(true, "SCC");
+//            t.start_timer("");
+//            auto scc = Tools::stronglyConnectedComponents(g);
+//            auto numOfScc = std::count_if(scc.begin(), scc.end(), [](auto &in) {
+//                if (in.size() > 1) std::cout << in.size() << " ";
+//                return in.size() > 1;
+//            });
+//            std::cout << "NUM OF SCC: " << numOfScc << std::endl;
+//            t.stop_timer();
         }
 
         EDGE_PROP_TYPE capacity = 0;

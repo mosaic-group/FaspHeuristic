@@ -2,90 +2,187 @@
 #include "prettyprint.h"
 #include "tools/easylogging++.h"
 
+#include "graph/graphFaspFastFinal.h"
 #include "graph/graph.h"
-#include "graph/graphFaspFast2.h"
+//#include "graph/graphFaspFast2.h"
 #include "graph/graphIO.h"
+#include "hdf5/dataHdf5.h"
+
+#include <string>
+#include <cstddef>
+using std::size_t;
 
 INITIALIZE_EASYLOGGINGPP
 
-int main() {
-    int cntA = 0;
-    int cntB = 0;
-    int cntAB = 0;
-    std::vector<double> timesGS;
-    std::vector<double> timesGS2;
-    for (int i = 800; i <= 800; i += 30) {
-        Timer<true, false> t("");
-        int rep = 1;
-        std::vector<double> tsa;
-        std::vector<int> sa;
-        double ct = 0;
-        int cn = 0;
-        for (int r = 0; r < rep; ++r) {
-//                auto [ge, cc] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(i, 15, 4 * i);
-            auto[ge, cc] = Graph::Tools::generateErdosRenyiGraph<int, int, Graph::GraphMap>(i, 1.4 * (double) i / (i * (i - 1)));
+void configureLogger() {
+    el::Configurations defaultConf;
+    defaultConf.setToDefault();
+    el::Loggers::addFlag(el::LoggingFlag::ColoredTerminalOutput);
+    el::Loggers::addFlag(el::LoggingFlag::DisableApplicationAbortOnFatalLog);
+    defaultConf.set(el::Level::Trace, el::ConfigurationType::Enabled, "true");
+    defaultConf.set(el::Level::Debug, el::ConfigurationType::Enabled, "true");
+    defaultConf.set(el::Level::Info, el::ConfigurationType::Enabled, "true");
+    defaultConf.set(el::Level::Warning, el::ConfigurationType::Enabled, "true");
+    defaultConf.set(el::Level::Error, el::ConfigurationType::Enabled, "true");
+    defaultConf.set(el::Level::Fatal, el::ConfigurationType::Enabled, "true");
+    defaultConf.set(el::Level::Global, el::ConfigurationType::SubsecondPrecision, "1");
+    constexpr const char *format = "[%datetime, %fbase:%line] %msg";
+    defaultConf.set(el::Level::Global, el::ConfigurationType::Format, format);
+    el::Loggers::reconfigureLogger("default", defaultConf);
+}
 
-            Graph::IO::graphToFile<int, Graph::GraphMap>("/tmp/graph.txt", ge);
-            Graph::Graph gg = Graph::IO::graphFromFile<int, Graph::GraphMap>("/tmp/graph.txt");
+// Easy helper class for comparing results from different solvers (just shows number of wins/draws etc.). Really bad design - just temporary ;-)
+class FaspSolutionResult {
+    std::vector<std::string> names;
+    std::vector<int> results;
+    std::vector<int> statistics;
+    int eqStat = 0;
+    int runCnt = 0;
 
-
-            auto vertices = gg.getVertices();
-            auto maxId = std::max_element(vertices.begin(), vertices.end());
-            Graph::FaspFast2::PathHero<int> path2(maxId == vertices.end() ? 1 : *maxId + 1);
-            auto g1{gg};
-            auto g2{gg};
-            auto c1 = Graph::Ext::getEdgeProperties<int>(g1, 1);
-            auto c2 = Graph::Ext::getEdgeProperties<int>(g2, 1);
-
-
-//                t.start_timer("G");
-//                Graph::FaspFast::randomFASP(g1, c1);
-//                std::cout << "CNT1: " << path1.cnt << std::endl;
-//                t.stop_timer();
-
-            int b = 0;
-//                t.start_timer("G2 orig");
-//                b = Graph::FaspFast2::randomFASP_orig(g2, c2);
-//                std::cout << "CNT SA:" << path2.saCnt << std::endl;
-//                tsa.push_back(t.stop_timer());
-//                ct += tsa.back();
-//                sa.push_back(path2.saCnt);
-//                cn += path2.saCnt;
-//                path2.saCnt = 0;
-
-            auto[ca, ed] = Graph::Fasp::GR(g2, c2);
-            std::cout << "GR CAPACITY = " << ca << std::endl;
-
-//
-//
-//                t.start_timer("G2 parallel");
-//                int a = Graph::FaspFast2::randomFASP(g2, c2);
-//                std::cout << "CNT SA: " << path2.saCnt << std::endl;
-//                tsa.push_back(t.stop_timer());
-//                ct += tsa.back();
-//                sa.push_back(path2.saCnt);
-//                cn += path2.saCnt;
-//                path2.saCnt = 0;
-
-            t.start_timer("G2 new");
-            int a = Graph::FaspFast2::randomFASP_blueEdges(g1, c1);
-            std::cout << "CNT SA: " << path2.saCnt << std::endl;
-            tsa.push_back(t.stop_timer());
-            ct += tsa.back();
-            sa.push_back(path2.saCnt);
-            cn += path2.saCnt;
-            path2.saCnt = 0;
-
-            if (a > b) cntB++;
-            else if (b > a) cntA++;
-            else cntAB++;
-//
-            std::cout << "======================>      " << cntA << " " << cntB << " " << cntAB << std::endl;
+    void print() {
+        std::cout << "#WINS(";
+        for (std::size_t i = 0; i < names.size(); ++i) {
+            std::cout << names[i] << (i == names.size() - 1 ? "" : "/");
         }
-        std::cout << "t = " << tsa << ";\n";
-        std::cout << "n = " << sa << ";\n";
-        std::cout << "SA time = " << ct / cn << std::endl;
+        std::cout << ")=";
 
+        for (std::size_t i = 0; i < names.size(); ++i) {
+            std::cout << statistics[i] << (i == names.size() - 1 ? "" : "/");
+        }
+        std::cout << "     #DRAWS=" << eqStat << "     #RUNS=" << runCnt << std::endl;
     }
+
+public:
+    auto& getCnt(const std::string &aCounterName) {
+        names.push_back(aCounterName);
+        results.push_back(0);
+        return results.back();
+    }
+
+    void calculateAndPrint() {
+        size_t n = results.size();
+        if (statistics.size() < n) statistics.resize(n);
+
+        bool eqOnce = true;
+        for (size_t i = 0; i < n; ++i) {
+            auto a = results[i];
+            bool best = true;
+            bool eq = true;
+            // Stats are really small so O(n^2) is OK ;-)
+            for (size_t j = 0; j < n; ++j) {
+                if (j == i) continue;
+                int b = results[j];
+                if (a > b) {best = false; eq = false;}
+                else if (a < b) {eq = false;}
+            }
+
+            if (best & !eq) statistics[i]++;
+            else if (eq && eqOnce) { eqStat++; eqOnce = false; } // inc. only one time
+        }
+
+        runCnt++;
+        print();
+
+        names.clear();
+        results.clear();
+    }
+};
+
+void test() {
+    DataHdf5<double> f("/tmp/out.h5");
+    std::string dir;
+    dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/random/";
+//    dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/de-bruijn/";
+
+Timer<true, false> t(true);
+    int limitCnt = 1;
+    int cnt = 0;
+
+    auto checkIfExist = [](const std::vector<std::string> &files, const std::string &file) -> bool {return std::find(files.begin(), files.end(), file) != files.end();};
+
+    auto files = Graph::IO::getFilesInDir(std::string(dir));
+    std::sort(files.begin(), files.end());
+    for (auto &graphFile : files) {
+        if (!Tools::endsWith(graphFile, ".al")) continue;
+
+        graphFile = "random-1463-410-533.al"; // 0.1s
+        graphFile = "random-1833-500-700.al"; // 1s
+
+        auto solutionFile{graphFile}; Tools::replace(solutionFile, ".al", ".mfas");
+        auto timeoutFile{graphFile}; Tools::replace(timeoutFile, ".al", ".timeout");
+        auto timingFile{graphFile}; Tools::replace(timingFile, ".al", ".timing");
+
+        if (!checkIfExist(files, solutionFile) || checkIfExist(files, timeoutFile) || !checkIfExist(files, timingFile)) {
+//            std::cout << "Skipping [" << graphFile << "] - solution/timing not found or there was a timing\n";
+            continue;
+        }
+
+        if (limitCnt-- == 0) break;
+
+        Graph::Graph g = Graph::IO::graphFromFile<int, Graph::GraphMap>(dir + "/" + graphFile);
+        auto c = Graph::Ext::getEdgeProperties<int>(g, 1);
+
+        if ((double)g.getNumOfEdges() / g.getNumOfVertices() > 1.5) continue;
+
+        std::cout << ++cnt << " ======================= Processing [" << graphFile << "] " << g << std::endl;
+
+        Graph::IO::graphToFile("/tmp/myGraph.txt", g);
+        int solution = Graph::IO::solutionFromFile(dir + "/" + solutionFile);
+        double timeExact = Graph::IO::timingFromFile(dir + "/" + timingFile);
+        std::cout << "Exact solution=" << solution << " Time=" << timeExact << std::endl;
+
+        t.start_timer("G2 new");
+//        Graph::FaspFast2::randomFASP_blueEdges(g, c);
+        Graph::FaspFastFinal::randomFASP(g, c);
+        t.stop_timer();
+//        f.put("exact", solution);
+//        f.put("edges", gv.getNumOfEdges());
+//        f.put("vertices", gv.getNumOfVertices());
+    }
+}
+
+//void testBlueEdges() {
+//    FaspSolutionResult fsr;
+//    Timer<true, false> t("");
+//
+//    for (int i = 77; i <= 77; i += 30) {
+//        int rep = 10;
+//
+//        for (int r = 0; r < rep; ++r) {
+//            std::cout << "\n\n\n";
+//
+////                auto [ge, cc] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(i, 15, 4 * i);
+//            auto[ge, cc] = Graph::Tools::generateErdosRenyiGraph<int, int, Graph::GraphMap>(i, 1.9 * (double) i / (i * (i - 1)));
+//            Graph::IO::graphToFile<int, Graph::GraphMap>("/tmp/graph.txt", ge);
+//            Graph::Graph gg = Graph::IO::graphFromFile<int, Graph::GraphMap>("/tmp/graph.txt");
+//
+//            auto g2{gg};
+//            auto c2 = Graph::Ext::getEdgeProperties<int>(g2, 1);
+//
+//            t.start_timer("G2 orig");
+//            fsr.getCnt("OrigRandom") = Graph::FaspFast2::randomFASP_orig(g2, c2);
+//            t.stop_timer();
+//
+//            t.start_timer("GR");
+//            auto[ca, ed] = Graph::Fasp::GR(g2, c2);
+//            std::cout << "GR CAPACITY = " << ca << std::endl;
+//            fsr.getCnt("GR") = ca;
+//            t.stop_timer();
+//
+//            t.start_timer("G2 new");
+//            fsr.getCnt("NewRandom") = Graph::FaspFast2::randomFASP_blueEdges(g2, c2);
+//            t.stop_timer();
+//
+//            std::cout << "===========> ";
+//            fsr.calculateAndPrint();
+//        }
+//    }
+//}
+
+int main() {
+    configureLogger();
+//    testBlueEdges();
+    test();
+
     return 0;
 }

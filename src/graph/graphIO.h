@@ -89,6 +89,21 @@ namespace Graph::IO {
         return capacity;
     }
 
+    /**
+     * Reads timing from "*.timing" files to get time of exact solver (no check for errors done!)
+     * @param aFileName full (with path) filename
+     * @return timing
+     */
+    [[maybe_unused]]
+    static double timingFromFile(const std::string &aFileName) {
+        std::ifstream infile(aFileName);
+
+        double num = 0.0;
+        infile >> num;
+
+        return num;
+    }
+
     enum FileType {FT_REGULAR_FILE = DT_REG, FT_DIRECTORY = DT_DIR};
 
     /**
@@ -104,15 +119,15 @@ namespace Graph::IO {
         DIR *dir = opendir(aDir.c_str());
         if (dir != NULL) {
             struct dirent *ent;
-            while ((ent = readdir (dir)) != NULL) {
+            while ((ent = readdir(dir)) != NULL) {
                 if (ent->d_type == aFileType) {
                     // If we are looking for directories skip "." and ".."
                     if (aFileType == FT_DIRECTORY && (!strcmp(ent->d_name, ".") || !strcmp(ent->d_name, ".."))) continue;
-                    files.emplace_back(ent->d_name);
+                    files.push_back(std::string{ent->d_name});
                 }
             }
         }
-
+        closedir(dir);
         return files;
     }
 

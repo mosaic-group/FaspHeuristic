@@ -25,8 +25,8 @@ public:
     void start_timer(const std::string &timing_name) {
         if (iUseTimer) {
             std::ostringstream os;
-            for (size_t i = 0; i < iStartTimes.size(); ++i) os << "    ";
-            if (SHOW_TIMINGS && !PRINT_JUST_TIME) LOG(TRACE) << os.str() << iTimerName << " [" << timing_name << "]\n";
+            for (std::size_t i = 0; i < iStartTimes.size(); ++i) os << "    ";
+            if (SHOW_TIMINGS && !PRINT_JUST_TIME) LOG(TRACE) << os.str() << iTimerName << " [" << timing_name << "]";
             names.push_back(timing_name);
             std::chrono::system_clock::time_point startTime = std::chrono::system_clock::now();
             iStartTimes.push_back(startTime);
@@ -46,7 +46,7 @@ public:
             auto name = names.back();
             names.pop_back();
             std::ostringstream os;
-            if (SHOW_TIMINGS && !PRINT_JUST_TIME) for (size_t i = 0; i < iStartTimes.size(); ++i) os << "    ";
+            if (SHOW_TIMINGS && !PRINT_JUST_TIME) for (std::size_t i = 0; i < iStartTimes.size(); ++i) os << "    ";
             double time = elapsedSeconds.count();
             if (SHOW_TIMINGS) {
                 if (PRINT_JUST_TIME) {
