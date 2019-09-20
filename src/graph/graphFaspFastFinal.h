@@ -49,7 +49,7 @@ namespace Graph::FaspFastFinal {
         /**
          * @return true if path from src to dst exists
          */
-        template<template<typename> class GRAPH_TYPE>
+        template<bool FORWARD_SEARCH=true, template<typename> class GRAPH_TYPE>
         bool pathExistsDFS(const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph,
                            const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
                            const typename Graph<VERTEX_TYPE>::VertexId &aDst,
@@ -66,7 +66,7 @@ namespace Graph::FaspFastFinal {
                 const auto currentVertex = stack.pop();
 
                 // find all not visted vertices and add them to stack
-                const auto &vertices = aReversedSearch ? aGraph.getInVertices(currentVertex) : aGraph.getOutVertices(currentVertex);
+                const auto &vertices = FORWARD_SEARCH ? aGraph.getOutVertices(currentVertex) : aGraph.getInVertices(currentVertex);
                 for (const auto &v : vertices) {
                     if (v == aDst) return true;
                     else if (iVisited.test(v) == 0) {
@@ -116,7 +116,7 @@ namespace Graph::FaspFastFinal {
             using Edge = typename Graph<VERTEX_TYPE>::Edge;
             Edge redEdge{};
             int maxMcRedEdge = 0;
-            int cnt = 0;
+
             for (const auto &e : aGraph.getEdges()) {
                 if (!pathExistsDFS(aGraph, e.dst, e.src)) continue; // optimization
 
@@ -138,8 +138,8 @@ namespace Graph::FaspFastFinal {
                     prevCandidate = currCandidate;
                 }
 
-                for (auto &e : redEdges) {
-                    cnt++;
+                aGraph.addEdge(e);
+                for (const auto &e : redEdges) {
                     auto d = minStCutFordFulkerson(aGraph, e.dst, e.src, aWeights);
                     if (d > maxMcRedEdge) {
                         maxMcRedEdge = d;
@@ -147,11 +147,9 @@ namespace Graph::FaspFastFinal {
                     }
                 }
 
-
-                aGraph.addEdge(e);
                 if (maxMcRedEdge > 1) break;
             }
-            std::cout << cnt << " ";
+
             return std::pair{maxMcRedEdge, redEdge};
         }
 
@@ -160,11 +158,11 @@ namespace Graph::FaspFastFinal {
             // 1. Remove an edge of interest 'aEdge' and find all connected components bigger than 1
             //    They consist from edges which are cycles not belonging only to aEdge so remove them.
             aGraph.removeEdge(aEdge);
-            auto scc = Tools::stronglyConnectedComponents(aGraph);
+            const auto scc = Tools::stronglyConnectedComponents(aGraph);
             for (const auto &s : scc) {
                 if (s.size() == 1) continue;
                 // we get sets of vertices from SCC, find all edges connecting vertices in given SCC and remove
-                for (auto &v : s) {
+                for (const auto &v : s) {
                     const auto outV = aGraph.getOutVertices(v);
                     for (const auto &vo : outV) {
                         if (s.find(vo) != s.end()) {
@@ -183,6 +181,8 @@ namespace Graph::FaspFastFinal {
             // then it consist aEdge and all its isolated cycles
             if (pathExistsDFS(aGraph, aEdge.dst, aEdge.src)) return true;
 //            aGraph.addEdge(aEdge);
+
+
 //            auto scc2 = Tools::stronglyConnectedComponents(aGraph);
 //            for (const auto &s : scc2) {
 //                if (s.size() > 1) return true;
@@ -538,6 +538,7 @@ namespace Graph::FaspFastFinal {
                      });
                 i++;
             }
+
             for (auto &task : tasks) {
                 auto [edgesToRemove, edgesToRemoveGR] = task.get();
                 for (auto &e : edgesToRemove) edgesCnt.try_emplace(e, 0).first->second++;

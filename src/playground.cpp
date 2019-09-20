@@ -94,7 +94,7 @@ void test() {
     dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/random/";
 //    dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/de-bruijn/";
     FaspSolutionResult fsr;
-Timer<true, false> t(true);
+    Timer<true, false> t(true);
     int limitCnt = 1;
     int cnt = 0;
 
@@ -106,8 +106,10 @@ Timer<true, false> t(true);
         if (!Tools::endsWith(graphFile, ".al")) continue;
 
 //        graphFile = "random-1463-410-533.al"; // 0.1s
-//        graphFile = "random-1833-500-700.al"; // 1s
+        graphFile = "random-1833-500-700.al"; // 1s
         graphFile = "random-1224-350-700.al"; // 15s
+
+
 
         auto solutionFile{graphFile}; Tools::replace(solutionFile, ".al", ".mfas");
         auto timeoutFile{graphFile}; Tools::replace(timeoutFile, ".al", ".timeout");
@@ -131,27 +133,28 @@ Timer<true, false> t(true);
 //        if ( density > 2.5 || density < 2) continue;
 
 
-
-
         std::cout << ++cnt << " ======================= Processing [" << graphFile << "] " << g << std::endl;
 
         std::cout << "Exact solution=" << solution << " Time=" << timeExact << std::endl;
 
-        t.start_timer("G2 new");
-//        Graph::FaspFast2::randomFASP_blueEdges(g, c);
-
+        t.start_timer("--------RANDOM new");
         fsr.getCnt("NewRandom") = Graph::FaspFastFinal::randomFASP(g, c);
         t.stop_timer();
-        t.start_timer("Orig");
+
+        t.start_timer("---------Orig");
         fsr.getCnt("OrigRandom") = Graph::FaspFast2::randomFASP_orig(g, c);
         t.stop_timer();
 
+        t.start_timer("---------GR");
+        auto [grc, dummy] = Graph::Fasp::GR(g, c);
+        std::cout << "GR CAPACITY = " << grc << std::endl;
+        fsr.getCnt("GR") = grc;
+        t.stop_timer();
+
         fsr.getCnt("Exact") = solution;
-                    std::cout << "===========> ";
-            fsr.calculateAndPrint();
-//        f.put("exact", solution);
-//        f.put("edges", gv.getNumOfEdges());
-//        f.put("vertices", gv.getNumOfVertices());
+
+        std::cout << "===========> ";
+        fsr.calculateAndPrint();
     }
 }
 
