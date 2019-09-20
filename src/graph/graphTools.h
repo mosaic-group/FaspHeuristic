@@ -29,7 +29,7 @@ namespace Graph::Tools {
     depthFirstSearch(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
                      bool aReversedSearch = false) {
 
-        size_t size = aGraph.getNumOfVertices();
+        std::size_t size = aGraph.getNumOfVertices();
 
         typename Graph<VERTEX_TYPE>::VerticesSet visited;
         typename Graph<VERTEX_TYPE>::Vertices stack;
@@ -59,7 +59,7 @@ namespace Graph::Tools {
                               bool aReversedSearch = false) {
         if (aSrc == aDst) return true;
 
-        size_t size = aGraph.getNumOfVertices();
+        std::size_t size = aGraph.getNumOfVertices();
 
         std::unordered_set<VERTEX_TYPE> visited;
         visited.reserve(size);
@@ -201,13 +201,13 @@ namespace Graph::Tools {
             if (!pathExists) break;
             // Find edge wiht minimum capacity left
             EDGE_PROP_TYPE pathFlow = std::numeric_limits<EDGE_PROP_TYPE>::max();
-            for (size_t i = 0; i < path.size() - 1; ++i) {
+            for (std::size_t i = 0; i < path.size() - 1; ++i) {
                 pathFlow = std::min(pathFlow, c[{path[i], path[i + 1]}]);
             }
 
             // Update max flow and capacities of edges on the found path
             maxFlow += pathFlow;
-            for (size_t i = 0; i < path.size() - 1; ++i) {
+            for (std::size_t i = 0; i < path.size() - 1; ++i) {
                 c.at({path[i], path[i + 1]}) -= pathFlow;
                 c.at({path[i + 1], path[i]}) += pathFlow;
             }
@@ -376,6 +376,7 @@ namespace Graph::Tools {
             // If `node` is a root node, pop the stack and generate an SCC
             if (lowLinks.at(node) == index.at(node)) {
                 std::unordered_set<VERTEX_TYPE> connectedComponent;
+                connectedComponent.reserve(stack.size());
 
                 while (true) {
                     auto successor = stack.back();

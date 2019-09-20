@@ -79,47 +79,28 @@ namespace Graph {
 
     private:
         // -------- Internal data -------------------------------------------------
-        inline static int iGlobalId = 0;
-        inline static int iGlobalCreations = 0;
-        int iMyId;
-        int iBornId;
         GraphDef graph;
-        static constexpr bool showConstructorMsg = false;
 
     public:
-        GraphMap() : iMyId(++iGlobalId), iBornId(iMyId) {
-            ++iGlobalCreations;
-            if (showConstructorMsg) std::cout << "Graph() " << *this << std::endl;
-        }
+        GraphMap() {}
 
-        GraphMap(const GraphMap &obj) : iMyId(++iGlobalId), iBornId(iMyId), graph(obj.graph) {
-            ++iGlobalCreations;
-            if (showConstructorMsg) std::cout << "Graph(Graph&) " << *this << " from " << obj << std::endl;
-        }
+        GraphMap(const GraphMap &obj) : graph(obj.graph) {}
 
-        GraphMap(const GraphMap &&obj) noexcept : iMyId(++iGlobalId), iBornId(iMyId) {
-            iMyId = obj.iMyId;
+        GraphMap(const GraphMap &&obj) noexcept {
             graph = std::move(obj.graph);
-            if (showConstructorMsg) std::cout << "Graph(Graph&&) " << *this << " from " << obj << std::endl;
         }
 
         GraphMap &operator=(const GraphMap &obj) {
-            iMyId = obj.iMyId;
             graph = obj.graph;
-            if (showConstructorMsg) std::cout << "Graph=Graph& " << *this << " from " << obj << std::endl;
             return *this;
         }
 
         GraphMap &operator=(GraphMap &&obj) noexcept {
-            iMyId = obj.iMyId;
             graph = std::move(obj.graph);
-            if (showConstructorMsg) std::cout << "Graph=Graph&& " << *this << std::endl;
             return *this;
         }
 
-        ~GraphMap() {
-            if (showConstructorMsg) std::cout << "~Graph() " << *this << std::endl;
-        }
+        ~GraphMap() {}
 
         GraphMap createEmptyInstance() {return GraphMap{};}
 
@@ -323,9 +304,7 @@ namespace Graph {
          * Outputs graph info to std::cout
          */
         friend std::ostream &operator<<(std::ostream &os, const GraphMap &obj) {
-            os << "{Graph (" << obj.iMyId << "/" << obj.iBornId << "/" << GraphMap::iGlobalId << "/"
-               << GraphMap::iGlobalCreations << ")" << obj.getNumOfVertices() << "/" << obj.getNumOfEdges() << "}";
-            if (false) os << obj.getStrRepresentationOfGraph();
+            os << "{Graph V/E: " << obj.getNumOfVertices() << "/" << obj.getNumOfEdges() << "}";
             return os;
         }
     };

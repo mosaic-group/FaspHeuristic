@@ -12,7 +12,7 @@
 #include <string>
 #include "tools/easylogging++.h"
 
-template <bool SHOW_TIMINGS=false, bool PRINT_JUST_TIME=true>
+template <bool SHOW_TIMINGS=false, bool PRINT_JUST_TIME=true, bool PRINT_INIT_MSG=false>
 class Timer {
     std::vector<std::chrono::system_clock::time_point> iStartTimes;
     std::vector<std::string> names;
@@ -26,7 +26,7 @@ public:
         if (iUseTimer) {
             std::ostringstream os;
             for (std::size_t i = 0; i < iStartTimes.size(); ++i) os << "    ";
-            if (SHOW_TIMINGS && !PRINT_JUST_TIME) LOG(TRACE) << os.str() << iTimerName << " [" << timing_name << "]";
+            if (SHOW_TIMINGS && !PRINT_JUST_TIME && PRINT_INIT_MSG) LOG(TRACE) << os.str() << iTimerName << " [" << timing_name << "]";
             names.push_back(timing_name);
             std::chrono::system_clock::time_point startTime = std::chrono::system_clock::now();
             iStartTimes.push_back(startTime);
@@ -53,7 +53,7 @@ public:
                     LOG(TRACE) << time << std::endl;
                 }
                 else {
-                    LOG(TRACE) << os.str() << iTimerName << " [" << name << "] = " << time << "\n";
+                    LOG(TRACE) << os.str() << iTimerName << " [" << name << "] = " << time;
                 }
             }
             return time;
