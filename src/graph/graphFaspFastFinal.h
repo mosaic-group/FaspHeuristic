@@ -9,6 +9,8 @@
 #include "tools/tools.h"
 #include <future>
 #include <cstddef>
+#include <vector>
+
 
 namespace Graph::FaspFastFinal {
 
@@ -27,22 +29,18 @@ namespace Graph::FaspFastFinal {
      * @tparam VERTEX_TYPE
      */
     template<typename VERTEX_TYPE>
-    class PathHero {
+    class alignas (64) PathHero {
 
         // Allocation of structures/memory/containers shared by all algorithms from PathHero class
         DynamicBitset <uint32_t, uint16_t> iVisited;
         Stack <VERTEX_TYPE> stack;
         std::vector<VERTEX_TYPE> parents;
-        typename Graph<VERTEX_TYPE>::Edges inEdges;
-        typename Graph<VERTEX_TYPE>::Edges outEdges;
         typename Graph<VERTEX_TYPE>::Vertices path;
 
 
     public:
         explicit PathHero(std::size_t aN) : iVisited(aN), stack(aN), parents(aN, 0) {
             // both can have at most aN in/outgoing edges
-            inEdges.reserve(aN);
-            outEdges.reserve(aN);
             path.reserve(aN);
         }
 
@@ -312,6 +310,7 @@ namespace Graph::FaspFastFinal {
         template<template<typename> class GRAPH_TYPE>
         auto getRandomSubgraphNotBlue(Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph, int aNumEdgesToRemove, const EdgesSet<VERTEX_TYPE> &blueEdges) {
             int edgesRemovedCnt = 0;
+            typename Graph<VERTEX_TYPE>::Edge lastRndEdge{};
             while (edgesRemovedCnt < aNumEdgesToRemove) {
                 auto edgesWithCycles = findEdgesWithCycles(aGraph);
 //                auto edgesWithCycles = findNotBlueEdges(aGraph);
@@ -320,13 +319,14 @@ namespace Graph::FaspFastFinal {
                 auto n = edgesWithCycles.size();
 //                std::cout << "n: " << n << std::endl;
                 if (n == 0) {
-//                    LOG(TRACE) << "Removed less edges than requested (" << edgesRemovedCnt << ", " << aNumEdgesToRemove << ")";
+                    if (edgesRemovedCnt > 0) aGraph.addEdge(lastRndEdge);
+                    else LOG(TRACE) << "Removed less edges than requested (" << edgesRemovedCnt << ", " << aNumEdgesToRemove << ")";
 //                    LOG(TRACE) << edgesWithCycles;
                     return (edgesRemovedCnt > 0);
                 } else {
-                    auto rndEdge = edgesWithCycles[::Tools::randInt(0, n - 1)];
-                    while (blueEdges.find(rndEdge) != blueEdges.end()) {rndEdge = edgesWithCycles[::Tools::randInt(0, n - 1)];}
-                    aGraph.removeEdge(rndEdge);
+                    lastRndEdge = edgesWithCycles[::Tools::randInt(0, n - 1)];
+                    while (blueEdges.find(lastRndEdge) != blueEdges.end()) {lastRndEdge = edgesWithCycles[::Tools::randInt(0, n - 1)];}
+                    aGraph.removeEdge(lastRndEdge);
                     ++edgesRemovedCnt;
                 }
             }
@@ -430,23 +430,17 @@ namespace Graph::FaspFastFinal {
             if (!wasGraphModified) break;
         }
         if (removedEdgesSA.size() == 0) {
-            t.start_timer("RED");
             auto [maxMcRedEdge, redEdge] = path.getRedEdge(outGraph, aWeights);
-            std::cout << t.stop_timer() << " ";
             if (relaxSA && maxMcRedEdge > 0) {
-                std::cout << "xRE";
                 removedEdgesGR.push_back(redEdge);
             }
             else {
                 auto ed = Fasp::GR(outGraph, aWeights).second;
                 auto n = ed.size();
-
                 if (n > 0) {
-                    std::cout << "xGR";
                     removedEdgesGR.push_back(ed[0]);
                 }
             }
-
         }
         return std::tuple{removedEdgesSA, setOfEdges, removedEdgesGR};
     }
@@ -470,7 +464,7 @@ namespace Graph::FaspFastFinal {
         Timer<true, false, true> t(true);
         constexpr int numOfReps = 20;
 
-        Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> props[numOfReps];
+        alignas(64) Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> props[numOfReps];
         for (auto &p : props) p = aWeights;
 
         auto g{aGraph};
@@ -492,7 +486,7 @@ namespace Graph::FaspFastFinal {
         removedEdges.reserve(removedEdges.size() + edgesToRemove.size());
         removedEdges.insert(removedEdges.begin(), edgesToRemove.begin(), edgesToRemove.end());
 
-        int numEdgesToRemoveInitVal = 1;
+        int numEdgesToRemoveInitVal = 3;
         //auto [dummy1, grEdges] = Fasp::GR(g, aWeights); int faspSize = grEdges.size(); numEdgesToRemoveInitVal = faspSize == 0 ? 1 : g.getNumOfEdges() / faspSize / 2;
         std::cout << "EDGES TO REMOVE INIT VAL = " << numEdgesToRemoveInitVal << std::endl;
         int numEdgesToRemove = numEdgesToRemoveInitVal;
@@ -510,16 +504,16 @@ namespace Graph::FaspFastFinal {
 
             // Run each randomly generated graph in seperate thread and later collect all solutions found
             t.start_timer("random graphs");
-            alignas(1024) std::future<std::pair<typename Graph<VERTEX_TYPE>::Edges, typename Graph<VERTEX_TYPE>::Edges>> tasks[numOfReps];
+            alignas(64) std::future<std::pair<typename Graph<VERTEX_TYPE>::Edges, typename Graph<VERTEX_TYPE>::Edges>> tasks[numOfReps];
             int i = 0;
             for (auto &task : tasks) {
 
                 task= std::async(std::launch::async,
-                     [&, i] () {
+                     [&, i, numEdgesToRemove] () {
                          Timer<true, false> tt(true);
                          if (i == 0) tt.start_timer("1 - copy graph");
                          auto workGraph{g};
-                         if (i == 0) tt.stop_timer();
+                         if (i == 0) {std::cout << sizeof(workGraph) << std::endl; tt.stop_timer();}
 
                          if (i == 0) tt.start_timer("2 - prepare path hero");
                          auto vertices = workGraph.getVertices();

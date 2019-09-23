@@ -21,6 +21,11 @@ class Timer {
 
 public:
     Timer(bool aUseTimer, const std::string &aTimerName = "NO_NAME") : iUseTimer(aUseTimer), iTimerName(aTimerName) {}
+    ~Timer() {
+        while(iStartTimes.size() > 0) {
+            stop_timer();
+        }
+    }
 
     void start_timer(const std::string &timing_name) {
         if (iUseTimer) {

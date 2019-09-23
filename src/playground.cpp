@@ -141,15 +141,15 @@ void test() {
         fsr.getCnt("NewRandom") = Graph::FaspFastFinal::randomFASP(g, c);
         t.stop_timer();
 
-        t.start_timer("---------Orig");
-        fsr.getCnt("OrigRandom") = Graph::FaspFast2::randomFASP_orig(g, c);
-        t.stop_timer();
-
-        t.start_timer("---------GR");
-        auto [grc, dummy] = Graph::Fasp::GR(g, c);
-        std::cout << "GR CAPACITY = " << grc << std::endl;
-        fsr.getCnt("GR") = grc;
-        t.stop_timer();
+//        t.start_timer("---------Orig");
+//        fsr.getCnt("OrigRandom") = Graph::FaspFast2::randomFASP_orig(g, c);
+//        t.stop_timer();
+//
+//        t.start_timer("---------GR");
+//        auto [grc, dummy] = Graph::Fasp::GR(g, c);
+//        std::cout << "GR CAPACITY = " << grc << std::endl;
+//        fsr.getCnt("GR") = grc;
+//        t.stop_timer();
 
         fsr.getCnt("Exact") = solution;
 
