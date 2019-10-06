@@ -67,6 +67,13 @@ public:
     }
 
     /**
+     *  Returns max capacity of stack
+     */
+    IDX capacity() const {
+        return iSize;
+    }
+
+    /**
      * string stream output
      */
     friend std::ostream &operator<<(std::ostream &os, const Stack &obj) {

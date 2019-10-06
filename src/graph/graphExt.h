@@ -6,13 +6,14 @@
 #define GRAPHEXT_H
 
 #include "graph.h"
-
+#include <cstddef>
+#include <map>
 
 namespace Graph::Ext {
     template <typename VERTEX_TYPE>
     class EdgeHasher {
     public:
-        size_t operator() (const typename Graph<VERTEX_TYPE>::Edge &key) const {
+        std::size_t operator() (const typename Graph<VERTEX_TYPE>::Edge &key) const {
             typedef std::size_t result_type;
             const result_type s = std::hash<typename Graph<VERTEX_TYPE>::VertexId >{}(key.src);
             const result_type d = std::hash<typename Graph<VERTEX_TYPE>::VertexId >{}(key.dst);

@@ -8,6 +8,7 @@
 #include "graph.h"
 #include "graphExt.h"
 #include "tools/easylogging++.h"
+#include "tools/dynamicBitset.h"
 
 #include <cassert>
 #include <type_traits>
@@ -342,7 +343,6 @@ namespace Graph::Tools {
     // https://en.wikipedia.org/wiki/Tarjan%27s_strongly_connected_components_algorithm
     template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
     static auto stronglyConnectedComponents(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
-
         int index_counter = 0;
         const int numOfV = aGraph.getNumOfVertices();
         Ext::VertexProperties<VERTEX_TYPE, VERTEX_TYPE> lowLinks; lowLinks.reserve(numOfV);
@@ -365,11 +365,9 @@ namespace Graph::Tools {
                     strongconnect(successor);
                     lowLinks[node] = std::min(lowLinks.at(node), lowLinks.at(successor));
                 }
-//                else if (std::find(stack.begin(), stack.end(), successor) != stack.end()) {
                 else if (stackHelper.find(successor) != stackHelper.end()) {
                         // the successor is in the stack and hence in the current strongly connected component (SCC)
                         lowLinks[node] = std::min(lowLinks.at(node), index.at(successor));
-
                 }
             }
 
@@ -395,53 +393,90 @@ namespace Graph::Tools {
                 strongconnect(node);
             }
         }
-
 //        std::cout << "SCC: " << result << std::endl;
         return result;
     }
 
+    // https://en.wikipedia.org/wiki/Tarjan%27s_strongly_connected_components_algorithm
     template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
     static auto stronglyConnectedComponents2(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
+        auto vertices = aGraph.getVertices();
+        auto maxId = std::max_element(vertices.begin(), vertices.end());
+        auto maxV = (maxId == vertices.end() ? 0 : *maxId);
+        DynamicBitset <uint32_t, VERTEX_TYPE> sh(maxV + 1);
 
         int index_counter = 0;
         const int numOfV = aGraph.getNumOfVertices();
         Ext::VertexProperties<VERTEX_TYPE, VERTEX_TYPE> lowLinks; lowLinks.reserve(numOfV);
         Ext::VertexProperties<VERTEX_TYPE, VERTEX_TYPE> index;    index.reserve(numOfV);
+//        std::unordered_set<VERTEX_TYPE> stackHelper;    stackHelper.reserve(numOfV);
         typename Graph<VERTEX_TYPE>::Vertices stack;    stack.reserve(numOfV);
-        std::vector<typename Graph<VERTEX_TYPE>::Vertices> result; result.reserve(numOfV);
+        std::vector<std::unordered_set<VERTEX_TYPE>> result; result.reserve(numOfV);
 
-        // worker function that is called recursively
         std::function<void(const VERTEX_TYPE &)> strongconnect = [&](const VERTEX_TYPE &node) {
-            index[node] = index_counter;
-            lowLinks[node] = index_counter;
-            ++index_counter;
-            stack.emplace_back(node);
+            typename Graph<VERTEX_TYPE>::Vertices sv; sv.reserve(numOfV);
+            std::vector<int> si; si.reserve(numOfV);
+            std::vector<bool> init; init.reserve(numOfV);
 
-            for (const auto &successor : aGraph.getOutVertices(node)) {
-                if (lowLinks.find(successor) == lowLinks.end()) {
-                    // successor has not yet been visited; recurse on it
-                    strongconnect(successor);
-                    lowLinks[node] = std::min(lowLinks.at(node), lowLinks.at(successor));
+            sv.push_back(node);
+            si.push_back(0);
+            init.push_back(true);
+            while (sv.size() > 0) {
+
+
+                VERTEX_TYPE currentNode = sv.back(); sv.pop_back();
+                int ci = si.back(); si.pop_back();
+                bool initRun = init.back(); init.pop_back();
+                nextLoopER:
+
+                if (initRun) {
+                    index[currentNode] = index_counter;
+                    lowLinks[currentNode] = index_counter;
+                    ++index_counter;
+                    stack.emplace_back(currentNode);
+//                    stackHelper.emplace(currentNode);
+                    sh.set(currentNode);
                 }
-                else if (std::find(stack.begin(), stack.end(), successor) != stack.end()) {
-                    // the successor is in the stack and hence in the current strongly connected component (SCC)
-                    lowLinks[node] = std::min(lowLinks.at(node), index.at(successor));
-
+                auto ov = aGraph.getOutVertices(currentNode);
+                for(int i = ci; i < ov.size(); ++i) {
+                    auto successor = ov[i];
+                    if (lowLinks.find(successor) == lowLinks.end()) {
+                            sv.push_back(currentNode);
+                            si.push_back(i + 1);
+                            init.push_back(false);
+//                            sv.push_back(successor);
+//                            si.push_back(0);
+//                            init.push_back(true);
+                            currentNode = successor;
+                            ci = 0;
+                            initRun = true;
+                            goto nextLoopER;
+                    }
+//                    else if (stackHelper.find(successor) != stackHelper.end()) {
+                     else if (sh.test(successor)) {
+                        // the successor is in the stack and hence in the current strongly connected component (SCC)
+                        lowLinks[currentNode] = std::min(lowLinks.at(currentNode), index.at(successor));
+                    }
                 }
-            }
 
-            // If `node` is a root node, pop the stack and generate an SCC
-            if (lowLinks.at(node) == index.at(node)) {
-                typename Graph<VERTEX_TYPE>::Vertices connectedComponent;
+                // If `node` is a root node, pop the stack and generate an SCC
+                if (lowLinks.at(currentNode) == index.at(currentNode)) {
+                    std::unordered_set<VERTEX_TYPE> connectedComponent; connectedComponent.reserve(stack.size());
 
-                while (true) {
-                    auto successor = stack.back();
-                    stack.pop_back();
-
-                    connectedComponent.push_back(successor);
-                    if (successor == node) break;
+                    while (true) {
+                        auto successor = stack.back();
+                        stack.pop_back();
+//                        stackHelper.erase(successor);
+                        sh.clear(successor);
+                        connectedComponent.emplace(successor);
+                        if (successor == currentNode) break;
+                    }
+                    result.emplace_back(std::move(connectedComponent));
                 }
-                result.emplace_back(std::move(connectedComponent));
+                if (sv.size() > 0) {
+                    auto predecessor = sv.back();
+                    lowLinks[predecessor] = std::min(lowLinks.at(predecessor), lowLinks.at(currentNode));
+                }
             }
         };
 
@@ -450,8 +485,6 @@ namespace Graph::Tools {
                 strongconnect(node);
             }
         }
-
-        std::cout << "SCC: " << result << std::endl;
         return result;
     }
 

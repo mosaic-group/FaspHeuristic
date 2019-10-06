@@ -2,17 +2,18 @@
 #include "prettyprint.h"
 #include "tools/easylogging++.h"
 
-#include "graph/graphFaspFastFinal.h"
+INITIALIZE_EASYLOGGINGPP
+
 #include "graph/graph.h"
 #include "graph/graphFaspFast2.h"
 #include "graph/graphIO.h"
 #include "hdf5/dataHdf5.h"
+#include "graph/graphFaspFastFinal.h"
 
 #include <string>
 #include <cstddef>
 using std::size_t;
 
-INITIALIZE_EASYLOGGINGPP
 
 void configureLogger() {
     el::Configurations defaultConf;
@@ -100,16 +101,17 @@ void test() {
 
     auto checkIfExist = [](const std::vector<std::string> &files, const std::string &file) -> bool {return std::find(files.begin(), files.end(), file) != files.end();};
 
+    double timeExact=0.0;
+    double timeRandom=0.0;
+
     auto files = Graph::IO::getFilesInDir(std::string(dir));
     std::sort(files.begin(), files.end());
     for (auto &graphFile : files) {
         if (!Tools::endsWith(graphFile, ".al")) continue;
 
 //        graphFile = "random-1463-410-533.al"; // 0.1s
-        graphFile = "random-1833-500-700.al"; // 1s
+//        graphFile = "random-1833-500-700.al"; // 1s
         graphFile = "random-1224-350-700.al"; // 15s
-
-
 
         auto solutionFile{graphFile}; Tools::replace(solutionFile, ".al", ".mfas");
         auto timeoutFile{graphFile}; Tools::replace(timeoutFile, ".al", ".timeout");
@@ -126,20 +128,20 @@ void test() {
         auto c = Graph::Ext::getEdgeProperties<int>(g, 1);
         Graph::IO::graphToFile("/tmp/myGraph.txt", g);
         int solution = Graph::IO::solutionFromFile(dir + "/" + solutionFile);
-        double timeExact = Graph::IO::timingFromFile(dir + "/" + timingFile);
+        double timeExactOfGraph = Graph::IO::timingFromFile(dir + "/" + timingFile);
 
-//        if (timeExact > 0.05) continue;
+//        if (timeExact >= 1) continue;
 //        auto density = (double)g.getNumOfEdges() / g.getNumOfVertices();
 //        if ( density > 2.5 || density < 2) continue;
 
 
         std::cout << ++cnt << " ======================= Processing [" << graphFile << "] " << g << std::endl;
-
-        std::cout << "Exact solution=" << solution << " Time=" << timeExact << std::endl;
+        std::cout << "Exact solution=" << solution << " Time=" << timeExactOfGraph << std::endl;
+        timeExact += timeExactOfGraph;
 
         t.start_timer("--------RANDOM new");
         fsr.getCnt("NewRandom") = Graph::FaspFastFinal::randomFASP(g, c);
-        t.stop_timer();
+        timeRandom+=t.stop_timer();
 
 //        t.start_timer("---------Orig");
 //        fsr.getCnt("OrigRandom") = Graph::FaspFast2::randomFASP_orig(g, c);
@@ -156,6 +158,8 @@ void test() {
         std::cout << "===========> ";
         fsr.calculateAndPrint();
     }
+
+    std::cout << "TIME exact/random: " << timeExact << "/" << timeRandom << std::endl;
 }
 
 //void testBlueEdges() {

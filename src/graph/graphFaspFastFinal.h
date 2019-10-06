@@ -10,7 +10,7 @@
 #include <future>
 #include <cstddef>
 #include <vector>
-
+#include "graph/dinic3rdParty.h"
 
 namespace Graph::FaspFastFinal {
 
@@ -123,7 +123,7 @@ namespace Graph::FaspFastFinal {
                 auto somePath = path;
 
                 aGraph.removeEdge(e);
-                auto scc = Tools::stronglyConnectedComponents(aGraph);
+                auto scc = Tools::stronglyConnectedComponents2(aGraph);
 
                 std::vector<Edge> redEdges;
                 bool prevCandidate = false;
@@ -137,11 +137,11 @@ namespace Graph::FaspFastFinal {
                 }
 
                 aGraph.addEdge(e);
-                for (const auto &e : redEdges) {
-                    auto d = minStCutFordFulkerson(aGraph, e.dst, e.src, aWeights);
+                for (auto &ee : redEdges) {
+                    auto d = minStCutFordFulkerson(aGraph, ee.dst, ee.src, aWeights);
                     if (d > maxMcRedEdge) {
                         maxMcRedEdge = d;
-                        redEdge = e;
+                        redEdge = ee;
                     }
                 }
 
@@ -156,7 +156,7 @@ namespace Graph::FaspFastFinal {
             // 1. Remove an edge of interest 'aEdge' and find all connected components bigger than 1
             //    They consist from edges which are cycles not belonging only to aEdge so remove them.
             aGraph.removeEdge(aEdge);
-            const auto scc = Tools::stronglyConnectedComponents(aGraph);
+            const auto scc = Tools::stronglyConnectedComponents2(aGraph);
             for (const auto &s : scc) {
                 if (s.size() == 1) continue;
                 // we get sets of vertices from SCC, find all edges connecting vertices in given SCC and remove
@@ -303,8 +303,29 @@ namespace Graph::FaspFastFinal {
                                    const typename Graph<VERTEX_TYPE>::VertexId &aDst,
                                    const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
             assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
-            auto maxFlow = std::get<0>(minStCutFordFulkersonBase(aGraph, aSrc, aDst, aWeights));
-            return maxFlow;
+//            auto maxFlow = std::get<0>(minStCutFordFulkersonBase(aGraph, aSrc, aDst, aWeights));
+
+//            Graph<int, GraphMap> g;
+//            std::unordered_map<int, int> em;
+//            int nv = 0;
+//            for (auto &v : aGraph.getVertices()) {
+//                if (em.find(v) == em.end()) {
+//                    em[v] = nv++;
+//                }
+//                g.addVertexSafe(em[v]);
+//                for (auto &vo : aGraph.getOutVertices(v)) {
+//                    if (em.find(vo) == em.end()) {
+//                        em[vo] = nv++;
+//                    }
+//                    g.addVertexSafe(em[vo]);
+//                    g.addEdge({em[v], em[vo]});
+//                }
+//            }
+//            std::cout << "DINIC:" << g << " " << nv << std::endl;
+//            auto dinicc = Dinic().runDinic(g, em[aSrc], em[aDst], aWeights, em);
+            auto dinicc = Dinic().runDinic(aGraph, aSrc, aDst, aWeights, stack.capacity());
+            auto maxFlow = dinicc;
+        return maxFlow;
         }
 
         template<template<typename> class GRAPH_TYPE>
@@ -453,7 +474,7 @@ namespace Graph::FaspFastFinal {
 
         auto cleanGraphWithScc = [](Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
             int cnt1 = 0, cntBig = 0;
-            auto scc = Tools::stronglyConnectedComponents(aGraph);
+            auto scc = Tools::stronglyConnectedComponents2(aGraph);
             for (const auto &s : scc) {
                 if (s.size() == 1) {cnt1++; aGraph.removeVertex(*s.begin());}
                 else cntBig++;
@@ -478,6 +499,8 @@ namespace Graph::FaspFastFinal {
         auto vertices = g.getVertices();
         auto maxId = std::max_element(vertices.begin(), vertices.end());
         PathHero<VERTEX_TYPE> path{static_cast<std::size_t>(maxId == vertices.end() ? 1 : *maxId + 1)};
+        std::cout << g << std::endl;
+        std::cout << "Max V = " << (maxId == vertices.end() ? 0 : *maxId) << std::endl;
 
         // initial run of superAlgorithm (SA)
         auto [edgesToRemove, blueEdgesx, dummy2] = superAlgorithmBlue(g, aWeights, path);
@@ -503,40 +526,68 @@ namespace Graph::FaspFastFinal {
             std::unordered_map<typename Graph<VERTEX_TYPE>::Edge, int, Ext::EdgeHasher<VERTEX_TYPE>> edgesCntGR;
 
             // Run each randomly generated graph in seperate thread and later collect all solutions found
+//            t.start_timer("random graphs");
+//            alignas(64) std::future<std::pair<typename Graph<VERTEX_TYPE>::Edges, typename Graph<VERTEX_TYPE>::Edges>> tasks[numOfReps];
+//            int i = 0;
+//            for (auto &task : tasks) {
+//
+//                task= std::async(std::launch::async,
+//                     [&, i, numEdgesToRemove] () {
+//                         Timer<true, false> tt(true);
+//                         if (i == 0) tt.start_timer("1 - copy graph");
+//                         auto workGraph{g};
+//                         if (i == 0) {std::cout << sizeof(workGraph) << std::endl; tt.stop_timer();}
+//
+//                         if (i == 0) tt.start_timer("2 - prepare path hero");
+//                         auto vertices = workGraph.getVertices();
+//                         auto maxId = std::max_element(vertices.begin(), vertices.end());
+//                         PathHero<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
+//                         if (i == 0) tt.stop_timer();
+//
+//                         if (i == 0) tt.start_timer("3 - random subgraph");
+//                         path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove, blueEdges);
+//                         if (i == 0) tt.stop_timer();
+//
+//                         if (i == 0) tt.start_timer("4 - SA blue");
+//                         auto [edgesSA, _, edgesGR] = superAlgorithmBlue(workGraph, props[i], path, false, true);
+//                         if (i == 0) tt.stop_timer();
+//                         return std::pair{edgesSA, edgesGR};
+//                     });
+//                i++;
+//            }
+//
+//            for (auto &task : tasks) {
+//                auto [edgesToRemove, edgesToRemoveGR] = task.get();
+//                for (auto &e : edgesToRemove) edgesCnt.try_emplace(e, 0).first->second++;
+//                for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
+//            }
+//            t.stop_timer();
             t.start_timer("random graphs");
-            alignas(64) std::future<std::pair<typename Graph<VERTEX_TYPE>::Edges, typename Graph<VERTEX_TYPE>::Edges>> tasks[numOfReps];
-            int i = 0;
-            for (auto &task : tasks) {
+            for (int i = 0; i < numOfReps; ++i) {
+                                     Timer<true, false> tt(true);
+                                     if (i == 0) tt.start_timer("1 - copy graph");
+                                     auto workGraph{g};
+                                     if (i == 0) {std::cout << sizeof(workGraph) << std::endl; tt.stop_timer();}
 
-                task= std::async(std::launch::async,
-                     [&, i, numEdgesToRemove] () {
-                         Timer<true, false> tt(true);
-                         if (i == 0) tt.start_timer("1 - copy graph");
-                         auto workGraph{g};
-                         if (i == 0) {std::cout << sizeof(workGraph) << std::endl; tt.stop_timer();}
+                                     if (i == 0) tt.start_timer("2 - prepare path hero");
+                                     auto vertices = workGraph.getVertices();
+                                     auto maxId = std::max_element(vertices.begin(), vertices.end());
+                                     PathHero<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
+                                     if (i == 0) tt.stop_timer();
 
-                         if (i == 0) tt.start_timer("2 - prepare path hero");
-                         auto vertices = workGraph.getVertices();
-                         auto maxId = std::max_element(vertices.begin(), vertices.end());
-                         PathHero<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
-                         if (i == 0) tt.stop_timer();
+                                     if (i == 0) tt.start_timer("3 - random subgraph");
+                                     path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove, blueEdges);
+                                     if (i == 0) tt.stop_timer();
 
-                         if (i == 0) tt.start_timer("3 - random subgraph");
-                         path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove, blueEdges);
-                         if (i == 0) tt.stop_timer();
+                                     if (i == 0) tt.start_timer("4 - SA blue");
+                                     auto [edgesSA, _, edgesGR] = superAlgorithmBlue(workGraph, props[i], path, false, true);
+                                     if (i == 0) tt.stop_timer();
 
-                         if (i == 0) tt.start_timer("4 - SA blue");
-                         auto [edgesSA, _, edgesGR] = superAlgorithmBlue(workGraph, props[i], path, false, true);
-                         if (i == 0) tt.stop_timer();
-                         return std::pair{edgesSA, edgesGR};
-                     });
-                i++;
-            }
-
-            for (auto &task : tasks) {
-                auto [edgesToRemove, edgesToRemoveGR] = task.get();
-                for (auto &e : edgesToRemove) edgesCnt.try_emplace(e, 0).first->second++;
-                for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
+                                     if (i == 0) tt.start_timer("5 - Getting edges");
+                                    auto [edgesToRemove, edgesToRemoveGR] = std::pair{edgesSA, edgesGR};
+                                    for (auto &e : edgesToRemove) edgesCnt.try_emplace(e, 0).first->second++;
+                                    for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
+                                    if (i == 0) tt.stop_timer();
             }
             t.stop_timer();
 
