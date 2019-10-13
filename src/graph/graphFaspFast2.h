@@ -1216,7 +1216,6 @@ namespace Graph::FaspFast2 {
         // ========= calc threshold ==========
         auto [_, grEdges] = Fasp::GR(g, aWeights);
         int faspSize = grEdges.size();
-        double density = g.getNumOfEdges() / g.getNumOfVertices();
         if (faspSize > 0) useGrThreshold = 2 * g.getNumOfEdges() / faspSize;
         useGrThreshold = std::min(useGrThreshold, 2 * 5);
         std::cout << ":::::::::THRESHOLD = " << useGrThreshold << std::endl;
@@ -1305,7 +1304,6 @@ namespace Graph::FaspFast2 {
                     useGrThreshold++;
                     std::cout << ">>>>>>>> " << useGrThreshold << std::endl;
                     auto [c, faspEdges] = Fasp::GR(g, aWeights);
-                    int n = faspEdges.size();
                     auto e = faspEdges[0]; // rand() % n
                     g.removeEdge(e);
                     removedEdges.emplace_back(std::move(e));

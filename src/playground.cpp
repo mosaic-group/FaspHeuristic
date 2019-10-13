@@ -96,7 +96,7 @@ void test() {
 //    dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/de-bruijn/";
     FaspSolutionResult fsr;
     Timer<true, false> t(true);
-    int limitCnt = 1;
+    int limitCnt = 10;
     int cnt = 0;
 
     auto checkIfExist = [](const std::vector<std::string> &files, const std::string &file) -> bool {return std::find(files.begin(), files.end(), file) != files.end();};
@@ -105,13 +105,14 @@ void test() {
     double timeRandom=0.0;
 
     auto files = Graph::IO::getFilesInDir(std::string(dir));
+
     std::sort(files.begin(), files.end());
     for (auto &graphFile : files) {
         if (!Tools::endsWith(graphFile, ".al")) continue;
 
 //        graphFile = "random-1463-410-533.al"; // 0.1s
 //        graphFile = "random-1833-500-700.al"; // 1s
-        graphFile = "random-1224-350-700.al"; // 15s
+//        graphFile = "random-1224-350-700.al"; // 15s
 
         auto solutionFile{graphFile}; Tools::replace(solutionFile, ".al", ".mfas");
         auto timeoutFile{graphFile}; Tools::replace(timeoutFile, ".al", ".timeout");
@@ -122,10 +123,10 @@ void test() {
             continue;
         }
 
-        if (limitCnt-- == 0) break;
+//        if (limitCnt-- == 0) break;
 
-        Graph::Graph g = Graph::IO::graphFromFile<int, Graph::GraphMap>(dir + "/" + graphFile);
-        auto c = Graph::Ext::getEdgeProperties<int>(g, 1);
+        Graph::Graph g = Graph::IO::graphFromFile<int16_t, Graph::GraphMap>(dir + "/" + graphFile);
+        auto c = Graph::Ext::getEdgeProperties<int16_t>(g, 1);
         Graph::IO::graphToFile("/tmp/myGraph.txt", g);
         int solution = Graph::IO::solutionFromFile(dir + "/" + solutionFile);
         double timeExactOfGraph = Graph::IO::timingFromFile(dir + "/" + timingFile);
@@ -140,8 +141,14 @@ void test() {
         timeExact += timeExactOfGraph;
 
         t.start_timer("--------RANDOM new");
-        fsr.getCnt("NewRandom") = Graph::FaspFastFinal::randomFASP(g, c);
-        timeRandom+=t.stop_timer();
+        auto random = Graph::FaspFastFinal::randomFASP(g, c);
+        fsr.getCnt("NewRandom") = random;
+        auto thisStep = t.stop_timer();
+        timeRandom+=thisStep;
+
+        t.start_timer("gr");
+        auto gr = Graph::Fasp::GR(g, c);
+        auto grTime = t.stop_timer();
 
 //        t.start_timer("---------Orig");
 //        fsr.getCnt("OrigRandom") = Graph::FaspFast2::randomFASP_orig(g, c);
@@ -157,8 +164,19 @@ void test() {
 
         std::cout << "===========> ";
         fsr.calculateAndPrint();
+
+
+        f.put("gr", gr.first);
+        f.put("grTime", grTime);
+        f.put("random", random);
+        f.put("randomTime", thisStep);
+        f.put("exact", solution);
+        f.put("exactTime", timeExactOfGraph);
+        f.put("vertices", g.getNumOfVertices());
+        f.put("edges", g.getNumOfEdges());
     }
 
+    f.save();
     std::cout << "TIME exact/random: " << timeExact << "/" << timeRandom << std::endl;
 }
 

@@ -11,6 +11,7 @@
 #include <cstddef>
 #include <vector>
 #include "graph/dinic3rdParty.h"
+#include "graph/hipr/hi_pr.h"
 
 namespace Graph::FaspFastFinal {
 
@@ -36,10 +37,11 @@ namespace Graph::FaspFastFinal {
         Stack <VERTEX_TYPE> stack;
         std::vector<VERTEX_TYPE> parents;
         typename Graph<VERTEX_TYPE>::Vertices path;
-
+        std::vector<int16_t> lowLinks;
+        std::vector<int16_t> index;
 
     public:
-        explicit PathHero(std::size_t aN) : iVisited(aN), stack(aN), parents(aN, 0) {
+        explicit PathHero(std::size_t aN) : iVisited(aN), stack(aN), parents(aN, 0), lowLinks(aN, -1), index(aN, -1) {
             // both can have at most aN in/outgoing edges
             path.reserve(aN);
         }
@@ -123,7 +125,7 @@ namespace Graph::FaspFastFinal {
                 auto somePath = path;
 
                 aGraph.removeEdge(e);
-                auto scc = Tools::stronglyConnectedComponents2(aGraph);
+                auto scc = stronglyConnectedComponents2(aGraph);
 
                 std::vector<Edge> redEdges;
                 bool prevCandidate = false;
@@ -135,6 +137,7 @@ namespace Graph::FaspFastFinal {
                     if (currCandidate && prevCandidate) redEdges.emplace_back(Edge{somePath[i - 1], somePath[i]});
                     prevCandidate = currCandidate;
                 }
+
 
                 aGraph.addEdge(e);
                 for (auto &ee : redEdges) {
@@ -156,7 +159,7 @@ namespace Graph::FaspFastFinal {
             // 1. Remove an edge of interest 'aEdge' and find all connected components bigger than 1
             //    They consist from edges which are cycles not belonging only to aEdge so remove them.
             aGraph.removeEdge(aEdge);
-            const auto scc = Tools::stronglyConnectedComponents2(aGraph);
+            const auto scc = stronglyConnectedComponents2(aGraph);//Tools::stronglyConnectedComponents2(aGraph);
             for (const auto &s : scc) {
                 if (s.size() == 1) continue;
                 // we get sets of vertices from SCC, find all edges connecting vertices in given SCC and remove
@@ -324,6 +327,7 @@ namespace Graph::FaspFastFinal {
 //            std::cout << "DINIC:" << g << " " << nv << std::endl;
 //            auto dinicc = Dinic().runDinic(g, em[aSrc], em[aDst], aWeights, em);
             auto dinicc = Dinic().runDinic(aGraph, aSrc, aDst, aWeights, stack.capacity());
+            auto hiprc = 
             auto maxFlow = dinicc;
         return maxFlow;
         }
@@ -403,6 +407,106 @@ namespace Graph::FaspFastFinal {
             }
             return false;
         }
+
+//        struct R {
+//            VERTEX_TYPE v;
+//            VERTEX_TYPE idx;
+//            bool init;
+//
+//            R(VERTEX_TYPE aV, VERTEX_TYPE aIdx, bool aInit) : v(aV), idx(aIdx), init(aInit) {}
+//
+//            friend std::ostream &operator<<(std::ostream &os, const R &obj) {
+//                os << "R{" << obj.v << ", " << obj.idx << ", " << (obj.init ? "true" : "false") << "}";
+//                return os;
+//            }
+//        };
+        template<template<typename> class GRAPH_TYPE>
+        auto stronglyConnectedComponents2(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
+            iVisited.clearAll();
+            auto &sh = iVisited;
+            stack.clear();
+
+            int index_counter = 0;
+            const int numOfV = aGraph.getNumOfVertices();
+            for (int i = 0; i < lowLinks.size(); ++i) lowLinks[i] = -1;
+
+            std::vector<std::unordered_set<VERTEX_TYPE>> result; result.reserve(numOfV);
+
+            std::function<void(const VERTEX_TYPE &)> strongconnect = [&](const VERTEX_TYPE &node) {
+
+                struct R {
+                    const VERTEX_TYPE v;
+                    const VERTEX_TYPE idx;
+                    R(VERTEX_TYPE aV, VERTEX_TYPE aIdx) : v(aV), idx(aIdx) {}
+                };
+
+                std::vector<R> r; r.reserve(numOfV);
+                r.push_back(R{node, 0});
+
+                bool initRun = true;
+
+                while (r.size() > 0) {
+
+                    auto &b = r.back();
+                    VERTEX_TYPE currentNode =  b.v;
+                    int ci = b.idx;
+                    r.pop_back();
+
+                    processSuccessor:
+
+                    if (initRun) {
+                        index[currentNode] = index_counter;
+                        lowLinks[currentNode] = index_counter;
+                        ++index_counter;
+                        stack.push(currentNode);
+                        sh.set(currentNode);
+                        initRun = false;
+                    }
+                    auto ov = aGraph.getOutVertices(currentNode);
+                    for(VERTEX_TYPE i = ci; i < ov.size(); ++i) {
+                        auto successor = ov[i];
+                        if (lowLinks[successor] == -1) {
+                            // save the state (it would be recurrent call in default version of Trajan's algorithm)
+                            r.push_back(R(currentNode, i + 1));
+                            // set values for successor and repeat from beginning ('goto' is bad... I know).
+                            currentNode = successor;
+                            ci = 0;
+                            initRun = true;
+                            goto processSuccessor;
+                        }
+                        else if (sh.test(successor)) {
+                            // the successor is in the stack and hence in the current strongly connected component (SCC)
+                            lowLinks[currentNode] = std::min(lowLinks.at(currentNode), index[successor]);
+                        }
+                    }
+
+                    // If `node` is a root node, pop the stack and generate an SCC
+                    if (lowLinks.at(currentNode) == index[currentNode]) {
+                        std::unordered_set<VERTEX_TYPE> connectedComponent; connectedComponent.reserve(stack.size());
+
+                        while (true) {
+                            auto successor = stack.pop();
+                            sh.clear(successor);
+                            connectedComponent.emplace(successor);
+                            if (successor == currentNode) break;
+                        }
+                        result.emplace_back(std::move(connectedComponent));
+                    }
+                    if (r.size() > 0) {
+                        auto predecessor = r.back().v;
+                        lowLinks[predecessor] = std::min(lowLinks.at(predecessor), lowLinks.at(currentNode));
+                    }
+                }
+            };
+
+            for (auto &node : aGraph.getVertices()) {
+                if (lowLinks[node] == -1) {
+                    strongconnect(node);
+                }
+            }
+
+            return result;
+        }
     };
 
     // ------------------------------------------------------------------------
@@ -472,9 +576,9 @@ namespace Graph::FaspFastFinal {
     template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
     static auto randomFASP(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
 
-        auto cleanGraphWithScc = [](Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
+        auto cleanGraphWithScc = [](Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, PathHero<VERTEX_TYPE> &path) {
             int cnt1 = 0, cntBig = 0;
-            auto scc = Tools::stronglyConnectedComponents2(aGraph);
+            auto scc = path.stronglyConnectedComponents2(aGraph);
             for (const auto &s : scc) {
                 if (s.size() == 1) {cnt1++; aGraph.removeVertex(*s.begin());}
                 else cntBig++;
@@ -482,25 +586,26 @@ namespace Graph::FaspFastFinal {
             std::cout << "SCC  #1=" << cnt1 << " #BIG=" << cntBig << "\n";
         };
 
-        Timer<true, false, true> t(true);
+        Timer<false, false, true> t(true);
         constexpr int numOfReps = 20;
 
         alignas(64) Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> props[numOfReps];
         for (auto &p : props) p = aWeights;
 
         auto g{aGraph};
-        t.start_timer("init scc");
-        cleanGraphWithScc(g);
-        t.stop_timer();
-
-        typename Graph<VERTEX_TYPE>::Edges removedEdges;
-
         // find max vertex id in graph and setup PathHero
         auto vertices = g.getVertices();
         auto maxId = std::max_element(vertices.begin(), vertices.end());
         PathHero<VERTEX_TYPE> path{static_cast<std::size_t>(maxId == vertices.end() ? 1 : *maxId + 1)};
         std::cout << g << std::endl;
         std::cout << "Max V = " << (maxId == vertices.end() ? 0 : *maxId) << std::endl;
+
+        t.start_timer("init scc");
+        cleanGraphWithScc(g, path);
+        t.stop_timer();
+
+        typename Graph<VERTEX_TYPE>::Edges removedEdges;
+
 
         // initial run of superAlgorithm (SA)
         auto [edgesToRemove, blueEdgesx, dummy2] = superAlgorithmBlue(g, aWeights, path);
@@ -519,7 +624,7 @@ namespace Graph::FaspFastFinal {
             std::cout << "----- loop=" << cnt++ << "\n";
             if (path.isAcyclic(g)) break;
 
-            cleanGraphWithScc(g);
+            cleanGraphWithScc(g, path);
 
             // if we are here there are still cycles not handled by SA
             std::unordered_map<typename Graph<VERTEX_TYPE>::Edge, int, Ext::EdgeHasher<VERTEX_TYPE>> edgesCnt;
@@ -564,7 +669,7 @@ namespace Graph::FaspFastFinal {
 //            t.stop_timer();
             t.start_timer("random graphs");
             for (int i = 0; i < numOfReps; ++i) {
-                                     Timer<true, false> tt(true);
+                                     Timer<false, false> tt(true);
                                      if (i == 0) tt.start_timer("1 - copy graph");
                                      auto workGraph{g};
                                      if (i == 0) {std::cout << sizeof(workGraph) << std::endl; tt.stop_timer();}
