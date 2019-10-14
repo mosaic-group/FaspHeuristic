@@ -14,7 +14,6 @@ INITIALIZE_EASYLOGGINGPP
 #include <cstddef>
 using std::size_t;
 
-
 void configureLogger() {
     el::Configurations defaultConf;
     defaultConf.setToDefault();
@@ -90,14 +89,26 @@ public:
 };
 
 void test() {
+
+//    Graph::Graph<int, Graph::GraphMap> g;
+//    for (int i = 0; i < 3; ++i) g.addVertex(i);
+//    g.addEdge({0, 1});
+//    g.addEdge({0,2});
+//    g.addEdge({2,1});
+//    auto c = Graph::Ext::getEdgeProperties<int16_t>(g, 2);
+//    std::vector<int> mapv(3, 0);
+//    std::cout << Graph::HIPR().runHipr(g, 0, 1, c, 2, mapv) << std::endl;
+//    if (true) return;
+
     DataHdf5<double> f("/tmp/out.h5");
     std::string dir;
     dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/random/";
 //    dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/de-bruijn/";
     FaspSolutionResult fsr;
     Timer<true, false> t(true);
-    int limitCnt = 10;
+    int limitCnt = 1;
     int cnt = 0;
+
 
     auto checkIfExist = [](const std::vector<std::string> &files, const std::string &file) -> bool {return std::find(files.begin(), files.end(), file) != files.end();};
 

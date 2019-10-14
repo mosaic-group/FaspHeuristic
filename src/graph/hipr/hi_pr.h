@@ -1,5 +1,7 @@
 /* Maximum flow - highest lavel push-relabel algorithm */
 /* COPYRIGHT C 1995, 2000 by IG Systems, Inc., igsys@eclipse.net */
+#ifndef HIPR_H
+#define HIPR_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,6 +13,7 @@
 namespace Graph {
 
 class HIPR {
+#define DEXCESS_TYPE_LONG
 #ifdef EXCESS_TYPE_LONG
             typedef unsigned long excessType;
 #else
@@ -19,24 +22,27 @@ class HIPR {
 
             typedef unsigned long cType;
 
-            typedef  /* arc */
+            struct nodeSt;
+
+            /* arc */
             struct arcSt {
                 cType resCap;          /* residual capasity */
-                struct nodeSt *head;           /* arc head */
-                struct arcSt *rev;            /* reverse arc */
-            }
-                    arc;
+                nodeSt *head;           /* arc head */
+                arcSt *rev;            /* reverse arc */
+            };
+            using arc  = arcSt;
 
-            typedef  /* node */
+            /* node */
             struct nodeSt {
                 arc *first;           /* first outgoing arc */
                 arc *current;         /* current outgoing arc */
                 excessType excess;           /* excess at the node
 				        change to double if needed */
                 long d;                /* distance label */
-                struct nodeSt *bNext;           /* next node in bucket */
-                struct nodeSt *bPrev;           /* previous node in bucket */
-            } node;
+                nodeSt *bNext;           /* next node in bucket */
+                nodeSt *bPrev;           /* previous node in bucket */
+            };
+            using node = nodeSt;
 
 
             typedef /* bucket */
@@ -45,15 +51,15 @@ class HIPR {
                 node *firstInactive;    /* first node with zero excess */
             } bucket;
 
-#include <sys/time.h>
-#include <sys/resource.h>
+//#include <sys/time.h>
+//#include <sys/resource.h>
 
-            float timer() {
-                struct rusage r;
-
-                getrusage(0, &r);
-                return (float) (r.ru_utime.tv_sec + r.ru_utime.tv_usec / (float) 1000000);
-            }
+//            float timer() {
+//                struct rusage r;
+//
+//                getrusage(0, &r);
+//                return (float) (r.ru_utime.tv_sec + r.ru_utime.tv_usec / (float) 1000000);
+//            }
 
 /*
 #define GLOB_UPDT_FREQ 0.5
@@ -103,7 +109,7 @@ class HIPR {
 #define nNode(i) ( (i) - nodes + nMin )
 #define nArc(a)  ( ( a == NULL )? -1 : (a) - arcs )
 
-#define min(a, b) ( ( (a) < (b) ) ? a : b )
+template <typename T> T min(const T &a, const T &b) {return ( ( (a) < (b) ) ? a : b ); }
 
 /* FIFO queue for BFS macros */
 /*
@@ -792,10 +798,12 @@ class HIPR {
 
             }
 
+    public:
 
-            int main(int argc, char *argv[])
-
-            {
+        template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
+        double runHipr(const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
+                    const typename Graph<VERTEX_TYPE>::VertexId &aDst, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights,
+                    int maxV, std::vector<VERTEX_TYPE> &mapVertices) {
 #if (defined(PRINT_FLOW) || defined(CHECK_SOLUTION))
                 node *i;
                 arc *a;
@@ -814,22 +822,13 @@ class HIPR {
 #endif
 
 
-                if (argc > 2) {
-                    printf("Usage: %s [update frequency]\n", argv[0]);
-                    exit(1);
-                }
 
-                if (argc < 2)
-                    globUpdtFreq = GLOB_UPDT_FREQ;
-                else
-                    globUpdtFreq = (float) atof(argv[1]);
+                globUpdtFreq = GLOB_UPDT_FREQ;
 
-                printf("c\nc hi_pr version 3.5\n");
-                printf("c Copyright C by IG Systems, igsys@eclipse.net\nc\n");
 
-                parse(&n, &m, &nodes, &arcs, &cap, &source, &sink, &nMin);
+                parse(&n, &m, &nodes, &arcs, &cap, &source, &sink, &nMin, aGraph, aSrc, aDst, aWeights, maxV, mapVertices);
 
-                printf("c nodes:       %10ld\nc arcs:        %10ld\nc\n", n, m);
+//                printf("c nodes:       %10ld\nc arcs:        %10ld\nc\n", n, m);
 
                 cc = allocDS();
                 if (cc) {
@@ -837,130 +836,318 @@ class HIPR {
                     exit(1);
                 }
 
-                t = timer();
-                t2 = t;
+//                t = timer();
+//                t2 = t;
 
                 init();
                 stageOne();
 
-                t2 = timer() - t2;
+//                t2 = timer() - t2;
 
-                printf("c flow:       %12.01f\n", flow);
+//                printf("c flow:       %12.01f\n", flow);
 
-#ifndef CUT_ONLY
-                stageTwo();
+//#ifndef CUT_ONLY
+//                stageTwo();
+//
+//                t = timer() - t;
+//
+//                printf("c time:        %10.2f\n", t);
+//
+//#endif
+//
+//                printf("c cut tm:      %10.2f\n", t2);
+//
+//#ifdef CHECK_SOLUTION
+//
+//                /* check if you have a flow (pseudoflow) */
+//                /* check arc flows */
+//                forAllNodes(i) {
+//                  forAllArcs(i,a) {
+//                    if (cap[a - arcs] > 0) /* original arc */
+//                  if ((a->resCap + a->rev->resCap != cap[a - arcs])
+//                      || (a->resCap < 0)
+//                      || (a->rev->resCap < 0)) {
+//                    printf("ERROR: bad arc flow\n");
+//                    exit(2);
+//                  }
+//                  }
+//                }
+//
+//                /* check conservation */
+//                forAllNodes(i)
+//                  if ((i != source) && (i != sink)) {
+//#ifdef CUT_ONLY
+//                    if (i->excess < 0) {
+//                  printf("ERROR: nonzero node excess\n");
+//                  exit(2);
+//                    }
+//#else
+//                    if (i->excess != 0) {
+//                  printf("ERROR: nonzero node excess\n");
+//                  exit(2);
+//                    }
+//#endif
+//
+//                    sum = 0;
+//                    forAllArcs(i,a) {
+//                  if (cap[a - arcs] > 0) /* original arc */
+//                    sum -= cap[a - arcs] - a->resCap;
+//                  else
+//                    sum += a->resCap;
+//                    }
+//
+//                    if (i->excess != sum) {
+//                  printf("ERROR: conservation constraint violated\n");
+//                  exit(2);
+//                    }
+//                  }
+//
+//                /* check if mincut is saturated */
+//                aMax = dMax = 0;
+//                for (l = buckets; l < buckets + n; l++) {
+//                  l->firstActive = sentinelNode;
+//                  l->firstInactive = sentinelNode;
+//                }
+//                globalUpdate();
+//                if (source->d < n) {
+//                  printf("ERROR: the solution is not optimal\n");
+//                  exit(2);
+//                }
+//
+//                printf("c\nc Solution checks (feasible and optimal)\nc\n");
+//#endif
+//
+//#ifdef PRINT_STAT
+//                printf ("c pushes:      %10ld\n", pushCnt);
+//                printf ("c relabels:    %10ld\n", relabelCnt);
+//                printf ("c updates:     %10ld\n", updateCnt);
+//                printf ("c gaps:        %10ld\n", gapCnt);
+//                printf ("c gap nodes:   %10ld\n", gNodeCnt);
+//                printf ("c\n");
+//#endif
+//
+//#ifdef PRINT_FLOW
+//                printf ("c flow values\n");
+//                forAllNodes(i) {
+//                  ni = nNode(i);
+//                  forAllArcs(i,a) {
+//                na = nArc(a);
+//                if ( cap[na] > 0 )
+//                  printf ( "f %7ld %7ld %12ld\n",
+//                      ni, nNode( a -> head ), cap[na] - ( a -> resCap )
+//                      );
+//                  }
+//                }
+//                printf("c\n");
+//#endif
+//
+//#ifdef PRINT_CUT
+//                globalUpdate();
+//                printf ("c nodes on the sink side\n");
+//                forAllNodes(j)
+//                  if (j->d < n)
+//                    printf("c %ld\n", nNode(j));
+//
+//#endif
 
-                t = timer() - t;
-
-                printf("c time:        %10.2f\n", t);
-
-#endif
-
-                printf("c cut tm:      %10.2f\n", t2);
-
-#ifdef CHECK_SOLUTION
-
-                /* check if you have a flow (pseudoflow) */
-                /* check arc flows */
-                forAllNodes(i) {
-                  forAllArcs(i,a) {
-                    if (cap[a - arcs] > 0) /* original arc */
-                  if ((a->resCap + a->rev->resCap != cap[a - arcs])
-                      || (a->resCap < 0)
-                      || (a->rev->resCap < 0)) {
-                    printf("ERROR: bad arc flow\n");
-                    exit(2);
-                  }
-                  }
-                }
-
-                /* check conservation */
-                forAllNodes(i)
-                  if ((i != source) && (i != sink)) {
-#ifdef CUT_ONLY
-                    if (i->excess < 0) {
-                  printf("ERROR: nonzero node excess\n");
-                  exit(2);
-                    }
-#else
-                    if (i->excess != 0) {
-                  printf("ERROR: nonzero node excess\n");
-                  exit(2);
-                    }
-#endif
-
-                    sum = 0;
-                    forAllArcs(i,a) {
-                  if (cap[a - arcs] > 0) /* original arc */
-                    sum -= cap[a - arcs] - a->resCap;
-                  else
-                    sum += a->resCap;
-                    }
-
-                    if (i->excess != sum) {
-                  printf("ERROR: conservation constraint violated\n");
-                  exit(2);
-                    }
-                  }
-
-                /* check if mincut is saturated */
-                aMax = dMax = 0;
-                for (l = buckets; l < buckets + n; l++) {
-                  l->firstActive = sentinelNode;
-                  l->firstInactive = sentinelNode;
-                }
-                globalUpdate();
-                if (source->d < n) {
-                  printf("ERROR: the solution is not optimal\n");
-                  exit(2);
-                }
-
-                printf("c\nc Solution checks (feasible and optimal)\nc\n");
-#endif
-
-#ifdef PRINT_STAT
-                printf ("c pushes:      %10ld\n", pushCnt);
-                printf ("c relabels:    %10ld\n", relabelCnt);
-                printf ("c updates:     %10ld\n", updateCnt);
-                printf ("c gaps:        %10ld\n", gapCnt);
-                printf ("c gap nodes:   %10ld\n", gNodeCnt);
-                printf ("c\n");
-#endif
-
-#ifdef PRINT_FLOW
-                printf ("c flow values\n");
-                forAllNodes(i) {
-                  ni = nNode(i);
-                  forAllArcs(i,a) {
-                na = nArc(a);
-                if ( cap[na] > 0 )
-                  printf ( "f %7ld %7ld %12ld\n",
-                      ni, nNode( a -> head ), cap[na] - ( a -> resCap )
-                      );
-                  }
-                }
-                printf("c\n");
-#endif
-
-#ifdef PRINT_CUT
-                globalUpdate();
-                printf ("c nodes on the sink side\n");
-                forAllNodes(j)
-                  if (j->d < n)
-                    printf("c %ld\n", nNode(j));
-
-#endif
-
-                exit(0);
-
+                return flow;
             }
 
-    public:
+
         template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
-        int runHipr(const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
+        int parse( long    *n_ad, long    *m_ad, node    **nodes_ad, arc     **arcs_ad, unsigned long    **cap_ad,
+                   node    **source_ad, node    **sink_ad, long    *node_min_ad,const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
             const typename Graph<VERTEX_TYPE>::VertexId &aDst, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights,
-            int maxV) {
+            int maxV, std::vector<VERTEX_TYPE> &mapVertices) {
+
+            //                parse(&n, &m, &nodes, &arcs, &cap, &source, &sink, &nMin);
+            long n = aGraph.getNumOfVertices();
+            long m = aGraph.getNumOfEdges();
+
+//            std::cout << "PARSE: " << aGraph << " " << maxV << std::endl;
+            /* allocating memory for  'nodes', 'arcs'  and internal arrays */
+            node *nodes    = (node*) calloc ( n+2, sizeof(node) );
+            arc *arcs     = (arc*)  calloc ( 2*m+1, sizeof(arc) );
+            long *arc_tail = (long*) calloc ( 2*m,   sizeof(long) );
+            long *arc_first= (long*) calloc ( n+2, sizeof(long) );
+            unsigned long *acap     = (unsigned long*) calloc ( 2*m, sizeof(long) );
+            /* arc_first [ 0 .. n+1 ] = 0 - initialized by calloc */
+            arc *arc_current = arcs;
+
+
+            long no_nslines = 1;
+            long source = aSrc;
+            long no_nklines = 1;
+            long sink = aDst;
+            long node_max = 0;
+            long node_min = n;
+
+            long pos_current=0;
+            long no_alines=0;
+
+            long head, tail, cap;
+            node    *ndp;
+            long arc_num;
+
+            for (int i = 0; i < mapVertices.size(); ++i) mapVertices[i] = -1;
+
+            int newIdx = 0;
+            for (auto &e : aGraph.getEdges()) {
+                auto capacity = aWeights.at(e);
+                if (mapVertices[e.src] == -1) mapVertices[e.src] = newIdx++;
+                if (mapVertices[e.dst] == -1) mapVertices[e.dst] = newIdx++;
+                tail = mapVertices[e.src];
+                head = mapVertices[e.dst];
+                cap = capacity;
+//                std::cout << "P: " << e.src << " " << e.dst << " " << capacity << std::endl;
+//                std::cout << "P: " << tail << " " << head << " " << cap << std::endl;
+//                std::cout << mapVertices << std::endl;
+
+                /* no of arcs incident to node i is stored in arc_first[i+1] */
+                arc_first[tail + 1] ++;
+                arc_first[head + 1] ++;
+
+                /* storing information about the arc */
+                arc_tail[pos_current]        = tail;
+                arc_tail[pos_current+1]      = head;
+                arc_current       -> head    = nodes + head;
+                arc_current       -> resCap    = cap;
+                arc_current       -> rev  = arc_current + 1;
+                ( arc_current + 1 ) -> head    = nodes + tail;
+                ( arc_current + 1 ) -> resCap    = 0;
+                ( arc_current + 1 ) -> rev  = arc_current;
+
+                /* searching minimumu and maximum node */
+                if ( head < node_min ) node_min = head;
+                if ( tail < node_min ) node_min = tail;
+                if ( head > node_max ) node_max = head;
+                if ( tail > node_max ) node_max = tail;
+
+                no_alines   ++;
+                arc_current += 2;
+                pos_current += 2;
+
             }
+            source = mapVertices[source];
+            sink = mapVertices[sink];
+
+            /* first arc from the first node */
+            ( nodes + node_min ) -> first = arcs;
+
+/* before below loop arc_first[i+1] is the number of arcs outgoing from i;
+   after this loop arc_first[i] is the position of the first
+   outgoing from node i arcs after they would be ordered;
+   this value is transformed to pointer and written to node.first[i]
+   */
+
+            for (long i = node_min + 1; i <= node_max + 1; i ++ )
+            {
+                arc_first[i]          += arc_first[i-1];
+                ( nodes + i ) -> first = arcs + arc_first[i];
+            }
+
+
+            for (long  i = node_min; i < node_max; i ++ ) /* scanning all the nodes
+                                            exept the last*/
+            {
+
+                long last = ((nodes + i + 1)->first) - arcs;
+                /* arcs outgoing from i must be cited
+                 from position arc_first[i] to the position
+                 equal to initial value of arc_first[i+1]-1  */
+
+                for (long arc_num = arc_first[i]; arc_num < last; arc_num++) {
+                    long tail = arc_tail[arc_num];
+
+                    while (tail != i)
+                        /* the arc no  arc_num  is not in place because arc cited here
+                           must go out from i;
+                           we'll put it to its place and continue this process
+                           until an arc in this position would go out from i */
+
+                    {
+                        long arc_new_num = arc_first[tail];
+                        arc_current = arcs + arc_num;
+                        arc *arc_new = arcs + arc_new_num;
+
+                        /* arc_current must be cited in the position arc_new
+                           swapping these arcs:                                 */
+
+                        node *head_p = arc_new->head;
+                        arc_new->head = arc_current->head;
+                        arc_current->head = head_p;
+
+                        cap = arc_new->resCap;
+                        arc_new->resCap = arc_current->resCap;
+                        arc_current->resCap = cap;
+
+                        if (arc_new != arc_current->rev) {
+                            arc *arc_tmp = arc_new->rev;
+                            arc_new->rev = arc_current->rev;
+                            arc_current->rev = arc_tmp;
+
+                            (arc_current->rev)->rev = arc_current;
+                            (arc_new->rev)->rev = arc_new;
+                        }
+
+                        arc_tail[arc_num] = arc_tail[arc_new_num];
+                        arc_tail[arc_new_num] = tail;
+
+                        /* we increase arc_first[tail]  */
+                        arc_first[tail]++;
+
+                        tail = arc_tail[arc_num];
+                    }
+                }
+                /* all arcs outgoing from  i  are in place */
+            }
+
+            /* -----------------------  arcs are ordered  ------------------------- */
+
+/*----------- constructing lists ---------------*/
+
+
+            for ( ndp = nodes + node_min; ndp <= nodes + node_max;  ndp ++ )
+                ndp -> first = (arc*) NULL;
+
+            for ( arc_current = arcs + (2*m-1); arc_current >= arcs; arc_current -- )
+            {
+                arc_num = arc_current - arcs;
+                tail = arc_tail [arc_num];
+                ndp = nodes + tail;
+                /* avg
+                arc_current -> next = ndp -> first;
+                */
+                ndp -> first = arc_current;
+            }
+
+            /* ----------- assigning output values ------------*/
+            *m_ad = m;
+            *n_ad = node_max - node_min + 1;
+            *source_ad = nodes + source;
+            *sink_ad   = nodes + sink;
+            *node_min_ad = node_min;
+            *nodes_ad = nodes + node_min;
+            *arcs_ad = arcs;
+            *cap_ad = acap;
+
+            for ( arc_current = arcs, arc_num = 0;
+                  arc_num < 2*m;
+                  arc_current ++, arc_num ++
+                    )
+                acap [ arc_num ] = arc_current -> resCap;
+
+
+/* free internal memory */
+            free ( arc_first ); free ( arc_tail );
+
+/* Thanks God! all is done */
+            return (0);
+        }
+
 
         };
-};
+}
+
+
+#endif

@@ -325,12 +325,14 @@ namespace Graph::FaspFastFinal {
 //                }
 //            }
 //            std::cout << "DINIC:" << g << " " << nv << std::endl;
-//            auto dinicc = Dinic().runDinic(g, em[aSrc], em[aDst], aWeights, em);
-            auto dinicc = Dinic().runDinic(aGraph, aSrc, aDst, aWeights, stack.capacity());
-            auto hiprc = 
-            auto maxFlow = dinicc;
+//            auto c = Dinic().runDinic(g, em[aSrc], em[aDst], aWeights, em);
+//            auto c = Dinic().runDinic(aGraph, aSrc, aDst, aWeights, stack.capacity());
+            auto c = HIPR().runHipr(aGraph, aSrc, aDst, aWeights, stack.capacity(), parents);
+//            std::cout << "VS: " << dinicc << " " << hiprc << std::endl;
+            auto maxFlow = c;
         return maxFlow;
         }
+
 
         template<template<typename> class GRAPH_TYPE>
         auto getRandomSubgraphNotBlue(Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph, int aNumEdgesToRemove, const EdgesSet<VERTEX_TYPE> &blueEdges) {
