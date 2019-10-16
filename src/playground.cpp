@@ -120,10 +120,9 @@ void test() {
     std::sort(files.begin(), files.end());
     for (auto &graphFile : files) {
         if (!Tools::endsWith(graphFile, ".al")) continue;
-
 //        graphFile = "random-1463-410-533.al"; // 0.1s
 //        graphFile = "random-1833-500-700.al"; // 1s
-//        graphFile = "random-1224-350-700.al"; // 15s
+        graphFile = "random-1224-350-700.al"; // 15s
 
         auto solutionFile{graphFile}; Tools::replace(solutionFile, ".al", ".mfas");
         auto timeoutFile{graphFile}; Tools::replace(timeoutFile, ".al", ".timeout");
@@ -134,7 +133,7 @@ void test() {
             continue;
         }
 
-//        if (limitCnt-- == 0) break;
+        if (limitCnt-- == 0) break;
 
         Graph::Graph g = Graph::IO::graphFromFile<int16_t, Graph::GraphMap>(dir + "/" + graphFile);
         auto c = Graph::Ext::getEdgeProperties<int16_t>(g, 1);

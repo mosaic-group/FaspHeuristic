@@ -825,8 +825,8 @@ template <typename T> T min(const T &a, const T &b) {return ( ( (a) < (b) ) ? a 
 
                 globUpdtFreq = GLOB_UPDT_FREQ;
 
-
-                parse(&n, &m, &nodes, &arcs, &cap, &source, &sink, &nMin, aGraph, aSrc, aDst, aWeights, maxV, mapVertices);
+                node *nodesPtr;
+                parse(&n, &m, &nodes, &arcs, &cap, &source, &sink, &nMin, &nodesPtr, aGraph, aSrc, aDst, aWeights, maxV, mapVertices);
 
 //                printf("c nodes:       %10ld\nc arcs:        %10ld\nc\n", n, m);
 
@@ -949,6 +949,10 @@ template <typename T> T min(const T &a, const T &b) {return ( ( (a) < (b) ) ? a 
 //                    printf("c %ld\n", nNode(j));
 //
 //#endif
+                free(nodesPtr);
+                free(arcs);
+                free(cap);
+                free(buckets);
 
                 return flow;
             }
@@ -956,7 +960,7 @@ template <typename T> T min(const T &a, const T &b) {return ( ( (a) < (b) ) ? a 
 
         template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
         int parse( long    *n_ad, long    *m_ad, node    **nodes_ad, arc     **arcs_ad, unsigned long    **cap_ad,
-                   node    **source_ad, node    **sink_ad, long    *node_min_ad,const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
+                   node    **source_ad, node    **sink_ad, long    *node_min_ad, node **nodesPtr, const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
             const typename Graph<VERTEX_TYPE>::VertexId &aDst, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights,
             int maxV, std::vector<VERTEX_TYPE> &mapVertices) {
 
@@ -1130,6 +1134,7 @@ template <typename T> T min(const T &a, const T &b) {return ( ( (a) < (b) ) ? a 
             *nodes_ad = nodes + node_min;
             *arcs_ad = arcs;
             *cap_ad = acap;
+            *nodesPtr = nodes;
 
             for ( arc_current = arcs, arc_num = 0;
                   arc_num < 2*m;
