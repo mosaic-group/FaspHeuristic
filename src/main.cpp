@@ -35,6 +35,15 @@ void playground(int v) {
 
 [[maybe_unused]] auto PrintAppArgs = [](int argc, char **argv) {std::cout << argc; for (int i = 0; i < argc; ++i) std::cout << " [" << argv[i] << "]"; std::cout << "\n";};
 
+template <typename T>
+auto reqArgHdl(TCLAP::ValueArg<T> &arg) {
+    if (!arg.isSet()) {
+        LOG(ERROR) << "Argument: [" << arg.longID("") << " " << arg.getDescription() << "] is required!";
+        exit(-1);
+    }
+    return arg.getValue();
+};
+
 int main(int argc, char **argv) {
     configureLogger();
 
@@ -68,7 +77,7 @@ int main(int argc, char **argv) {
         TCLAP::ValueArg<int> eMinArg("s", "emin", "min (begin) number of edges in graph", false, 0, "#minNumberOfEdges");
         TCLAP::ValueArg<int> eMaxArg("t", "emax", "max (end) number of edges in graph", false, 0, "#maxNumberOfEdges");
 
-        TCLAP::ValueArg<int> dArg("u", "d", "density of graph - ratio e/v", false, 0, "density");
+        TCLAP::ValueArg<double> dArg("u", "d", "density of graph - ratio e/v", false, 0, "density");
         TCLAP::ValueArg<int> dMinArg("j", "dmin", "min (begin) density of graph - ratio e/v", false, 0, "minDensity");
         TCLAP::ValueArg<int> dMaxArg("k", "dmax", "max (end) density of graph - ratio e/v", false, 0, "maxDensity");
 
@@ -107,13 +116,14 @@ int main(int argc, char **argv) {
 
         cmd.parse( argc, argv );
 
-        auto reqArgHdl = [] (TCLAP::ValueArg<int> &arg) {
-            if (!arg.isSet()) {
-                LOG(ERROR) << "Argument: [" << arg.longID("") << " " << arg.getDescription() << "] is required!";
-                exit(-1);
-            }
-            return arg.getValue();
-        };
+
+//        auto reqArgHdl = [] (TCLAP::ValueArg<int> &arg) {
+//            if (!arg.isSet()) {
+//                LOG(ERROR) << "Argument: [" << arg.longID("") << " " << arg.getDescription() << "] is required!";
+//                exit(-1);
+//            }
+//            return arg.getValue();
+//        };
         auto dirArgHdl = [] (TCLAP::ValueArg<std::string> &arg) {
             return arg.getValue();
         };

@@ -81,7 +81,7 @@ std::string getFilenameOfBenchmarkConstDensityAndFaspGrowingsize(int vmin, int v
 }
 
 
-void benchTimingConstDensityAndFaspGrowingsize(const std::string &outputDir, int minNumOfVertices, int maxNumOfVertices, int density, int fasp, int numOfSteps, int numOfReps, bool logDistribution) {
+void benchTimingConstDensityAndFaspGrowingsize(const std::string &outputDir, int minNumOfVertices, int maxNumOfVertices, double density, int fasp, int numOfSteps, int numOfReps, bool logDistribution) {
 
     LOG(TRACE) << "Running benchTimingConstDensityAndFaspGrowingsize. Params: vmin=" << minNumOfVertices << " vmax=" << maxNumOfVertices << " d=" << density << " f=" << fasp << " steps=" << numOfSteps << " reps=" << numOfReps;
 
