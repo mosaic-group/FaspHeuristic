@@ -623,6 +623,7 @@ namespace Graph::FaspFastFinal {
         int cnt = 1;
         t.start_timer("rand loop");
         while (true) {
+
             std::cout << "----- loop=" << cnt++ << "\n";
             if (path.isAcyclic(g)) break;
 
@@ -691,10 +692,10 @@ namespace Graph::FaspFastFinal {
                                      if (i == 0) tt.stop_timer();
 
                                      if (i == 0) tt.start_timer("5 - Getting edges");
-                                    auto [edgesToRemove, edgesToRemoveGR] = std::pair{edgesSA, edgesGR};
-                                    for (auto &e : edgesToRemove) edgesCnt.try_emplace(e, 0).first->second++;
-                                    for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
-                                    if (i == 0) tt.stop_timer();
+                                     auto [edgesToRemove, edgesToRemoveGR] = std::pair{edgesSA, edgesGR};
+                                     for (auto &e : edgesToRemove) edgesCnt.try_emplace(e, 0).first->second++;
+                                     for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
+                                     if (i == 0) tt.stop_timer();
             }
             t.stop_timer();
 

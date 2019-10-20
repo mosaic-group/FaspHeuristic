@@ -9,10 +9,11 @@
 #include "graph/graphTools.h"
 #include "graph/graphFasp.h"
 #include "graph/graphFaspFast.h"
+#include "graph/graphFaspFastFinal.h"
 
 
 std::string getFilenameOfBenchmarkTiming(int v, int e, int fmin, int fmax, int steps, int reps, bool logDistr) {
-    return std::string("TimingConstWeightVarFaspConstVE") +
+    return std::string("NewTimingConstWeightVarFaspConstVE") +
            "_v_" + std::to_string(v) +
            "_e_" + std::to_string(e) +
            "_f_" + std::to_string(fmin) + "-" + std::to_string(fmax) +
@@ -49,21 +50,20 @@ void benchTimingConstWeightVarFaspConstVE(const std::string &outputDir, int numO
             auto gr = Graph::Fasp::GR(g, c);
             auto grTime = t.stop_timer();
 
-            t.start_timer("delta");
-            auto delta = Graph::FaspFast::deltaFASP(g, c);
-            auto deltaTime = t.stop_timer();
+//            t.start_timer("delta");
+//            auto delta = Graph::FaspFastFinal::  deltaFASP(g, c);
+//            auto deltaTime = t.stop_timer();
 
             t.start_timer("random");
-            auto random = Graph::FaspFast::randomFASP(g, c);
+            auto random = Graph::FaspFastFinal::randomFASP(g, c);
             auto randomTime = t.stop_timer();
 
             f1.put("gr", gr.first);
             f1.put("grTime", grTime);
-            f1.put("delta", delta);
-            f1.put("deltaTime", deltaTime);
             f1.put("random", random);
             f1.put("randomTime", randomTime);
             f1.put("exact", faspSize);
+            f1.put("exactTime", 1);
         }
     }
     f1.save();

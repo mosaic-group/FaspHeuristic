@@ -88,7 +88,7 @@ public:
     }
 };
 
-void test() {
+void test(const char *inputDir) {
 
 //    Graph::Graph<int, Graph::GraphMap> g;
 //    for (int i = 0; i < 3; ++i) g.addVertex(i);
@@ -104,6 +104,10 @@ void test() {
     std::string dir;
     dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/random/";
 //    dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/de-bruijn/";
+//    dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/tournaments";
+
+    if (inputDir != "") dir = inputDir;
+
     FaspSolutionResult fsr;
     Timer<true, false> t(true);
     int limitCnt = 1;
@@ -122,7 +126,8 @@ void test() {
         if (!Tools::endsWith(graphFile, ".al")) continue;
 //        graphFile = "random-1463-410-533.al"; // 0.1s
 //        graphFile = "random-1833-500-700.al"; // 1s
-        graphFile = "random-1224-350-700.al"; // 15s
+//        graphFile = "random-1224-350-700.al"; // 15s
+
 
         auto solutionFile{graphFile}; Tools::replace(solutionFile, ".al", ".mfas");
         auto timeoutFile{graphFile}; Tools::replace(timeoutFile, ".al", ".timeout");
@@ -133,7 +138,7 @@ void test() {
             continue;
         }
 
-        if (limitCnt-- == 0) break;
+//        if (limitCnt-- == 0) break;
 
         Graph::Graph g = Graph::IO::graphFromFile<int16_t, Graph::GraphMap>(dir + "/" + graphFile);
         auto c = Graph::Ext::getEdgeProperties<int16_t>(g, 1);
@@ -228,10 +233,10 @@ void test() {
 //    }
 //}
 
-int main() {
+int main(int argc, char *argv[]) {
     configureLogger();
 //    testBlueEdges();
-    test();
+    test((argc > 1 ? argv[1] : ""));
 
     return 0;
 }
