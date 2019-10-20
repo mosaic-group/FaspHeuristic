@@ -70,10 +70,17 @@ void benchTimingConstWeightVarFaspConstVE(const std::string &outputDir, int numO
 }
 
 
-std::string getFilenameOfBenchmarkConstDensityAndFaspGrowingsize(int vmin, int vmax, int d, int fasp, int steps, int reps, bool logDistr) {
+std::string getFilenameOfBenchmarkConstDensityAndFaspGrowingsize(int vmin, int vmax, double d, int fasp, int steps, int reps, bool logDistr) {
+    std::ostringstream streamObj3;
+    streamObj3 << std::fixed;
+    streamObj3 << std::setprecision(2);
+    streamObj3 << d;
+    std::string dens = streamObj3.str();
+    
+    std::replace( dens.begin(), dens.end(), '.', '_');
     return std::string("TimingConstWeightVarFaspConstVE") +
            "_v_" + std::to_string(vmin) + "-" + std::to_string(vmax) +
-           "_d_" + std::to_string(d) +
+           "_d_" + dens +
            "_f_" + std::to_string(fasp) +
            "_s_" + std::to_string(steps) + (logDistr ? "_log_" : "lin") +
            "_r_" + std::to_string(reps) +
