@@ -76,7 +76,7 @@ std::string getFilenameOfBenchmarkConstDensityAndFaspGrowingsize(int vmin, int v
     streamObj3 << std::setprecision(2);
     streamObj3 << d;
     std::string dens = streamObj3.str();
-    
+
     std::replace( dens.begin(), dens.end(), '.', '_');
     return std::string("TimingConstWeightVarFaspConstVE") +
            "_v_" + std::to_string(vmin) + "-" + std::to_string(vmax) +
