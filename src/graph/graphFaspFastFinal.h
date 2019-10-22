@@ -556,18 +556,18 @@ namespace Graph::FaspFastFinal {
             }
             if (!wasGraphModified) break;
         }
-        if (removedEdgesSA.size() == 0) {
+        if (removedEdgesSA.size() == 0 && relaxSA) {
             auto [maxMcRedEdge, redEdge] = path.getRedEdge(outGraph, aWeights);
-            if (relaxSA && maxMcRedEdge > 0) {
+            if (maxMcRedEdge > 0) {
                 removedEdgesGR.push_back(redEdge);
             }
-            else {
-                auto ed = Fasp::GR(outGraph, aWeights).second;
-                auto n = ed.size();
-                if (n > 0) {
-                    removedEdgesGR.push_back(ed[0]);
-                }
-            }
+//            else {
+//                auto ed = Fasp::GR(outGraph, aWeights).second;
+//                auto n = ed.size();
+//                if (n > 0) {
+//                    removedEdgesGR.push_back(ed[0]);
+//                }
+//            }
         }
         return std::tuple{removedEdgesSA, setOfEdges, removedEdgesGR};
     }

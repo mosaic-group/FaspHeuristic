@@ -15,14 +15,14 @@
 #include "graph/graphTools.h"
 #include "graph/graphFasp.h"
 #include "graph/graphFaspFast.h"
-
+#include "graph/graphFaspFastFinal.h"
 
 std::string getFilenameOfBenchmarkSAFaspWithConstVE(int v, int e, int fmin, int fmax, int steps, int reps, bool logDistr) {
     return std::string("SuperAlgorithmConstWeightVarFaspConstVE") +
            "_v_" + std::to_string(v) +
            "_e_" + std::to_string(e) +
            "_f_" + std::to_string(fmin) + "-" + std::to_string(fmax) +
-           "_s_" + std::to_string(steps) + (logDistr ? "_log_" : "lin") +
+           "_s_" + std::to_string(steps) + (logDistr ? "_log_" : "_lin_") +
            "_r_" + std::to_string(reps) +
            ".h5";
 }
@@ -38,7 +38,7 @@ void benchSuperAlgorithmConstWeightVarFaspConstVE(const std::string &outputDir, 
 
     auto faspValues =  logDistribution ? Tools::logspace(minFasp, maxFasp, numOfSteps) : Tools::linspace(minFasp, maxFasp, numOfSteps);
 
-    Graph::FaspFast::PathHero<int> path(numOfVertices + 1); // maxId included
+    Graph::FaspFastFinal::PathHero<int> path(numOfVertices + 1); // maxId included
 
     for (auto &faspSize : faspValues) {
         for (int r = 0; r < numOfReps; ++r) {
@@ -47,7 +47,8 @@ void benchSuperAlgorithmConstWeightVarFaspConstVE(const std::string &outputDir, 
 
             f1.put("vertices", g.getNumOfVertices());
             f1.put("edges", g.getNumOfEdges());
-            f1.put("sa", Graph::FaspFast::superAlgorithm(g, c, path).size());
+            auto [edgesSA, _, edgesGR] = superAlgorithmBlue(g, c, path, false, false);
+            f1.put("sa", edgesSA.size());
             f1.put("exact", faspSize);
         }
     }
