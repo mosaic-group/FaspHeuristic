@@ -4,7 +4,7 @@ addpath('../matlabHelpers/')
 
 figure(1)
 clf;
-d = []
+d = [];
 d = addData(loadHDF5('./data/DensityVsFaspSizeTime/NewTimingConstWeightVarFaspConstVE_v_300_e_375_f_1-41_s_21_lin__r_100.h5'), d);
 d = addData(loadHDF5('./data/DensityVsFaspSizeTime/NewTimingConstWeightVarFaspConstVE_v_300_e_450_f_1-41_s_21_lin__r_100.h5'), d);
 d = addData(loadHDF5('./data/DensityVsFaspSizeTime/NewTimingConstWeightVarFaspConstVE_v_300_e_525_f_1-41_s_21_lin__r_100.h5'), d);
@@ -24,7 +24,7 @@ d = addData(loadHDF5('./data/DensityVsFaspSizeTime/NewTimingConstWeightVarFaspCo
 
 [X, Y] = meshgrid(xvals, 1.25:0.25:5)
 s = mesh(X,Y,d);
-s.FaceColor = 'interp';
+s.FaceColor = 'flat';
 colorbar
 xlabel('|FASP|')
 ylabel('density = |E| / |V|')
@@ -35,7 +35,7 @@ ylim([1.25 5])
 
 figure(2)
 clf;
-d = []
+d = [];
 d = addData2(loadHDF5('./data/DensityVsVerticesTime/TimingConstWeightVarFaspConstVE_v_1000-4000_d_1_25_f_40_s_7lin_r_100.h5'), d);
 d = addData2(loadHDF5('./data/DensityVsVerticesTime/TimingConstWeightVarFaspConstVE_v_1000-4000_d_1_50_f_40_s_7lin_r_100.h5'), d);
 d = addData2(loadHDF5('./data/DensityVsVerticesTime/TimingConstWeightVarFaspConstVE_v_1000-4000_d_1_75_f_40_s_7lin_r_100.h5'), d);
@@ -51,7 +51,7 @@ d = addData2(loadHDF5('./data/DensityVsVerticesTime/TimingConstWeightVarFaspCons
 
 [X, Y] = meshgrid(xvals, 1.25:0.25:4)
 s = mesh(X,Y,d);
-s.FaceColor = 'interp';
+s.FaceColor = 'flat';
 colorbar
 xlabel('|V|')
 ylabel('density = |E| / |V|')
@@ -62,14 +62,14 @@ ylim([1.25 4])
     function [dd, uniqeValues] = addData2(dataFile, dd)
         data = dataFile.Analysis_data;
         [data, uniqeValues, startIdx] = sortValues(data.vertices, data);
-        dd = [dd; calcMeanOnUniqueValues(data.randomTime, startIdx)];
+        dd = [dd; calcMeanOnUniqueValues(data.random, startIdx)];
     end
 
 
     function [dd, uniqeValues] = addData(dataFile, dd)
         data = dataFile.Analysis_data;
         [data, uniqeValues, startIdx] = sortValues(data.exact, data);
-        dd = [dd; calcMeanOnUniqueValues(data.randomTime, startIdx)];
+        dd = [dd; calcMeanOnUniqueValues(data.random, startIdx)];
     end
 
 

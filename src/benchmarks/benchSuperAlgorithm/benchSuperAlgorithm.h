@@ -16,6 +16,7 @@
 #include "graph/graphFasp.h"
 #include "graph/graphFaspFast.h"
 #include "graph/graphFaspFastFinal.h"
+#include <string>
 
 std::string getFilenameOfBenchmarkSAFaspWithConstVE(int v, int e, int fmin, int fmax, int steps, int reps, bool logDistr) {
     return std::string("SuperAlgorithmConstWeightVarFaspConstVE") +

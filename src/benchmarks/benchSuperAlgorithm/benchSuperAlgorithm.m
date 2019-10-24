@@ -55,8 +55,15 @@ dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_50_e_500_f_1
 data = dataFile.Analysis_data; legendStr=[legendStr, 'v=50 e=500'];
 plotOne(data.exact, [data.sa]);
 
-
-
+dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_500_e_1000_f_1-41_s_41_lin__r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=500 e=1000'];
+plotOne(data.exact, [data.sa]);
+dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_500_e_2000_f_1-41_s_41_lin__r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=500 e=2000'];
+plotOne(data.exact, [data.sa]);
+dataFile = loadHDF5('data/SuperAlgorithmConstWeightVarFaspConstVE_v_500_e_3000_f_1-41_s_41_lin__r_1000.h5');
+data = dataFile.Analysis_data; legendStr=[legendStr, 'v=500 e=2000'];
+plotOne(data.exact, [data.sa]);
 
 l = legend(legendStr);
 l.FontSize = 20;
