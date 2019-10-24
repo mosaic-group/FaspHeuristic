@@ -13,7 +13,7 @@
 #include "graph/graph.h"
 #include "graph/graphTools.h"
 #include "graph/graphFasp.h"
-#include "graph/graphFaspFast.h"
+#include "graph/graphFaspFastFinal.h"
 
 
 std::string getFilenameOfBenchmarkHeuristicsFaspWithConstVE(int v, int e, int fmin, int fmax, int steps, int reps, bool logDistr) {
@@ -37,18 +37,17 @@ void benchHeuristicsConstWeightVarFaspConstVE(const std::string &outputDir, int 
 
     auto faspValues =  logDistribution ? Tools::logspace(minFasp, maxFasp, numOfSteps) : Tools::linspace(minFasp, maxFasp, numOfSteps);
 
-    Graph::FaspFast::PathHero<int> path(numOfVertices + 1); // maxId included
+    Graph::FaspFastFinal::PathHero<int> path(numOfVertices + 1); // maxId included
 
     for (auto &faspSize : faspValues) {
         for (int r = 0; r < numOfReps; ++r) {
             LOG(TRACE) << "--- Progress --- Fasp size=" << faspSize  << "/" << maxFasp << " Reps=" << r + 1 << "/" << numOfReps << "";
-            auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(numOfVertices, faspSize, numOfEdges);
+            auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int>(numOfVertices, faspSize, numOfEdges);
 
             f1.put("vertices", g.getNumOfVertices());
             f1.put("edges", g.getNumOfEdges());
             f1.put("gr", Graph::Fasp::GR(g, c).first);
-            f1.put("delta", Graph::FaspFast::deltaFASP(g, c));
-            f1.put("random", Graph::FaspFast::randomFASP(g, c));
+            f1.put("random", Graph::FaspFastFinal::randomFASP(g, c));
             f1.put("exact", faspSize);
         }
     }

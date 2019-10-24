@@ -30,14 +30,14 @@ namespace Graph::Fasp {
      * @param aWeights input weights
      * @return capacity of cut edges
      */
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
-    static auto GR(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const Ext::EdgeProperties<EDGE_PROP_TYPE, VERTEX_TYPE> &aWeights) {
+    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
+    static auto GR(const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<EDGE_PROP_TYPE, VERTEX_TYPE> &aWeights) {
         assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
 
         typename Graph<VERTEX_TYPE>::Vertices s1, s2;
         s1.reserve(aGraph.getNumOfVertices());
         s2.reserve(aGraph.getNumOfVertices());
-        Graph<VERTEX_TYPE, GRAPH_TYPE> g(aGraph);
+        Graph<VERTEX_TYPE> g(aGraph);
 
         while (true) {
             // Handle sinks
@@ -98,160 +98,7 @@ namespace Graph::Fasp {
             ++idx;
         }
 
-        // Debug printout and check of solution.
-//        LOG(DEBUG) << "FASP(GR)    capacity = " << capacity << " edgeCnt = " << edges.size() << " edgeList = " << edges;
-//        LOG(TRACE) << "Edges with cycles: " << Tools::findEdgesWithCycles(g);
-
         return std::pair{capacity, edges};
-    }
-
-    template<typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
-    void G(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge aEdge) {
-        // Remove outgoing edges from destination and ingoing to source.
-        for (const auto &vo : aGraph.getOutVertices(aEdge.dst)) {
-            aGraph.removeEdge({aEdge.dst, vo});
-        }
-        for (const auto &vi : aGraph.getInVertices(aEdge.src)) {
-            aGraph.removeEdge({vi, aEdge.src});
-        }
-
-        // Remove all vertices which are not accessible from source (regular search) and not accessible from destination
-        // (reverse search - against edge direction). This will leave as with a graph with all paths from srouce to dest.
-        // We need at least 2 vertices: source, destination (source might be equal to destination in case looped edge)
-        // and at least one more vertex to be verified, if less then nothing to be done here
-        auto numOfVertices = aGraph.getNumOfVertices();
-        if (numOfVertices >= 2) {
-            auto A = Tools::depthFirstSearch(aGraph, aEdge.src);
-            auto B = Tools::depthFirstSearch(aGraph, aEdge.dst, true /* reverseSearch */);
-            typename Graph<VERTEX_TYPE>::VerticesSet AandB;
-            std::set_intersection(A.begin(), A.end(), B.begin(), B.end(), std::inserter(AandB, AandB.begin()));
-            const auto &vertices = aGraph.getVertices();
-            if (vertices.size() == AandB.size()) return; // Optimization: V == A∩B
-            for (auto v : vertices) {
-                if (AandB.find(v) == AandB.end()) {
-                    // Removes all vertices which are in set V\(A∩B)
-                    aGraph.removeVertex(v);
-                }
-            }
-        }
-    }
-
-    template<typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
-    void GStar(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge) {
-//        LOG(DEBUG) << aGraph << " " << aEdge;
-        auto vFrom = aEdge.dst;
-        auto vTo = aEdge.src;
-
-        while (true) {
-            // Run cleanup phase 'G' which will remove not reachable edges/vertices.
-            // NOTE: G() will remove aEdge from aGraph
-            G(aGraph, {vFrom, vTo});
-            bool wasGraphModified = false;
-
-            // For every edge in a graph remove:
-            // - all edges 'e' which after removing its input edges does not have a path
-            //   from e.dst to vTo (so this are loops through which we would need to go back)
-            // - all edges 'e' which after removing its output edges does not have a path
-            //   from vFrom to e.src
-            for (const auto &e : aGraph.getEdges()) {
-                bool wasCurrentEdgeRemoved = false;
-                typename Graph<VERTEX_TYPE>::Edges inEdges;
-                for (const auto &v : aGraph.getInVertices(e.src)) {
-                    typename Graph<VERTEX_TYPE>::Edge inEdge{v, e.src};
-                    if (e != inEdge) inEdges.emplace_back(std::move(inEdge));
-                }
-                aGraph.removeEdges(inEdges);
-                if (e.src == e.dst || !Tools::pathExistsDFS(aGraph, e.dst, vTo)) {
-                    aGraph.removeEdge(e);
-                    wasGraphModified = true;
-                    wasCurrentEdgeRemoved = true;
-                }
-                aGraph.addEdges(inEdges);
-
-                if (!wasCurrentEdgeRemoved) {
-                    typename Graph<VERTEX_TYPE>::Edges outEdges;
-                    for (const auto &v : aGraph.getOutVertices(e.dst)) {
-                        typename Graph<VERTEX_TYPE>::Edge outEdge{e.dst, v};
-                        if (e != outEdge) outEdges.emplace_back(std::move(outEdge));
-                    }
-                    aGraph.removeEdges(outEdges);
-                    if (e.src == e.dst || !Tools::pathExistsDFS(aGraph, vFrom, e.src)) {
-                        aGraph.removeEdge(e);
-                        wasGraphModified = true;
-                    }
-                    aGraph.addEdges(outEdges);
-                }
-            }
-
-            if (!wasGraphModified) break;
-        }
-    }
-
-    template<typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
-    auto step2b(Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const Graph<VERTEX_TYPE, GRAPH_TYPE> &aCleanedGraph, const typename Graph<VERTEX_TYPE>::Edge aEdge) {
-        // Remove edge to not find any path going through it
-        aGraph.removeEdge(aEdge);
-
-        typename Graph<VERTEX_TYPE>::Edges S;
-        for (const auto &h : aCleanedGraph.getEdges()) {
-            if (Tools::pathExistsDFS(aGraph, h.dst, h.src)) {
-                S.emplace_back(h);
-            }
-        }
-
-        // revert
-        aGraph.addEdge(aEdge);
-        return S;
-    }
-
-    /**
-     * FASP heuristic - implementation of "A fast and effective heuristic for the feedback arc set problem" Eades, Lin, Smyth 1993
-     * @tparam EDGE_PROP_TYPE type of edge property - must be a signed number with weight of each edge in a graph
-     * @tparam VERTEX_TYPE
-     * @tparam GRAPH_TYPE
-     * @param aGraph input graph
-     * @param aWeights input weights
-     * @return capacity of cut edges
-     */
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
-    static auto superAlgorithm(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const Ext::EdgeProperties<EDGE_PROP_TYPE, VERTEX_TYPE> &aWeights) {
-        assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
-
-        typename Graph<VERTEX_TYPE>::Edges removedEdges;
-
-        std::cout << "superAlgorithm START" << std::endl;
-        auto outGraph{aGraph}; // eventually acyclic graph
-        while(true) {
-            bool wasGraphModified = false;
-
-            for (const auto &e : outGraph.getEdges()) {
-
-                // Optimization, if there is no path back from dst to src, then edge has no cycles.
-                if (!Tools::pathExistsDFS(outGraph, e.dst, e.src)) continue;
-
-                auto workGraph{outGraph};
-                GStar(workGraph, e);
-
-                auto S = step2b(outGraph, workGraph, e);
-
-                workGraph.removeEdges(S);
-                GStar(workGraph, e);
-
-                auto mc = Tools::minStCutFordFulkerson(workGraph, e.dst, e.src, aWeights);
-
-                if (mc >= aWeights.at(e)) {
-                    std::cout << "    REMOVING EDGE: " << e << std::endl;
-                    wasGraphModified = true;
-                    outGraph.removeEdge(e);
-                    removedEdges.emplace_back(e);
-                }
-            }
-
-            if (!wasGraphModified) break;
-        }
-        std::cout << "superAlgorithm DONE" << std::endl;
-
-        return removedEdges;
     }
 
     /**
@@ -267,9 +114,9 @@ namespace Graph::Fasp {
      *
      * @return generated graph
      */
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
+    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
     static auto generateGraphWithKnownFasp(int aNumOfVertices, int aFaspCapacity, int aLowerBondOfNumOfEdges, int aMaxRandomFaspValue = 10, bool aAddRandomFaspWeights = false, bool aOnlyNewEdges = true) {
-        Graph<VERTEX_TYPE, GRAPH_TYPE> g;
+        Graph<VERTEX_TYPE> g;
         Ext::EdgeProperties<EDGE_PROP_TYPE, VERTEX_TYPE> c;
 
         // helper for easier generation of random ints - gives rand int in range [min, max]
@@ -314,7 +161,7 @@ namespace Graph::Fasp {
                 i = randInt(1, aNumOfVertices - 1);
                 j = randInt(0, i - 1);
 
-                typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge newEdge = {verticesShuffle[i], verticesShuffle[j]};
+                typename Graph<VERTEX_TYPE>::Edge newEdge = {verticesShuffle[i], verticesShuffle[j]};
                 if (g.hasEdge(newEdge)) continue; // make sure we add new arc
                 c[newEdge] = 1;
                 g.addEdge(std::move(newEdge));
@@ -330,10 +177,10 @@ namespace Graph::Fasp {
 
 
             // finish the cycle by adding rightward arc(s) from j to i
-            std::vector<typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge> backEdges;
+            std::vector<typename Graph<VERTEX_TYPE>::Edge> backEdges;
             while (j != i) {
                 int k = randInt(j + 1, i);
-                typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge e = {verticesShuffle[j], verticesShuffle[k]};
+                typename Graph<VERTEX_TYPE>::Edge e = {verticesShuffle[j], verticesShuffle[k]};
                 if (aAddRandomFaspWeights) backEdges.push_back(e);
                 if (g.hasEdge(e)) {
                     c.at(e) += 1;
@@ -358,7 +205,7 @@ namespace Graph::Fasp {
             int i = randInt(0, aNumOfVertices - 2);
             int j = randInt(i + 1, aNumOfVertices - 1);
 
-            typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge e = {verticesShuffle[i], verticesShuffle[j]};
+            typename Graph<VERTEX_TYPE>::Edge e = {verticesShuffle[i], verticesShuffle[j]};
             if (g.hasEdge(e)) {
                 if (aOnlyNewEdges) continue;
                 c.at(e) += 1;
@@ -387,10 +234,10 @@ namespace Graph::Fasp {
       *
       * @return generated graph or empty graph in case when input parameters (#V/#E/#FASP) are wrong
      */
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
+    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
     static auto generateGraphWithKnownFaspAndSameWeights(int aNumOfVertices, int aFaspCapacity, int aNumOfEdges) {
         // Create graph and property container for capacity
-        Graph<VERTEX_TYPE, GRAPH_TYPE> g;
+        Graph<VERTEX_TYPE> g;
         Ext::EdgeProperties<EDGE_PROP_TYPE, VERTEX_TYPE> c;
 
         // If requested parameters are wrong, return empty graph.
@@ -428,8 +275,8 @@ namespace Graph::Fasp {
                 int i = randInt(1, aNumOfVertices - 1);
                 int j = randInt(0, i - 1);
 
-                typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge faspEdge = {verticesShuffle[i], verticesShuffle[j]};
-                typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge cycleEdge = {verticesShuffle[j], verticesShuffle[i]};
+                typename Graph<VERTEX_TYPE>::Edge faspEdge = {verticesShuffle[i], verticesShuffle[j]};
+                typename Graph<VERTEX_TYPE>::Edge cycleEdge = {verticesShuffle[j], verticesShuffle[i]};
 
                 if (g.hasEdge(faspEdge)) continue; // make sure we add new arc
 
@@ -462,8 +309,8 @@ namespace Graph::Fasp {
                 int k = randInt(j + 1, i - 1);
 
                 // j =====> k =====> i
-                typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge e1 = {verticesShuffle[j], verticesShuffle[k]};
-                typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge e2 = {verticesShuffle[k], verticesShuffle[i]};
+                typename Graph<VERTEX_TYPE>::Edge e1 = {verticesShuffle[j], verticesShuffle[k]};
+                typename Graph<VERTEX_TYPE>::Edge e2 = {verticesShuffle[k], verticesShuffle[i]};
 
                 if (g.hasEdge(e1) || g.hasEdge(e2)) break; // no luck - give  up
 
@@ -484,7 +331,7 @@ namespace Graph::Fasp {
             int i = randInt(0, aNumOfVertices - 2);
             int j = randInt(i + 1, aNumOfVertices - 1);
 
-            typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge e = {verticesShuffle[i], verticesShuffle[j]};
+            typename Graph<VERTEX_TYPE>::Edge e = {verticesShuffle[i], verticesShuffle[j]};
 
             if (g.hasEdge(e)) continue;
 
@@ -512,7 +359,7 @@ namespace Graph::Fasp {
     template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
     static auto generateGraphWithKnownFaspAndRandWeights(int aNumOfVertices, int aFaspCapacity, int aNumOfEdges) {
         // Create graph and property container for capacity
-        Graph<VERTEX_TYPE, GRAPH_TYPE> g;
+        Graph<VERTEX_TYPE> g;
         Ext::EdgeProperties<EDGE_PROP_TYPE, VERTEX_TYPE> c;
 
         // If requested parameters are wrong, return empty graph.
@@ -550,8 +397,8 @@ namespace Graph::Fasp {
                 int i = randInt(1, aNumOfVertices - 1);
                 int j = randInt(0, i - 1);
 
-                typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge faspEdge = {verticesShuffle[i], verticesShuffle[j]};
-                typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge cycleEdge = {verticesShuffle[j], verticesShuffle[i]};
+                typename Graph<VERTEX_TYPE>::Edge faspEdge = {verticesShuffle[i], verticesShuffle[j]};
+                typename Graph<VERTEX_TYPE>::Edge cycleEdge = {verticesShuffle[j], verticesShuffle[i]};
 
                 if (g.hasEdge(faspEdge)) continue; // make sure we add new arc
 
@@ -584,8 +431,8 @@ namespace Graph::Fasp {
                 int k = randInt(j + 1, i - 1);
 
                 // j =====> k =====> i
-                typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge e1 = {verticesShuffle[j], verticesShuffle[k]};
-                typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge e2 = {verticesShuffle[k], verticesShuffle[i]};
+                typename Graph<VERTEX_TYPE>::Edge e1 = {verticesShuffle[j], verticesShuffle[k]};
+                typename Graph<VERTEX_TYPE>::Edge e2 = {verticesShuffle[k], verticesShuffle[i]};
 
                 if (g.hasEdge(e1) || g.hasEdge(e2)) break; // no luck - give  up
 
@@ -606,7 +453,7 @@ namespace Graph::Fasp {
             int i = randInt(0, aNumOfVertices - 2);
             int j = randInt(i + 1, aNumOfVertices - 1);
 
-            typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge e = {verticesShuffle[i], verticesShuffle[j]};
+            typename Graph<VERTEX_TYPE>::Edge e = {verticesShuffle[i], verticesShuffle[j]};
 
             if (g.hasEdge(e)) continue;
 

@@ -7,6 +7,7 @@
 
 
 #include "graph.h"
+#include "graphExt.h"
 #include <dirent.h>
 
 namespace Graph::IO {
@@ -19,10 +20,10 @@ namespace Graph::IO {
     * @param aFileName inputFileName
     * @return created graph
     */
-    template<typename VERTEX_TYPE = uint16_t, template<typename> class GRAPH_TYPE = GraphMap>
-    static Graph<VERTEX_TYPE, GRAPH_TYPE> graphFromFile(const std::string &aFileName) {
+    template<typename VERTEX_TYPE = uint16_t>
+    static Graph<VERTEX_TYPE> graphFromFile(const std::string &aFileName) {
         std::ifstream infile(aFileName);
-        Graph<VERTEX_TYPE, GRAPH_TYPE> graph;
+        Graph<VERTEX_TYPE> graph;
 
         std::string line;
         while (std::getline(infile, line)) {
@@ -47,8 +48,8 @@ namespace Graph::IO {
         return graph;
     }
 
-    template<typename VERTEX_TYPE = uint16_t, template<typename> class GRAPH_TYPE = GraphMap>
-    void graphToFile(const std::string &aFileName, const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
+    template<typename VERTEX_TYPE = uint16_t>
+    void graphToFile(const std::string &aFileName, const Graph<VERTEX_TYPE> &aGraph) {
         std::ofstream outfile(aFileName, std::ios_base::out); // overwrite output file if exists
 
         // In a case of map implementation (or any other using unordered containter) output files  look
@@ -131,8 +132,8 @@ namespace Graph::IO {
         return files;
     }
 
-    template<typename VERTEX_TYPE = uint16_t, template<typename> class GRAPH_TYPE = GraphMap, typename EDGE_PROP_TYPE>
-    void graphWithWeightsToFile(const std::string &aFileName, const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
+    template<typename VERTEX_TYPE = uint16_t, typename EDGE_PROP_TYPE>
+    void graphWithWeightsToFile(const std::string &aFileName, const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
         std::ofstream outfile(aFileName, std::ios_base::out); // overwrite output file if exists
 
         // In a case of map implementation (or any other using unordered containter) output files  look
@@ -163,10 +164,10 @@ namespace Graph::IO {
 * @param aFileName inputFileName
 * @return created graph
 */
-    template<typename VERTEX_TYPE = uint16_t, template<typename> class GRAPH_TYPE = GraphMap, typename EDGE_PROP_TYPE>
+    template<typename VERTEX_TYPE = uint16_t, typename EDGE_PROP_TYPE>
     static auto graphWithWeightsFromFile(const std::string &aFileName) {
         std::ifstream infile(aFileName);
-        Graph<VERTEX_TYPE, GRAPH_TYPE> graph;
+        Graph<VERTEX_TYPE> graph;
         Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> weights;
         std::string line;
         while (std::getline(infile, line)) {

@@ -5,7 +5,6 @@
 INITIALIZE_EASYLOGGINGPP
 
 #include "graph/graph.h"
-#include "graph/graphFaspFast2.h"
 #include "graph/graphIO.h"
 #include "hdf5/dataHdf5.h"
 #include "graph/graphFaspFastFinal.h"
@@ -106,11 +105,11 @@ void test(const char *inputDir) {
 //    dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/de-bruijn/";
 //    dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/tournaments";
 
-    if (inputDir != "") dir = inputDir;
+    if (strcmp(inputDir, "") == 0) dir = inputDir;
 
     FaspSolutionResult fsr;
     Timer<true, false> t(true);
-    int limitCnt = 1;
+    [[maybe_unused]] int limitCnt = 1;
     int cnt = 0;
 
 
@@ -140,7 +139,7 @@ void test(const char *inputDir) {
 
 //        if (limitCnt-- == 0) break;
 
-        Graph::Graph g = Graph::IO::graphFromFile<int16_t, Graph::GraphMap>(dir + "/" + graphFile);
+        Graph::Graph g = Graph::IO::graphFromFile<int16_t>(dir + "/" + graphFile);
         auto c = Graph::Ext::getEdgeProperties<int16_t>(g, 1);
         Graph::IO::graphToFile("/tmp/myGraph.txt", g);
         int solution = Graph::IO::solutionFromFile(dir + "/" + solutionFile);

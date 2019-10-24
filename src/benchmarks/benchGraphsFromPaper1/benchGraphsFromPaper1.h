@@ -13,7 +13,7 @@
 #include "graph/graph.h"
 #include "graph/graphTools.h"
 #include "graph/graphFasp.h"
-#include "graph/graphFaspFast.h"
+#include "graph/graphFaspFastFinal.h"
 #include <regex>
 
 /*
@@ -54,10 +54,10 @@ void benchGraphsFromPaper1(const std::string &outputDir, const std::string &inpu
             correct = std::stoi(num);
         }
 
-        Graph::Graph gv = Graph::IO::graphFromFile<int, Graph::GraphMap>(inputDir + "/" + file);
+        Graph::Graph gv = Graph::IO::graphFromFile<int>(inputDir + "/" + file);
         auto c = Graph::Ext::getEdgeProperties<int>(gv, 1);
 
-        int faspCapacity = Graph::FaspFast2::randomFASP_sequential(gv, c);
+        int faspCapacity = Graph::FaspFastFinal::randomFASP(gv, c);
         f1.put("random", faspCapacity);
         f1.put("exact", correct);
 

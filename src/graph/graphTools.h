@@ -25,9 +25,9 @@ namespace Graph::Tools {
      * @param aSrc start vertex
      * @return sorted set of vertices
      */
-    template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
+    template<typename VERTEX_TYPE>
     static typename Graph<VERTEX_TYPE>::VerticesSet
-    depthFirstSearch(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
+    depthFirstSearch(const Graph<VERTEX_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
                      bool aReversedSearch = false) {
 
         std::size_t size = aGraph.getNumOfVertices();
@@ -53,8 +53,8 @@ namespace Graph::Tools {
         return visited;
     }
 
-    template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
-    static bool pathExistsDFS(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph,
+    template<typename VERTEX_TYPE>
+    static bool pathExistsDFS(const Graph<VERTEX_TYPE> &aGraph,
                               const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
                               const typename Graph<VERTEX_TYPE>::VertexId &aDst,
                               bool aReversedSearch = false) {
@@ -92,9 +92,9 @@ namespace Graph::Tools {
      * @param aGraph input graph
      * @return container with edges
      */
-    template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
+    template<typename VERTEX_TYPE>
     static typename Graph<VERTEX_TYPE>::Edges
-    findEdgesWithCycles(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
+    findEdgesWithCycles(const Graph<VERTEX_TYPE> &aGraph) {
         typename Graph<VERTEX_TYPE>::Edges edges;
         for (const auto &e : aGraph.getEdges()) {
             if (pathExistsDFS(aGraph, e.dst, e.src)) {
@@ -109,8 +109,8 @@ namespace Graph::Tools {
      * @param aGraph input graph
      * @return true if there are still cycles
     */
-    template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
-    static bool isAcyclic(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
+    template<typename VERTEX_TYPE>
+    static bool isAcyclic(const Graph<VERTEX_TYPE> &aGraph) {
         for (const auto &e : aGraph.getEdges()) {
             if (pathExistsDFS(aGraph, e.dst, e.src)) return false;
         }
@@ -118,8 +118,8 @@ namespace Graph::Tools {
         return true;
     }
 
-    template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE, typename EDGE_PROP_TYPE>
-    static auto findPathWithPositiveCapacity(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph,
+    template<typename VERTEX_TYPE, typename EDGE_PROP_TYPE>
+    static auto findPathWithPositiveCapacity(const Graph<VERTEX_TYPE> &aGraph,
                                              const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
                                              const typename Graph<VERTEX_TYPE>::VertexId &aDst,
                                              const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
@@ -175,8 +175,8 @@ namespace Graph::Tools {
      * @param aWeights weights of edges
      * @return max flow value, graph and capacities after algorithm ends
      */
-    template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE, typename EDGE_PROP_TYPE>
-    static auto minStCutFordFulkersonBase(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph,
+    template<typename VERTEX_TYPE, typename EDGE_PROP_TYPE>
+    static auto minStCutFordFulkersonBase(const Graph<VERTEX_TYPE> &aGraph,
                                           const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
                                           const typename Graph<VERTEX_TYPE>::VertexId &aDst,
                                           const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
@@ -225,8 +225,8 @@ namespace Graph::Tools {
      * @param aWeights weights of edges
      * @return max flow value
      */
-    template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE, typename EDGE_PROP_TYPE>
-    static auto minStCutFordFulkerson(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph,
+    template<typename VERTEX_TYPE, typename EDGE_PROP_TYPE>
+    static auto minStCutFordFulkerson(const Graph<VERTEX_TYPE> &aGraph,
                                       const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
                                       const typename Graph<VERTEX_TYPE>::VertexId &aDst,
                                       const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
@@ -243,8 +243,8 @@ namespace Graph::Tools {
      * @param aWeights weights of edges
      * @return max flow value, set of s-t cut edges
      */
-    template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE, typename EDGE_PROP_TYPE>
-    static auto minStCutFordFulkersonEdges(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph,
+    template<typename VERTEX_TYPE, typename EDGE_PROP_TYPE>
+    static auto minStCutFordFulkersonEdges(const Graph<VERTEX_TYPE> &aGraph,
                                            const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
                                            const typename Graph<VERTEX_TYPE>::VertexId &aDst,
                                            const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
@@ -272,8 +272,8 @@ namespace Graph::Tools {
      * TODO: Edges with cycles need to be found only first time, then the only cycles left might be a part of left edges only.
      *       So we could speedup procedure to search only within edgesWithCycles
      */
-    template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
-    static auto getRandomSubgraph(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, int aNumEdgesToRemove) {
+    template<typename VERTEX_TYPE>
+    static auto getRandomSubgraph(const Graph<VERTEX_TYPE> &aGraph, int aNumEdgesToRemove) {
         auto g{aGraph};
         int edgesRemovedCnt = 0;
         typename Graph<VERTEX_TYPE>::Edges edges;
@@ -304,9 +304,9 @@ namespace Graph::Tools {
      * @param aProbabilityOfEdge probability in G(n,p) Erdos-Renyi model
      * @return generated graph
      */
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
+    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
     static auto generateErdosRenyiGraph(int aNumOfVertices, float aProbabilityOfEdge) {
-        Graph<VERTEX_TYPE, GRAPH_TYPE> g;
+        Graph<VERTEX_TYPE> g;
         Ext::EdgeProperties<EDGE_PROP_TYPE, VERTEX_TYPE> c;
 
         // add vertices in range: 0..aNumOfVertices-1
@@ -321,13 +321,13 @@ namespace Graph::Tools {
         // Go through all possible arcs in graph and check if should be generated
         for (int i = 0; i < aNumOfVertices - 1; ++i) {
             for (int j = i + 1; j < aNumOfVertices; ++j) {
-                typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge e1 = {i, j};
+                typename Graph<VERTEX_TYPE>::Edge e1 = {i, j};
                 if (std::uniform_real_distribution<>(0.0, 1.0)(mt) < aProbabilityOfEdge) {
                     c[e1] = 1;
                     g.addEdge(std::move(e1));
                     ++numOfArcs;
                 }
-                typename Graph<VERTEX_TYPE, GRAPH_TYPE>::Edge e2 = {j, i};
+                typename Graph<VERTEX_TYPE>::Edge e2 = {j, i};
                 if (std::uniform_real_distribution<>(0.0, 1.0)(mt) < aProbabilityOfEdge) {
                     c[e2] = 1;
                     g.addEdge(std::move(e2));
@@ -341,8 +341,8 @@ namespace Graph::Tools {
     }
 
     // https://en.wikipedia.org/wiki/Tarjan%27s_strongly_connected_components_algorithm
-    template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
-    static auto stronglyConnectedComponents(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
+    template<typename VERTEX_TYPE>
+    static auto stronglyConnectedComponents(const Graph<VERTEX_TYPE> &aGraph) {
         int index_counter = 0;
         const int numOfV = aGraph.getNumOfVertices();
         Ext::VertexProperties<VERTEX_TYPE, VERTEX_TYPE> lowLinks; lowLinks.reserve(numOfV);
@@ -398,8 +398,8 @@ namespace Graph::Tools {
     }
 
     // https://en.wikipedia.org/wiki/Tarjan%27s_strongly_connected_components_algorithm
-    template<typename VERTEX_TYPE, template<typename> class GRAPH_TYPE>
-    static auto stronglyConnectedComponents2(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
+    template<typename VERTEX_TYPE>
+    static auto stronglyConnectedComponents2(const Graph<VERTEX_TYPE> &aGraph) {
         auto vertices = aGraph.getVertices();
         auto maxId = std::max_element(vertices.begin(), vertices.end());
         auto maxV = (maxId == vertices.end() ? 0 : *maxId) + 1;
@@ -494,8 +494,8 @@ namespace Graph::Tools {
      * @param max maximum weight value
      * @return container with random weights for every edge
      */
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
-    auto getRandomWeights(const Graph<VERTEX_TYPE, GRAPH_TYPE> &graph, const EDGE_PROP_TYPE min, const EDGE_PROP_TYPE max) {
+    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
+    auto getRandomWeights(const Graph<VERTEX_TYPE> &graph, const EDGE_PROP_TYPE min, const EDGE_PROP_TYPE max) {
         // helper for easier generation of random values in range [min, max]
         auto randInt = [](EDGE_PROP_TYPE min, EDGE_PROP_TYPE max) -> EDGE_PROP_TYPE {
             static std::mt19937 mt(std::random_device{}());

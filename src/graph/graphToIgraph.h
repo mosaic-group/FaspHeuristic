@@ -10,8 +10,8 @@
 #include <iostream>
 
 
-template<typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
-void printIGraphCommands(const Graph::Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
+template<typename VERTEX_TYPE>
+void printIGraphCommands(const Graph::Graph<VERTEX_TYPE> &aGraph) {
     std::cout << "g = igraph.Graph(directed=True)" << std::endl;
     std::string vertexLabel = "g.vs[\"label\"] = [";
     std::string vertexColor = "g.vs[\"color\"] = [";

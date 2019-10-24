@@ -33,8 +33,8 @@ namespace Graph::Ext {
      * @param aInitValue init value for property
      * @return map wiht K: Edge and V: property of type T
      */
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
-    auto getEdgeProperties(const Graph<VERTEX_TYPE, GRAPH_TYPE> &graph, const EDGE_PROP_TYPE &aInitValue) {
+    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
+    auto getEdgeProperties(const Graph<VERTEX_TYPE> &graph, const EDGE_PROP_TYPE &aInitValue) {
         EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> p;
         for (const auto &srcVertex : graph.getVertices()) {
             for (const auto &dstVertex : graph.getOutVertices(srcVertex)) {
@@ -50,8 +50,8 @@ namespace Graph::Ext {
      * @param aInitValue init value for property
      * @return map wiht K: VertexId and V: property of type T
      */
-    template<typename VERTEX_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
-    auto getVertexProperties(const Graph<VERTEX_TYPE, GRAPH_TYPE> &graph, const VERTEX_PROP_TYPE &aInitValue = VERTEX_PROP_TYPE()) {
+    template<typename VERTEX_PROP_TYPE, typename VERTEX_TYPE>
+    auto getVertexProperties(const Graph<VERTEX_TYPE> &graph, const VERTEX_PROP_TYPE &aInitValue = VERTEX_PROP_TYPE()) {
         VertexProperties <VERTEX_TYPE, VERTEX_PROP_TYPE> p;
         for (auto &v : graph.getVertices()) p.emplace(v, aInitValue);
         return p;

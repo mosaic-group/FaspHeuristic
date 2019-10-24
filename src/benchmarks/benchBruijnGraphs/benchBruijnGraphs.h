@@ -10,10 +10,8 @@
 #include "graph/graph.h"
 #include "graph/graphTools.h"
 #include "graph/graphFasp.h"
-#include "graph/graphFaspFast.h"
-#include "graph/graphIO.h"
-#include "graph/graphFaspFast2.h"
 #include "graph/graphFaspFastFinal.h"
+#include "graph/graphIO.h"
 
 
 void benchBruijnGraphs(const std::string &outputDir) {
@@ -27,12 +25,12 @@ void benchBruijnGraphs(const std::string &outputDir) {
     std::cout << " ======================= Processing [" << file << "] " << std::endl;
 
         std::string inF = "/Users/gonciarz/ws/FaspRemote/src/benchmarks/benchErdosRenyiGraphs/data/erdos_renyi_n_75_c_9_seed_43.edges";
-        Graph::Graph gg = Graph::IO::graphFromFile<int, Graph::GraphMap>(inF);
+        Graph::Graph gg = Graph::IO::graphFromFile<int>(inF);
         std::cout << "INF: " << gg << std::endl;
 
-        Graph::IO::graphToFile<int, Graph::GraphMap>("/tmp/graph.txt", gg);
+        Graph::IO::graphToFile<int>("/tmp/graph.txt", gg);
         std::string outF = "/tmp/graph.txt";
-        Graph::Graph gf = Graph::IO::graphFromFile<int, Graph::GraphMap>(outF);
+        Graph::Graph gf = Graph::IO::graphFromFile<int>(outF);
         std::cout << gf << std::endl;
 
         auto g{gf};
@@ -45,9 +43,6 @@ void benchBruijnGraphs(const std::string &outputDir) {
 
         t.start_timer("final");
         Graph::FaspFastFinal::randomFASP(g, c);
-        t.stop_timer();
-        t.start_timer("old");
-        Graph::FaspFast2::randomFASP_blueEdges(g2, c2);
         t.stop_timer();
 }
 

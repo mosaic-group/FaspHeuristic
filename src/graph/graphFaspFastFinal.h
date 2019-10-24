@@ -10,7 +10,6 @@
 #include <future>
 #include <cstddef>
 #include <vector>
-#include "graph/dinic3rdParty.h"
 #include "graph/hipr/hi_pr.h"
 
 namespace Graph::FaspFastFinal {
@@ -49,8 +48,8 @@ namespace Graph::FaspFastFinal {
         /**
          * @return true if path from src to dst exists
          */
-        template<bool FORWARD_SEARCH=true, template<typename> class GRAPH_TYPE>
-        bool pathExistsDFS(const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph,
+        template<bool FORWARD_SEARCH=true>
+        bool pathExistsDFS(const Graph <VERTEX_TYPE> &aGraph,
                            const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
                            const typename Graph<VERTEX_TYPE>::VertexId &aDst,
                            bool aReversedSearch = false) {
@@ -79,14 +78,12 @@ namespace Graph::FaspFastFinal {
             return false;
         }
 
-
         /**
          * Finds all edges with cycles, that is if we have edge a->b there is a path from b to a
          * @param aGraph input graph
          * @return true if there are still cycles
          */
-        template<template<typename> class GRAPH_TYPE>
-        bool isAcyclic(const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
+        bool isAcyclic(const Graph <VERTEX_TYPE> &aGraph) {
             for (const auto &e : aGraph.getEdges()) {
                 if (pathExistsDFS(aGraph, e.dst, e.src)) return false;
             }
@@ -94,14 +91,12 @@ namespace Graph::FaspFastFinal {
             return true;
         }
 
-
         /**
          * Finds all edges with cycles, that is if we have edge a->b there is a path from b to a
          * @param aGraph input graph
          * @return container with edges
          */
-        template<template<typename> class GRAPH_TYPE>
-        auto findEdgesWithCycles(const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
+        auto findEdgesWithCycles(const Graph <VERTEX_TYPE> &aGraph) {
             typename Graph<VERTEX_TYPE>::Edges edges;
             for (const auto &e : aGraph.getEdges()) {
                 if (pathExistsDFS(aGraph, e.dst, e.src)) {
@@ -111,8 +106,8 @@ namespace Graph::FaspFastFinal {
             return edges;
         }
 
-        template<template<typename> class GRAPH_TYPE, typename EDGE_PROP_TYPE>
-        auto getRedEdge(Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
+        template<typename EDGE_PROP_TYPE>
+        auto getRedEdge(Graph <VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
             using Edge = typename Graph<VERTEX_TYPE>::Edge;
             Edge redEdge{};
             int maxMcRedEdge = 0;
@@ -154,8 +149,7 @@ namespace Graph::FaspFastFinal {
             return std::pair{maxMcRedEdge, redEdge};
         }
 
-        template<template<typename> class GRAPH_TYPE>
-        bool GStarBlue(Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge, EdgesSet<VERTEX_TYPE> &aBlueEdges) {
+        bool GStarBlue(Graph <VERTEX_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge, EdgesSet<VERTEX_TYPE> &aBlueEdges) {
             // 1. Remove an edge of interest 'aEdge' and find all connected components bigger than 1
             //    They consist from edges which are cycles not belonging only to aEdge so remove them.
             aGraph.removeEdge(aEdge);
@@ -193,115 +187,12 @@ namespace Graph::FaspFastFinal {
         }
 
         /**
-         * Finds path with positive (>0) capacity from src to dst
-         */
-        template<template<typename> class GRAPH_TYPE, typename EDGE_PROP_TYPE>
-        auto findPathWithPositiveCapacity(const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph,
-                                          const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
-                                          const typename Graph<VERTEX_TYPE>::VertexId &aDst,
-                                          const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
-
-            path.clear();
-            if (aGraph.hasVertex(aSrc) && aGraph.hasVertex(aDst)) {
-                if (aSrc == aDst) {
-                    path.emplace_back(aSrc);
-                    return true;
-                }
-
-                iVisited.clearAll();
-
-                stack.clear();
-                stack.push(aSrc);
-                iVisited.set(aSrc);
-
-                while (!stack.empty()) {
-                    auto currentVertex = stack.pop();
-                    if (currentVertex == aDst) {
-                        // Traverse path back to source and build the path
-                        path.emplace_back(currentVertex);
-                        while (true) {
-                            currentVertex = parents[currentVertex];
-                            path.emplace_back(currentVertex);
-                            if (currentVertex == aSrc) break;
-                        }
-                        // Finally reverse it to have path from src to dst
-                        std::reverse(path.begin(), path.end());
-                        return true;
-                    }
-
-                    const auto &vertices = aGraph.getOutVertices(currentVertex);
-                    for (const auto &v : vertices) {
-                        if (iVisited.test(v) == 0 && aWeights.at({currentVertex, v}) > 0) {
-                            parents[v] = currentVertex;
-                            stack.push(v);
-                            iVisited.set(v);
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        /**
-         * Calculate minimum s-t cut via Ford-Fulkerson max flow - min cut metaGraphWorker
-         * @param aGraph input graph
-         * @param aSrc source vertex
-         * @param aDst destination vertex
-         * @param aWeights weights of edges
-         * @return max flow value, graph and capacities after algorithm ends
-         */
-        template<template<typename> class GRAPH_TYPE, typename EDGE_PROP_TYPE>
-        auto minStCutFordFulkersonBase(const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph,
-                                       const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
-                                       const typename Graph<VERTEX_TYPE>::VertexId &aDst,
-                                       const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
-            assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
-
-            // Copy graph and weights - they will be modified
-            auto g{aGraph};
-            auto c{aWeights};
-
-            // Add edges in backwerd direction if not yet exists
-            for (const auto &e : g.getEdges()) {
-                auto backwardEdge = typename Graph<VERTEX_TYPE>::Edge{e.dst, e.src};
-                if (!g.hasEdge(backwardEdge)) {
-                    g.addEdge(backwardEdge);
-                    c.insert_or_assign(std::move(backwardEdge), 0);
-                }
-            }
-
-            EDGE_PROP_TYPE maxFlow = 0;
-            int cnt = 0;
-            while (true) {
-                // Find new path from source to sink, if not found than full capacity of network is reached
-                auto pathExists = findPathWithPositiveCapacity(g, aSrc, aDst, c);
-                if (!pathExists) break;
-                // Find edge wiht minimum capacity left
-                EDGE_PROP_TYPE pathFlow = std::numeric_limits<EDGE_PROP_TYPE>::max();
-                for (std::size_t i = 0; i < path.size() - 1; ++i) {
-                    pathFlow = std::min(pathFlow, c[{path[i], path[i + 1]}]);
-                }
-
-                // Update max flow and capacities of edges on the found path
-                maxFlow += pathFlow;
-                for (std::size_t i = 0; i < path.size() - 1; ++i) {
-                    c.at({path[i], path[i + 1]}) -= pathFlow;
-                    c.at({path[i + 1], path[i]}) += pathFlow;
-                }
-
-                if (++cnt > 10000) throw MinCutFailed();
-            }
-
-            return std::tuple{maxFlow, g, c};
-        }
-
-        /**
          * Implementation of maximum flow / min cut algorithm:
          * https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm
          * @return maxFlow value
          */
-        template<template<typename> class GRAPH_TYPE, typename EDGE_PROP_TYPE>
-        auto minStCutFordFulkerson(const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph,
+        template<typename EDGE_PROP_TYPE>
+        auto minStCutFordFulkerson(const Graph <VERTEX_TYPE> &aGraph,
                                    const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
                                    const typename Graph<VERTEX_TYPE>::VertexId &aDst,
                                    const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
@@ -334,8 +225,7 @@ namespace Graph::FaspFastFinal {
         }
 
 
-        template<template<typename> class GRAPH_TYPE>
-        auto getRandomSubgraphNotBlue(Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph, int aNumEdgesToRemove, const EdgesSet<VERTEX_TYPE> &blueEdges) {
+        auto getRandomSubgraphNotBlue(Graph <VERTEX_TYPE> &aGraph, int aNumEdgesToRemove, const EdgesSet<VERTEX_TYPE> &blueEdges) {
             int edgesRemovedCnt = 0;
             typename Graph<VERTEX_TYPE>::Edge lastRndEdge{};
             while (edgesRemovedCnt < aNumEdgesToRemove) {
@@ -364,8 +254,7 @@ namespace Graph::FaspFastFinal {
         /**
          * Finds path from src to dst
          */
-        template<template<typename> class GRAPH_TYPE>
-        auto findPathDfs(const Graph <VERTEX_TYPE, GRAPH_TYPE> &aGraph,
+        auto findPathDfs(const Graph <VERTEX_TYPE> &aGraph,
                          const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
                          const typename Graph<VERTEX_TYPE>::VertexId &aDst) {
 
@@ -410,20 +299,7 @@ namespace Graph::FaspFastFinal {
             return false;
         }
 
-//        struct R {
-//            VERTEX_TYPE v;
-//            VERTEX_TYPE idx;
-//            bool init;
-//
-//            R(VERTEX_TYPE aV, VERTEX_TYPE aIdx, bool aInit) : v(aV), idx(aIdx), init(aInit) {}
-//
-//            friend std::ostream &operator<<(std::ostream &os, const R &obj) {
-//                os << "R{" << obj.v << ", " << obj.idx << ", " << (obj.init ? "true" : "false") << "}";
-//                return os;
-//            }
-//        };
-        template<template<typename> class GRAPH_TYPE>
-        auto stronglyConnectedComponents2(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph) {
+        auto stronglyConnectedComponents2(const Graph<VERTEX_TYPE> &aGraph) {
             iVisited.clearAll();
             auto &sh = iVisited;
             stack.clear();
@@ -513,8 +389,8 @@ namespace Graph::FaspFastFinal {
 
     // ------------------------------------------------------------------------
 
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
-    static auto superAlgorithmBlue(Graph<VERTEX_TYPE, GRAPH_TYPE> &outGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, PathHero<VERTEX_TYPE> &path, bool aUseWeights = false, bool relaxSA = false) {
+    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
+    static auto superAlgorithmBlue(Graph<VERTEX_TYPE> &outGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, PathHero<VERTEX_TYPE> &path, bool aUseWeights = false, bool relaxSA = false) {
         assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
         typename Graph<VERTEX_TYPE>::Edges removedEdgesSA;
         typename Graph<VERTEX_TYPE>::Edges removedEdgesGR;
@@ -575,10 +451,10 @@ namespace Graph::FaspFastFinal {
     /**
      * Working original idea of how random FASP heuristic should work
      */
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, template <typename> class GRAPH_TYPE>
-    static auto randomFASP(const Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
+    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
+    static auto randomFASP(const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
 
-        auto cleanGraphWithScc = [](Graph<VERTEX_TYPE, GRAPH_TYPE> &aGraph, PathHero<VERTEX_TYPE> &path) {
+        auto cleanGraphWithScc = [](Graph<VERTEX_TYPE> &aGraph, PathHero<VERTEX_TYPE> &path) {
             int cnt1 = 0, cntBig = 0;
             auto scc = path.stronglyConnectedComponents2(aGraph);
             for (const auto &s : scc) {
@@ -738,6 +614,5 @@ namespace Graph::FaspFastFinal {
         return capacity;
     }
 }
-
 
 #endif //FASPHEURISTIC_GRAPHFASPFASTFINAL_H

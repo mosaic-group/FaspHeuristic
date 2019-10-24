@@ -8,7 +8,6 @@
 #include "graph/graph.h"
 #include "graph/graphTools.h"
 #include "graph/graphFasp.h"
-#include "graph/graphFaspFast.h"
 #include "graph/graphFaspFastFinal.h"
 
 
@@ -33,7 +32,6 @@ void benchTimingConstWeightVarFaspConstVE(const std::string &outputDir, int numO
 
     auto faspValues =  logDistribution ? Tools::logspace(minFasp, maxFasp, numOfSteps) : Tools::linspace(minFasp, maxFasp, numOfSteps);
 
-    Graph::FaspFast::PathHero<int> path(numOfVertices + 1); // maxId included
 
     Timer<true, false> t("benchTiming");
 
@@ -41,7 +39,7 @@ void benchTimingConstWeightVarFaspConstVE(const std::string &outputDir, int numO
         Timer<true, false> t("");
         for (int r = 0; r < numOfReps; ++r) {
             LOG(TRACE) << "--- Progress --- Fasp size=" << faspSize  << "/" << maxFasp << " Reps=" << r + 1 << "/" << numOfReps << "";
-            auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(numOfVertices, faspSize, numOfEdges);
+            auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int>(numOfVertices, faspSize, numOfEdges);
 
             f1.put("vertices", g.getNumOfVertices());
             f1.put("edges", g.getNumOfEdges());
@@ -104,7 +102,7 @@ void benchTimingConstDensityAndFaspGrowingsize(const std::string &outputDir, int
         Timer<true, false> t("");
         for (int r = 0; r < numOfReps; ++r) {
             LOG(TRACE) << "--- Progress --- V size=" << cv  << "/" << maxNumOfVertices << " Reps=" << r + 1 << "/" << numOfReps << "";
-            auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(cv, fasp, cv * density);
+            auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int>(cv, fasp, cv * density);
 
             f1.put("vertices", g.getNumOfVertices());
             f1.put("edges", g.getNumOfEdges());
