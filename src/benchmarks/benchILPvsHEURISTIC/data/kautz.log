@@ -1,0 +1,3432 @@
+1 ======================= Processing [kautz-0001-2-1-6-12.al] {Graph V/E: 6/12}
+Exact solution=5 Time=0.012
+{Graph V/E: 6/12}
+Max V = 6
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+----- loop=3
+[2019-10-17 13:07:11,6, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 5 edgeCnt = 5 edgeList = [{6, 4}, {3, 2}, {1, 4}, {2, 5}, {3, 1}]
+[2019-10-17 13:07:11,6, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:07:11,6, timer.h:61] NO_NAME [--------RANDOM new] = 0.000904805
+[2019-10-17 13:07:11,6, timer.h:61] NO_NAME [gr] = 7.421e-06
+===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=1     #RUNS=1
+2 ======================= Processing [kautz-0002-2-2-12-24.al] {Graph V/E: 12/24}
+Exact solution=8 Time=0.016
+{Graph V/E: 12/24}
+Max V = 12
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+----- loop=3
+SCC  #1=0 #BIG=1
+56
+----- loop=4
+SCC  #1=0 #BIG=1
+56
+----- loop=5
+SCC  #1=1 #BIG=1
+56
+----- loop=6
+[2019-10-17 13:07:11,7, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 8 edgeCnt = 8 edgeList = [{7, 10}, {2, 8}, {9, 2}, {3, 10}, {1, 5}, {8, 12}, {1, 6}, {6, 4}]
+[2019-10-17 13:07:11,7, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:07:11,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.00801874
+[2019-10-17 13:07:11,7, timer.h:61] NO_NAME [gr] = 1.5522e-05
+===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=2     #RUNS=2
+3 ======================= Processing [kautz-0003-2-3-24-48.al] {Graph V/E: 24/48}
+Exact solution=12 Time=0.012
+{Graph V/E: 24/48}
+Max V = 24
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+----- loop=3
+SCC  #1=0 #BIG=1
+56
+----- loop=4
+SCC  #1=0 #BIG=1
+56
+----- loop=5
+SCC  #1=0 #BIG=1
+56
+----- loop=6
+SCC  #1=1 #BIG=1
+56
+----- loop=7
+SCC  #1=0 #BIG=1
+56
+----- loop=8
+SCC  #1=1 #BIG=1
+56
+----- loop=9
+SCC  #1=1 #BIG=1
+56
+----- loop=10
+SCC  #1=1 #BIG=1
+56
+----- loop=11
+SCC  #1=4 #BIG=1
+56
+----- loop=12
+SCC  #1=3 #BIG=1
+56
+----- loop=13
+[2019-10-17 13:07:11,2, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 13 edgeCnt = 13 edgeList = [{8, 23}, {24, 16}, {9, 1}, {6, 19}, {22, 12}, {22, 11}, {18, 3}, {17, 1}, {4, 16}, {2, 11}, {15, 21}, {14, 19}, {7, 21}]
+[2019-10-17 13:07:11,2, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:07:11,2, timer.h:61] NO_NAME [--------RANDOM new] = 0.10509
+[2019-10-17 13:07:11,3, timer.h:61] NO_NAME [gr] = 4.0082e-05
+===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=2     #RUNS=3
+4 ======================= Processing [kautz-0004-2-4-48-96.al] {Graph V/E: 48/96}
+Exact solution=20 Time=0.028
+{Graph V/E: 48/96}
+Max V = 48
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+----- loop=3
+SCC  #1=0 #BIG=1
+56
+----- loop=4
+SCC  #1=0 #BIG=1
+56
+----- loop=5
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({47, 30}, 1), ({45, 26}, 1), ({32, 47}, 18)]
+----- loop=6
+SCC  #1=1 #BIG=1
+56
+----- loop=7
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({46, 27}, 1), ({31, 45}, 1), ({31, 46}, 16), ({46, 28}, 2)]
+----- loop=8
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({43, 22}, 1), ({31, 45}, 18), ({45, 26}, 1)]
+----- loop=9
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({14, 43}, 2), ({43, 22}, 4), ({24, 15}, 14)]
+----- loop=10
+SCC  #1=1 #BIG=1
+56
+----- loop=11
+SCC  #1=0 #BIG=1
+56
+----- loop=12
+SCC  #1=3 #BIG=1
+56
+----- loop=13
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({43, 22}, 3), ({23, 13}, 2), ({14, 43}, 15)]
+----- loop=14
+SCC  #1=1 #BIG=1
+56
+----- loop=15
+SCC  #1=0 #BIG=1
+56
+----- loop=16
+SCC  #1=3 #BIG=1
+56
+----- loop=17
+SCC  #1=0 #BIG=1
+56
+----- loop=18
+SCC  #1=4 #BIG=1
+56
+----- loop=19
+SCC  #1=5 #BIG=1
+56
+----- loop=20
+[2019-10-17 13:07:12,1, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 20 edgeCnt = 20 edgeList = [{19, 6}, {1, 17}, {11, 38}, {32, 48}, {14, 44}, {32, 47}, {24, 16}, {31, 46}, {31, 45}, {24, 15}, {35, 5}, {40, 15}, {37, 10}, {14, 43}, {34, 3}, {19, 5}, {7, 29}, {23, 13}, {30, 43}, {18, 3}]
+[2019-10-17 13:07:12,1, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:07:12,1, timer.h:61] NO_NAME [--------RANDOM new] = 0.557668
+[2019-10-17 13:07:12,1, timer.h:61] NO_NAME [gr] = 0.000118207
+===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=3     #RUNS=4
+5 ======================= Processing [kautz-0005-2-5-96-192.al] {Graph V/E: 96/192}
+Exact solution=32 Time=0.2
+{Graph V/E: 96/192}
+Max V = 96
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+----- loop=3
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({61, 90}, 1), ({63, 94}, 19)]
+----- loop=4
+SCC  #1=0 #BIG=1
+56
+----- loop=5
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({93, 57}, 1), ({63, 93}, 19)]
+----- loop=6
+SCC  #1=2 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({62, 91}, 2), ({62, 92}, 18)]
+----- loop=7
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({90, 52}, 1), ({61, 90}, 18), ({61, 89}, 1)]
+----- loop=8
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({62, 91}, 20)]
+----- loop=9
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({89, 49}, 1), ({61, 89}, 18), ({59, 85}, 1)]
+----- loop=10
+SCC  #1=8 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({60, 87}, 2), ({60, 88}, 18)]
+----- loop=11
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({86, 43}, 1), ({43, 22}, 1), ({59, 86}, 17), ({86, 44}, 1)]
+----- loop=12
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({60, 87}, 20)]
+----- loop=13
+SCC  #1=1 #BIG=1
+56
+----- loop=14
+SCC  #1=0 #BIG=1
+56
+----- loop=15
+SCC  #1=0 #BIG=1
+56
+----- loop=16
+SCC  #1=1 #BIG=1
+56
+----- loop=17
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({42, 19}, 1), ({85, 41}, 2), ({59, 85}, 15), ({57, 81}, 1), ({41, 17}, 1)]
+----- loop=18
+SCC  #1=6 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({57, 82}, 1), ({58, 83}, 18), ({83, 37}, 1)]
+----- loop=19
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({82, 36}, 2), ({74, 19}, 3), ({57, 82}, 15)]
+----- loop=20
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({74, 19}, 1), ({57, 81}, 17), ({2, 36}, 2)]
+----- loop=21
+SCC  #1=8 #BIG=1
+56
+----- loop=22
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({70, 12}, 1), ({19, 70}, 1), ({74, 19}, 18)]
+----- loop=23
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({24, 79}, 1), ({54, 76}, 18), ({70, 12}, 1)]
+----- loop=24
+SCC  #1=0 #BIG=1
+56
+----- loop=25
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({70, 12}, 2), ({21, 73}, 16), ({70, 11}, 1), ({73, 18}, 1)]
+----- loop=26
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({70, 12}, 1), ({53, 73}, 19)]
+----- loop=27
+SCC  #1=5 #BIG=1
+56
+----- loop=28
+SCC  #1=1 #BIG=1
+56
+----- loop=29
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({78, 28}, 2), ({79, 29}, 1), ({70, 12}, 12), ({9, 50}, 5)]
+----- loop=30
+SCC  #1=4 #BIG=1
+56
+----- loop=31
+SCC  #1=1 #BIG=1
+56
+----- loop=32
+SCC  #1=0 #BIG=1
+56
+----- loop=33
+[2019-10-17 13:07:15,8, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 35 edgeCnt = 35 edgeList = [{9, 50}, {81, 33}, {23, 78}, {1, 33}, {96, 64}, {63, 94}, {75, 22}, {63, 93}, {62, 92}, {61, 90}, {62, 91}, {61, 89}, {60, 88}, {59, 86}, {60, 87}, {46, 28}, {39, 13}, {20, 71}, {30, 92}, {59, 85}, {58, 83}, {57, 82}, {57, 81}, {10, 51}, {74, 19}, {54, 76}, {9, 49}, {21, 73}, {53, 73}, {41, 18}, {38, 12}, {70, 12}, {25, 82}, {65, 2}, {89, 50}]
+[2019-10-17 13:07:15,9, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:07:15,9, timer.h:61] NO_NAME [--------RANDOM new] = 3.39297
+[2019-10-17 13:07:15,9, timer.h:61] NO_NAME [gr] = 0.000412986
+===========> #WINS(NewRandom/Exact)=0/2     #DRAWS=3     #RUNS=5
+6 ======================= Processing [kautz-0006-2-6-192-384.al] {Graph V/E: 192/384}
+Exact solution=54 Time=52.012
+{Graph V/E: 192/384}
+Max V = 192
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+----- loop=3
+SCC  #1=0 #BIG=1
+56
+----- loop=4
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({127, 190}, 20)]
+----- loop=5
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({127, 189}, 20)]
+----- loop=6
+SCC  #1=2 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({188, 120}, 1), ({126, 188}, 19)]
+----- loop=7
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({125, 185}, 1), ({125, 186}, 19)]
+----- loop=8
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({125, 185}, 1), ({126, 187}, 19)]
+----- loop=9
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({123, 182}, 1), ({125, 185}, 19)]
+----- loop=10
+SCC  #1=8 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({184, 112}, 1), ({124, 184}, 19)]
+----- loop=11
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({182, 107}, 1), ({123, 181}, 1), ({123, 182}, 17), ({182, 108}, 1)]
+----- loop=12
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({124, 183}, 20)]
+----- loop=13
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({181, 105}, 1), ({123, 181}, 19)]
+----- loop=14
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({122, 180}, 20)]
+----- loop=15
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({178, 100}, 2), ({121, 178}, 18)]
+----- loop=16
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({179, 101}, 1), ({122, 179}, 18), ({121, 177}, 1)]
+----- loop=17
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({119, 174}, 1), ({121, 177}, 19)]
+----- loop=18
+SCC  #1=12 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({176, 95}, 17), ({117, 170}, 1), ({95, 62}, 2)]
+----- loop=19
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({117, 170}, 1), ({119, 174}, 17), ({174, 92}, 2)]
+----- loop=20
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({175, 94}, 1), ({120, 175}, 19)]
+----- loop=21
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({173, 90}, 2), ({119, 173}, 18)]
+----- loop=22
+SCC  #1=3 #BIG=1
+56
+----- loop=23
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({115, 166}, 1), ({117, 170}, 18), ({84, 39}, 1)]
+----- loop=24
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({172, 88}, 1), ({118, 172}, 18), ({118, 171}, 1)]
+----- loop=25
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({118, 171}, 1), ({117, 169}, 19)]
+----- loop=26
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({118, 171}, 20)]
+----- loop=27
+SCC  #1=6 #BIG=1
+56
+----- loop=28
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({166, 76}, 2), ({115, 166}, 18)]
+----- loop=29
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({74, 19}, 1), ({115, 165}, 19)]
+----- loop=30
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({111, 158}, 1), ({114, 164}, 19)]
+----- loop=31
+SCC  #1=0 #BIG=1
+56
+----- loop=32
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({113, 162}, 1), ({114, 163}, 19)]
+----- loop=33
+SCC  #1=1 #BIG=1
+56
+----- loop=34
+SCC  #1=12 #BIG=1
+56
+----- loop=35
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({67, 6}, 1), ({162, 67}, 19)]
+----- loop=36
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({158, 59}, 1), ({161, 66}, 18), ({161, 65}, 1)]
+----- loop=37
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({2, 67}, 2), ({161, 65}, 18)]
+----- loop=38
+SCC  #1=11 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({158, 59}, 20)]
+----- loop=39
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({101, 137}, 1), ({111, 157}, 19)]
+----- loop=40
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({110, 155}, 1), ({56, 175}, 1), ({110, 156}, 17), ({55, 173}, 1)]
+----- loop=41
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({51, 165}, 1), ({153, 50}, 1), ({154, 51}, 17), ({107, 150}, 1)]
+----- loop=42
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({155, 53}, 2), ({110, 155}, 18)]
+----- loop=43
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({107, 150}, 1), ({153, 50}, 18), ({71, 14}, 1)]
+----- loop=44
+SCC  #1=8 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({101, 137}, 1), ({47, 157}, 18), ({151, 46}, 1)]
+----- loop=45
+SCC  #1=4 #BIG=1
+56
+----- loop=46
+SCC  #1=1 #BIG=1
+56
+----- loop=47
+SCC  #1=4 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({101, 137}, 1), ({42, 147}, 1), ({107, 149}, 2), ({46, 156}, 2), ({107, 150}, 14)]
+----- loop=48
+SCC  #1=1 #BIG=1
+56
+----- loop=49
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({37, 137}, 1), ({107, 149}, 17), ({46, 156}, 2)]
+----- loop=50
+SCC  #1=1 #BIG=1
+56
+----- loop=51
+SCC  #1=7 #BIG=1
+56
+----- loop=52
+SCC  #1=1 #BIG=1
+56
+----- loop=53
+SCC  #1=4 #BIG=1
+56
+----- loop=54
+SCC  #1=3 #BIG=1
+56
+----- loop=55
+SCC  #1=20 #BIG=1
+56
+----- loop=56
+SCC  #1=2 #BIG=1
+56
+----- loop=57
+SCC  #1=1 #BIG=1
+56
+----- loop=58
+SCC  #1=4 #BIG=1
+56
+----- loop=59
+SCC  #1=1 #BIG=1
+56
+----- loop=60
+SCC  #1=25 #BIG=1
+56
+----- loop=61
+[2019-10-17 13:07:39,2, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 62 edgeCnt = 62 edgeList = [{81, 33}, {105, 145}, {192, 128}, {43, 150}, {1, 65}, {127, 190}, {127, 189}, {126, 188}, {125, 186}, {126, 187}, {125, 185}, {124, 184}, {123, 182}, {124, 183}, {123, 181}, {122, 180}, {121, 178}, {122, 179}, {121, 177}, {176, 95}, {119, 174}, {120, 175}, {119, 173}, {55, 174}, {117, 170}, {118, 172}, {117, 169}, {118, 171}, {167, 77}, {115, 166}, {115, 165}, {114, 164}, {158, 60}, {114, 163}, {25, 113}, {138, 19}, {162, 67}, {161, 66}, {161, 65}, {158, 59}, {111, 157}, {110, 156}, {154, 51}, {110, 155}, {153, 50}, {47, 157}, {46, 155}, {89, 50}, {107, 150}, {38, 139}, {107, 149}, {90, 51}, {135, 14}, {94, 59}, {93, 57}, {58, 179}, {18, 99}, {82, 35}, {146, 35}, {98, 131}, {17, 97}, {145, 33}]
+[2019-10-17 13:07:39,2, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:07:39,3, timer.h:61] NO_NAME [--------RANDOM new] = 23.8981
+[2019-10-17 13:07:39,5, timer.h:61] NO_NAME [gr] = 0.00229047
+===========> #WINS(NewRandom/Exact)=0/3     #DRAWS=3     #RUNS=6
+7 ======================= Processing [kautz-0007-2-7-384-768.al] {Graph V/E: 384/768}
+Exact solution=94 Time=9051.37
+{Graph V/E: 384/768}
+Max V = 384
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({256, 384}, 20)]
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({255, 382}, 20)]
+----- loop=3
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({383, 254}, 1), ({256, 383}, 19)]
+----- loop=4
+SCC  #1=1 #BIG=1
+56
+----- loop=5
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({255, 381}, 20)]
+----- loop=6
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({254, 380}, 20)]
+----- loop=7
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({253, 377}, 1), ({253, 378}, 19)]
+----- loop=8
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({254, 379}, 20)]
+----- loop=9
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({253, 377}, 20)]
+----- loop=10
+SCC  #1=6 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({252, 376}, 20)]
+----- loop=11
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({251, 374}, 19), ({374, 236}, 1)]
+----- loop=12
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({252, 375}, 20)]
+----- loop=13
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({249, 370}, 1), ({251, 373}, 19)]
+----- loop=14
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({250, 372}, 20)]
+----- loop=15
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({370, 228}, 1), ({249, 370}, 19)]
+----- loop=16
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({250, 371}, 20)]
+----- loop=17
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({249, 369}, 20)]
+----- loop=18
+SCC  #1=12 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({245, 362}, 1), ({248, 368}, 19)]
+----- loop=19
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({366, 220}, 1), ({247, 366}, 18), ({366, 219}, 1)]
+----- loop=20
+SCC  #1=0 #BIG=1
+56
+----- loop=21
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({365, 217}, 1), ({247, 365}, 19)]
+----- loop=22
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({248, 367}, 20)]
+----- loop=23
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({246, 364}, 20)]
+----- loop=24
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({245, 362}, 20)]
+----- loop=25
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({246, 363}, 20)]
+----- loop=26
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({361, 209}, 1), ({245, 361}, 19)]
+----- loop=27
+SCC  #1=6 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({207, 285}, 20)]
+----- loop=28
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({241, 354}, 1), ({243, 358}, 19)]
+----- loop=29
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({244, 359}, 20)]
+----- loop=30
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({243, 357}, 20)]
+----- loop=31
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({242, 356}, 20)]
+----- loop=32
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({241, 354}, 20)]
+----- loop=33
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({242, 355}, 20)]
+----- loop=34
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({241, 353}, 20)]
+----- loop=35
+SCC  #1=21 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({351, 189}, 1), ({240, 351}, 19)]
+----- loop=36
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({350, 188}, 1), ({239, 350}, 19)]
+----- loop=37
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({239, 349}, 20)]
+----- loop=38
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({238, 348}, 20)]
+----- loop=39
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({237, 346}, 20)]
+----- loop=40
+SCC  #1=0 #BIG=1
+56
+----- loop=41
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({238, 347}, 1), ({237, 345}, 18), ({345, 177}, 1)]
+----- loop=42
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({347, 181}, 1), ({238, 347}, 19)]
+----- loop=43
+SCC  #1=6 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({236, 344}, 20)]
+----- loop=44
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({235, 342}, 20)]
+----- loop=45
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({236, 343}, 20)]
+----- loop=46
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({235, 341}, 20)]
+----- loop=47
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({340, 167}, 20)]
+----- loop=48
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({233, 338}, 20)]
+----- loop=49
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({233, 337}, 1), ({234, 339}, 19)]
+----- loop=50
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({233, 337}, 20)]
+----- loop=51
+SCC  #1=12 #BIG=1
+56
+----- loop=52
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({227, 326}, 1), ({332, 151}, 1), ({332, 152}, 1), ({230, 332}, 17)]
+----- loop=53
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({229, 330}, 20)]
+----- loop=54
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({331, 149}, 1), ({230, 331}, 18), ({229, 329}, 1)]
+----- loop=55
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({329, 145}, 1), ({229, 329}, 18), ({329, 146}, 1)]
+----- loop=56
+SCC  #1=6 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({228, 328}, 20)]
+----- loop=57
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({326, 140}, 1), ({326, 139}, 1), ({227, 326}, 17), ({227, 325}, 1)]
+----- loop=58
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({228, 327}, 17), ({225, 322}, 2), ({227, 325}, 1)]
+----- loop=59
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({227, 325}, 20)]
+----- loop=60
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({221, 314}, 1), ({153, 49}, 19)]
+----- loop=61
+SCC  #1=12 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({225, 322}, 20)]
+----- loop=62
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({226, 323}, 20)]
+----- loop=63
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({225, 321}, 20)]
+----- loop=64
+SCC  #1=30 #BIG=1
+56
+----- loop=65
+SCC  #1=2 #BIG=1
+56
+----- loop=66
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({219, 310}, 18), ({310, 108}, 1), ({219, 309}, 1)]
+----- loop=67
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({312, 111}, 18), ({111, 350}, 1), ({220, 311}, 1)]
+----- loop=68
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({106, 339}, 1), ({219, 309}, 19)]
+----- loop=69
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({217, 306}, 1), ({220, 311}, 17), ({311, 109}, 2)]
+----- loop=70
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({218, 307}, 20)]
+----- loop=71
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({217, 306}, 20)]
+----- loop=72
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({305, 97}, 1), ({217, 305}, 17), ({215, 302}, 2)]
+----- loop=73
+SCC  #1=8 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({215, 302}, 1), ({216, 303}, 19)]
+----- loop=74
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({302, 91}, 1), ({215, 302}, 18), ({298, 83}, 1)]
+----- loop=75
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({215, 301}, 20)]
+----- loop=76
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({214, 300}, 20)]
+----- loop=77
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({83, 294}, 1), ({298, 83}, 19)]
+----- loop=78
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({214, 299}, 20)]
+----- loop=79
+SCC  #1=2 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({211, 294}, 1), ({213, 297}, 19)]
+----- loop=80
+SCC  #1=6 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({211, 294}, 17), ({290, 67}, 1), ({280, 47}, 2)]
+----- loop=81
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({293, 73}, 1), ({211, 293}, 17), ({275, 38}, 2)]
+----- loop=82
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({277, 41}, 1), ({210, 292}, 19)]
+----- loop=83
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({290, 67}, 20)]
+----- loop=84
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({210, 291}, 20)]
+----- loop=85
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({209, 289}, 20)]
+----- loop=86
+SCC  #1=16 #BIG=1
+56
+----- loop=87
+SCC  #1=18 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({199, 270}, 1), ({201, 273}, 1), ({201, 274}, 17), ({274, 36}, 1)]
+----- loop=88
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({273, 33}, 2), ({201, 273}, 18)]
+----- loop=89
+SCC  #1=9 #BIG=1
+56
+----- loop=90
+SCC  #1=6 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({270, 27}, 2), ({199, 270}, 15), ({270, 28}, 2), ({199, 269}, 1)]
+----- loop=91
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({165, 73}, 3), ({113, 353}, 2), ({185, 114}, 2), ({29, 185}, 13)]
+----- loop=92
+SCC  #1=7 #BIG=1
+56
+----- loop=93
+SCC  #1=7 #BIG=1
+56
+----- loop=94
+SCC  #1=9 #BIG=1
+56
+----- loop=95
+SCC  #1=3 #BIG=1
+56
+----- loop=96
+SCC  #1=7 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({260, 7}, 1), ({109, 345}, 1), ({269, 25}, 18)]
+----- loop=97
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({23, 174}, 1), ({173, 89}, 1), ({268, 23}, 17), ({109, 345}, 1)]
+----- loop=98
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({260, 7}, 17), ({109, 345}, 2), ({7, 142}, 1)]
+----- loop=99
+SCC  #1=1 #BIG=1
+56
+----- loop=100
+SCC  #1=2 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({109, 345}, 1), ({265, 18}, 1), ({194, 259}, 17), ({259, 6}, 1)]
+----- loop=101
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({267, 21}, 1), ({109, 345}, 2), ({87, 302}, 1), ({267, 22}, 14), ({172, 87}, 2)]
+----- loop=102
+SCC  #1=0 #BIG=1
+56
+----- loop=103
+SCC  #1=2 #BIG=1
+56
+----- loop=104
+SCC  #1=0 #BIG=1
+56
+----- loop=105
+SCC  #1=3 #BIG=1
+56
+----- loop=106
+SCC  #1=62 #BIG=1
+56
+----- loop=107
+SCC  #1=2 #BIG=1
+56
+----- loop=108
+[2019-10-17 13:10:25,0, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 111 edgeCnt = 111 edgeList = [{99, 326}, {87, 302}, {132, 7}, {71, 270}, {256, 384}, {255, 382}, {256, 383}, {129, 1}, {255, 381}, {254, 380}, {253, 378}, {254, 379}, {253, 377}, {252, 376}, {251, 374}, {252, 375}, {251, 373}, {250, 372}, {249, 370}, {250, 371}, {249, 369}, {248, 368}, {247, 366}, {86, 299}, {247, 365}, {248, 367}, {246, 364}, {245, 362}, {246, 363}, {245, 361}, {207, 285}, {243, 358}, {244, 359}, {243, 357}, {242, 356}, {241, 354}, {242, 355}, {241, 353}, {240, 351}, {239, 350}, {239, 349}, {238, 348}, {237, 346}, {183, 110}, {237, 345}, {238, 347}, {236, 344}, {235, 342}, {236, 343}, {235, 341}, {340, 167}, {233, 338}, {234, 339}, {233, 337}, {231, 333}, {230, 332}, {229, 330}, {230, 331}, {229, 329}, {228, 328}, {227, 326}, {228, 327}, {227, 325}, {153, 49}, {225, 322}, {226, 323}, {225, 321}, {120, 367}, {275, 37}, {219, 310}, {312, 111}, {219, 309}, {220, 311}, {218, 307}, {217, 306}, {217, 305}, {216, 303}, {215, 302}, {215, 301}, {214, 300}, {298, 83}, {214, 299}, {213, 297}, {211, 294}, {211, 293}, {210, 292}, {290, 67}, {210, 291}, {209, 289}, {47, 221}, {201, 274}, {201, 273}, {261, 9}, {199, 270}, {29, 185}, {101, 329}, {133, 9}, {73, 274}, {93, 313}, {269, 25}, {268, 23}, {260, 7}, {100, 327}, {194, 259}, {267, 22}, {66, 259}, {265, 18}, {267, 21}, {2, 131}, {108, 343}, {322, 131}]
+[2019-10-17 13:10:25,0, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:10:25,0, timer.h:61] NO_NAME [--------RANDOM new] = 166.1
+[2019-10-17 13:10:25,5, timer.h:61] NO_NAME [gr] = 0.00440317
+===========> #WINS(NewRandom/Exact)=0/4     #DRAWS=3     #RUNS=7
+8 ======================= Processing [kautz-0009-3-1-12-36.al] {Graph V/E: 12/36}
+Exact solution=14 Time=0.012
+{Graph V/E: 12/36}
+Max V = 12
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+----- loop=3
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({7, 2}, 1), ({8, 6}, 2), ({3, 12}, 14), ({7, 3}, 3)]
+----- loop=4
+SCC  #1=0 #BIG=1
+56
+----- loop=5
+SCC  #1=0 #BIG=1
+56
+----- loop=6
+SCC  #1=1 #BIG=1
+56
+----- loop=7
+SCC  #1=0 #BIG=1
+56
+----- loop=8
+SCC  #1=1 #BIG=1
+56
+----- loop=9
+SCC  #1=0 #BIG=1
+56
+----- loop=10
+SCC  #1=0 #BIG=1
+56
+----- loop=11
+SCC  #1=3 #BIG=1
+56
+----- loop=12
+[2019-10-17 13:10:25,2, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 14 edgeCnt = 14 edgeList = [{2, 9}, {4, 3}, {6, 10}, {2, 7}, {9, 12}, {3, 12}, {5, 8}, {6, 12}, {6, 11}, {5, 7}, {10, 3}, {1, 4}, {5, 9}, {2, 8}]
+[2019-10-17 13:10:25,2, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:10:25,2, timer.h:61] NO_NAME [--------RANDOM new] = 0.0327118
+[2019-10-17 13:10:25,2, timer.h:61] NO_NAME [gr] = 2.0413e-05
+===========> #WINS(NewRandom/Exact)=0/4     #DRAWS=4     #RUNS=8
+9 ======================= Processing [kautz-0010-3-2-36-108.al] {Graph V/E: 36/108}
+Exact solution=32 Time=0.044
+{Graph V/E: 36/108}
+Max V = 36
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({26, 33}, 18), ({26, 32}, 1), ({27, 36}, 1)]
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+----- loop=3
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({26, 32}, 1), ({25, 30}, 17), ({30, 9}, 2)]
+----- loop=4
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({32, 14}, 1), ({32, 15}, 4), ({26, 32}, 13), ({27, 36}, 2)]
+----- loop=5
+SCC  #1=0 #BIG=1
+56
+----- loop=6
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({26, 31}, 1), ({6, 27}, 1), ({25, 28}, 1), ({25, 29}, 13), ({29, 6}, 4)]
+----- loop=7
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({27, 36}, 1), ({26, 31}, 18), ({12, 9}, 1)]
+----- loop=8
+SCC  #1=1 #BIG=1
+56
+----- loop=9
+SCC  #1=0 #BIG=1
+56
+----- loop=10
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({3, 18}, 1), ({28, 3}, 1), ({25, 28}, 18)]
+----- loop=11
+SCC  #1=2 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({23, 14}, 1), ({15, 27}, 19)]
+----- loop=12
+SCC  #1=1 #BIG=1
+56
+----- loop=13
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({22, 11}, 1), ({22, 12}, 19)]
+----- loop=14
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({23, 13}, 18), ({13, 21}, 1), ({21, 8}, 1)]
+----- loop=15
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({22, 10}, 1), ({22, 11}, 19)]
+----- loop=16
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({18, 35}, 1), ({24, 18}, 18), ({22, 10}, 1)]
+----- loop=17
+SCC  #1=0 #BIG=1
+56
+----- loop=18
+SCC  #1=2 #BIG=1
+56
+----- loop=19
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({2, 13}, 1), ({22, 10}, 19)]
+----- loop=20
+SCC  #1=1 #BIG=1
+56
+----- loop=21
+SCC  #1=0 #BIG=1
+56
+----- loop=22
+SCC  #1=0 #BIG=1
+56
+----- loop=23
+SCC  #1=6 #BIG=1
+56
+----- loop=24
+SCC  #1=0 #BIG=1
+56
+----- loop=25
+SCC  #1=1 #BIG=1
+56
+----- loop=26
+SCC  #1=1 #BIG=1
+56
+----- loop=27
+SCC  #1=6 #BIG=1
+56
+----- loop=28
+SCC  #1=0 #BIG=1
+56
+----- loop=29
+SCC  #1=1 #BIG=1
+56
+----- loop=30
+[2019-10-17 13:10:26,9, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 32 edgeCnt = 32 edgeList = [{29, 4}, {11, 4}, {21, 8}, {26, 33}, {17, 33}, {25, 30}, {26, 32}, {7, 30}, {25, 29}, {26, 31}, {1, 10}, {36, 27}, {25, 28}, {15, 27}, {23, 14}, {22, 12}, {23, 13}, {22, 11}, {24, 18}, {6, 27}, {20, 4}, {22, 10}, {24, 16}, {17, 32}, {17, 31}, {34, 21}, {16, 30}, {2, 13}, {12, 8}, {28, 3}, {28, 1}, {34, 19}]
+[2019-10-17 13:10:26,9, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:10:26,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.725849
+[2019-10-17 13:10:26,9, timer.h:61] NO_NAME [gr] = 8.6545e-05
+===========> #WINS(NewRandom/Exact)=0/4     #DRAWS=5     #RUNS=9
+10 ======================= Processing [kautz-0011-3-3-108-324.al] {Graph V/E: 108/324}
+Exact solution=72 Time=54.876
+{Graph V/E: 108/324}
+Max V = 108
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({80, 105}, 19), ({105, 72}, 1)]
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({81, 108}, 20)]
+----- loop=3
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({79, 102}, 20)]
+----- loop=4
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({81, 107}, 1), ({80, 104}, 19)]
+----- loop=5
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({81, 107}, 20)]
+----- loop=6
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({79, 101}, 20)]
+----- loop=7
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({80, 103}, 20)]
+----- loop=8
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({81, 106}, 1), ({100, 57}, 2), ({79, 100}, 17)]
+----- loop=9
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({81, 106}, 20)]
+----- loop=10
+SCC  #1=4 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({96, 43}, 1), ({96, 44}, 19)]
+----- loop=11
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({78, 99}, 18), ({54, 107}, 2)]
+----- loop=12
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({93, 36}, 1), ({76, 93}, 19)]
+----- loop=13
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({43, 74}, 1), ({96, 43}, 19)]
+----- loop=14
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({78, 98}, 20)]
+----- loop=15
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({33, 17}, 1), ({77, 95}, 1), ({76, 92}, 18)]
+----- loop=16
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({77, 95}, 20)]
+----- loop=17
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({77, 94}, 1), ({78, 97}, 18), ({97, 48}, 1)]
+----- loop=18
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({77, 94}, 20)]
+----- loop=19
+SCC  #1=1 #BIG=1
+56
+----- loop=20
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({91, 30}, 1), ({76, 91}, 19)]
+----- loop=21
+SCC  #1=4 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({87, 16}, 17), ({74, 86}, 2), ({75, 90}, 1)]
+----- loop=22
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({75, 90}, 19), ({27, 106}, 1)]
+----- loop=23
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({74, 86}, 1), ({84, 9}, 4), ({73, 84}, 15)]
+----- loop=24
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({74, 86}, 20)]
+----- loop=25
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({75, 89}, 20)]
+----- loop=26
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({6, 43}, 1), ({73, 83}, 18), ({83, 5}, 1)]
+----- loop=27
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({74, 85}, 20)]
+----- loop=28
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({82, 3}, 1), ({73, 82}, 19)]
+----- loop=29
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({88, 21}, 1), ({75, 88}, 19)]
+----- loop=30
+SCC  #1=10 #BIG=1
+56
+----- loop=31
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({53, 105}, 1), ({72, 53}, 18), ({72, 52}, 1)]
+----- loop=32
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({71, 51}, 1), ({70, 48}, 18), ({26, 105}, 1)]
+----- loop=33
+SCC  #1=0 #BIG=1
+56
+----- loop=34
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({52, 102}, 1), ({72, 52}, 19)]
+----- loop=35
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({47, 85}, 1), ({71, 51}, 17), ({47, 86}, 1), ({51, 97}, 1)]
+----- loop=36
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({47, 86}, 18), ({50, 95}, 1), ({71, 49}, 1)]
+----- loop=37
+SCC  #1=0 #BIG=1
+56
+----- loop=38
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({70, 46}, 1), ({47, 85}, 17), ({63, 26}, 1), ({11, 59}, 1)]
+----- loop=39
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({70, 46}, 1), ({50, 95}, 19)]
+----- loop=40
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({50, 94}, 1), ({70, 46}, 19)]
+----- loop=41
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({71, 49}, 1), ({50, 94}, 18), ({63, 26}, 1)]
+----- loop=42
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({49, 93}, 1), ({71, 49}, 18), ({67, 39}, 1)]
+----- loop=43
+SCC  #1=4 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({67, 39}, 1), ({41, 67}, 19)]
+----- loop=44
+SCC  #1=1 #BIG=1
+56
+----- loop=45
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({68, 40}, 1), ({40, 66}, 19)]
+----- loop=46
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({14, 67}, 1), ({67, 39}, 18), ({63, 25}, 1)]
+----- loop=47
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 7
+ER2: [({65, 31}, 1), ({10, 57}, 1), ({38, 58}, 13), ({32, 13}, 1), ({68, 40}, 2), ({59, 13}, 1), ({13, 66}, 1)]
+----- loop=48
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({40, 64}, 1), ({37, 57}, 1), ({65, 31}, 17), ({32, 13}, 1)]
+----- loop=49
+SCC  #1=0 #BIG=1
+56
+----- loop=50
+SCC  #1=0 #BIG=1
+56
+----- loop=51
+SCC  #1=2 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({64, 30}, 1), ({40, 64}, 19)]
+----- loop=52
+SCC  #1=4 #BIG=1
+56
+----- loop=53
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({59, 13}, 17), ({64, 30}, 1), ({13, 66}, 2)]
+----- loop=54
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({64, 30}, 1), ({37, 57}, 16), ({4, 39}, 3)]
+----- loop=55
+SCC  #1=0 #BIG=1
+56
+----- loop=56
+SCC  #1=1 #BIG=1
+56
+----- loop=57
+SCC  #1=2 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({64, 30}, 1), ({55, 3}, 19)]
+----- loop=58
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({64, 30}, 2), ({62, 24}, 1), ({55, 1}, 1), ({37, 55}, 15), ({2, 31}, 1)]
+----- loop=59
+SCC  #1=3 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({36, 25}, 2), ({66, 36}, 14), ({64, 30}, 1), ({26, 103}, 3)]
+----- loop=60
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({4, 39}, 2), ({30, 9}, 1), ({64, 30}, 15), ({35, 24}, 2)]
+----- loop=61
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({66, 35}, 2), ({35, 24}, 17), ({4, 39}, 1)]
+----- loop=62
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({35, 22}, 1), ({4, 39}, 19)]
+----- loop=63
+SCC  #1=4 #BIG=1
+56
+----- loop=64
+SCC  #1=1 #BIG=1
+56
+----- loop=65
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({35, 22}, 18), ({22, 93}, 1), ({66, 34}, 1)]
+----- loop=66
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({66, 34}, 1), ({28, 3}, 18), ({3, 36}, 1)]
+----- loop=67
+SCC  #1=2 #BIG=1
+56
+----- loop=68
+SCC  #1=6 #BIG=1
+56
+----- loop=69
+SCC  #1=1 #BIG=1
+56
+----- loop=70
+SCC  #1=1 #BIG=1
+56
+----- loop=71
+SCC  #1=1 #BIG=1
+56
+----- loop=72
+SCC  #1=0 #BIG=1
+56
+----- loop=73
+SCC  #1=0 #BIG=1
+56
+----- loop=74
+SCC  #1=12 #BIG=1
+56
+----- loop=75
+SCC  #1=9 #BIG=1
+56
+----- loop=76
+SCC  #1=0 #BIG=1
+56
+----- loop=77
+SCC  #1=10 #BIG=1
+56
+----- loop=78
+[2019-10-17 13:10:41,3, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 79 edgeCnt = 79 edgeList = [{25, 102}, {21, 89}, {80, 105}, {81, 108}, {79, 102}, {80, 104}, {81, 107}, {79, 101}, {80, 103}, {79, 100}, {81, 106}, {96, 44}, {78, 99}, {76, 93}, {96, 43}, {78, 98}, {76, 92}, {77, 95}, {78, 97}, {77, 94}, {51, 98}, {76, 91}, {87, 16}, {75, 90}, {73, 84}, {74, 86}, {75, 89}, {73, 83}, {74, 85}, {73, 82}, {75, 88}, {41, 68}, {72, 53}, {70, 48}, {11, 58}, {72, 52}, {71, 51}, {47, 86}, {21, 88}, {47, 85}, {50, 95}, {70, 46}, {50, 94}, {71, 49}, {41, 67}, {7, 46}, {40, 66}, {67, 39}, {38, 58}, {65, 31}, {32, 13}, {32, 14}, {40, 64}, {14, 67}, {59, 13}, {37, 57}, {56, 4}, {23, 94}, {55, 3}, {37, 55}, {66, 36}, {64, 30}, {35, 24}, {4, 39}, {2, 31}, {28, 1}, {35, 22}, {28, 3}, {66, 34}, {9, 52}, {7, 48}, {82, 3}, {89, 24}, {8, 49}, {8, 51}, {62, 24}, {61, 20}, {62, 22}, {101, 58}]
+[2019-10-17 13:10:41,3, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:10:41,3, timer.h:61] NO_NAME [--------RANDOM new] = 14.7631
+[2019-10-17 13:10:41,4, timer.h:61] NO_NAME [gr] = 0.000612911
+===========> #WINS(NewRandom/Exact)=0/5     #DRAWS=5     #RUNS=10
+11 ======================= Processing [kautz-0013-4-1-20-80.al] {Graph V/E: 20/80}
+Exact solution=30 Time=0.028
+{Graph V/E: 20/80}
+Max V = 20
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({8, 20}, 1), ({8, 19}, 1), ({15, 12}, 2), ({14, 8}, 15), ({14, 7}, 1)]
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({15, 11}, 1), ({15, 12}, 14), ({12, 20}, 5)]
+----- loop=3
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({13, 4}, 1), ({16, 20}, 19)]
+----- loop=4
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({4, 19}, 1), ({13, 4}, 16), ({4, 20}, 3)]
+----- loop=5
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({14, 6}, 1), ({16, 19}, 3), ({19, 12}, 1), ({14, 7}, 14), ({15, 11}, 1)]
+----- loop=6
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({14, 6}, 1), ({15, 10}, 1), ({16, 19}, 6), ({19, 12}, 1), ({15, 11}, 11)]
+----- loop=7
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({19, 11}, 1), ({15, 10}, 1), ({16, 19}, 14), ({13, 3}, 1), ({19, 12}, 3)]
+----- loop=8
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({15, 10}, 1), ({18, 8}, 1), ({13, 3}, 14), ({16, 18}, 4)]
+----- loop=9
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({18, 8}, 1), ({15, 10}, 1), ({14, 6}, 17), ({10, 8}, 1)]
+----- loop=10
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({10, 7}, 1), ({10, 8}, 2), ({15, 10}, 17)]
+----- loop=11
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({13, 2}, 1), ({18, 8}, 6), ({2, 12}, 1), ({18, 6}, 1), ({16, 18}, 11)]
+----- loop=12
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({13, 1}, 1), ({5, 4}, 1), ({2, 12}, 5), ({2, 11}, 1), ({13, 2}, 12)]
+----- loop=13
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({9, 4}, 1), ({5, 3}, 3), ({5, 4}, 5), ({15, 9}, 1), ({14, 5}, 10)]
+----- loop=14
+SCC  #1=1 #BIG=1
+56
+----- loop=15
+SCC  #1=1 #BIG=1
+56
+----- loop=16
+SCC  #1=0 #BIG=1
+56
+----- loop=17
+SCC  #1=6 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({8, 19}, 1), ({9, 4}, 17), ({10, 8}, 2)]
+----- loop=18
+SCC  #1=0 #BIG=1
+56
+----- loop=19
+SCC  #1=0 #BIG=1
+56
+----- loop=20
+SCC  #1=1 #BIG=1
+56
+----- loop=21
+SCC  #1=0 #BIG=1
+56
+----- loop=22
+SCC  #1=0 #BIG=1
+56
+----- loop=23
+SCC  #1=1 #BIG=1
+56
+----- loop=24
+SCC  #1=0 #BIG=1
+56
+----- loop=25
+SCC  #1=1 #BIG=1
+56
+----- loop=26
+SCC  #1=0 #BIG=1
+56
+----- loop=27
+[2019-10-17 13:10:41,9, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 30 edgeCnt = 30 edgeList = [{17, 2}, {5, 4}, {10, 8}, {13, 1}, {14, 8}, {15, 12}, {16, 20}, {13, 4}, {14, 7}, {15, 11}, {16, 19}, {13, 3}, {14, 6}, {15, 10}, {16, 18}, {13, 2}, {14, 5}, {16, 17}, {17, 4}, {15, 9}, {9, 4}, {9, 2}, {9, 1}, {19, 12}, {5, 1}, {17, 1}, {10, 6}, {18, 6}, {18, 8}, {5, 2}]
+[2019-10-17 13:10:41,9, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:10:41,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.314219
+[2019-10-17 13:10:41,9, timer.h:61] NO_NAME [gr] = 4.4505e-05
+===========> #WINS(NewRandom/Exact)=0/5     #DRAWS=6     #RUNS=11
+12 ======================= Processing [kautz-0014-4-2-80-320.al] {Graph V/E: 80/320}
+Exact solution=90 Time=0.444
+{Graph V/E: 80/320}
+Max V = 80
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({63, 76}, 1), ({62, 72}, 19)]
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({63, 75}, 1), ({63, 76}, 17), ({76, 48}, 2)]
+----- loop=3
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({64, 80}, 20)]
+----- loop=4
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({61, 68}, 17), ({68, 16}, 2), ({61, 67}, 1)]
+----- loop=5
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({62, 70}, 1), ({62, 71}, 19)]
+----- loop=6
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({63, 75}, 20)]
+----- loop=7
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({79, 59}, 1), ({64, 79}, 16), ({79, 60}, 3)]
+----- loop=8
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({61, 67}, 20)]
+----- loop=9
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({62, 70}, 17), ({70, 24}, 3)]
+----- loop=10
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({74, 40}, 2), ({63, 74}, 18)]
+----- loop=11
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({64, 77}, 1), ({78, 56}, 3), ({64, 78}, 16)]
+----- loop=12
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({62, 69}, 1), ({61, 66}, 18), ({66, 8}, 1)]
+----- loop=13
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({62, 69}, 20)]
+----- loop=14
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({77, 52}, 3), ({64, 77}, 17)]
+----- loop=15
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({73, 36}, 2), ({63, 73}, 18)]
+----- loop=16
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({65, 4}, 1), ({61, 65}, 19)]
+----- loop=17
+SCC  #1=5 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({58, 40}, 17), ({32, 79}, 1), ({40, 31}, 2)]
+----- loop=18
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({59, 43}, 20)]
+----- loop=19
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({60, 48}, 1), ({48, 79}, 19)]
+----- loop=20
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({16, 79}, 2), ({57, 36}, 17), ({39, 27}, 1)]
+----- loop=21
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({27, 60}, 2), ({58, 38}, 1), ({39, 27}, 17)]
+----- loop=22
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({59, 42}, 20)]
+----- loop=23
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({48, 78}, 16), ({32, 79}, 2), ({60, 47}, 2)]
+----- loop=24
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({57, 34}, 1), ({35, 11}, 19)]
+----- loop=25
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({39, 25}, 1), ({39, 26}, 16), ({26, 56}, 2), ({55, 27}, 1)]
+----- loop=26
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({59, 41}, 20)]
+----- loop=27
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({10, 56}, 2), ({35, 10}, 17), ({48, 77}, 1)]
+----- loop=28
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({39, 25}, 20)]
+----- loop=29
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({48, 77}, 20)]
+----- loop=30
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({35, 9}, 20)]
+----- loop=31
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({24, 47}, 1), ({58, 38}, 18), ({60, 47}, 1)]
+----- loop=32
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({60, 47}, 19), ({19, 10}, 1)]
+----- loop=33
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({8, 47}, 1), ({57, 34}, 19)]
+----- loop=34
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({37, 20}, 2), ({58, 37}, 18)]
+----- loop=35
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({33, 4}, 1), ({57, 33}, 19)]
+----- loop=36
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({46, 72}, 2), ({60, 46}, 18)]
+----- loop=37
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({16, 78}, 1), ({60, 45}, 19)]
+----- loop=38
+SCC  #1=5 #BIG=1
+56
+----- loop=39
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({16, 78}, 1), ({55, 25}, 19)]
+----- loop=40
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({53, 20}, 20)]
+----- loop=41
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({23, 42}, 1), ({24, 47}, 19)]
+----- loop=42
+SCC  #1=0 #BIG=1
+56
+----- loop=43
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({24, 46}, 2), ({19, 10}, 18)]
+----- loop=44
+SCC  #1=0 #BIG=1
+56
+----- loop=45
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({32, 78}, 20)]
+----- loop=46
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({32, 77}, 1), ({19, 9}, 19)]
+----- loop=47
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({24, 46}, 18), ({32, 77}, 1), ({24, 45}, 1)]
+----- loop=48
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({32, 77}, 20)]
+----- loop=49
+SCC  #1=1 #BIG=1
+56
+----- loop=50
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({45, 68}, 1), ({24, 45}, 19)]
+----- loop=51
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({23, 41}, 2), ({56, 30}, 1), ({56, 31}, 16), ({68, 15}, 1)]
+----- loop=52
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({8, 47}, 3), ({53, 17}, 2), ({56, 30}, 1), ({53, 18}, 14)]
+----- loop=53
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({56, 30}, 15), ({53, 17}, 1), ({23, 42}, 4)]
+----- loop=54
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({68, 15}, 1), ({53, 17}, 1), ({56, 29}, 16), ({29, 68}, 2)]
+----- loop=55
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({68, 15}, 1), ({53, 17}, 18), ({23, 41}, 1)]
+----- loop=56
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({23, 41}, 20)]
+----- loop=57
+SCC  #1=2 #BIG=1
+56
+----- loop=58
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({54, 22}, 20)]
+----- loop=59
+SCC  #1=0 #BIG=1
+56
+----- loop=60
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({21, 36}, 18), ({54, 21}, 2)]
+----- loop=61
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({68, 15}, 1), ({8, 46}, 1), ({8, 47}, 17), ({21, 34}, 1)]
+----- loop=62
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({68, 15}, 1), ({21, 33}, 1), ({8, 46}, 12), ({34, 6}, 1), ({21, 34}, 5)]
+----- loop=63
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({34, 6}, 1), ({8, 45}, 19)]
+----- loop=64
+SCC  #1=1 #BIG=1
+56
+----- loop=65
+SCC  #1=0 #BIG=1
+56
+----- loop=66
+SCC  #1=1 #BIG=1
+56
+----- loop=67
+SCC  #1=8 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({68, 15}, 1), ({72, 31}, 18), ({72, 29}, 1)]
+----- loop=68
+SCC  #1=0 #BIG=1
+56
+----- loop=69
+SCC  #1=0 #BIG=1
+56
+----- loop=70
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({72, 29}, 1), ({68, 15}, 18), ({68, 14}, 1)]
+----- loop=71
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({71, 25}, 2), ({72, 29}, 16), ({68, 14}, 2)]
+----- loop=72
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({52, 15}, 1), ({68, 14}, 14), ({71, 25}, 5)]
+----- loop=73
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({71, 25}, 3), ({67, 9}, 16), ({6, 40}, 1)]
+----- loop=74
+SCC  #1=2 #BIG=1
+56
+----- loop=75
+SCC  #1=7 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({4, 31}, 1), ({40, 31}, 13), ({70, 22}, 3), ({22, 40}, 2), ({37, 20}, 1)]
+----- loop=76
+SCC  #1=0 #BIG=1
+56
+----- loop=77
+SCC  #1=0 #BIG=1
+56
+----- loop=78
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 6
+ER2: [({66, 5}, 3), ({6, 40}, 2), ({66, 6}, 6), ({37, 20}, 2), ({17, 4}, 1), ({69, 20}, 6)]
+----- loop=79
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({65, 4}, 1), ({4, 31}, 3), ({37, 20}, 1), ({22, 40}, 1), ({70, 22}, 14)]
+----- loop=80
+SCC  #1=1 #BIG=1
+56
+----- loop=81
+SCC  #1=2 #BIG=1
+56
+----- loop=82
+SCC  #1=1 #BIG=1
+56
+----- loop=83
+SCC  #1=2 #BIG=1
+56
+----- loop=84
+SCC  #1=0 #BIG=1
+56
+----- loop=85
+SCC  #1=1 #BIG=1
+56
+----- loop=86
+SCC  #1=2 #BIG=1
+56
+----- loop=87
+SCC  #1=0 #BIG=1
+56
+----- loop=88
+[2019-10-17 13:10:54,1, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 92 edgeCnt = 92 edgeList = [{33, 1}, {20, 13}, {71, 25}, {68, 13}, {42, 54}, {62, 72}, {63, 76}, {64, 80}, {61, 68}, {62, 71}, {63, 75}, {64, 79}, {61, 67}, {62, 70}, {63, 74}, {64, 78}, {61, 66}, {62, 69}, {64, 77}, {63, 73}, {61, 65}, {58, 40}, {59, 43}, {48, 79}, {57, 36}, {39, 27}, {59, 42}, {48, 78}, {35, 11}, {39, 26}, {59, 41}, {35, 10}, {39, 25}, {48, 77}, {35, 9}, {58, 38}, {60, 47}, {57, 34}, {58, 37}, {57, 33}, {60, 46}, {60, 45}, {55, 26}, {55, 25}, {53, 20}, {24, 47}, {76, 47}, {19, 10}, {51, 9}, {32, 78}, {19, 9}, {24, 46}, {32, 77}, {16, 77}, {24, 45}, {56, 31}, {53, 18}, {56, 30}, {56, 29}, {53, 17}, {23, 41}, {7, 41}, {54, 22}, {38, 22}, {21, 36}, {8, 47}, {8, 46}, {8, 45}, {34, 5}, {34, 6}, {21, 33}, {72, 31}, {72, 30}, {3, 25}, {68, 15}, {72, 29}, {68, 14}, {67, 9}, {75, 41}, {40, 31}, {17, 1}, {15, 73}, {66, 6}, {70, 22}, {4, 31}, {18, 6}, {2, 22}, {20, 15}, {30, 69}, {4, 29}, {69, 20}, {5, 36}]
+[2019-10-17 13:10:54,1, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:10:54,1, timer.h:61] NO_NAME [--------RANDOM new] = 13.0474
+[2019-10-17 13:10:54,1, timer.h:61] NO_NAME [gr] = 0.000480787
+===========> #WINS(NewRandom/Exact)=0/6     #DRAWS=6     #RUNS=12
+13 ======================= Processing [kautz-0016-5-1-30-150.al] {Graph V/E: 30/150}
+Exact solution=55 Time=0.048
+{Graph V/E: 30/150}
+Max V = 30
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({10, 30}, 1), ({22, 10}, 18), ({22, 9}, 1)]
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({15, 29}, 1), ({23, 15}, 15), ({15, 30}, 4)]
+----- loop=3
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({20, 30}, 4), ({24, 20}, 16)]
+----- loop=4
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({25, 30}, 20)]
+----- loop=5
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({5, 30}, 3), ({21, 5}, 16), ({5, 29}, 1)]
+----- loop=6
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({8, 19}, 1), ({22, 8}, 1), ({8, 20}, 1), ({22, 9}, 16), ({25, 29}, 1)]
+----- loop=7
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({29, 20}, 1), ({23, 13}, 1), ({23, 14}, 17), ({24, 19}, 1)]
+----- loop=8
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({24, 19}, 20)]
+----- loop=9
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({29, 20}, 3), ({25, 29}, 17)]
+----- loop=10
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({24, 18}, 1), ({22, 8}, 1), ({21, 4}, 13), ({25, 28}, 3), ({28, 15}, 2)]
+----- loop=11
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({8, 20}, 2), ({22, 8}, 18)]
+----- loop=12
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({23, 13}, 14), ({13, 19}, 2), ({13, 20}, 4)]
+----- loop=13
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({18, 15}, 1), ({24, 18}, 19)]
+----- loop=14
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({28, 15}, 5), ({25, 28}, 15)]
+----- loop=15
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({22, 7}, 1), ({21, 3}, 16), ({3, 20}, 3)]
+----- loop=16
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({7, 14}, 1), ({23, 12}, 1), ({22, 7}, 16), ({7, 15}, 2)]
+----- loop=17
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({12, 10}, 2), ({23, 11}, 1), ({23, 12}, 16), ({12, 9}, 1)]
+----- loop=18
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({17, 10}, 2), ({24, 17}, 18)]
+----- loop=19
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({24, 16}, 1), ({27, 10}, 3), ({25, 27}, 16)]
+----- loop=20
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({6, 5}, 1), ({2, 14}, 1), ({21, 1}, 2), ({2, 15}, 4), ({21, 2}, 12)]
+----- loop=21
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({6, 5}, 2), ({23, 11}, 2), ({22, 6}, 16)]
+----- loop=22
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({25, 26}, 1), ({24, 16}, 19)]
+----- loop=23
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({1, 10}, 1), ({21, 1}, 19)]
+----- loop=24
+SCC  #1=1 #BIG=1
+56
+----- loop=25
+SCC  #1=7 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({16, 5}, 12), ({5, 28}, 2), ({16, 3}, 1), ({5, 29}, 5)]
+----- loop=26
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({10, 28}, 2), ({17, 10}, 16), ({10, 29}, 2)]
+----- loop=27
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({15, 27}, 2), ({18, 15}, 14), ({28, 11}, 1), ({15, 29}, 3)]
+----- loop=28
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({16, 3}, 1), ({20, 29}, 18), ({20, 28}, 1)]
+----- loop=29
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({16, 3}, 17), ({16, 2}, 1), ({20, 28}, 2)]
+----- loop=30
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({20, 28}, 3), ({17, 8}, 17)]
+----- loop=31
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({20, 27}, 1), ({18, 13}, 15), ({20, 28}, 4)]
+----- loop=32
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({20, 27}, 1), ({16, 2}, 1), ({20, 28}, 17), ({28, 15}, 1)]
+----- loop=33
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({2, 13}, 1), ({16, 2}, 16), ({2, 15}, 3)]
+----- loop=34
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({17, 7}, 13), ({20, 27}, 1), ({7, 15}, 6)]
+----- loop=35
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 7
+ER2: [({27, 10}, 1), ({27, 8}, 1), ({20, 27}, 1), ({18, 12}, 12), ({12, 10}, 3), ({18, 11}, 1), ({11, 3}, 1)]
+----- loop=36
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({27, 8}, 1), ({27, 10}, 7), ({20, 27}, 12)]
+----- loop=37
+SCC  #1=0 #BIG=1
+56
+----- loop=38
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({6, 5}, 1), ({17, 6}, 18), ({18, 11}, 1)]
+----- loop=39
+SCC  #1=1 #BIG=1
+56
+----- loop=40
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({18, 11}, 1), ({16, 1}, 17), ({1, 10}, 2)]
+----- loop=41
+SCC  #1=1 #BIG=1
+56
+----- loop=42
+SCC  #1=6 #BIG=1
+56
+----- loop=43
+SCC  #1=0 #BIG=1
+56
+----- loop=44
+SCC  #1=0 #BIG=1
+56
+----- loop=45
+SCC  #1=0 #BIG=1
+56
+----- loop=46
+SCC  #1=1 #BIG=1
+56
+----- loop=47
+SCC  #1=0 #BIG=1
+56
+----- loop=48
+SCC  #1=1 #BIG=1
+56
+----- loop=49
+SCC  #1=0 #BIG=1
+56
+----- loop=50
+SCC  #1=3 #BIG=1
+56
+----- loop=51
+[2019-10-17 13:10:56,1, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 55 edgeCnt = 55 edgeList = [{27, 6}, {2, 12}, {10, 26}, {18, 11}, {23, 11}, {22, 10}, {23, 15}, {24, 20}, {25, 30}, {21, 5}, {22, 9}, {23, 14}, {24, 19}, {25, 29}, {21, 4}, {22, 8}, {23, 13}, {24, 18}, {25, 28}, {21, 3}, {22, 7}, {23, 12}, {24, 17}, {25, 27}, {21, 2}, {22, 6}, {24, 16}, {21, 1}, {25, 26}, {16, 5}, {17, 10}, {18, 15}, {20, 29}, {16, 3}, {17, 8}, {18, 13}, {20, 28}, {16, 2}, {17, 7}, {18, 12}, {20, 27}, {10, 27}, {17, 6}, {7, 12}, {16, 1}, {20, 26}, {1, 6}, {7, 11}, {2, 11}, {7, 15}, {26, 5}, {28, 11}, {28, 15}, {28, 12}, {26, 2}]
+[2019-10-17 13:10:56,1, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:10:56,1, timer.h:61] NO_NAME [--------RANDOM new] = 1.55914
+[2019-10-17 13:10:56,1, timer.h:61] NO_NAME [gr] = 9.8962e-05
+===========> #WINS(NewRandom/Exact)=0/6     #DRAWS=7     #RUNS=13
+14 ======================= Processing [kautz-0018-6-1-42-252.al] {Graph V/E: 42/252}
+Exact solution=91 Time=0.188
+{Graph V/E: 42/252}
+Max V = 42
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({12, 41}, 1), ({32, 12}, 17), ({12, 42}, 2)]
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({33, 17}, 1), ({33, 18}, 18), ({34, 24}, 1)]
+----- loop=3
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({24, 41}, 1), ({35, 30}, 1), ({24, 42}, 3), ({34, 24}, 15)]
+----- loop=4
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({35, 30}, 20)]
+----- loop=5
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({36, 42}, 20)]
+----- loop=6
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({6, 42}, 2), ({31, 6}, 17), ({31, 5}, 1)]
+----- loop=7
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({36, 41}, 3), ({32, 11}, 17)]
+----- loop=8
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({41, 30}, 1), ({34, 22}, 1), ({33, 17}, 17), ({34, 23}, 1)]
+----- loop=9
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({36, 41}, 4), ({34, 23}, 16)]
+----- loop=10
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({35, 28}, 2), ({41, 30}, 1), ({35, 29}, 15), ({36, 41}, 2)]
+----- loop=11
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({36, 41}, 17), ({41, 30}, 2), ({36, 40}, 1)]
+----- loop=12
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({31, 4}, 1), ({36, 40}, 2), ({31, 5}, 17)]
+----- loop=13
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({10, 30}, 1), ({32, 10}, 19)]
+----- loop=14
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({33, 16}, 20)]
+----- loop=15
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({22, 30}, 1), ({34, 22}, 18), ({34, 21}, 1)]
+----- loop=16
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({28, 24}, 1), ({35, 28}, 19)]
+----- loop=17
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({40, 23}, 1), ({40, 24}, 3), ({36, 40}, 15), ({31, 4}, 1)]
+----- loop=18
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({31, 4}, 14), ({4, 30}, 4), ({31, 3}, 2)]
+----- loop=19
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({32, 8}, 1), ({32, 9}, 17), ({9, 24}, 2)]
+----- loop=20
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({15, 24}, 1), ({33, 15}, 19)]
+----- loop=21
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({34, 21}, 18), ({21, 18}, 2)]
+----- loop=22
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({27, 18}, 2), ({35, 27}, 18)]
+----- loop=23
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({31, 2}, 1), ({36, 39}, 17), ({39, 18}, 2)]
+----- loop=24
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({31, 3}, 17), ({3, 24}, 3)]
+----- loop=25
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({8, 18}, 1), ({32, 8}, 19)]
+----- loop=26
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({33, 14}, 20)]
+----- loop=27
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({20, 12}, 2), ({34, 20}, 18)]
+----- loop=28
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({26, 12}, 3), ({35, 26}, 17)]
+----- loop=29
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({38, 11}, 1), ({36, 38}, 17), ({38, 12}, 2)]
+----- loop=30
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({2, 18}, 3), ({31, 2}, 17)]
+----- loop=31
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({7, 6}, 1), ({32, 7}, 18), ({7, 5}, 1)]
+----- loop=32
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({35, 25}, 1), ({34, 19}, 18), ({25, 6}, 1)]
+----- loop=33
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({37, 6}, 2), ({36, 37}, 18)]
+----- loop=34
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({35, 25}, 1), ({33, 13}, 17), ({13, 6}, 2)]
+----- loop=35
+SCC  #1=1 #BIG=1
+56
+----- loop=36
+SCC  #1=8 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({6, 41}, 1), ({25, 6}, 18), ({6, 40}, 1)]
+----- loop=37
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({26, 12}, 16), ({12, 41}, 3), ({27, 18}, 1)]
+----- loop=38
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({18, 41}, 2), ({27, 18}, 18)]
+----- loop=39
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({24, 41}, 3), ({28, 22}, 2), ({22, 30}, 1), ({28, 24}, 14)]
+----- loop=40
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({30, 39}, 1), ({30, 41}, 19)]
+----- loop=41
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({30, 40}, 2), ({25, 4}, 18)]
+----- loop=42
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({30, 40}, 2), ({26, 10}, 18)]
+----- loop=43
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({27, 16}, 15), ({28, 22}, 2), ({30, 40}, 3)]
+----- loop=44
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({30, 40}, 2), ({28, 22}, 17), ({40, 24}, 1)]
+----- loop=45
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({30, 40}, 16), ({30, 39}, 1), ({40, 24}, 3)]
+----- loop=46
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({25, 3}, 17), ({3, 24}, 1), ({25, 2}, 1), ({26, 9}, 1)]
+----- loop=47
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({9, 22}, 1), ({26, 9}, 17), ({9, 24}, 2)]
+----- loop=48
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({27, 14}, 2), ({15, 24}, 3), ({27, 15}, 15)]
+----- loop=49
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({21, 18}, 4), ({28, 21}, 16)]
+----- loop=50
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({39, 18}, 2), ({30, 39}, 18)]
+----- loop=51
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({2, 18}, 3), ({25, 2}, 17)]
+----- loop=52
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({26, 8}, 14), ({14, 12}, 1), ({8, 18}, 5)]
+----- loop=53
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({14, 12}, 5), ({27, 14}, 14), ({14, 10}, 1)]
+----- loop=54
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({20, 10}, 1), ({20, 12}, 3), ({30, 38}, 1), ({28, 20}, 15)]
+----- loop=55
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({38, 12}, 1), ({30, 38}, 19)]
+----- loop=56
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({28, 19}, 1), ({25, 1}, 19)]
+----- loop=57
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({28, 19}, 1), ({30, 37}, 3), ({27, 13}, 15), ({13, 6}, 1)]
+----- loop=58
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({37, 6}, 2), ({30, 37}, 18)]
+----- loop=59
+SCC  #1=1 #BIG=1
+56
+----- loop=60
+SCC  #1=7 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({21, 18}, 1), ({39, 15}, 1), ({19, 6}, 15), ({6, 40}, 3)]
+----- loop=61
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({20, 8}, 1), ({20, 9}, 2), ({20, 12}, 14), ({12, 40}, 3)]
+----- loop=62
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({24, 40}, 2), ({21, 18}, 16), ({18, 40}, 2)]
+----- loop=63
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({24, 39}, 1), ({24, 40}, 19)]
+----- loop=64
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({20, 9}, 1), ({19, 3}, 14), ({24, 39}, 5)]
+----- loop=65
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({20, 9}, 16), ({24, 39}, 1), ({20, 8}, 3)]
+----- loop=66
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 6
+ER2: [({14, 9}, 1), ({24, 39}, 3), ({39, 18}, 1), ({21, 15}, 13), ({38, 8}, 1), ({21, 14}, 1)]
+----- loop=67
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({19, 2}, 1), ({24, 38}, 2), ({39, 18}, 2), ({24, 39}, 13), ({39, 15}, 2)]
+----- loop=68
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({2, 15}, 2), ({19, 2}, 14), ({2, 18}, 4)]
+----- loop=69
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({8, 18}, 3), ({8, 15}, 1), ({20, 8}, 14), ({21, 14}, 2)]
+----- loop=70
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 6
+ER2: [({21, 13}, 1), ({14, 9}, 2), ({37, 6}, 1), ({21, 14}, 11), ({24, 38}, 3), ({14, 12}, 2)]
+----- loop=71
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({38, 12}, 5), ({38, 9}, 1), ({24, 38}, 14)]
+----- loop=72
+SCC  #1=0 #BIG=1
+56
+----- loop=73
+SCC  #1=0 #BIG=1
+56
+----- loop=74
+SCC  #1=0 #BIG=1
+56
+----- loop=75
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({20, 7}, 1), ({13, 6}, 1), ({24, 37}, 15), ({37, 6}, 3)]
+----- loop=76
+SCC  #1=1 #BIG=1
+56
+----- loop=77
+SCC  #1=1 #BIG=1
+56
+----- loop=78
+SCC  #1=0 #BIG=1
+56
+----- loop=79
+SCC  #1=6 #BIG=1
+56
+----- loop=80
+SCC  #1=0 #BIG=1
+56
+----- loop=81
+SCC  #1=0 #BIG=1
+56
+----- loop=82
+SCC  #1=0 #BIG=1
+56
+----- loop=83
+SCC  #1=1 #BIG=1
+56
+----- loop=84
+SCC  #1=0 #BIG=1
+56
+----- loop=85
+SCC  #1=2 #BIG=1
+56
+----- loop=86
+SCC  #1=0 #BIG=1
+56
+----- loop=87
+SCC  #1=1 #BIG=1
+56
+----- loop=88
+[2019-10-17 13:11:02,4, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 92 edgeCnt = 92 edgeList = [{2, 14}, {39, 18}, {13, 1}, {26, 7}, {35, 25}, {32, 12}, {33, 18}, {34, 24}, {35, 30}, {36, 42}, {31, 6}, {32, 11}, {33, 17}, {34, 23}, {35, 29}, {36, 41}, {31, 5}, {32, 10}, {33, 16}, {34, 22}, {35, 28}, {36, 40}, {31, 4}, {32, 9}, {33, 15}, {34, 21}, {35, 27}, {36, 39}, {31, 3}, {32, 8}, {33, 14}, {34, 20}, {35, 26}, {36, 38}, {31, 2}, {32, 7}, {34, 19}, {36, 37}, {33, 13}, {31, 1}, {25, 6}, {26, 12}, {27, 18}, {28, 24}, {30, 41}, {25, 4}, {26, 10}, {27, 16}, {28, 22}, {30, 40}, {25, 3}, {26, 9}, {27, 15}, {28, 21}, {30, 39}, {25, 2}, {26, 8}, {27, 14}, {28, 20}, {30, 38}, {25, 1}, {27, 13}, {30, 37}, {28, 19}, {19, 6}, {20, 12}, {21, 18}, {24, 40}, {19, 3}, {20, 9}, {21, 15}, {24, 39}, {19, 2}, {20, 8}, {21, 14}, {24, 38}, {13, 2}, {13, 3}, {19, 1}, {24, 37}, {20, 7}, {7, 1}, {13, 6}, {8, 14}, {37, 6}, {12, 38}, {7, 6}, {12, 37}, {39, 14}, {38, 8}, {37, 1}, {2, 18}]
+[2019-10-17 13:11:02,4, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:11:02,4, timer.h:61] NO_NAME [--------RANDOM new] = 6.28806
+[2019-10-17 13:11:02,4, timer.h:61] NO_NAME [gr] = 0.000227948
+===========> #WINS(NewRandom/Exact)=0/7     #DRAWS=7     #RUNS=14
+15 ======================= Processing [kautz-0020-7-1-56-392.al] {Graph V/E: 56/392}
+Exact solution=140 Time=27.408
+{Graph V/E: 56/392}
+Max V = 56
+SCC  #1=0 #BIG=1
+EDGES TO REMOVE INIT VAL = 3
+----- loop=1
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({45, 21}, 1), ({44, 14}, 18), ({14, 56}, 1)]
+----- loop=2
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({45, 20}, 1), ({21, 55}, 1), ({45, 21}, 15), ({21, 56}, 3)]
+----- loop=3
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({47, 35}, 1), ({46, 27}, 1), ({28, 56}, 3), ({46, 28}, 15)]
+----- loop=4
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({35, 56}, 2), ({47, 35}, 18)]
+----- loop=5
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({42, 56}, 1), ({48, 42}, 19)]
+----- loop=6
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({49, 56}, 20)]
+----- loop=7
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({43, 6}, 1), ({43, 7}, 18), ({7, 56}, 1)]
+----- loop=8
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({49, 55}, 2), ({48, 41}, 1), ({44, 13}, 17)]
+----- loop=9
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({49, 55}, 2), ({45, 20}, 18)]
+----- loop=10
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({46, 27}, 20)]
+----- loop=11
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({49, 55}, 1), ({47, 34}, 19)]
+----- loop=12
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({49, 55}, 3), ({48, 41}, 17)]
+----- loop=13
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({55, 42}, 2), ({49, 55}, 18)]
+----- loop=14
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({44, 12}, 1), ({43, 6}, 17), ({49, 54}, 2)]
+----- loop=15
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({12, 42}, 2), ({44, 12}, 18)]
+----- loop=16
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({45, 19}, 20)]
+----- loop=17
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({26, 42}, 1), ({46, 26}, 18), ({26, 41}, 1)]
+----- loop=18
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({48, 40}, 1), ({47, 33}, 16), ({33, 42}, 3)]
+----- loop=19
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({40, 35}, 4), ({48, 40}, 16)]
+----- loop=20
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({49, 53}, 1), ({54, 35}, 4), ({54, 34}, 1), ({49, 54}, 14)]
+----- loop=21
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({43, 4}, 2), ({43, 5}, 18)]
+----- loop=22
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({11, 35}, 4), ({44, 11}, 15), ({11, 34}, 1)]
+----- loop=23
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({18, 35}, 3), ({45, 18}, 17)]
+----- loop=24
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({25, 35}, 1), ({46, 25}, 19)]
+----- loop=25
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({32, 28}, 2), ({47, 32}, 18)]
+----- loop=26
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({39, 28}, 1), ({48, 39}, 19)]
+----- loop=27
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({53, 28}, 1), ({49, 53}, 19)]
+----- loop=28
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({43, 4}, 20)]
+----- loop=29
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({10, 28}, 3), ({44, 10}, 15), ({10, 27}, 2)]
+----- loop=30
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({17, 28}, 1), ({45, 17}, 19)]
+----- loop=31
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({24, 21}, 2), ({46, 24}, 18)]
+----- loop=32
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({47, 31}, 17), ({31, 21}, 3)]
+----- loop=33
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({38, 21}, 1), ({48, 37}, 1), ({48, 38}, 17), ({38, 20}, 1)]
+----- loop=34
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({49, 52}, 20)]
+----- loop=35
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({3, 28}, 2), ({43, 3}, 18)]
+----- loop=36
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({44, 8}, 1), ({9, 21}, 1), ({44, 9}, 18)]
+----- loop=37
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({45, 16}, 20)]
+----- loop=38
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({23, 14}, 3), ({46, 23}, 17)]
+----- loop=39
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({30, 14}, 2), ({47, 30}, 17), ({30, 13}, 1)]
+----- loop=40
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({37, 14}, 2), ({48, 37}, 18)]
+----- loop=41
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({51, 13}, 1), ({49, 51}, 17), ({51, 14}, 2)]
+----- loop=42
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({2, 20}, 1), ({43, 2}, 16), ({2, 21}, 3)]
+----- loop=43
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({44, 8}, 18), ({8, 7}, 2)]
+----- loop=44
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({47, 29}, 1), ({46, 22}, 17), ({22, 7}, 1), ({49, 50}, 1)]
+----- loop=45
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({48, 36}, 20)]
+----- loop=46
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({43, 1}, 20)]
+----- loop=47
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({29, 7}, 1), ({47, 29}, 19)]
+----- loop=48
+SCC  #1=1 #BIG=1
+56
+----- loop=49
+SCC  #1=9 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({36, 7}, 19), ({7, 55}, 1)]
+----- loop=50
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({14, 55}, 1), ({37, 14}, 19)]
+----- loop=51
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({21, 55}, 2), ({38, 21}, 17), ({39, 28}, 1)]
+----- loop=52
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({28, 55}, 1), ({28, 54}, 1), ({39, 28}, 17), ({40, 35}, 1)]
+----- loop=53
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({36, 5}, 1), ({42, 55}, 1), ({35, 53}, 1), ({35, 55}, 3), ({40, 35}, 14)]
+----- loop=54
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({42, 55}, 20)]
+----- loop=55
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({42, 54}, 4), ({36, 5}, 16)]
+----- loop=56
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({42, 54}, 1), ({37, 12}, 18), ({38, 19}, 1)]
+----- loop=57
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({38, 18}, 1), ({38, 19}, 18), ({54, 35}, 1)]
+----- loop=58
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({39, 25}, 1), ({39, 26}, 16), ({42, 54}, 3)]
+----- loop=59
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({39, 25}, 1), ({40, 33}, 17), ({42, 54}, 2)]
+----- loop=60
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({54, 33}, 1), ({36, 4}, 1), ({42, 54}, 17), ({54, 35}, 1)]
+----- loop=61
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({4, 35}, 2), ({36, 4}, 18)]
+----- loop=62
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({11, 35}, 3), ({37, 11}, 17)]
+----- loop=63
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({18, 33}, 1), ({38, 18}, 16), ({18, 35}, 2), ({39, 25}, 1)]
+----- loop=64
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({25, 35}, 1), ({39, 25}, 17), ({39, 24}, 2)]
+----- loop=65
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({32, 28}, 1), ({40, 32}, 19)]
+----- loop=66
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({53, 28}, 7), ({42, 53}, 13)]
+----- loop=67
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({10, 28}, 1), ({3, 28}, 3), ({37, 10}, 1), ({36, 3}, 15)]
+----- loop=68
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({10, 28}, 3), ({37, 10}, 17)]
+----- loop=69
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({17, 28}, 4), ({38, 17}, 15), ({24, 21}, 1)]
+----- loop=70
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({24, 19}, 1), ({39, 24}, 15), ({24, 21}, 4)]
+----- loop=71
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({42, 52}, 1), ({40, 31}, 15), ({31, 21}, 4)]
+----- loop=72
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({42, 52}, 18), ({36, 2}, 1), ({52, 21}, 1)]
+----- loop=73
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({2, 21}, 1), ({36, 2}, 19)]
+----- loop=74
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({9, 21}, 3), ({37, 9}, 17)]
+----- loop=75
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({42, 51}, 1), ({38, 16}, 17), ({16, 14}, 2)]
+----- loop=76
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({23, 14}, 1), ({39, 23}, 19)]
+----- loop=77
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({30, 14}, 4), ({40, 30}, 16)]
+----- loop=78
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({51, 14}, 2), ({42, 51}, 16), ({51, 12}, 2)]
+----- loop=79
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({36, 1}, 20)]
+----- loop=80
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({15, 7}, 1), ({38, 15}, 19)]
+----- loop=81
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({29, 7}, 3), ({40, 29}, 17)]
+----- loop=82
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({8, 7}, 1), ({37, 8}, 19)]
+----- loop=83
+SCC  #1=1 #BIG=1
+56
+----- loop=84
+SCC  #1=8 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({7, 53}, 1), ({29, 7}, 15), ({7, 54}, 4)]
+----- loop=85
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({14, 54}, 2), ({30, 11}, 1), ({30, 14}, 15), ({31, 21}, 1), ({14, 53}, 1)]
+----- loop=86
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({21, 54}, 1), ({31, 21}, 18), ({21, 53}, 1)]
+----- loop=87
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({28, 54}, 3), ({32, 28}, 17)]
+----- loop=88
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({35, 54}, 18), ({35, 53}, 1), ({29, 4}, 1)]
+----- loop=89
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({53, 28}, 1), ({29, 4}, 16), ({35, 53}, 3)]
+----- loop=90
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({30, 10}, 1), ({30, 11}, 18), ({53, 25}, 1)]
+----- loop=91
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({31, 18}, 15), ({35, 53}, 5)]
+----- loop=92
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({32, 24}, 2), ({35, 53}, 2), ({35, 52}, 1), ({32, 25}, 15)]
+----- loop=93
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({29, 3}, 1), ({35, 53}, 19)]
+----- loop=94
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({29, 2}, 1), ({3, 28}, 5), ({29, 3}, 12), ({30, 10}, 2)]
+----- loop=95
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({10, 28}, 1), ({30, 10}, 19)]
+----- loop=96
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({17, 28}, 3), ({31, 17}, 13), ({31, 16}, 2), ({17, 25}, 2)]
+----- loop=97
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({24, 18}, 1), ({35, 52}, 1), ({32, 24}, 14), ({24, 21}, 3), ({32, 23}, 1)]
+----- loop=98
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({29, 2}, 1), ({35, 52}, 15), ({52, 21}, 4)]
+----- loop=99
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({2, 21}, 7), ({35, 51}, 1), ({29, 2}, 12)]
+----- loop=100
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({30, 8}, 1), ({9, 18}, 1), ({9, 21}, 2), ({30, 9}, 16)]
+----- loop=101
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({16, 14}, 2), ({31, 16}, 17), ({16, 10}, 1)]
+----- loop=102
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({23, 11}, 1), ({51, 14}, 1), ({32, 23}, 13), ({23, 14}, 5)]
+----- loop=103
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({35, 51}, 16), ({29, 1}, 1), ({51, 14}, 3)]
+----- loop=104
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({1, 14}, 1), ({29, 1}, 17), ({1, 11}, 2)]
+----- loop=105
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 3
+ER2: [({35, 50}, 2), ({31, 15}, 16), ({15, 7}, 2)]
+----- loop=106
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 2
+ER2: [({30, 8}, 1), ({35, 50}, 19)]
+----- loop=107
+SCC  #1=1 #BIG=1
+56
+----- loop=108
+SCC  #1=7 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({7, 52}, 1), ({22, 7}, 15), ({7, 53}, 3), ({22, 3}, 1)]
+----- loop=109
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({14, 52}, 2), ({23, 10}, 1), ({52, 15}, 1), ({23, 14}, 12), ({14, 53}, 4)]
+----- loop=110
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({21, 53}, 2), ({21, 51}, 2), ({24, 21}, 15), ({28, 53}, 1)]
+----- loop=111
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 1
+ER2: [({28, 53}, 20)]
+----- loop=112
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({52, 21}, 3), ({24, 17}, 1), ({22, 3}, 13), ({28, 52}, 3)]
+----- loop=113
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({23, 9}, 1), ({28, 52}, 3), ({24, 17}, 2), ({23, 10}, 14)]
+----- loop=114
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({23, 9}, 1), ({24, 17}, 17), ({24, 16}, 1), ({28, 52}, 1)]
+----- loop=115
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({22, 2}, 2), ({28, 51}, 2), ({28, 52}, 13), ({52, 21}, 3)]
+----- loop=116
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 6
+ER2: [({51, 14}, 1), ({2, 21}, 2), ({22, 1}, 1), ({22, 2}, 14), ({2, 17}, 1), ({23, 9}, 1)]
+----- loop=117
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 6
+ER2: [({9, 17}, 1), ({23, 9}, 12), ({9, 21}, 4), ({24, 16}, 1), ({22, 1}, 1), ({23, 8}, 1)]
+----- loop=118
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 5
+ER2: [({15, 7}, 1), ({28, 51}, 2), ({16, 10}, 2), ({24, 16}, 12), ({16, 14}, 3)]
+----- loop=119
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({51, 14}, 3), ({22, 1}, 2), ({28, 51}, 13), ({51, 10}, 2)]
+----- loop=120
+SCC  #1=0 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({1, 14}, 2), ({1, 10}, 2), ({23, 8}, 1), ({22, 1}, 15)]
+----- loop=121
+SCC  #1=1 #BIG=1
+56
+------ USING alternative (GR/RED_EDGE) ------ 4
+ER2: [({28, 50}, 1), ({24, 15}, 16), ({15, 7}, 2), ({50, 7}, 1)]
+----- loop=122
+SCC  #1=1 #BIG=1
+56
+----- loop=123
+SCC  #1=6 #BIG=1
+56
+----- loop=124
+SCC  #1=0 #BIG=1
+56
+----- loop=125
+SCC  #1=0 #BIG=1
+56
+----- loop=126
+SCC  #1=0 #BIG=1
+56
+----- loop=127
+SCC  #1=0 #BIG=1
+56
+----- loop=128
+SCC  #1=0 #BIG=1
+56
+----- loop=129
+SCC  #1=0 #BIG=1
+56
+----- loop=130
+SCC  #1=0 #BIG=1
+56
+----- loop=131
+SCC  #1=0 #BIG=1
+56
+----- loop=132
+SCC  #1=0 #BIG=1
+56
+----- loop=133
+SCC  #1=5 #BIG=1
+56
+----- loop=134
+[2019-10-17 13:11:24,5, graphFaspFastFinal.h:735] FASP(RAND)  capacity = 140 edgeCnt = 140 edgeList = [{21, 50}, {7, 52}, {2, 16}, {28, 50}, {32, 22}, {42, 50}, {49, 50}, {44, 14}, {45, 21}, {46, 28}, {47, 35}, {48, 42}, {49, 56}, {43, 7}, {44, 13}, {45, 20}, {46, 27}, {47, 34}, {48, 41}, {49, 55}, {43, 6}, {44, 12}, {45, 19}, {46, 26}, {47, 33}, {48, 40}, {49, 54}, {43, 5}, {44, 11}, {45, 18}, {46, 25}, {47, 32}, {48, 39}, {49, 53}, {43, 4}, {44, 10}, {45, 17}, {46, 24}, {47, 31}, {48, 38}, {49, 52}, {43, 3}, {44, 9}, {45, 16}, {46, 23}, {47, 30}, {48, 37}, {49, 51}, {43, 2}, {44, 8}, {46, 22}, {48, 36}, {43, 1}, {47, 29}, {45, 15}, {36, 7}, {37, 14}, {38, 21}, {39, 28}, {40, 35}, {42, 55}, {36, 5}, {37, 12}, {38, 19}, {39, 26}, {40, 33}, {42, 54}, {36, 4}, {37, 11}, {38, 18}, {39, 25}, {40, 32}, {42, 53}, {36, 3}, {37, 10}, {38, 17}, {39, 24}, {40, 31}, {42, 52}, {36, 2}, {37, 9}, {38, 16}, {39, 23}, {40, 30}, {42, 51}, {36, 1}, {38, 15}, {40, 29}, {37, 8}, {39, 22}, {29, 7}, {30, 14}, {31, 21}, {32, 28}, {35, 54}, {29, 4}, {30, 11}, {31, 18}, {32, 25}, {35, 53}, {29, 3}, {30, 10}, {31, 17}, {32, 24}, {35, 52}, {29, 2}, {30, 9}, {31, 16}, {32, 23}, {35, 51}, {29, 1}, {31, 15}, {35, 50}, {30, 8}, {22, 7}, {23, 14}, {24, 21}, {28, 53}, {22, 3}, {23, 10}, {24, 17}, {28, 52}, {22, 2}, {23, 9}, {24, 16}, {28, 51}, {22, 1}, {24, 15}, {23, 8}, {7, 50}, {14, 51}, {9, 16}, {21, 52}, {15, 2}, {14, 52}, {9, 15}, {21, 51}, {1, 8}, {7, 51}, {1, 14}]
+[2019-10-17 13:11:24,5, graphFaspFastFinal.h:736] Edges with cycles: []
+[2019-10-17 13:11:24,6, timer.h:61] NO_NAME [--------RANDOM new] = 21.6465
+[2019-10-17 13:11:24,6, timer.h:61] NO_NAME [gr] = 0.000391585
+===========> #WINS(NewRandom/Exact)=0/7     #DRAWS=8     #RUNS=15
+TIME exact/random: 9186.7/252.439
