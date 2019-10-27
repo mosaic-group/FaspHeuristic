@@ -42,7 +42,7 @@ auto reqArgHdl(TCLAP::ValueArg<T> &arg) {
         exit(-1);
     }
     return arg.getValue();
-};
+}
 
 int main(int argc, char **argv) {
     configureLogger();

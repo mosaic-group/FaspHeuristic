@@ -993,7 +993,7 @@ template <typename T> T min(const T &a, const T &b) {return ( ( (a) < (b) ) ? a 
             node    *ndp;
             long arc_num;
 
-            for (int i = 0; i < mapVertices.size(); ++i) mapVertices[i] = -1;
+            for (std::size_t i = 0; i < mapVertices.size(); ++i) mapVertices[i] = -1;
 
             int newIdx = 0;
             for (auto &e : aGraph.getEdges()) {
