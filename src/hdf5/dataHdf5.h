@@ -12,6 +12,8 @@
 #include <tools/prettyprint.h>
 #include <hdf5.h>
 #include <iostream>
+#include <memory>
+
 
 // Types converter from C++ to HDF5 type - won't compile if type is not defined explicitely here
 template<typename DATA_TYPE> struct Hdf5Type {static hid_t type() {return  DATA_TYPE::CANNOT_DETECT_TYPE_AND_WILL_NOT_COMPILE;}};
@@ -50,6 +52,7 @@ class DataHdf5 {
     hid_t groupId = -1;
 
     std::map<std::string, ContainerType> iData;
+    std::map<std::string, std::vector<std::string>> iStrData;
 
     void hdf5WriteData(hid_t obj_id, hid_t type_id, const char *aDataSetName, hsize_t *dims, const void *data) {
 
@@ -61,10 +64,38 @@ class DataHdf5 {
         H5Sclose(space_id);
         H5Pclose(plist_id);
     }
+    void writeString(hid_t obj_id, const char *aDataSetName,const std::vector<std::string> &s) {
+        const int MaxStrLen = 256;
 
-    void write(hid_t aObjectId, const std::string &aName, const ContainerType &aContainer) {
+        // Create dataype
+        hid_t dtype = H5Tcopy(H5T_C_S1);
+        size_t size = MaxStrLen * sizeof(char);
+        H5Tset_size(dtype, size);
+
+        // create dataset
+        hsize_t dims[] = {s.size()};
+        hid_t dataspace_id = H5Screate_simple(1, dims, NULL);
+        hid_t dataset_id = H5Dcreate(obj_id, aDataSetName, dtype, dataspace_id, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+
+        // save data
+        std::unique_ptr<char[]> strData(new char[MaxStrLen * s.size()]);
+        std::size_t i = 0;
+        for (auto &str : s) {
+            strcpy(strData.get() + i, str.c_str());
+            i += MaxStrLen;
+        }
+        H5Dwrite (dataset_id, dtype, H5S_ALL, H5S_ALL, H5P_DEFAULT, strData.get());
+
+        // close things
+        H5Dclose(dataset_id);
+        H5Sclose(dataspace_id);
+        H5Tclose(dtype);
+    }
+
+    template<typename CONTAINER_TYPE>
+    void write(hid_t aObjectId, const std::string &aName, const CONTAINER_TYPE &aContainer) {
         hsize_t dims[] = {aContainer.size()};
-        hdf5WriteData(aObjectId, Hdf5DataType, aName.c_str(), dims, aContainer.data());
+        hdf5WriteData(aObjectId, Hdf5Type<typename CONTAINER_TYPE::value_type>::type(), aName.c_str(), dims, aContainer.data());
     }
 
 public:
@@ -87,14 +118,19 @@ public:
         iData.try_emplace(aTableName, ContainerType{}).first->second.emplace_back(aValue);
     }
 
+    void put(const std::string &aTableName, const std::string &aValue) {
+        iStrData.try_emplace(aTableName, std::vector<std::string>{}).first->second.emplace_back(aValue);
+    }
+
     void save() {
         if (groupId != -1) {
             for (auto& [name, data] : iData) write(groupId, name, data);
-        }
+            for (auto& [name, data] : iStrData) writeString(groupId, name.c_str(), data);
+         }
     }
 
     friend std::ostream &operator<<(std::ostream &os, const DataHdf5 &obj) {
-        return os << "DataHdf5{" << obj.iData << "}";
+        return os << "DataHdf5{" << "Numeric: " << obj.iData << "String: " << obj.iStrData << "}";
     }
 };
 

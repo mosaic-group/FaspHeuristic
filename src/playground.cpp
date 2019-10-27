@@ -105,11 +105,11 @@ void test(const char *inputDir) {
 //    dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/de-bruijn/";
 //    dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/tournaments";
 
-    if (strcmp(inputDir, "") == 0) dir = inputDir;
+    if (strcmp(inputDir, "") != 0) dir = inputDir;
 
     FaspSolutionResult fsr;
     Timer<true, false> t(true);
-    [[maybe_unused]] int limitCnt = 1;
+    [[maybe_unused]] int limitCnt = 23;
     int cnt = 0;
 
 
@@ -121,12 +121,14 @@ void test(const char *inputDir) {
     auto files = Graph::IO::getFilesInDir(std::string(dir));
 
     std::sort(files.begin(), files.end());
+    std::cout << files.size() << std::endl;
     for (auto &graphFile : files) {
+        std::cout << graphFile <<std::endl;
         if (!Tools::endsWith(graphFile, ".al")) continue;
+
 //        graphFile = "random-1463-410-533.al"; // 0.1s
 //        graphFile = "random-1833-500-700.al"; // 1s
 //        graphFile = "random-1224-350-700.al"; // 15s
-
 
         auto solutionFile{graphFile}; Tools::replace(solutionFile, ".al", ".mfas");
         auto timeoutFile{graphFile}; Tools::replace(timeoutFile, ".al", ".timeout");
@@ -137,7 +139,7 @@ void test(const char *inputDir) {
             continue;
         }
 
-//        if (limitCnt-- == 0) break;
+        if (limitCnt-- == 0) break;
 
         Graph::Graph g = Graph::IO::graphFromFile<int16_t>(dir + "/" + graphFile);
         auto c = Graph::Ext::getEdgeProperties<int16_t>(g, 1);
@@ -188,6 +190,7 @@ void test(const char *inputDir) {
         f.put("exactTime", timeExactOfGraph);
         f.put("vertices", g.getNumOfVertices());
         f.put("edges", g.getNumOfEdges());
+        f.put("fileName", graphFile);
     }
 
     f.save();
