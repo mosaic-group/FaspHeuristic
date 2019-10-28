@@ -79,6 +79,7 @@ class DataHdf5 {
 
         // save data
         std::unique_ptr<char[]> strData(new char[MaxStrLen * s.size()]);
+        memset(strData.get(), 0, MaxStrLen * s.size());
         std::size_t i = 0;
         for (auto &str : s) {
             strcpy(strData.get() + i, str.c_str());
