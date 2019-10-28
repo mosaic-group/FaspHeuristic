@@ -9,7 +9,7 @@
 #include "graph/graphTools.h"
 #include "graph/graphFasp.h"
 #include "graph/graphFaspFastFinal.h"
-
+#include "graph/graphIO.h"
 
 std::string getFilenameOfBenchmarkTiming(int v, int e, int fmin, int fmax, int steps, int reps, bool logDistr) {
     return std::string("NewTimingConstWeightVarFaspConstVE") +
@@ -35,9 +35,11 @@ void benchTimingConstWeightVarFaspConstVE(const std::string &outputDir, int numO
 
     Timer<true, false> t("benchTiming");
 
+    int fidx = 0;
     for (auto &faspSize : faspValues) {
         Timer<true, false> t("");
         for (int r = 0; r < numOfReps; ++r) {
+            fidx++;
             LOG(TRACE) << "--- Progress --- Fasp size=" << faspSize  << "/" << maxFasp << " Reps=" << r + 1 << "/" << numOfReps << "";
             auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int>(numOfVertices, faspSize, numOfEdges);
 
@@ -55,6 +57,8 @@ void benchTimingConstWeightVarFaspConstVE(const std::string &outputDir, int numO
             t.start_timer("random");
             auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::FaspFastFinal::randomFASP(g, c);
             auto randomTime = t.stop_timer();
+
+            Graph::IO::graphToFile(outputDir + "/" + "xl-" + Tools::convertToStrWithLeadingZeros(fidx) + "-" + std::to_string(numOfVertices) + "-" + std::to_string(numOfEdges)+"-"+std::to_string(faspSize)+".al", g);
 
             f1.put("gr", gr.first);
             f1.put("grTime", grTime);
