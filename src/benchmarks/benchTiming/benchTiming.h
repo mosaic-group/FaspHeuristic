@@ -53,15 +53,18 @@ void benchTimingConstWeightVarFaspConstVE(const std::string &outputDir, int numO
 //            auto deltaTime = t.stop_timer();
 
             t.start_timer("random");
-            auto random = Graph::FaspFastFinal::randomFASP(g, c);
+            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::FaspFastFinal::randomFASP(g, c);
             auto randomTime = t.stop_timer();
 
             f1.put("gr", gr.first);
             f1.put("grTime", grTime);
-            f1.put("random", random);
+            f1.put("random", capacity);
             f1.put("randomTime", randomTime);
             f1.put("exact", faspSize);
-            f1.put("exactTime", 1);
+            f1.put("exactTime", 1); // fake it
+            f1.put("saEdges", saEdgesCnt);
+            f1.put("saRndEdges", saRndEdgesCnt);
+            f1.put("redRndEdges", redRndEdgesCnt);
         }
     }
     f1.save();
@@ -111,22 +114,19 @@ void benchTimingConstDensityAndFaspGrowingsize(const std::string &outputDir, int
             auto gr = Graph::Fasp::GR(g, c);
             auto grTime = t.stop_timer();
 
-//            t.start_timer("delta");
-//            auto delta = Graph::FaspFast::deltaFASP(g, c);
-//            auto deltaTime = t.stop_timer();
-
             t.start_timer("random");
-            auto random = Graph::FaspFastFinal::randomFASP(g, c);
+            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::FaspFastFinal::randomFASP(g, c);
             auto randomTime = t.stop_timer();
 
             f1.put("gr", gr.first);
             f1.put("grTime", grTime);
-//            f1.put("delta", delta);
-//            f1.put("deltaTime", deltaTime);
-            f1.put("random", random);
+            f1.put("random", capacity);
             f1.put("randomTime", randomTime);
             f1.put("exact", fasp);
             f1.put("exactTime", 1);
+            f1.put("saEdges", saEdgesCnt);
+            f1.put("saRndEdges", saRndEdgesCnt);
+            f1.put("redRndEdges", redRndEdgesCnt);
         }
     }
     f1.save();}

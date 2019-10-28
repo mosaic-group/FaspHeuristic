@@ -138,7 +138,7 @@ void test(const char *inputDir) {
             continue;
         }
 
-        if (limitCnt-- == 0) break;
+//        if (limitCnt-- == 0) break;
 
         Graph::Graph g = Graph::IO::graphFromFile<int16_t>(dir + "/" + graphFile);
         auto c = Graph::Ext::getEdgeProperties<int16_t>(g, 1);

@@ -41,8 +41,8 @@ set(STATIC_TARGET_NAME staticLib)
 add_library(${STATIC_TARGET_NAME} STATIC $<TARGET_OBJECTS:testObjLib>)
 set(TEST_BUILD_LIBRARY ${STATIC_TARGET_NAME})
 
-add_executable(TestExe src/main.cpp)
-target_link_libraries(TestExe PRIVATE ${TEST_BUILD_LIBRARY} ${HDF5_LIBRARIES})
+add_executable(benchmark src/main.cpp)
+target_link_libraries(benchmark PRIVATE ${TEST_BUILD_LIBRARY} ${HDF5_LIBRARIES})
 
 add_executable(playground src/playground.cpp)
 target_link_libraries(playground PRIVATE ${TEST_BUILD_LIBRARY} ${HDF5_LIBRARIES})

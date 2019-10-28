@@ -35,7 +35,7 @@ void benchGraphsFromPaper1(const std::string &outputDir, const std::string &inpu
     std::smatch match;
 
     auto outputFile = outputDir + "/" + getFilenameOfBenchGraphsFromPaper1();
-    DataHdf5<double> f1(outputFile, /* create output file (dummy run) */ (outputDir == "" ? true : false));
+    DataHdf5<double> f(outputFile, /* create output file (dummy run) */ (outputDir == "" ? true : false));
 
     int numOfCorrect = 0;
     int numOfGraphs = 0;
@@ -57,19 +57,22 @@ void benchGraphsFromPaper1(const std::string &outputDir, const std::string &inpu
         Graph::Graph gv = Graph::IO::graphFromFile<int>(inputDir + "/" + file);
         auto c = Graph::Ext::getEdgeProperties<int>(gv, 1);
 
-        int faspCapacity = Graph::FaspFastFinal::randomFASP(gv, c);
-        f1.put("random", faspCapacity);
-        f1.put("exact", correct);
+        auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::FaspFastFinal::randomFASP(gv, c);
+        f.put("random", capacity);
+        f.put("exact", correct);
+        f.put("saEdges", saEdgesCnt);
+        f.put("saRndEdges", saRndEdgesCnt);
+        f.put("redRndEdges", redRndEdgesCnt);
 
-        if (faspCapacity == correct) ++numOfCorrect;
+        if (capacity == correct) ++numOfCorrect;
         else {
             LOG(ERROR) << "Not exact soltion found!";
-            if (faspCapacity - correct > largestError) largestError = faspCapacity - correct;
+            if (capacity - correct > largestError) largestError = capacity - correct;
         }
         ++numOfGraphs;
     }
 
-    f1.save();
+    f.save();
 
     LOG(INFO) << "Results - #graphs exactly solved / #graphs: " << numOfCorrect << "/" << numOfGraphs;
     LOG(INFO) << "Largest error: " << largestError;

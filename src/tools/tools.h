@@ -18,6 +18,7 @@
 #include <algorithm>
 #include <cmath>
 #include <random>
+#include <iomanip>
 
 namespace Tools {
 
@@ -90,6 +91,14 @@ namespace Tools {
             str.replace(start_pos, from.length(), to);
             start_pos += to.length(); // In case 'to' contains 'from', like replacing 'x' with 'yx'
         }
+    }
+
+    [[maybe_unused]]
+    static auto convertToStrWithLeadingZeros(int aNumber, uint16_t aNumOfLeadingZeros = 4) {
+        std::stringstream ss;
+        ss << std::setw(aNumOfLeadingZeros) << std::setfill('0') << aNumber;
+        std::string s = ss.str();
+        return s;
     }
 
     /**

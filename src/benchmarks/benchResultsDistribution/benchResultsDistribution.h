@@ -44,11 +44,16 @@ void benchResultsDistr(const std::string &outputDir, int numOfVertices, int numO
             LOG(TRACE) << "--- Progress --- Fasp size=" << faspSize  << "/" << maxFasp << " Reps=" << r + 1 << "/" << numOfReps << "";
             auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int>(numOfVertices, faspSize, numOfEdges);
 
+            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::FaspFastFinal::randomFASP(g, c);
+
             f1.put("vertices", g.getNumOfVertices());
             f1.put("edges", g.getNumOfEdges());
             f1.put("gr", Graph::Fasp::GR(g, c).first);
-            f1.put("random", Graph::FaspFastFinal::randomFASP(g, c));
+            f1.put("random", capacity);
             f1.put("exact", faspSize);
+            f1.put("saEdges", saEdgesCnt);
+            f1.put("saRndEdges", saRndEdgesCnt);
+            f1.put("redRndEdges", redRndEdgesCnt);
         }
     }
 

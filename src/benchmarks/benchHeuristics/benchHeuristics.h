@@ -33,7 +33,7 @@ void benchHeuristicsConstWeightVarFaspConstVE(const std::string &outputDir, int 
 
 
     auto outputFile = outputDir + "/" + getFilenameOfBenchmarkHeuristicsFaspWithConstVE(numOfVertices, numOfEdges, minFasp, maxFasp, numOfSteps, numOfReps, logDistribution);
-    DataHdf5<double> f1(outputFile, /* create output file (dummy run) */ (outputDir == "" ? true : false));
+    DataHdf5<double> f(outputFile, /* create output file (dummy run) */ (outputDir == "" ? true : false));
 
     auto faspValues =  logDistribution ? Tools::logspace(minFasp, maxFasp, numOfSteps) : Tools::linspace(minFasp, maxFasp, numOfSteps);
 
@@ -44,15 +44,20 @@ void benchHeuristicsConstWeightVarFaspConstVE(const std::string &outputDir, int 
             LOG(TRACE) << "--- Progress --- Fasp size=" << faspSize  << "/" << maxFasp << " Reps=" << r + 1 << "/" << numOfReps << "";
             auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int>(numOfVertices, faspSize, numOfEdges);
 
-            f1.put("vertices", g.getNumOfVertices());
-            f1.put("edges", g.getNumOfEdges());
-            f1.put("gr", Graph::Fasp::GR(g, c).first);
-            f1.put("random", Graph::FaspFastFinal::randomFASP(g, c));
-            f1.put("exact", faspSize);
+            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::FaspFastFinal::randomFASP(g, c);
+
+            f.put("vertices", g.getNumOfVertices());
+            f.put("edges", g.getNumOfEdges());
+            f.put("gr", Graph::Fasp::GR(g, c).first);
+            f.put("random", capacity);
+            f.put("exact", faspSize);
+            f.put("saEdges", saEdgesCnt);
+            f.put("saRndEdges", saRndEdgesCnt);
+            f.put("redRndEdges", redRndEdgesCnt);
         }
     }
 
-    f1.save();
+    f.save();
 }
 
 
