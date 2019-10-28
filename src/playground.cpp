@@ -123,7 +123,6 @@ void test(const char *inputDir) {
     std::sort(files.begin(), files.end());
     std::cout << files.size() << std::endl;
     for (auto &graphFile : files) {
-        std::cout << graphFile <<std::endl;
         if (!Tools::endsWith(graphFile, ".al")) continue;
 
 //        graphFile = "random-1463-410-533.al"; // 0.1s
@@ -157,9 +156,11 @@ void test(const char *inputDir) {
         timeExact += timeExactOfGraph;
 
         t.start_timer("--------RANDOM new");
-        auto random = Graph::FaspFastFinal::randomFASP(g, c);
-        fsr.getCnt("NewRandom") = random;
+        auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::FaspFastFinal::randomFASP(g, c);
         auto thisStep = t.stop_timer();
+        LOG(DEBUG) << "SA / SA RND / RED RND edges: " << saEdgesCnt << " / " << saRndEdgesCnt << " / " << redRndEdgesCnt;
+        LOG(DEBUG) << "FASP(RAND)  capacity = " << capacity << " edgeCnt = " << removedEdges.size() << " edgeList = " << removedEdges;
+        fsr.getCnt("NewRandom") = capacity;
         timeRandom+=thisStep;
 
         t.start_timer("gr");
@@ -184,13 +185,16 @@ void test(const char *inputDir) {
 
         f.put("gr", gr.first);
         f.put("grTime", grTime);
-        f.put("random", random);
+        f.put("random", capacity);
         f.put("randomTime", thisStep);
         f.put("exact", solution);
         f.put("exactTime", timeExactOfGraph);
         f.put("vertices", g.getNumOfVertices());
         f.put("edges", g.getNumOfEdges());
         f.put("fileName", graphFile);
+        f.put("saEdges", saEdgesCnt);
+        f.put("saRndEdges", saRndEdgesCnt);
+        f.put("redRndEdges", redRndEdgesCnt);
     }
 
     f.save();

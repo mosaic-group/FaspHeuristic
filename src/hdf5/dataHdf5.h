@@ -64,6 +64,7 @@ class DataHdf5 {
         H5Sclose(space_id);
         H5Pclose(plist_id);
     }
+
     void writeString(hid_t obj_id, const char *aDataSetName,const std::vector<std::string> &s) {
         const int MaxStrLen = 256;
 
