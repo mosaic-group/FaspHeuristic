@@ -306,7 +306,7 @@ namespace Graph::FaspFastFinal {
 
             int index_counter = 0;
             const int numOfV = aGraph.getNumOfVertices();
-            for (int i = 0; i < lowLinks.size(); ++i) lowLinks[i] = -1;
+            for (std::size_t i = 0; i < lowLinks.size(); ++i) lowLinks[i] = -1;
 
             std::vector<std::unordered_set<VERTEX_TYPE>> result; result.reserve(numOfV);
 
@@ -341,7 +341,7 @@ namespace Graph::FaspFastFinal {
                         initRun = false;
                     }
                     auto ov = aGraph.getOutVertices(currentNode);
-                    for(VERTEX_TYPE i = ci; i < ov.size(); ++i) {
+                    for(std::size_t i = ci; i < ov.size(); ++i) {
                         auto successor = ov[i];
                         if (lowLinks[successor] == -1) {
                             // save the state (it would be recurrent call in default version of Trajan's algorithm)
