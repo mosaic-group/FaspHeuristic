@@ -32,12 +32,23 @@ outputData = processLevel(fileID, fileInfo.GroupHierarchy(1), struct());
             for ld = 1:length(currentHdf5Level.Datasets)
                 % dataset name is the last part of path delimited with '/'
                 fullDatasetPath = currentHdf5Level.Datasets(ld).Name;
-                datasetName = getSuffixOfDelimiter(fullDatasetPath, '/');
-                                
+                datasetName = getSuffixOfDelimiter(fullDatasetPath, '/');             
                 datasetId = H5D.open(fileId, fullDatasetPath);
                 try
-                    % shortcut - always treat data as a double
-                    dataStruct.(datasetName) = double(H5D.read(datasetId));
+                    
+                    isString = H5T.detect_class(H5D.get_type(datasetId), 'H5T_STRING');
+                    if isString == 1
+                        strType = H5T.copy('H5T_C_S1');
+                        H5T.set_size(strType, 256);
+                        H5T.set_cset(strType, 'H5T_CSET_ASCII');
+                        H5T.set_strpad(strType, 'H5T_STR_NULLTERM');
+                        dataStruct.(datasetName) = cellstr(H5D.read(datasetId, strType, 'H5S_ALL','H5S_ALL','H5P_DEFAULT')');
+                        H5T.close(strType);
+                    else
+                        % shortcut - always treat non string data as a double
+                        dataStruct.(datasetName) = double(H5D.read(datasetId));
+                    end
+%                     dataStruct.(datasetName) = double(H5D.read(datasetId));
                     H5D.close(datasetId)
                 catch
                     H5D.close(datasetId)
