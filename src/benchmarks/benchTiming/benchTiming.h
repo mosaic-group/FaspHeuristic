@@ -11,7 +11,7 @@
 #include "graph/graphFaspFastFinal.h"
 #include "graph/graphIO.h"
 
-std::string getFilenameOfBenchmarkTiming(int v, int e, int fmin, int fmax, int steps, int reps, bool logDistr) {
+static std::string getFilenameOfBenchmarkTiming(int v, int e, int fmin, int fmax, int steps, int reps, bool logDistr) {
     return std::string("NewTimingConstWeightVarFaspConstVE") +
            "_v_" + std::to_string(v) +
            "_e_" + std::to_string(e) +

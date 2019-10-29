@@ -9,6 +9,7 @@
 #include "benchmarks/benchGraphsFromPaper1/benchGraphsFromPaper1.h"
 #include "benchmarks/benchResultsDistribution/benchResultsDistribution.h"
 #include "benchmarks/benchTiming/benchTiming.h"
+#include "benchmarks/benchWeights/benchWeights.h"
 
 INITIALIZE_EASYLOGGINGPP
 
@@ -60,6 +61,7 @@ int main(int argc, char **argv) {
         allowedBenchmarks.push_back("benchResultsDistribution");
         allowedBenchmarks.push_back("benchTimingConstWeightVarFaspConstVE");
         allowedBenchmarks.push_back("benchTimingConstDensityAndFaspGrowingsize");
+        allowedBenchmarks.push_back("benchTimingVarWeightVarFaspConstVE");
         TCLAP::ValuesConstraint<std::string> allowedVals( allowedBenchmarks );
         TCLAP::UnlabeledValueArg<std::string>  benchmarkName("benchmarkName", "name of benchmark to run", true, "", &allowedVals);
         cmd.add(benchmarkName);
@@ -152,6 +154,9 @@ int main(int argc, char **argv) {
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[7]) {
             benchTimingConstDensityAndFaspGrowingsize(dirArgHdl(dirArg), reqArgHdl(vMinArg), reqArgHdl(vMaxArg), reqArgHdl(dArg), reqArgHdl(fArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
+        }
+        else if (benchmarkName.getValue() == allowedBenchmarks[8]) {
+            benchTimingVarWeightVarFaspConstVE(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else {
 

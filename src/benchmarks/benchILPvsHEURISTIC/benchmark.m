@@ -26,7 +26,14 @@ d = gs ./ es;
 [min(d), mean(d), max(d)]
 h2 = histogram(d);
 
+min(data.edges ./ data.vertices)
 max(data.edges ./ data.vertices)
+min(data.edges)
+max(data.edges)
+min(data.vertices)
+max(data.vertices)
+min(data.exact)
+max(data.exact)
 
 % -------------------------------------------------------------------------
 

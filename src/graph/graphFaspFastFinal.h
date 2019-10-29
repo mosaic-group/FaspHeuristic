@@ -113,6 +113,7 @@ namespace Graph::FaspFastFinal {
             int maxMcRedEdge = 0;
 
             for (const auto &e : aGraph.getEdges()) {
+                EDGE_PROP_TYPE eCapacity = aWeights.at(e);
                 if (!pathExistsDFS(aGraph, e.dst, e.src)) continue; // optimization
 
                 auto pathExists = findPathDfs(aGraph, e.dst, e.src);
@@ -143,13 +144,13 @@ namespace Graph::FaspFastFinal {
                     }
                 }
 
-                if (maxMcRedEdge > 1) break;
+                if (maxMcRedEdge > eCapacity) break;
             }
 
             return std::pair{maxMcRedEdge, redEdge};
         }
 
-        bool GStarBlue(Graph <VERTEX_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge, EdgesSet<VERTEX_TYPE> &aBlueEdges) {
+        bool GStarBlue(Graph <VERTEX_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge, EdgesSet<VERTEX_TYPE> &aBlueEdges, bool weighted) {
             // 1. Remove an edge of interest 'aEdge' and find all connected components bigger than 1
             //    They consist from edges which are cycles not belonging only to aEdge so remove them.
             aGraph.removeEdge(aEdge);
@@ -168,6 +169,7 @@ namespace Graph::FaspFastFinal {
             }
 
             // 1.5 update blue edges
+            if (!weighted)
             for (auto &e : aGraph.getEdges()) {
                 aBlueEdges.emplace(e);
             }
@@ -412,7 +414,7 @@ namespace Graph::FaspFastFinal {
                 if (!path.pathExistsDFS(outGraph, e.dst, e.src)) continue;
 
                 auto workGraph{outGraph};
-                if (!path.GStarBlue(workGraph, e, setOfEdges)) continue;
+                if (!path.GStarBlue(workGraph, e, setOfEdges, aUseWeights)) continue;
 
                 // If we have weights assigned to edges then we need to do min-cut, if not it is always safe to remove current edge
                 bool shouldRemoveCurrentEdge = true;
@@ -451,9 +453,9 @@ namespace Graph::FaspFastFinal {
     /**
      * Working original idea of how random FASP heuristic should work
      */
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
+    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, bool WEIGHTED = false>
     static auto randomFASP(const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
-
+        if (WEIGHTED) std::cout << "Graph with WEIGHTS!\n";
         auto cleanGraphWithScc = [](Graph<VERTEX_TYPE> &aGraph, PathHero<VERTEX_TYPE> &path) {
             int cnt1 = 0, cntBig = 0;
             auto scc = path.stronglyConnectedComponents2(aGraph);
@@ -487,7 +489,7 @@ namespace Graph::FaspFastFinal {
         int saRndEdgesCnt = 0;
         int redRndEdgesCnt = 0;
         // initial run of superAlgorithm (SA)
-        auto [edgesToRemove, blueEdgesx, dummy2] = superAlgorithmBlue(g, aWeights, path);
+        auto [edgesToRemove, blueEdgesx, dummy2] = superAlgorithmBlue(g, aWeights, path, WEIGHTED);
         auto blueEdges = blueEdgesx;
         g.removeEdges(edgesToRemove);
         saEdgesCnt += edgesToRemove.size();
@@ -568,7 +570,7 @@ namespace Graph::FaspFastFinal {
                                      if (i == 0) tt.stop_timer();
 
                                      if (i == 0) tt.start_timer("4 - SA blue");
-                                     auto [edgesSA, _, edgesGR] = superAlgorithmBlue(workGraph, aWeights, path, false, true);
+                                     auto [edgesSA, _, edgesGR] = superAlgorithmBlue(workGraph, aWeights, path, WEIGHTED, true);
                                      if (i == 0) tt.stop_timer();
 
                                      if (i == 0) tt.start_timer("5 - Getting edges");
@@ -601,7 +603,7 @@ namespace Graph::FaspFastFinal {
 
             t.start_timer("main SA");
             // Try to solve the rest with superAlgoritm - maybe it will now succeed!
-            auto [edgesToRemove, blueEdges2, dummy3] = superAlgorithmBlue(g, aWeights, path);
+            auto [edgesToRemove, blueEdges2, dummy3] = superAlgorithmBlue(g, aWeights, path, WEIGHTED);
             blueEdges = blueEdges2;
             g.removeEdges(edgesToRemove);
             saEdgesCnt += edgesToRemove.size();
