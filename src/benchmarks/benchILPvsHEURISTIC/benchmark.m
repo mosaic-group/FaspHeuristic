@@ -2,7 +2,7 @@ function benchmark
 
 addpath('../matlabHelpers/')
 
-dataFile = loadHDF5('./data/new/small-world.h5');
+dataFile = loadHDF5('./data/new/random-large.h5');
 data = dataFile.Analysis_data;
 
 % ----------------- histogram of results ----------------------------------
@@ -26,6 +26,7 @@ d = gs ./ es;
 [min(d), mean(d), max(d)]
 h2 = histogram(d);
 
+max(data.edges ./ data.vertices)
 
 % -------------------------------------------------------------------------
 
