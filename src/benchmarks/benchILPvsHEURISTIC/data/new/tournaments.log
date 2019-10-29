@@ -1,0 +1,1605 @@
+840
+1 ======================= Processing [tournament-0001-3-3.al] {Graph V/E: 3/3}
+Exact solution=0 Time=0
+[35m[2019-10-28 19:28:55,0, timer.h:61] NO_NAME [--------RANDOM new] = 2.8723e-05
+[0m[32m[2019-10-28 19:28:55,0, playground.cpp:161] SA / SA RND / RED RND edges: 0 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,0, playground.cpp:162] FASP(RAND)  capacity = 0 edgeCnt = 0 edgeList = []
+[0m[35m[2019-10-28 19:28:55,0, timer.h:61] NO_NAME [gr] = 7.651e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=1     #RUNS=1
+2 ======================= Processing [tournament-0002-3-3.al] {Graph V/E: 3/3}
+Exact solution=1 Time=0.012
+[35m[2019-10-28 19:28:55,4, timer.h:61] NO_NAME [--------RANDOM new] = 3.2374e-05
+[0m[32m[2019-10-28 19:28:55,4, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,4, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{2, 1}]
+[0m[35m[2019-10-28 19:28:55,4, timer.h:61] NO_NAME [gr] = 7.9e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=2     #RUNS=2
+3 ======================= Processing [tournament-0003-3-3.al] {Graph V/E: 3/3}
+Exact solution=0 Time=0
+[35m[2019-10-28 19:28:55,5, timer.h:61] NO_NAME [--------RANDOM new] = 1.8781e-05
+[0m[32m[2019-10-28 19:28:55,5, playground.cpp:161] SA / SA RND / RED RND edges: 0 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,5, playground.cpp:162] FASP(RAND)  capacity = 0 edgeCnt = 0 edgeList = []
+[0m[35m[2019-10-28 19:28:55,5, timer.h:61] NO_NAME [gr] = 4.903e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=3     #RUNS=3
+4 ======================= Processing [tournament-0004-3-3.al] {Graph V/E: 3/3}
+Exact solution=1 Time=0
+[35m[2019-10-28 19:28:55,5, timer.h:61] NO_NAME [--------RANDOM new] = 2.938e-05
+[0m[32m[2019-10-28 19:28:55,5, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,5, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{3, 1}]
+[0m[35m[2019-10-28 19:28:55,5, timer.h:61] NO_NAME [gr] = 7.157e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=4     #RUNS=4
+5 ======================= Processing [tournament-0005-3-3.al] {Graph V/E: 3/3}
+Exact solution=1 Time=0.004
+[35m[2019-10-28 19:28:55,5, timer.h:61] NO_NAME [--------RANDOM new] = 2.6983e-05
+[0m[32m[2019-10-28 19:28:55,5, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,5, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{2, 1}]
+[0m[35m[2019-10-28 19:28:55,5, timer.h:61] NO_NAME [gr] = 6.21e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=5     #RUNS=5
+6 ======================= Processing [tournament-0006-3-3.al] {Graph V/E: 3/3}
+Exact solution=0 Time=0
+[35m[2019-10-28 19:28:55,5, timer.h:61] NO_NAME [--------RANDOM new] = 1.7745e-05
+[0m[32m[2019-10-28 19:28:55,6, playground.cpp:161] SA / SA RND / RED RND edges: 0 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,6, playground.cpp:162] FASP(RAND)  capacity = 0 edgeCnt = 0 edgeList = []
+[0m[35m[2019-10-28 19:28:55,6, timer.h:61] NO_NAME [gr] = 4.417e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=6     #RUNS=6
+7 ======================= Processing [tournament-0007-3-3.al] {Graph V/E: 3/3}
+Exact solution=0 Time=0
+[35m[2019-10-28 19:28:55,6, timer.h:61] NO_NAME [--------RANDOM new] = 1.6994e-05
+[0m[32m[2019-10-28 19:28:55,6, playground.cpp:161] SA / SA RND / RED RND edges: 0 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,6, playground.cpp:162] FASP(RAND)  capacity = 0 edgeCnt = 0 edgeList = []
+[0m[35m[2019-10-28 19:28:55,6, timer.h:61] NO_NAME [gr] = 3.947e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=7     #RUNS=7
+8 ======================= Processing [tournament-0008-3-3.al] {Graph V/E: 3/3}
+Exact solution=1 Time=0
+[35m[2019-10-28 19:28:55,6, timer.h:61] NO_NAME [--------RANDOM new] = 2.7816e-05
+[0m[32m[2019-10-28 19:28:55,6, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,6, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{3, 1}]
+[0m[35m[2019-10-28 19:28:55,6, timer.h:61] NO_NAME [gr] = 6.647e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=8     #RUNS=8
+9 ======================= Processing [tournament-0009-3-3.al] {Graph V/E: 3/3}
+Exact solution=0 Time=0
+[35m[2019-10-28 19:28:55,6, timer.h:61] NO_NAME [--------RANDOM new] = 1.7581e-05
+[0m[32m[2019-10-28 19:28:55,6, playground.cpp:161] SA / SA RND / RED RND edges: 0 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,6, playground.cpp:162] FASP(RAND)  capacity = 0 edgeCnt = 0 edgeList = []
+[0m[35m[2019-10-28 19:28:55,6, timer.h:61] NO_NAME [gr] = 5.397e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=9     #RUNS=9
+10 ======================= Processing [tournament-0010-3-3.al] {Graph V/E: 3/3}
+Exact solution=0 Time=0
+[35m[2019-10-28 19:28:55,7, timer.h:61] NO_NAME [--------RANDOM new] = 1.723e-05
+[0m[32m[2019-10-28 19:28:55,7, playground.cpp:161] SA / SA RND / RED RND edges: 0 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,7, playground.cpp:162] FASP(RAND)  capacity = 0 edgeCnt = 0 edgeList = []
+[0m[35m[2019-10-28 19:28:55,7, timer.h:61] NO_NAME [gr] = 4.503e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=10     #RUNS=10
+11 ======================= Processing [tournament-0011-4-6.al] {Graph V/E: 4/6}
+Exact solution=0 Time=0
+[35m[2019-10-28 19:28:55,7, timer.h:61] NO_NAME [--------RANDOM new] = 1.9323e-05
+[0m[32m[2019-10-28 19:28:55,7, playground.cpp:161] SA / SA RND / RED RND edges: 0 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,7, playground.cpp:162] FASP(RAND)  capacity = 0 edgeCnt = 0 edgeList = []
+[0m[35m[2019-10-28 19:28:55,7, timer.h:61] NO_NAME [gr] = 6.437e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=11     #RUNS=11
+12 ======================= Processing [tournament-0012-4-6.al] {Graph V/E: 4/6}
+Exact solution=0 Time=0
+[35m[2019-10-28 19:28:55,7, timer.h:61] NO_NAME [--------RANDOM new] = 1.9117e-05
+[0m[32m[2019-10-28 19:28:55,7, playground.cpp:161] SA / SA RND / RED RND edges: 0 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,7, playground.cpp:162] FASP(RAND)  capacity = 0 edgeCnt = 0 edgeList = []
+[0m[35m[2019-10-28 19:28:55,7, timer.h:61] NO_NAME [gr] = 6.26e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=12     #RUNS=12
+13 ======================= Processing [tournament-0013-4-6.al] {Graph V/E: 4/6}
+Exact solution=0 Time=0
+[35m[2019-10-28 19:28:55,7, timer.h:61] NO_NAME [--------RANDOM new] = 1.8794e-05
+[0m[32m[2019-10-28 19:28:55,7, playground.cpp:161] SA / SA RND / RED RND edges: 0 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,8, playground.cpp:162] FASP(RAND)  capacity = 0 edgeCnt = 0 edgeList = []
+[0m[35m[2019-10-28 19:28:55,8, timer.h:61] NO_NAME [gr] = 6.117e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=13     #RUNS=13
+14 ======================= Processing [tournament-0014-4-6.al] {Graph V/E: 4/6}
+Exact solution=1 Time=0
+[35m[2019-10-28 19:28:55,8, timer.h:61] NO_NAME [--------RANDOM new] = 3.0054e-05
+[0m[32m[2019-10-28 19:28:55,8, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,8, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{2, 1}]
+[0m[35m[2019-10-28 19:28:55,8, timer.h:61] NO_NAME [gr] = 8.023e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=14     #RUNS=14
+15 ======================= Processing [tournament-0015-4-6.al] {Graph V/E: 4/6}
+Exact solution=1 Time=0
+[35m[2019-10-28 19:28:55,8, timer.h:61] NO_NAME [--------RANDOM new] = 2.8815e-05
+[0m[32m[2019-10-28 19:28:55,8, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,8, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{4, 2}]
+[0m[35m[2019-10-28 19:28:55,8, timer.h:61] NO_NAME [gr] = 7.491e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=15     #RUNS=15
+16 ======================= Processing [tournament-0016-4-6.al] {Graph V/E: 4/6}
+Exact solution=0 Time=0
+[35m[2019-10-28 19:28:55,8, timer.h:61] NO_NAME [--------RANDOM new] = 1.9097e-05
+[0m[32m[2019-10-28 19:28:55,8, playground.cpp:161] SA / SA RND / RED RND edges: 0 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,8, playground.cpp:162] FASP(RAND)  capacity = 0 edgeCnt = 0 edgeList = []
+[0m[35m[2019-10-28 19:28:55,8, timer.h:61] NO_NAME [gr] = 6.22e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=16     #RUNS=16
+17 ======================= Processing [tournament-0017-4-6.al] {Graph V/E: 4/6}
+Exact solution=1 Time=0
+[35m[2019-10-28 19:28:55,9, timer.h:61] NO_NAME [--------RANDOM new] = 5.0087e-05
+[0m[32m[2019-10-28 19:28:55,9, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,9, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{1, 3}]
+[0m[35m[2019-10-28 19:28:55,9, timer.h:61] NO_NAME [gr] = 9.796e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=17     #RUNS=17
+18 ======================= Processing [tournament-0018-4-6.al] {Graph V/E: 4/6}
+Exact solution=1 Time=0.004
+[35m[2019-10-28 19:28:55,9, timer.h:61] NO_NAME [--------RANDOM new] = 7.4255e-05
+[0m[32m[2019-10-28 19:28:55,9, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,9, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{4, 2}]
+[0m[35m[2019-10-28 19:28:55,9, timer.h:61] NO_NAME [gr] = 8.305e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=18     #RUNS=18
+19 ======================= Processing [tournament-0019-4-6.al] {Graph V/E: 4/6}
+Exact solution=1 Time=0
+[35m[2019-10-28 19:28:55,9, timer.h:61] NO_NAME [--------RANDOM new] = 3.0896e-05
+[0m[32m[2019-10-28 19:28:55,9, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,9, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{2, 1}]
+[0m[35m[2019-10-28 19:28:55,9, timer.h:61] NO_NAME [gr] = 7.425e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=19     #RUNS=19
+20 ======================= Processing [tournament-0020-4-6.al] {Graph V/E: 4/6}
+Exact solution=1 Time=0.004
+[35m[2019-10-28 19:28:55,0, timer.h:61] NO_NAME [--------RANDOM new] = 2.7631e-05
+[0m[32m[2019-10-28 19:28:55,0, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,0, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{4, 1}]
+[0m[35m[2019-10-28 19:28:55,0, timer.h:61] NO_NAME [gr] = 7.514e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=20     #RUNS=20
+21 ======================= Processing [tournament-0021-5-10.al] {Graph V/E: 5/10}
+Exact solution=1 Time=0
+[35m[2019-10-28 19:28:55,0, timer.h:61] NO_NAME [--------RANDOM new] = 2.8407e-05
+[0m[32m[2019-10-28 19:28:55,0, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,0, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{2, 1}]
+[0m[35m[2019-10-28 19:28:55,0, timer.h:61] NO_NAME [gr] = 8.434e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=21     #RUNS=21
+22 ======================= Processing [tournament-0022-5-10.al] {Graph V/E: 5/10}
+Exact solution=1 Time=0.004
+[35m[2019-10-28 19:28:55,0, timer.h:61] NO_NAME [--------RANDOM new] = 2.8271e-05
+[0m[32m[2019-10-28 19:28:55,0, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,0, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{3, 1}]
+[0m[35m[2019-10-28 19:28:55,0, timer.h:61] NO_NAME [gr] = 9.021e-06
+[0m===========> #WINS(NewRandom/Exact)=0/0     #DRAWS=22     #RUNS=22
+23 ======================= Processing [tournament-0023-5-10.al] {Graph V/E: 5/10}
+Exact solution=2 Time=0
+[35m[2019-10-28 19:28:55,1, timer.h:61] NO_NAME [--------RANDOM new] = 0.000559251
+[0m[32m[2019-10-28 19:28:55,1, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 1 / 0
+[0m[32m[2019-10-28 19:28:55,1, playground.cpp:162] FASP(RAND)  capacity = 3 edgeCnt = 3 edgeList = [{3, 1}, {3, 2}, {5, 1}]
+[0m[35m[2019-10-28 19:28:55,1, timer.h:61] NO_NAME [gr] = 1.3803e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=22     #RUNS=23
+24 ======================= Processing [tournament-0024-5-10.al] {Graph V/E: 5/10}
+Exact solution=1 Time=0.004
+[35m[2019-10-28 19:28:55,1, timer.h:61] NO_NAME [--------RANDOM new] = 2.9669e-05
+[0m[32m[2019-10-28 19:28:55,1, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,1, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{2, 1}]
+[0m[35m[2019-10-28 19:28:55,1, timer.h:61] NO_NAME [gr] = 9.693e-06
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=23     #RUNS=24
+25 ======================= Processing [tournament-0025-5-10.al] {Graph V/E: 5/10}
+Exact solution=0 Time=0
+[35m[2019-10-28 19:28:55,2, timer.h:61] NO_NAME [--------RANDOM new] = 2.0342e-05
+[0m[32m[2019-10-28 19:28:55,2, playground.cpp:161] SA / SA RND / RED RND edges: 0 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,2, playground.cpp:162] FASP(RAND)  capacity = 0 edgeCnt = 0 edgeList = []
+[0m[35m[2019-10-28 19:28:55,2, timer.h:61] NO_NAME [gr] = 7.381e-06
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=24     #RUNS=25
+26 ======================= Processing [tournament-0026-5-10.al] {Graph V/E: 5/10}
+Exact solution=2 Time=0.004
+[35m[2019-10-28 19:28:55,2, timer.h:61] NO_NAME [--------RANDOM new] = 0.000107706
+[0m[32m[2019-10-28 19:28:55,2, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,2, playground.cpp:162] FASP(RAND)  capacity = 2 edgeCnt = 2 edgeList = [{2, 3}, {4, 1}]
+[0m[35m[2019-10-28 19:28:55,2, timer.h:61] NO_NAME [gr] = 1.1453e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=25     #RUNS=26
+27 ======================= Processing [tournament-0027-5-10.al] {Graph V/E: 5/10}
+Exact solution=2 Time=0
+[35m[2019-10-28 19:28:55,2, timer.h:61] NO_NAME [--------RANDOM new] = 4.7111e-05
+[0m[32m[2019-10-28 19:28:55,2, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,2, playground.cpp:162] FASP(RAND)  capacity = 2 edgeCnt = 2 edgeList = [{4, 1}, {4, 3}]
+[0m[35m[2019-10-28 19:28:55,2, timer.h:61] NO_NAME [gr] = 1.1772e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=26     #RUNS=27
+28 ======================= Processing [tournament-0028-5-10.al] {Graph V/E: 5/10}
+Exact solution=1 Time=0.004
+[35m[2019-10-28 19:28:55,3, timer.h:61] NO_NAME [--------RANDOM new] = 3.044e-05
+[0m[32m[2019-10-28 19:28:55,3, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,3, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{3, 1}]
+[0m[35m[2019-10-28 19:28:55,3, timer.h:61] NO_NAME [gr] = 9.213e-06
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=27     #RUNS=28
+29 ======================= Processing [tournament-0029-5-10.al] {Graph V/E: 5/10}
+Exact solution=1 Time=0
+[35m[2019-10-28 19:28:55,3, timer.h:61] NO_NAME [--------RANDOM new] = 2.828e-05
+[0m[32m[2019-10-28 19:28:55,3, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,3, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{5, 4}]
+[0m[35m[2019-10-28 19:28:55,3, timer.h:61] NO_NAME [gr] = 9.45e-06
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=28     #RUNS=29
+30 ======================= Processing [tournament-0030-5-10.al] {Graph V/E: 5/10}
+Exact solution=1 Time=0.004
+[35m[2019-10-28 19:28:55,3, timer.h:61] NO_NAME [--------RANDOM new] = 4.4963e-05
+[0m[32m[2019-10-28 19:28:55,3, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,3, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{1, 2}]
+[0m[35m[2019-10-28 19:28:55,3, timer.h:61] NO_NAME [gr] = 1.1052e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=29     #RUNS=30
+31 ======================= Processing [tournament-0031-6-15.al] {Graph V/E: 6/15}
+Exact solution=3 Time=0.004
+[35m[2019-10-28 19:28:55,4, timer.h:61] NO_NAME [--------RANDOM new] = 0.000867367
+[0m[32m[2019-10-28 19:28:55,4, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 1 / 0
+[0m[32m[2019-10-28 19:28:55,4, playground.cpp:162] FASP(RAND)  capacity = 3 edgeCnt = 3 edgeList = [{6, 4}, {2, 5}, {1, 4}]
+[0m[35m[2019-10-28 19:28:55,5, timer.h:61] NO_NAME [gr] = 1.6819e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=30     #RUNS=31
+32 ======================= Processing [tournament-0032-6-15.al] {Graph V/E: 6/15}
+Exact solution=2 Time=0.004
+[35m[2019-10-28 19:28:55,5, timer.h:61] NO_NAME [--------RANDOM new] = 6.3352e-05
+[0m[32m[2019-10-28 19:28:55,5, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,5, playground.cpp:162] FASP(RAND)  capacity = 2 edgeCnt = 2 edgeList = [{1, 5}, {2, 3}]
+[0m[35m[2019-10-28 19:28:55,5, timer.h:61] NO_NAME [gr] = 1.3372e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=31     #RUNS=32
+33 ======================= Processing [tournament-0033-6-15.al] {Graph V/E: 6/15}
+Exact solution=2 Time=0.004
+[35m[2019-10-28 19:28:55,6, timer.h:61] NO_NAME [--------RANDOM new] = 0.000445302
+[0m[32m[2019-10-28 19:28:55,6, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 1 / 0
+[0m[32m[2019-10-28 19:28:55,6, playground.cpp:162] FASP(RAND)  capacity = 2 edgeCnt = 2 edgeList = [{5, 6}, {2, 3}]
+[0m[35m[2019-10-28 19:28:55,6, timer.h:61] NO_NAME [gr] = 1.4855e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=32     #RUNS=33
+34 ======================= Processing [tournament-0034-6-15.al] {Graph V/E: 6/15}
+Exact solution=3 Time=0.004
+[35m[2019-10-28 19:28:55,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.0015977
+[0m[32m[2019-10-28 19:28:55,8, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 2 / 0
+[0m[32m[2019-10-28 19:28:55,8, playground.cpp:162] FASP(RAND)  capacity = 3 edgeCnt = 3 edgeList = [{6, 1}, {4, 3}, {6, 5}]
+[0m[35m[2019-10-28 19:28:55,8, timer.h:61] NO_NAME [gr] = 1.8302e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=33     #RUNS=34
+35 ======================= Processing [tournament-0035-6-15.al] {Graph V/E: 6/15}
+Exact solution=3 Time=0.004
+[35m[2019-10-28 19:28:55,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.00124642
+[0m[32m[2019-10-28 19:28:55,9, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 1 / 0
+[0m[32m[2019-10-28 19:28:55,9, playground.cpp:162] FASP(RAND)  capacity = 3 edgeCnt = 3 edgeList = [{1, 5}, {1, 6}, {6, 3}]
+[0m[35m[2019-10-28 19:28:55,9, timer.h:61] NO_NAME [gr] = 1.6729e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=34     #RUNS=35
+36 ======================= Processing [tournament-0036-6-15.al] {Graph V/E: 6/15}
+Exact solution=2 Time=0.004
+[35m[2019-10-28 19:28:55,9, timer.h:61] NO_NAME [--------RANDOM new] = 9.0115e-05
+[0m[32m[2019-10-28 19:28:55,9, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,0, playground.cpp:162] FASP(RAND)  capacity = 2 edgeCnt = 2 edgeList = [{5, 2}, {6, 4}]
+[0m[35m[2019-10-28 19:28:55,0, timer.h:61] NO_NAME [gr] = 1.5702e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=35     #RUNS=36
+37 ======================= Processing [tournament-0037-6-15.al] {Graph V/E: 6/15}
+Exact solution=3 Time=0.004
+[35m[2019-10-28 19:28:55,1, timer.h:61] NO_NAME [--------RANDOM new] = 0.00171804
+[0m[32m[2019-10-28 19:28:55,2, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 2 / 0
+[0m[32m[2019-10-28 19:28:55,2, playground.cpp:162] FASP(RAND)  capacity = 3 edgeCnt = 3 edgeList = [{5, 6}, {2, 4}, {1, 6}]
+[0m[35m[2019-10-28 19:28:55,2, timer.h:61] NO_NAME [gr] = 1.7135e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=36     #RUNS=37
+38 ======================= Processing [tournament-0038-6-15.al] {Graph V/E: 6/15}
+Exact solution=2 Time=0.004
+[35m[2019-10-28 19:28:55,3, timer.h:61] NO_NAME [--------RANDOM new] = 0.000788557
+[0m[32m[2019-10-28 19:28:55,3, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 1 / 0
+[0m[32m[2019-10-28 19:28:55,3, playground.cpp:162] FASP(RAND)  capacity = 2 edgeCnt = 2 edgeList = [{2, 1}, {5, 3}]
+[0m[35m[2019-10-28 19:28:55,3, timer.h:61] NO_NAME [gr] = 1.3974e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=37     #RUNS=38
+39 ======================= Processing [tournament-0039-6-15.al] {Graph V/E: 6/15}
+Exact solution=1 Time=0.004
+[35m[2019-10-28 19:28:55,3, timer.h:61] NO_NAME [--------RANDOM new] = 3.8009e-05
+[0m[32m[2019-10-28 19:28:55,3, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,3, playground.cpp:162] FASP(RAND)  capacity = 1 edgeCnt = 1 edgeList = [{2, 1}]
+[0m[35m[2019-10-28 19:28:55,3, timer.h:61] NO_NAME [gr] = 1.1194e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=38     #RUNS=39
+40 ======================= Processing [tournament-0040-6-15.al] {Graph V/E: 6/15}
+Exact solution=2 Time=0.004
+[35m[2019-10-28 19:28:55,4, timer.h:61] NO_NAME [--------RANDOM new] = 0.000884821
+[0m[32m[2019-10-28 19:28:55,4, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 1 / 0
+[0m[32m[2019-10-28 19:28:55,4, playground.cpp:162] FASP(RAND)  capacity = 2 edgeCnt = 2 edgeList = [{6, 5}, {6, 2}]
+[0m[35m[2019-10-28 19:28:55,4, timer.h:61] NO_NAME [gr] = 1.3108e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=39     #RUNS=40
+41 ======================= Processing [tournament-0041-7-21.al] {Graph V/E: 7/21}
+Exact solution=3 Time=0.004
+[35m[2019-10-28 19:28:55,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.00229511
+[0m[32m[2019-10-28 19:28:55,7, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 2 / 0
+[0m[32m[2019-10-28 19:28:55,7, playground.cpp:162] FASP(RAND)  capacity = 3 edgeCnt = 3 edgeList = [{3, 4}, {3, 2}, {5, 4}]
+[0m[35m[2019-10-28 19:28:55,7, timer.h:61] NO_NAME [gr] = 1.8092e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=40     #RUNS=41
+42 ======================= Processing [tournament-0042-7-21.al] {Graph V/E: 7/21}
+Exact solution=3 Time=0.004
+[35m[2019-10-28 19:28:55,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.00016798
+[0m[32m[2019-10-28 19:28:55,7, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,7, playground.cpp:162] FASP(RAND)  capacity = 3 edgeCnt = 3 edgeList = [{4, 6}, {4, 7}, {5, 4}]
+[0m[35m[2019-10-28 19:28:55,7, timer.h:61] NO_NAME [gr] = 1.784e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=41     #RUNS=42
+43 ======================= Processing [tournament-0043-7-21.al] {Graph V/E: 7/21}
+Exact solution=2 Time=0.004
+[35m[2019-10-28 19:28:55,8, timer.h:61] NO_NAME [--------RANDOM new] = 0.000998272
+[0m[32m[2019-10-28 19:28:55,9, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 1 / 0
+[0m[32m[2019-10-28 19:28:55,9, playground.cpp:162] FASP(RAND)  capacity = 2 edgeCnt = 2 edgeList = [{1, 2}, {1, 5}]
+[0m[35m[2019-10-28 19:28:55,9, timer.h:61] NO_NAME [gr] = 1.8354e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=42     #RUNS=43
+44 ======================= Processing [tournament-0044-7-21.al] {Graph V/E: 7/21}
+Exact solution=3 Time=0.004
+[35m[2019-10-28 19:28:55,2, timer.h:61] NO_NAME [--------RANDOM new] = 0.00359431
+[0m[32m[2019-10-28 19:28:55,2, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 2 / 0
+[0m[32m[2019-10-28 19:28:55,2, playground.cpp:162] FASP(RAND)  capacity = 3 edgeCnt = 3 edgeList = [{4, 6}, {3, 6}, {4, 2}]
+[0m[35m[2019-10-28 19:28:55,2, timer.h:61] NO_NAME [gr] = 2.2766e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=43     #RUNS=44
+45 ======================= Processing [tournament-0045-7-21.al] {Graph V/E: 7/21}
+Exact solution=2 Time=0.004
+[35m[2019-10-28 19:28:55,3, timer.h:61] NO_NAME [--------RANDOM new] = 8.0153e-05
+[0m[32m[2019-10-28 19:28:55,3, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 0 / 0
+[0m[32m[2019-10-28 19:28:55,3, playground.cpp:162] FASP(RAND)  capacity = 2 edgeCnt = 2 edgeList = [{6, 1}, {2, 3}]
+[0m[35m[2019-10-28 19:28:55,3, timer.h:61] NO_NAME [gr] = 1.8458e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=44     #RUNS=45
+46 ======================= Processing [tournament-0046-7-21.al] {Graph V/E: 7/21}
+Exact solution=3 Time=0.004
+[35m[2019-10-28 19:28:55,4, timer.h:61] NO_NAME [--------RANDOM new] = 0.00101373
+[0m[32m[2019-10-28 19:28:55,4, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 1 / 0
+[0m[32m[2019-10-28 19:28:55,4, playground.cpp:162] FASP(RAND)  capacity = 3 edgeCnt = 3 edgeList = [{5, 6}, {3, 4}, {1, 6}]
+[0m[35m[2019-10-28 19:28:55,4, timer.h:61] NO_NAME [gr] = 1.6882e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=45     #RUNS=46
+47 ======================= Processing [tournament-0047-7-21.al] {Graph V/E: 7/21}
+Exact solution=4 Time=0.004
+[35m[2019-10-28 19:28:55,8, timer.h:61] NO_NAME [--------RANDOM new] = 0.00308925
+[0m[32m[2019-10-28 19:28:55,8, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 2 / 0
+[0m[32m[2019-10-28 19:28:55,8, playground.cpp:162] FASP(RAND)  capacity = 4 edgeCnt = 4 edgeList = [{3, 5}, {2, 7}, {1, 6}, {1, 7}]
+[0m[35m[2019-10-28 19:28:55,8, timer.h:61] NO_NAME [gr] = 2.0285e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=46     #RUNS=47
+48 ======================= Processing [tournament-0048-7-21.al] {Graph V/E: 7/21}
+Exact solution=6 Time=0.008
+[35m[2019-10-28 19:28:56,8, timer.h:61] NO_NAME [--------RANDOM new] = 0.00988383
+[0m[32m[2019-10-28 19:28:56,8, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 4 / 0
+[0m[32m[2019-10-28 19:28:56,8, playground.cpp:162] FASP(RAND)  capacity = 6 edgeCnt = 6 edgeList = [{7, 3}, {4, 3}, {1, 4}, {1, 2}, {1, 3}, {7, 5}]
+[0m[35m[2019-10-28 19:28:56,8, timer.h:61] NO_NAME [gr] = 1.9442e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=47     #RUNS=48
+49 ======================= Processing [tournament-0049-7-21.al] {Graph V/E: 7/21}
+Exact solution=5 Time=0.008
+[35m[2019-10-28 19:28:56,5, timer.h:61] NO_NAME [--------RANDOM new] = 0.00706186
+[0m[32m[2019-10-28 19:28:56,5, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 2 / 1
+[0m[32m[2019-10-28 19:28:56,5, playground.cpp:162] FASP(RAND)  capacity = 5 edgeCnt = 5 edgeList = [{7, 2}, {4, 3}, {4, 5}, {3, 5}, {4, 2}]
+[0m[35m[2019-10-28 19:28:56,5, timer.h:61] NO_NAME [gr] = 1.8893e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=48     #RUNS=49
+50 ======================= Processing [tournament-0050-7-21.al] {Graph V/E: 7/21}
+Exact solution=5 Time=0.008
+[35m[2019-10-28 19:28:56,1, timer.h:61] NO_NAME [--------RANDOM new] = 0.00547445
+[0m[32m[2019-10-28 19:28:56,1, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 3 / 0
+[0m[32m[2019-10-28 19:28:56,1, playground.cpp:162] FASP(RAND)  capacity = 5 edgeCnt = 5 edgeList = [{5, 2}, {7, 6}, {3, 1}, {7, 4}, {1, 6}]
+[0m[35m[2019-10-28 19:28:56,1, timer.h:61] NO_NAME [gr] = 1.7283e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=49     #RUNS=50
+51 ======================= Processing [tournament-0051-8-28.al] {Graph V/E: 8/28}
+Exact solution=4 Time=0.004
+[35m[2019-10-28 19:28:56,5, timer.h:61] NO_NAME [--------RANDOM new] = 0.0134841
+[0m[32m[2019-10-28 19:28:56,5, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 3 / 0
+[0m[32m[2019-10-28 19:28:56,5, playground.cpp:162] FASP(RAND)  capacity = 4 edgeCnt = 4 edgeList = [{3, 6}, {4, 7}, {8, 5}, {4, 6}]
+[0m[35m[2019-10-28 19:28:56,5, timer.h:61] NO_NAME [gr] = 2.0548e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=50     #RUNS=51
+52 ======================= Processing [tournament-0052-8-28.al] {Graph V/E: 8/28}
+Exact solution=4 Time=0.008
+[35m[2019-10-28 19:28:56,8, timer.h:61] NO_NAME [--------RANDOM new] = 0.00296247
+[0m[32m[2019-10-28 19:28:56,8, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 2 / 0
+[0m[32m[2019-10-28 19:28:56,8, playground.cpp:162] FASP(RAND)  capacity = 4 edgeCnt = 4 edgeList = [{2, 5}, {2, 8}, {7, 4}, {7, 1}]
+[0m[35m[2019-10-28 19:28:56,8, timer.h:61] NO_NAME [gr] = 1.7593e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=51     #RUNS=52
+53 ======================= Processing [tournament-0053-8-28.al] {Graph V/E: 8/28}
+Exact solution=5 Time=0.004
+[35m[2019-10-28 19:28:56,8, timer.h:61] NO_NAME [--------RANDOM new] = 0.00983864
+[0m[32m[2019-10-28 19:28:56,8, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 4 / 0
+[0m[32m[2019-10-28 19:28:56,8, playground.cpp:162] FASP(RAND)  capacity = 5 edgeCnt = 5 edgeList = [{6, 4}, {1, 3}, {6, 8}, {2, 7}, {1, 4}]
+[0m[35m[2019-10-28 19:28:56,8, timer.h:61] NO_NAME [gr] = 2.0804e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=52     #RUNS=53
+54 ======================= Processing [tournament-0054-8-28.al] {Graph V/E: 8/28}
+Exact solution=4 Time=0.008
+[35m[2019-10-28 19:28:56,3, timer.h:61] NO_NAME [--------RANDOM new] = 0.00476818
+[0m[32m[2019-10-28 19:28:56,3, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 2 / 0
+[0m[32m[2019-10-28 19:28:56,3, playground.cpp:162] FASP(RAND)  capacity = 4 edgeCnt = 4 edgeList = [{8, 2}, {5, 8}, {5, 4}, {3, 6}]
+[0m[35m[2019-10-28 19:28:56,3, timer.h:61] NO_NAME [gr] = 1.7761e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=53     #RUNS=54
+55 ======================= Processing [tournament-0055-8-28.al] {Graph V/E: 8/28}
+Exact solution=6 Time=0.008
+[35m[2019-10-28 19:28:56,5, timer.h:61] NO_NAME [--------RANDOM new] = 0.0116877
+[0m[32m[2019-10-28 19:28:56,5, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 5 / 0
+[0m[32m[2019-10-28 19:28:56,5, playground.cpp:162] FASP(RAND)  capacity = 6 edgeCnt = 6 edgeList = [{6, 1}, {4, 3}, {8, 3}, {4, 5}, {2, 5}, {8, 1}]
+[0m[35m[2019-10-28 19:28:56,5, timer.h:61] NO_NAME [gr] = 1.8938e-05
+[0m===========> #WINS(NewRandom/Exact)=0/1     #DRAWS=54     #RUNS=55
+56 ======================= Processing [tournament-0056-8-28.al] {Graph V/E: 8/28}
+Exact solution=6 Time=0.008
+[35m[2019-10-28 19:28:56,5, timer.h:61] NO_NAME [--------RANDOM new] = 0.0101381
+[0m[32m[2019-10-28 19:28:56,5, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 4 / 1
+[0m[32m[2019-10-28 19:28:56,5, playground.cpp:162] FASP(RAND)  capacity = 7 edgeCnt = 7 edgeList = [{4, 6}, {3, 6}, {8, 4}, {5, 4}, {3, 7}, {8, 6}, {4, 1}]
+[0m[35m[2019-10-28 19:28:56,5, timer.h:61] NO_NAME [gr] = 1.7759e-05
+[0m===========> #WINS(NewRandom/Exact)=0/2     #DRAWS=54     #RUNS=56
+57 ======================= Processing [tournament-0057-8-28.al] {Graph V/E: 8/28}
+Exact solution=4 Time=0.008
+[35m[2019-10-28 19:28:56,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.00106096
+[0m[32m[2019-10-28 19:28:56,7, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 1 / 0
+[0m[32m[2019-10-28 19:28:56,7, playground.cpp:162] FASP(RAND)  capacity = 4 edgeCnt = 4 edgeList = [{5, 1}, {5, 6}, {2, 3}, {4, 8}]
+[0m[35m[2019-10-28 19:28:56,7, timer.h:61] NO_NAME [gr] = 1.6458e-05
+[0m===========> #WINS(NewRandom/Exact)=0/2     #DRAWS=55     #RUNS=57
+58 ======================= Processing [tournament-0058-8-28.al] {Graph V/E: 8/28}
+Exact solution=6 Time=0.008
+[35m[2019-10-28 19:28:56,8, timer.h:61] NO_NAME [--------RANDOM new] = 0.011491
+[0m[32m[2019-10-28 19:28:56,8, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 3 / 1
+[0m[32m[2019-10-28 19:28:56,8, playground.cpp:162] FASP(RAND)  capacity = 6 edgeCnt = 6 edgeList = [{6, 3}, {7, 4}, {1, 7}, {6, 8}, {7, 3}, {6, 4}]
+[0m[35m[2019-10-28 19:28:56,8, timer.h:61] NO_NAME [gr] = 1.7185e-05
+[0m===========> #WINS(NewRandom/Exact)=0/2     #DRAWS=56     #RUNS=58
+59 ======================= Processing [tournament-0059-8-28.al] {Graph V/E: 8/28}
+Exact solution=4 Time=0.004
+[35m[2019-10-28 19:28:56,3, timer.h:61] NO_NAME [--------RANDOM new] = 0.00395395
+[0m[32m[2019-10-28 19:28:56,3, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 3 / 0
+[0m[32m[2019-10-28 19:28:56,3, playground.cpp:162] FASP(RAND)  capacity = 5 edgeCnt = 5 edgeList = [{7, 5}, {8, 2}, {8, 5}, {6, 2}, {6, 1}]
+[0m[35m[2019-10-28 19:28:56,3, timer.h:61] NO_NAME [gr] = 1.6715e-05
+[0m===========> #WINS(NewRandom/Exact)=0/3     #DRAWS=56     #RUNS=59
+60 ======================= Processing [tournament-0060-8-28.al] {Graph V/E: 8/28}
+Exact solution=6 Time=0.008
+[35m[2019-10-28 19:28:56,2, timer.h:61] NO_NAME [--------RANDOM new] = 0.00912088
+[0m[32m[2019-10-28 19:28:56,2, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 3 / 1
+[0m[32m[2019-10-28 19:28:56,2, playground.cpp:162] FASP(RAND)  capacity = 6 edgeCnt = 6 edgeList = [{3, 1}, {4, 7}, {6, 5}, {6, 1}, {3, 7}, {4, 2}]
+[0m[35m[2019-10-28 19:28:56,2, timer.h:61] NO_NAME [gr] = 1.5118e-05
+[0m===========> #WINS(NewRandom/Exact)=0/3     #DRAWS=57     #RUNS=60
+61 ======================= Processing [tournament-0061-9-36.al] {Graph V/E: 9/36}
+Exact solution=7 Time=0.012
+[35m[2019-10-28 19:28:56,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.0169209
+[0m[32m[2019-10-28 19:28:56,9, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 2 / 2
+[0m[32m[2019-10-28 19:28:56,9, playground.cpp:162] FASP(RAND)  capacity = 7 edgeCnt = 7 edgeList = [{3, 1}, {4, 7}, {4, 6}, {8, 9}, {5, 9}, {4, 9}, {5, 1}]
+[0m[35m[2019-10-28 19:28:56,9, timer.h:61] NO_NAME [gr] = 1.9425e-05
+[0m===========> #WINS(NewRandom/Exact)=0/3     #DRAWS=58     #RUNS=61
+62 ======================= Processing [tournament-0062-9-36.al] {Graph V/E: 9/36}
+Exact solution=9 Time=0.012
+[35m[2019-10-28 19:28:56,6, timer.h:61] NO_NAME [--------RANDOM new] = 0.0264089
+[0m[32m[2019-10-28 19:28:56,6, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 6 / 4
+[0m[32m[2019-10-28 19:28:56,6, playground.cpp:162] FASP(RAND)  capacity = 12 edgeCnt = 12 edgeList = [{7, 1}, {7, 3}, {1, 9}, {1, 8}, {5, 9}, {1, 4}, {6, 8}, {6, 9}, {6, 4}, {3, 4}, {6, 1}, {5, 1}]
+[0m[35m[2019-10-28 19:28:56,6, timer.h:61] NO_NAME [gr] = 1.9608e-05
+[0m===========> #WINS(NewRandom/Exact)=0/4     #DRAWS=58     #RUNS=62
+63 ======================= Processing [tournament-0063-9-36.al] {Graph V/E: 9/36}
+Exact solution=8 Time=0.012
+[35m[2019-10-28 19:28:56,4, timer.h:61] NO_NAME [--------RANDOM new] = 0.0176229
+[0m[32m[2019-10-28 19:28:56,4, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 6 / 1
+[0m[32m[2019-10-28 19:28:56,4, playground.cpp:162] FASP(RAND)  capacity = 8 edgeCnt = 8 edgeList = [{3, 7}, {1, 9}, {8, 9}, {1, 7}, {3, 4}, {8, 5}, {2, 6}, {5, 7}]
+[0m[35m[2019-10-28 19:28:56,4, timer.h:61] NO_NAME [gr] = 1.9128e-05
+[0m===========> #WINS(NewRandom/Exact)=0/4     #DRAWS=59     #RUNS=63
+64 ======================= Processing [tournament-0064-9-36.al] {Graph V/E: 9/36}
+Exact solution=6 Time=0.008
+[35m[2019-10-28 19:28:56,4, timer.h:61] NO_NAME [--------RANDOM new] = 0.00989295
+[0m[32m[2019-10-28 19:28:56,4, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 3 / 0
+[0m[32m[2019-10-28 19:28:56,4, playground.cpp:162] FASP(RAND)  capacity = 6 edgeCnt = 6 edgeList = [{1, 3}, {9, 7}, {5, 4}, {1, 8}, {3, 4}, {1, 5}]
+[0m[35m[2019-10-28 19:28:56,4, timer.h:61] NO_NAME [gr] = 1.8782e-05
+[0m===========> #WINS(NewRandom/Exact)=0/4     #DRAWS=60     #RUNS=64
+65 ======================= Processing [tournament-0065-9-36.al] {Graph V/E: 9/36}
+Exact solution=6 Time=0.012
+[35m[2019-10-28 19:28:56,4, timer.h:61] NO_NAME [--------RANDOM new] = 0.0105848
+[0m[32m[2019-10-28 19:28:56,4, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 2 / 1
+[0m[32m[2019-10-28 19:28:56,4, playground.cpp:162] FASP(RAND)  capacity = 6 edgeCnt = 6 edgeList = [{3, 2}, {3, 9}, {4, 6}, {5, 8}, {4, 1}, {3, 8}]
+[0m[35m[2019-10-28 19:28:56,4, timer.h:61] NO_NAME [gr] = 1.8443e-05
+[0m===========> #WINS(NewRandom/Exact)=0/4     #DRAWS=61     #RUNS=65
+66 ======================= Processing [tournament-0066-9-36.al] {Graph V/E: 9/36}
+Exact solution=6 Time=0.008
+[35m[2019-10-28 19:28:56,4, timer.h:61] NO_NAME [--------RANDOM new] = 0.0091763
+[0m[32m[2019-10-28 19:28:56,4, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 3 / 0
+[0m[32m[2019-10-28 19:28:56,4, playground.cpp:162] FASP(RAND)  capacity = 6 edgeCnt = 6 edgeList = [{2, 8}, {8, 6}, {3, 1}, {2, 5}, {7, 3}, {9, 6}]
+[0m[35m[2019-10-28 19:28:56,4, timer.h:61] NO_NAME [gr] = 1.7012e-05
+[0m===========> #WINS(NewRandom/Exact)=0/4     #DRAWS=62     #RUNS=66
+67 ======================= Processing [tournament-0067-9-36.al] {Graph V/E: 9/36}
+Exact solution=8 Time=0.008
+[35m[2019-10-28 19:28:56,8, timer.h:61] NO_NAME [--------RANDOM new] = 0.0137185
+[0m[32m[2019-10-28 19:28:56,8, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 4 / 1
+[0m[32m[2019-10-28 19:28:56,8, playground.cpp:162] FASP(RAND)  capacity = 8 edgeCnt = 8 edgeList = [{9, 1}, {2, 9}, {4, 5}, {6, 7}, {8, 5}, {8, 4}, {8, 1}, {2, 4}]
+[0m[35m[2019-10-28 19:28:56,8, timer.h:61] NO_NAME [gr] = 1.8294e-05
+[0m===========> #WINS(NewRandom/Exact)=0/4     #DRAWS=63     #RUNS=67
+68 ======================= Processing [tournament-0068-9-36.al] {Graph V/E: 9/36}
+Exact solution=9 Time=0.012
+[35m[2019-10-28 19:28:56,6, timer.h:61] NO_NAME [--------RANDOM new] = 0.0278135
+[0m[32m[2019-10-28 19:28:56,6, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 3 / 4
+[0m[32m[2019-10-28 19:28:56,6, playground.cpp:162] FASP(RAND)  capacity = 9 edgeCnt = 9 edgeList = [{2, 9}, {2, 5}, {1, 8}, {4, 9}, {7, 9}, {7, 1}, {3, 8}, {2, 4}, {2, 8}]
+[0m[35m[2019-10-28 19:28:56,6, timer.h:61] NO_NAME [gr] = 1.7802e-05
+[0m===========> #WINS(NewRandom/Exact)=0/4     #DRAWS=64     #RUNS=68
+69 ======================= Processing [tournament-0069-9-36.al] {Graph V/E: 9/36}
+Exact solution=7 Time=0.008
+[35m[2019-10-28 19:28:56,5, timer.h:61] NO_NAME [--------RANDOM new] = 0.0195082
+[0m[32m[2019-10-28 19:28:56,5, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 5 / 2
+[0m[32m[2019-10-28 19:28:56,6, playground.cpp:162] FASP(RAND)  capacity = 9 edgeCnt = 9 edgeList = [{8, 1}, {3, 4}, {1, 7}, {9, 7}, {4, 2}, {5, 4}, {9, 2}, {8, 3}, {9, 3}]
+[0m[35m[2019-10-28 19:28:56,6, timer.h:61] NO_NAME [gr] = 1.8165e-05
+[0m===========> #WINS(NewRandom/Exact)=0/5     #DRAWS=64     #RUNS=69
+70 ======================= Processing [tournament-0070-9-36.al] {Graph V/E: 9/36}
+Exact solution=7 Time=0.008
+[35m[2019-10-28 19:28:56,6, timer.h:61] NO_NAME [--------RANDOM new] = 0.0201259
+[0m[32m[2019-10-28 19:28:56,6, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 4 / 2
+[0m[32m[2019-10-28 19:28:56,6, playground.cpp:162] FASP(RAND)  capacity = 8 edgeCnt = 8 edgeList = [{9, 2}, {7, 4}, {6, 9}, {6, 7}, {6, 3}, {8, 4}, {1, 5}, {9, 5}]
+[0m[35m[2019-10-28 19:28:56,6, timer.h:61] NO_NAME [gr] = 1.8862e-05
+[0m===========> #WINS(NewRandom/Exact)=0/6     #DRAWS=64     #RUNS=70
+71 ======================= Processing [tournament-0071-10-45.al] {Graph V/E: 10/45}
+Exact solution=9 Time=0.016
+[35m[2019-10-28 19:28:56,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.0305783
+[0m[32m[2019-10-28 19:28:56,7, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 3 / 3
+[0m[32m[2019-10-28 19:28:56,7, playground.cpp:162] FASP(RAND)  capacity = 9 edgeCnt = 9 edgeList = [{6, 8}, {5, 8}, {1, 7}, {10, 4}, {1, 8}, {10, 8}, {10, 7}, {1, 5}, {3, 2}]
+[0m[35m[2019-10-28 19:28:56,7, timer.h:61] NO_NAME [gr] = 2.3768e-05
+[0m===========> #WINS(NewRandom/Exact)=0/6     #DRAWS=65     #RUNS=71
+72 ======================= Processing [tournament-0072-10-45.al] {Graph V/E: 10/45}
+Exact solution=12 Time=0.02
+[35m[2019-10-28 19:28:56,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.0420206
+[0m[32m[2019-10-28 19:28:56,9, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 5 / 6
+[0m[32m[2019-10-28 19:28:56,9, playground.cpp:162] FASP(RAND)  capacity = 12 edgeCnt = 12 edgeList = [{5, 10}, {1, 9}, {7, 6}, {7, 8}, {1, 5}, {1, 3}, {2, 10}, {2, 8}, {2, 3}, {4, 10}, {6, 9}, {6, 10}]
+[0m[35m[2019-10-28 19:28:56,9, timer.h:61] NO_NAME [gr] = 2.338e-05
+[0m===========> #WINS(NewRandom/Exact)=0/6     #DRAWS=66     #RUNS=72
+73 ======================= Processing [tournament-0073-10-45.al] {Graph V/E: 10/45}
+Exact solution=9 Time=0.008
+[35m[2019-10-28 19:28:56,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.040102
+[0m[32m[2019-10-28 19:28:56,9, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 8 / 3
+[0m[32m[2019-10-28 19:28:56,9, playground.cpp:162] FASP(RAND)  capacity = 13 edgeCnt = 13 edgeList = [{9, 2}, {7, 5}, {9, 4}, {9, 6}, {2, 6}, {8, 6}, {8, 4}, {10, 5}, {3, 10}, {3, 5}, {2, 5}, {9, 8}, {9, 10}]
+[0m[35m[2019-10-28 19:28:56,9, timer.h:61] NO_NAME [gr] = 2.3094e-05
+[0m===========> #WINS(NewRandom/Exact)=0/7     #DRAWS=66     #RUNS=73
+74 ======================= Processing [tournament-0074-10-45.al] {Graph V/E: 10/45}
+Exact solution=11 Time=0.016
+[35m[2019-10-28 19:28:56,1, timer.h:61] NO_NAME [--------RANDOM new] = 0.0418243
+[0m[32m[2019-10-28 19:28:56,1, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 6 / 4
+[0m[32m[2019-10-28 19:28:56,1, playground.cpp:162] FASP(RAND)  capacity = 12 edgeCnt = 12 edgeList = [{2, 5}, {9, 1}, {1, 6}, {8, 10}, {4, 10}, {4, 7}, {3, 6}, {9, 5}, {3, 8}, {3, 4}, {2, 7}, {3, 5}]
+[0m[35m[2019-10-28 19:28:56,1, timer.h:61] NO_NAME [gr] = 2.2787e-05
+[0m===========> #WINS(NewRandom/Exact)=0/8     #DRAWS=66     #RUNS=74
+75 ======================= Processing [tournament-0075-10-45.al] {Graph V/E: 10/45}
+Exact solution=8 Time=0.012
+[35m[2019-10-28 19:28:56,2, timer.h:61] NO_NAME [--------RANDOM new] = 0.030224
+[0m[32m[2019-10-28 19:28:56,2, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 4 / 4
+[0m[32m[2019-10-28 19:28:56,2, playground.cpp:162] FASP(RAND)  capacity = 10 edgeCnt = 10 edgeList = [{2, 9}, {4, 6}, {10, 6}, {10, 5}, {9, 5}, {8, 6}, {2, 5}, {3, 6}, {10, 7}, {10, 9}]
+[0m[35m[2019-10-28 19:28:56,2, timer.h:61] NO_NAME [gr] = 2.1948e-05
+[0m===========> #WINS(NewRandom/Exact)=0/9     #DRAWS=66     #RUNS=75
+76 ======================= Processing [tournament-0076-10-45.al] {Graph V/E: 10/45}
+Exact solution=10 Time=0.012
+[35m[2019-10-28 19:28:56,3, timer.h:61] NO_NAME [--------RANDOM new] = 0.0409174
+[0m[32m[2019-10-28 19:28:56,3, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 5 / 4
+[0m[32m[2019-10-28 19:28:56,3, playground.cpp:162] FASP(RAND)  capacity = 10 edgeCnt = 10 edgeList = [{5, 6}, {10, 9}, {8, 9}, {7, 4}, {1, 4}, {8, 4}, {10, 3}, {8, 2}, {1, 6}, {10, 6}]
+[0m[35m[2019-10-28 19:28:56,3, timer.h:61] NO_NAME [gr] = 2.3589e-05
+[0m===========> #WINS(NewRandom/Exact)=0/9     #DRAWS=67     #RUNS=76
+77 ======================= Processing [tournament-0077-10-45.al] {Graph V/E: 10/45}
+Exact solution=10 Time=0.016
+[35m[2019-10-28 19:28:56,5, timer.h:61] NO_NAME [--------RANDOM new] = 0.0419453
+[0m[32m[2019-10-28 19:28:56,5, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 4 / 4
+[0m[32m[2019-10-28 19:28:56,5, playground.cpp:162] FASP(RAND)  capacity = 10 edgeCnt = 10 edgeList = [{6, 3}, {7, 3}, {9, 4}, {2, 4}, {8, 10}, {7, 4}, {6, 5}, {8, 4}, {2, 1}, {8, 3}]
+[0m[35m[2019-10-28 19:28:56,5, timer.h:61] NO_NAME [gr] = 2.2519e-05
+[0m===========> #WINS(NewRandom/Exact)=0/9     #DRAWS=68     #RUNS=77
+78 ======================= Processing [tournament-0078-10-45.al] {Graph V/E: 10/45}
+Exact solution=9 Time=0.012
+[35m[2019-10-28 19:28:56,3, timer.h:61] NO_NAME [--------RANDOM new] = 0.0373526
+[0m[32m[2019-10-28 19:28:56,3, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 4 / 3
+[0m[32m[2019-10-28 19:28:56,3, playground.cpp:162] FASP(RAND)  capacity = 9 edgeCnt = 9 edgeList = [{9, 6}, {9, 4}, {1, 5}, {3, 10}, {8, 4}, {9, 10}, {1, 3}, {8, 10}, {3, 5}]
+[0m[35m[2019-10-28 19:28:56,3, timer.h:61] NO_NAME [gr] = 2.3327e-05
+[0m===========> #WINS(NewRandom/Exact)=0/9     #DRAWS=69     #RUNS=78
+79 ======================= Processing [tournament-0079-10-45.al] {Graph V/E: 10/45}
+Exact solution=10 Time=0.016
+[35m[2019-10-28 19:28:56,2, timer.h:61] NO_NAME [--------RANDOM new] = 0.0390628
+[0m[32m[2019-10-28 19:28:56,2, playground.cpp:161] SA / SA RND / RED RND edges: 1 / 7 / 3
+[0m[32m[2019-10-28 19:28:56,2, playground.cpp:162] FASP(RAND)  capacity = 11 edgeCnt = 11 edgeList = [{3, 7}, {5, 7}, {9, 6}, {3, 4}, {6, 4}, {1, 8}, {7, 2}, {9, 8}, {10, 5}, {3, 6}, {3, 5}]
+[0m[35m[2019-10-28 19:28:56,2, timer.h:61] NO_NAME [gr] = 2.3045e-05
+[0m===========> #WINS(NewRandom/Exact)=0/10     #DRAWS=69     #RUNS=79
+80 ======================= Processing [tournament-0080-10-45.al] {Graph V/E: 10/45}
+Exact solution=9 Time=0.012
+[35m[2019-10-28 19:28:56,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.0352841
+[0m[32m[2019-10-28 19:28:56,7, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 4 / 3
+[0m[32m[2019-10-28 19:28:56,7, playground.cpp:162] FASP(RAND)  capacity = 9 edgeCnt = 9 edgeList = [{7, 2}, {2, 9}, {10, 4}, {1, 9}, {6, 4}, {5, 9}, {8, 6}, {8, 3}, {8, 2}]
+[0m[35m[2019-10-28 19:28:56,7, timer.h:61] NO_NAME [gr] = 2.1351e-05
+[0m===========> #WINS(NewRandom/Exact)=0/10     #DRAWS=70     #RUNS=80
+81 ======================= Processing [tournament-0081-11-55.al] {Graph V/E: 11/55}
+Exact solution=12 Time=0.02
+[35m[2019-10-28 19:28:56,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.0590294
+[0m[32m[2019-10-28 19:28:56,7, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 4 / 6
+[0m[32m[2019-10-28 19:28:56,7, playground.cpp:162] FASP(RAND)  capacity = 12 edgeCnt = 12 edgeList = [{6, 11}, {7, 3}, {1, 11}, {1, 3}, {2, 8}, {7, 10}, {9, 10}, {4, 10}, {6, 10}, {7, 8}, {7, 6}, {5, 11}]
+[0m[35m[2019-10-28 19:28:56,7, timer.h:61] NO_NAME [gr] = 2.5956e-05
+[0m===========> #WINS(NewRandom/Exact)=0/10     #DRAWS=71     #RUNS=81
+82 ======================= Processing [tournament-0082-11-55.al] {Graph V/E: 11/55}
+Exact solution=11 Time=0.016
+[35m[2019-10-28 19:28:56,6, timer.h:61] NO_NAME [--------RANDOM new] = 0.0691242
+[0m[32m[2019-10-28 19:28:56,6, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 9 / 4
+[0m[32m[2019-10-28 19:28:56,6, playground.cpp:162] FASP(RAND)  capacity = 16 edgeCnt = 16 edgeList = [{11, 1}, {8, 3}, {7, 4}, {10, 6}, {1, 9}, {11, 3}, {8, 6}, {7, 11}, {7, 2}, {3, 9}, {2, 9}, {4, 6}, {4, 3}, {4, 10}, {10, 8}, {11, 8}]
+[0m[35m[2019-10-28 19:28:56,6, timer.h:61] NO_NAME [gr] = 2.6441e-05
+[0m===========> #WINS(NewRandom/Exact)=0/11     #DRAWS=71     #RUNS=82
+83 ======================= Processing [tournament-0083-11-55.al] {Graph V/E: 11/55}
+Exact solution=11 Time=0.016
+[35m[2019-10-28 19:28:56,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.03226
+[0m[32m[2019-10-28 19:28:56,9, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 7 / 2
+[0m[32m[2019-10-28 19:28:56,9, playground.cpp:162] FASP(RAND)  capacity = 12 edgeCnt = 12 edgeList = [{4, 11}, {6, 4}, {2, 1}, {10, 5}, {2, 11}, {1, 9}, {8, 7}, {8, 11}, {6, 9}, {6, 5}, {1, 4}, {7, 11}]
+[0m[35m[2019-10-28 19:28:56,9, timer.h:61] NO_NAME [gr] = 2.2376e-05
+[0m===========> #WINS(NewRandom/Exact)=0/12     #DRAWS=71     #RUNS=83
+84 ======================= Processing [tournament-0084-11-55.al] {Graph V/E: 11/55}
+Exact solution=13 Time=0.02
+[35m[2019-10-28 19:28:56,2, timer.h:61] NO_NAME [--------RANDOM new] = 0.0528632
+[0m[32m[2019-10-28 19:28:56,2, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 5 / 6
+[0m[32m[2019-10-28 19:28:56,2, playground.cpp:162] FASP(RAND)  capacity = 14 edgeCnt = 14 edgeList = [{2, 1}, {9, 4}, {3, 10}, {1, 10}, {8, 4}, {7, 4}, {2, 9}, {6, 9}, {1, 5}, {7, 5}, {3, 4}, {7, 1}, {2, 3}, {7, 6}]
+[0m[35m[2019-10-28 19:28:56,2, timer.h:61] NO_NAME [gr] = 2.0865e-05
+[0m===========> #WINS(NewRandom/Exact)=0/13     #DRAWS=71     #RUNS=84
+85 ======================= Processing [tournament-0085-11-55.al] {Graph V/E: 11/55}
+Exact solution=11 Time=0.016
+[35m[2019-10-28 19:28:56,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.0371778
+[0m[32m[2019-10-28 19:28:56,9, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 7 / 3
+[0m[32m[2019-10-28 19:28:56,9, playground.cpp:162] FASP(RAND)  capacity = 12 edgeCnt = 12 edgeList = [{4, 10}, {4, 8}, {11, 9}, {10, 9}, {2, 9}, {7, 9}, {6, 1}, {5, 9}, {11, 6}, {11, 7}, {6, 7}, {6, 10}]
+[0m[35m[2019-10-28 19:28:56,9, timer.h:61] NO_NAME [gr] = 2.006e-05
+[0m===========> #WINS(NewRandom/Exact)=0/14     #DRAWS=71     #RUNS=85
+86 ======================= Processing [tournament-0086-11-55.al] {Graph V/E: 11/55}
+Exact solution=10 Time=0.012
+[35m[2019-10-28 19:28:56,8, timer.h:61] NO_NAME [--------RANDOM new] = 0.0287661
+[0m[32m[2019-10-28 19:28:56,8, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 4 / 3
+[0m[32m[2019-10-28 19:28:56,8, playground.cpp:162] FASP(RAND)  capacity = 10 edgeCnt = 10 edgeList = [{2, 10}, {10, 9}, {1, 5}, {10, 8}, {10, 7}, {9, 11}, {4, 11}, {2, 5}, {3, 4}, {2, 6}]
+[0m[35m[2019-10-28 19:28:56,8, timer.h:61] NO_NAME [gr] = 2.0709e-05
+[0m===========> #WINS(NewRandom/Exact)=0/14     #DRAWS=72     #RUNS=86
+87 ======================= Processing [tournament-0087-11-55.al] {Graph V/E: 11/55}
+Exact solution=10 Time=0.016
+[35m[2019-10-28 19:28:56,3, timer.h:61] NO_NAME [--------RANDOM new] = 0.0352573
+[0m[32m[2019-10-28 19:28:56,3, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 6 / 2
+[0m[32m[2019-10-28 19:28:56,3, playground.cpp:162] FASP(RAND)  capacity = 10 edgeCnt = 10 edgeList = [{1, 7}, {9, 3}, {1, 10}, {9, 4}, {3, 4}, {5, 10}, {6, 11}, {1, 3}, {7, 3}, {1, 5}]
+[0m[35m[2019-10-28 19:28:56,3, timer.h:61] NO_NAME [gr] = 2.11e-05
+[0m===========> #WINS(NewRandom/Exact)=0/14     #DRAWS=73     #RUNS=87
+88 ======================= Processing [tournament-0088-11-55.al] {Graph V/E: 11/55}
+Exact solution=11 Time=0.016
+[35m[2019-10-28 19:28:57,0, timer.h:61] NO_NAME [--------RANDOM new] = 0.046917
+[0m[32m[2019-10-28 19:28:57,0, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 4 / 7
+[0m[32m[2019-10-28 19:28:57,1, playground.cpp:162] FASP(RAND)  capacity = 14 edgeCnt = 14 edgeList = [{8, 3}, {3, 10}, {2, 5}, {11, 5}, {11, 4}, {10, 7}, {9, 7}, {8, 7}, {6, 5}, {6, 2}, {4, 5}, {3, 7}, {3, 5}, {2, 10}]
+[0m[35m[2019-10-28 19:28:57,1, timer.h:61] NO_NAME [gr] = 2.207e-05
+[0m===========> #WINS(NewRandom/Exact)=0/15     #DRAWS=73     #RUNS=88
+89 ======================= Processing [tournament-0089-11-55.al] {Graph V/E: 11/55}
+Exact solution=11 Time=0.02
+[35m[2019-10-28 19:28:57,1, timer.h:61] NO_NAME [--------RANDOM new] = 0.0404823
+[0m[32m[2019-10-28 19:28:57,1, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 5 / 5
+[0m[32m[2019-10-28 19:28:57,1, playground.cpp:162] FASP(RAND)  capacity = 12 edgeCnt = 12 edgeList = [{11, 3}, {11, 9}, {1, 8}, {1, 9}, {7, 11}, {6, 9}, {3, 9}, {10, 7}, {5, 7}, {10, 2}, {11, 1}, {5, 3}]
+[0m[35m[2019-10-28 19:28:57,1, timer.h:61] NO_NAME [gr] = 2.0566e-05
+[0m===========> #WINS(NewRandom/Exact)=0/16     #DRAWS=73     #RUNS=89
+90 ======================= Processing [tournament-0090-11-55.al] {Graph V/E: 11/55}
+Exact solution=12 Time=0.016
+[35m[2019-10-28 19:28:57,0, timer.h:61] NO_NAME [--------RANDOM new] = 0.0483736
+[0m[32m[2019-10-28 19:28:57,0, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 4 / 6
+[0m[32m[2019-10-28 19:28:57,0, playground.cpp:162] FASP(RAND)  capacity = 12 edgeCnt = 12 edgeList = [{7, 11}, {3, 5}, {1, 11}, {8, 6}, {8, 11}, {8, 10}, {1, 2}, {10, 11}, {9, 6}, {9, 7}, {9, 11}, {3, 6}]
+[0m[35m[2019-10-28 19:28:57,0, timer.h:61] NO_NAME [gr] = 2.026e-05
+[0m===========> #WINS(NewRandom/Exact)=0/16     #DRAWS=74     #RUNS=90
+91 ======================= Processing [tournament-0091-12-66.al] {Graph V/E: 12/66}
+Exact solution=12 Time=0.016
+[35m[2019-10-28 19:28:57,4, timer.h:61] NO_NAME [--------RANDOM new] = 0.0641872
+[0m[32m[2019-10-28 19:28:57,4, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 7 / 5
+[0m[32m[2019-10-28 19:28:57,4, playground.cpp:162] FASP(RAND)  capacity = 16 edgeCnt = 16 edgeList = [{5, 4}, {6, 3}, {9, 1}, {4, 10}, {1, 7}, {9, 7}, {4, 11}, {2, 12}, {2, 4}, {12, 10}, {6, 5}, {5, 10}, {8, 5}, {9, 6}, {6, 4}, {5, 12}]
+[0m[35m[2019-10-28 19:28:57,4, timer.h:61] NO_NAME [gr] = 2.4868e-05
+[0m===========> #WINS(NewRandom/Exact)=0/17     #DRAWS=74     #RUNS=91
+92 ======================= Processing [tournament-0092-12-66.al] {Graph V/E: 12/66}
+Exact solution=17 Time=0.032
+[35m[2019-10-28 19:28:57,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.0947293
+[0m[32m[2019-10-28 19:28:57,9, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 4 / 9
+[0m[32m[2019-10-28 19:28:57,9, playground.cpp:162] FASP(RAND)  capacity = 17 edgeCnt = 17 edgeList = [{7, 11}, {5, 3}, {5, 12}, {9, 1}, {8, 11}, {8, 7}, {8, 3}, {6, 11}, {10, 12}, {9, 11}, {9, 7}, {9, 4}, {8, 2}, {6, 3}, {10, 1}, {12, 11}, {1, 2}]
+[0m[35m[2019-10-28 19:28:57,9, timer.h:61] NO_NAME [gr] = 2.4538e-05
+[0m===========> #WINS(NewRandom/Exact)=0/17     #DRAWS=75     #RUNS=92
+93 ======================= Processing [tournament-0093-12-66.al] {Graph V/E: 12/66}
+Exact solution=15 Time=0.024
+[35m[2019-10-28 19:28:57,6, timer.h:61] NO_NAME [--------RANDOM new] = 0.0967214
+[0m[32m[2019-10-28 19:28:57,6, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 8 / 10
+[0m[32m[2019-10-28 19:28:57,6, playground.cpp:162] FASP(RAND)  capacity = 20 edgeCnt = 20 edgeList = [{3, 5}, {2, 1}, {1, 12}, {11, 12}, {11, 5}, {2, 5}, {2, 4}, {2, 3}, {2, 9}, {1, 10}, {1, 9}, {7, 3}, {7, 8}, {1, 6}, {4, 12}, {4, 10}, {4, 3}, {4, 9}, {8, 10}, {3, 10}]
+[0m[35m[2019-10-28 19:28:57,6, timer.h:61] NO_NAME [gr] = 2.7112e-05
+[0m===========> #WINS(NewRandom/Exact)=0/18     #DRAWS=75     #RUNS=93
+94 ======================= Processing [tournament-0094-12-66.al] {Graph V/E: 12/66}
+Exact solution=14 Time=0.024
+[35m[2019-10-28 19:28:57,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.0607584
+[0m[32m[2019-10-28 19:28:57,7, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 5 / 7
+[0m[32m[2019-10-28 19:28:57,7, playground.cpp:162] FASP(RAND)  capacity = 15 edgeCnt = 15 edgeList = [{6, 11}, {6, 3}, {2, 10}, {11, 10}, {9, 5}, {8, 5}, {2, 12}, {2, 11}, {11, 12}, {7, 3}, {9, 7}, {8, 4}, {11, 3}, {8, 3}, {6, 4}]
+[0m[35m[2019-10-28 19:28:57,7, timer.h:61] NO_NAME [gr] = 2.5267e-05
+[0m===========> #WINS(NewRandom/Exact)=0/19     #DRAWS=75     #RUNS=94
+95 ======================= Processing [tournament-0095-12-66.al] {Graph V/E: 12/66}
+Exact solution=15 Time=0.032
+[35m[2019-10-28 19:28:57,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.0794428
+[0m[32m[2019-10-28 19:28:57,7, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 7 / 7
+[0m[32m[2019-10-28 19:28:57,7, playground.cpp:162] FASP(RAND)  capacity = 17 edgeCnt = 17 edgeList = [{4, 10}, {10, 2}, {5, 8}, {1, 12}, {10, 7}, {11, 12}, {9, 7}, {1, 8}, {11, 8}, {3, 8}, {11, 5}, {11, 1}, {11, 4}, {6, 1}, {4, 1}, {6, 2}, {3, 10}]
+[0m[35m[2019-10-28 19:28:57,7, timer.h:61] NO_NAME [gr] = 2.534e-05
+[0m===========> #WINS(NewRandom/Exact)=0/20     #DRAWS=75     #RUNS=95
+96 ======================= Processing [tournament-0096-12-66.al] {Graph V/E: 12/66}
+Exact solution=16 Time=0.032
+[35m[2019-10-28 19:28:57,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.0722151
+[0m[32m[2019-10-28 19:28:57,9, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 9 / 4
+[0m[32m[2019-10-28 19:28:57,9, playground.cpp:162] FASP(RAND)  capacity = 16 edgeCnt = 16 edgeList = [{11, 7}, {12, 7}, {2, 4}, {7, 8}, {11, 8}, {10, 8}, {4, 8}, {7, 1}, {6, 1}, {10, 4}, {9, 4}, {6, 5}, {11, 5}, {11, 9}, {10, 12}, {10, 7}]
+[0m[35m[2019-10-28 19:28:57,9, timer.h:61] NO_NAME [gr] = 2.564e-05
+[0m===========> #WINS(NewRandom/Exact)=0/20     #DRAWS=76     #RUNS=96
+97 ======================= Processing [tournament-0097-12-66.al] {Graph V/E: 12/66}
+Exact solution=12 Time=0.016
+[35m[2019-10-28 19:28:57,4, timer.h:61] NO_NAME [--------RANDOM new] = 0.0644768
+[0m[32m[2019-10-28 19:28:57,4, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 4 / 5
+[0m[32m[2019-10-28 19:28:57,4, playground.cpp:162] FASP(RAND)  capacity = 13 edgeCnt = 13 edgeList = [{12, 8}, {9, 2}, {7, 1}, {8, 3}, {12, 11}, {9, 7}, {8, 10}, {7, 10}, {12, 3}, {6, 11}, {8, 11}, {2, 1}, {6, 8}]
+[0m[35m[2019-10-28 19:28:57,4, timer.h:61] NO_NAME [gr] = 2.5537e-05
+[0m===========> #WINS(NewRandom/Exact)=0/21     #DRAWS=76     #RUNS=97
+98 ======================= Processing [tournament-0098-12-66.al] {Graph V/E: 12/66}
+Exact solution=14 Time=0.024
+[35m[2019-10-28 19:28:57,8, timer.h:61] NO_NAME [--------RANDOM new] = 0.0735996
+[0m[32m[2019-10-28 19:28:57,8, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 6 / 6
+[0m[32m[2019-10-28 19:28:57,8, playground.cpp:162] FASP(RAND)  capacity = 15 edgeCnt = 15 edgeList = [{10, 11}, {9, 11}, {6, 11}, {12, 7}, {11, 7}, {10, 7}, {6, 7}, {4, 7}, {5, 1}, {2, 10}, {5, 8}, {6, 4}, {10, 4}, {8, 11}, {8, 9}]
+[0m[35m[2019-10-28 19:28:57,8, timer.h:61] NO_NAME [gr] = 2.3523e-05
+[0m===========> #WINS(NewRandom/Exact)=0/22     #DRAWS=76     #RUNS=98
+99 ======================= Processing [tournament-0099-12-66.al] {Graph V/E: 12/66}
+Exact solution=15 Time=0.024
+[35m[2019-10-28 19:28:57,0, timer.h:61] NO_NAME [--------RANDOM new] = 0.0920375
+[0m[32m[2019-10-28 19:28:57,0, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 6 / 8
+[0m[32m[2019-10-28 19:28:57,0, playground.cpp:162] FASP(RAND)  capacity = 18 edgeCnt = 18 edgeList = [{1, 2}, {9, 1}, {10, 2}, {12, 7}, {9, 8}, {1, 12}, {11, 8}, {10, 7}, {4, 5}, {3, 7}, {3, 6}, {12, 6}, {5, 7}, {3, 12}, {3, 11}, {3, 9}, {10, 1}, {11, 2}]
+[0m[35m[2019-10-28 19:28:57,0, timer.h:61] NO_NAME [gr] = 2.5474e-05
+[0m===========> #WINS(NewRandom/Exact)=0/23     #DRAWS=76     #RUNS=99
+100 ======================= Processing [tournament-0100-12-66.al] {Graph V/E: 12/66}
+Exact solution=15 Time=0.028
+[35m[2019-10-28 19:28:57,6, timer.h:61] NO_NAME [--------RANDOM new] = 0.105748
+[0m[32m[2019-10-28 19:28:57,6, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 5 / 8
+[0m[32m[2019-10-28 19:28:57,6, playground.cpp:162] FASP(RAND)  capacity = 15 edgeCnt = 15 edgeList = [{4, 7}, {6, 2}, {7, 8}, {12, 3}, {12, 5}, {1, 10}, {6, 3}, {7, 3}, {4, 5}, {1, 2}, {5, 3}, {11, 2}, {10, 8}, {4, 2}, {6, 7}]
+[0m[35m[2019-10-28 19:28:57,6, timer.h:61] NO_NAME [gr] = 2.5236e-05
+[0m===========> #WINS(NewRandom/Exact)=0/23     #DRAWS=77     #RUNS=100
+101 ======================= Processing [tournament-0101-13-78.al] {Graph V/E: 13/78}
+Exact solution=17 Time=0.028
+[35m[2019-10-28 19:28:58,8, timer.h:61] NO_NAME [--------RANDOM new] = 0.132016
+[0m[32m[2019-10-28 19:28:58,8, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 5 / 10
+[0m[32m[2019-10-28 19:28:58,8, playground.cpp:162] FASP(RAND)  capacity = 18 edgeCnt = 18 edgeList = [{11, 10}, {9, 6}, {2, 12}, {1, 13}, {11, 5}, {8, 9}, {8, 12}, {7, 9}, {7, 6}, {7, 5}, {1, 4}, {11, 4}, {2, 4}, {8, 4}, {2, 6}, {13, 5}, {3, 2}, {7, 2}]
+[0m[35m[2019-10-28 19:28:58,8, timer.h:61] NO_NAME [gr] = 3.1354e-05
+[0m===========> #WINS(NewRandom/Exact)=0/24     #DRAWS=77     #RUNS=101
+102 ======================= Processing [tournament-0102-13-78.al] {Graph V/E: 13/78}
+Exact solution=18 Time=0.032
+[35m[2019-10-28 19:28:58,5, timer.h:61] NO_NAME [--------RANDOM new] = 0.136569
+[0m[32m[2019-10-28 19:28:58,5, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 5 / 10
+[0m[32m[2019-10-28 19:28:58,5, playground.cpp:162] FASP(RAND)  capacity = 19 edgeCnt = 19 edgeList = [{7, 13}, {4, 13}, {10, 3}, {1, 4}, {1, 9}, {1, 11}, {1, 10}, {6, 8}, {5, 9}, {5, 2}, {12, 3}, {5, 3}, {6, 11}, {6, 12}, {9, 8}, {4, 8}, {11, 3}, {4, 11}, {10, 13}]
+[0m[35m[2019-10-28 19:28:58,5, timer.h:61] NO_NAME [gr] = 3.0789e-05
+[0m===========> #WINS(NewRandom/Exact)=0/25     #DRAWS=77     #RUNS=102
+103 ======================= Processing [tournament-0103-13-78.al] {Graph V/E: 13/78}
+Exact solution=14 Time=0.02
+[35m[2019-10-28 19:28:58,0, timer.h:61] NO_NAME [--------RANDOM new] = 0.0645997
+[0m[32m[2019-10-28 19:28:58,0, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 6 / 5
+[0m[32m[2019-10-28 19:28:58,0, playground.cpp:162] FASP(RAND)  capacity = 14 edgeCnt = 14 edgeList = [{9, 4}, {13, 7}, {10, 4}, {11, 9}, {11, 13}, {10, 13}, {2, 8}, {11, 5}, {10, 1}, {1, 4}, {9, 8}, {3, 7}, {9, 5}, {3, 4}]
+[0m[35m[2019-10-28 19:28:58,0, timer.h:61] NO_NAME [gr] = 2.7904e-05
+[0m===========> #WINS(NewRandom/Exact)=0/25     #DRAWS=78     #RUNS=103
+104 ======================= Processing [tournament-0104-13-78.al] {Graph V/E: 13/78}
+Exact solution=19 Time=0.04
+[35m[2019-10-28 19:28:58,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.157379
+[0m[32m[2019-10-28 19:28:58,7, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 5 / 12
+[0m[32m[2019-10-28 19:28:58,7, playground.cpp:162] FASP(RAND)  capacity = 20 edgeCnt = 20 edgeList = [{4, 12}, {9, 3}, {1, 5}, {13, 4}, {1, 9}, {5, 11}, {13, 11}, {10, 4}, {10, 12}, {5, 6}, {13, 6}, {10, 6}, {1, 3}, {10, 9}, {8, 3}, {1, 2}, {7, 3}, {11, 4}, {9, 2}, {4, 2}]
+[0m[35m[2019-10-28 19:28:58,7, timer.h:61] NO_NAME [gr] = 3.0056e-05
+[0m===========> #WINS(NewRandom/Exact)=0/26     #DRAWS=78     #RUNS=104
+105 ======================= Processing [tournament-0105-13-78.al] {Graph V/E: 13/78}
+Exact solution=17 Time=0.032
+[35m[2019-10-28 19:28:58,1, timer.h:61] NO_NAME [--------RANDOM new] = 0.133365
+[0m[32m[2019-10-28 19:28:58,1, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 7 / 13
+[0m[32m[2019-10-28 19:28:58,1, playground.cpp:162] FASP(RAND)  capacity = 22 edgeCnt = 22 edgeList = [{3, 12}, {3, 7}, {11, 13}, {11, 10}, {8, 13}, {8, 10}, {6, 13}, {6, 10}, {6, 2}, {5, 13}, {3, 10}, {4, 13}, {4, 11}, {4, 9}, {4, 8}, {4, 7}, {4, 3}, {5, 11}, {11, 7}, {9, 7}, {3, 8}, {6, 11}]
+[0m[35m[2019-10-28 19:28:58,1, timer.h:61] NO_NAME [gr] = 2.9076e-05
+[0m===========> #WINS(NewRandom/Exact)=0/27     #DRAWS=78     #RUNS=105
+106 ======================= Processing [tournament-0106-13-78.al] {Graph V/E: 13/78}
+Exact solution=16 Time=0.032
+[35m[2019-10-28 19:28:58,3, timer.h:61] NO_NAME [--------RANDOM new] = 0.111886
+[0m[32m[2019-10-28 19:28:58,3, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 7 / 7
+[0m[32m[2019-10-28 19:28:58,3, playground.cpp:162] FASP(RAND)  capacity = 18 edgeCnt = 18 edgeList = [{4, 8}, {6, 10}, {1, 8}, {3, 7}, {12, 9}, {11, 9}, {5, 9}, {5, 7}, {8, 7}, {5, 2}, {1, 10}, {13, 2}, {8, 2}, {4, 3}, {5, 6}, {1, 4}, {1, 12}, {4, 10}]
+[0m[35m[2019-10-28 19:28:58,3, timer.h:61] NO_NAME [gr] = 3.2014e-05
+[0m===========> #WINS(NewRandom/Exact)=0/28     #DRAWS=78     #RUNS=106
+107 ======================= Processing [tournament-0107-13-78.al] {Graph V/E: 13/78}
+Exact solution=18 Time=0.036
+[35m[2019-10-28 19:28:58,5, timer.h:61] NO_NAME [--------RANDOM new] = 0.122025
+[0m[32m[2019-10-28 19:28:58,5, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 6 / 10
+[0m[32m[2019-10-28 19:28:58,5, playground.cpp:162] FASP(RAND)  capacity = 19 edgeCnt = 19 edgeList = [{3, 9}, {12, 11}, {2, 8}, {1, 13}, {10, 7}, {12, 13}, {11, 13}, {9, 7}, {9, 13}, {10, 4}, {3, 4}, {1, 8}, {10, 5}, {3, 5}, {6, 12}, {6, 11}, {6, 9}, {1, 2}, {10, 12}]
+[0m[35m[2019-10-28 19:28:58,5, timer.h:61] NO_NAME [gr] = 3.0527e-05
+[0m===========> #WINS(NewRandom/Exact)=0/29     #DRAWS=78     #RUNS=107
+108 ======================= Processing [tournament-0108-13-78.al] {Graph V/E: 13/78}
+Exact solution=20 Time=0.04
+[35m[2019-10-28 19:28:58,0, timer.h:61] NO_NAME [--------RANDOM new] = 0.175094
+[0m[32m[2019-10-28 19:28:58,0, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 4 / 13
+[0m[32m[2019-10-28 19:28:58,0, playground.cpp:162] FASP(RAND)  capacity = 22 edgeCnt = 22 edgeList = [{13, 12}, {12, 7}, {9, 1}, {10, 11}, {8, 2}, {11, 13}, {1, 12}, {10, 13}, {10, 7}, {9, 7}, {9, 2}, {1, 8}, {1, 5}, {11, 5}, {9, 5}, {4, 12}, {4, 2}, {3, 7}, {13, 2}, {3, 5}, {9, 11}, {13, 6}]
+[0m[35m[2019-10-28 19:28:58,1, timer.h:61] NO_NAME [gr] = 2.9951e-05
+[0m===========> #WINS(NewRandom/Exact)=0/30     #DRAWS=78     #RUNS=108
+109 ======================= Processing [tournament-0109-13-78.al] {Graph V/E: 13/78}
+Exact solution=16 Time=0.032
+[35m[2019-10-28 19:28:59,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.138601
+[0m[32m[2019-10-28 19:28:59,9, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 7 / 8
+[0m[32m[2019-10-28 19:28:59,9, playground.cpp:162] FASP(RAND)  capacity = 18 edgeCnt = 18 edgeList = [{5, 12}, {12, 11}, {7, 4}, {12, 6}, {11, 4}, {9, 13}, {5, 6}, {1, 3}, {10, 3}, {5, 3}, {2, 8}, {4, 8}, {3, 13}, {2, 4}, {7, 6}, {5, 11}, {2, 7}, {10, 1}]
+[0m[35m[2019-10-28 19:28:59,9, timer.h:61] NO_NAME [gr] = 2.9848e-05
+[0m===========> #WINS(NewRandom/Exact)=0/31     #DRAWS=78     #RUNS=109
+110 ======================= Processing [tournament-0110-13-78.al] {Graph V/E: 13/78}
+Exact solution=16 Time=0.024
+[35m[2019-10-28 19:28:59,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.137528
+[0m[32m[2019-10-28 19:28:59,7, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 7 / 9
+[0m[32m[2019-10-28 19:28:59,7, playground.cpp:162] FASP(RAND)  capacity = 18 edgeCnt = 18 edgeList = [{7, 2}, {3, 9}, {12, 9}, {11, 13}, {7, 8}, {1, 6}, {11, 6}, {5, 10}, {5, 9}, {5, 8}, {5, 3}, {3, 6}, {4, 13}, {4, 3}, {5, 7}, {5, 11}, {4, 2}, {12, 2}]
+[0m[35m[2019-10-28 19:28:59,7, timer.h:61] NO_NAME [gr] = 2.9468e-05
+[0m===========> #WINS(NewRandom/Exact)=0/32     #DRAWS=78     #RUNS=110
+111 ======================= Processing [tournament-0111-14-91.al] {Graph V/E: 14/91}
+Exact solution=20 Time=0.032
+[35m[2019-10-28 19:28:59,0, timer.h:61] NO_NAME [--------RANDOM new] = 0.242662
+[0m[32m[2019-10-28 19:28:59,0, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 6 / 13
+[0m[32m[2019-10-28 19:28:59,0, playground.cpp:162] FASP(RAND)  capacity = 22 edgeCnt = 22 edgeList = [{14, 2}, {6, 14}, {9, 12}, {14, 10}, {14, 5}, {4, 10}, {4, 13}, {1, 12}, {11, 10}, {11, 12}, {11, 5}, {7, 13}, {6, 10}, {6, 13}, {6, 9}, {1, 3}, {2, 13}, {3, 13}, {6, 8}, {4, 1}, {10, 13}, {6, 7}]
+[0m[35m[2019-10-28 19:28:59,0, timer.h:61] NO_NAME [gr] = 3.6555e-05
+[0m===========> #WINS(NewRandom/Exact)=0/33     #DRAWS=78     #RUNS=111
+112 ======================= Processing [tournament-0112-14-91.al] {Graph V/E: 14/91}
+Exact solution=23 Time=0.068
+[35m[2019-10-28 19:28:59,3, timer.h:61] NO_NAME [--------RANDOM new] = 0.22314
+[0m[32m[2019-10-28 19:28:59,3, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 6 / 18
+[0m[32m[2019-10-28 19:28:59,3, playground.cpp:162] FASP(RAND)  capacity = 28 edgeCnt = 28 edgeList = [{5, 10}, {14, 13}, {3, 2}, {5, 8}, {13, 12}, {14, 9}, {2, 4}, {2, 9}, {11, 4}, {11, 9}, {10, 12}, {6, 12}, {6, 8}, {4, 8}, {5, 9}, {1, 14}, {1, 11}, {1, 10}, {6, 13}, {6, 11}, {6, 2}, {1, 5}, {3, 11}, {3, 4}, {2, 11}, {5, 13}, {2, 10}, {5, 11}]
+[0m[35m[2019-10-28 19:28:59,3, timer.h:61] NO_NAME [gr] = 3.5712e-05
+[0m===========> #WINS(NewRandom/Exact)=0/34     #DRAWS=78     #RUNS=112
+113 ======================= Processing [tournament-0113-14-91.al] {Graph V/E: 14/91}
+Exact solution=21 Time=0.044
+[35m[2019-10-28 19:28:59,5, timer.h:61] NO_NAME [--------RANDOM new] = 0.231136
+[0m[32m[2019-10-28 19:28:59,5, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 5 / 14
+[0m[32m[2019-10-28 19:28:59,5, playground.cpp:162] FASP(RAND)  capacity = 23 edgeCnt = 23 edgeList = [{1, 5}, {1, 2}, {7, 13}, {10, 12}, {14, 7}, {14, 13}, {8, 7}, {9, 13}, {6, 7}, {6, 11}, {6, 13}, {1, 12}, {5, 11}, {5, 10}, {1, 4}, {3, 10}, {2, 13}, {4, 11}, {3, 2}, {14, 8}, {14, 6}, {6, 8}, {3, 9}]
+[0m[35m[2019-10-28 19:28:59,5, timer.h:61] NO_NAME [gr] = 3.5422e-05
+[0m===========> #WINS(NewRandom/Exact)=0/35     #DRAWS=78     #RUNS=113
+114 ======================= Processing [tournament-0114-14-91.al] {Graph V/E: 14/91}
+Exact solution=22 Time=0.06
+[35m[2019-10-28 19:29:00,5, timer.h:61] NO_NAME [--------RANDOM new] = 0.200389
+[0m[32m[2019-10-28 19:29:00,5, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 7 / 14
+[0m[32m[2019-10-28 19:29:00,5, playground.cpp:162] FASP(RAND)  capacity = 25 edgeCnt = 25 edgeList = [{11, 5}, {4, 6}, {3, 4}, {1, 3}, {1, 11}, {1, 10}, {1, 9}, {1, 8}, {1, 5}, {3, 13}, {12, 7}, {12, 13}, {12, 5}, {2, 11}, {3, 11}, {3, 10}, {4, 14}, {4, 13}, {4, 11}, {7, 13}, {4, 9}, {9, 10}, {11, 13}, {9, 13}, {9, 5}]
+[0m[35m[2019-10-28 19:29:00,5, timer.h:61] NO_NAME [gr] = 3.6708e-05
+[0m===========> #WINS(NewRandom/Exact)=0/36     #DRAWS=78     #RUNS=114
+115 ======================= Processing [tournament-0115-14-91.al] {Graph V/E: 14/91}
+Exact solution=23 Time=0.044
+[35m[2019-10-28 19:29:00,6, timer.h:61] NO_NAME [--------RANDOM new] = 0.300039
+[0m[32m[2019-10-28 19:29:00,6, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 6 / 18
+[0m[32m[2019-10-28 19:29:00,6, playground.cpp:162] FASP(RAND)  capacity = 27 edgeCnt = 27 edgeList = [{3, 2}, {6, 7}, {5, 7}, {14, 11}, {10, 8}, {10, 7}, {10, 5}, {14, 4}, {10, 4}, {3, 11}, {13, 8}, {13, 11}, {13, 5}, {1, 12}, {14, 12}, {1, 9}, {14, 9}, {7, 8}, {1, 6}, {3, 6}, {5, 8}, {2, 5}, {4, 11}, {4, 9}, {6, 12}, {10, 1}, {3, 1}]
+[0m[35m[2019-10-28 19:29:00,6, timer.h:61] NO_NAME [gr] = 3.5241e-05
+[0m===========> #WINS(NewRandom/Exact)=0/37     #DRAWS=78     #RUNS=115
+116 ======================= Processing [tournament-0116-14-91.al] {Graph V/E: 14/91}
+Exact solution=25 Time=0.08
+[35m[2019-10-28 19:29:00,4, timer.h:61] NO_NAME [--------RANDOM new] = 0.288039
+[0m[32m[2019-10-28 19:29:00,4, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 5 / 18
+[0m[32m[2019-10-28 19:29:00,4, playground.cpp:162] FASP(RAND)  capacity = 26 edgeCnt = 26 edgeList = [{7, 3}, {11, 6}, {11, 8}, {7, 9}, {13, 9}, {14, 11}, {14, 8}, {7, 12}, {10, 6}, {3, 8}, {3, 6}, {1, 5}, {13, 5}, {3, 5}, {1, 4}, {7, 4}, {13, 4}, {3, 4}, {2, 12}, {2, 11}, {2, 4}, {9, 4}, {5, 6}, {7, 14}, {7, 10}, {2, 3}]
+[0m[35m[2019-10-28 19:29:00,4, timer.h:61] NO_NAME [gr] = 3.6635e-05
+[0m===========> #WINS(NewRandom/Exact)=0/38     #DRAWS=78     #RUNS=116
+117 ======================= Processing [tournament-0117-14-91.al] {Graph V/E: 14/91}
+Exact solution=21 Time=0.056
+[35m[2019-10-28 19:29:00,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.232508
+[0m[32m[2019-10-28 19:29:00,7, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 8 / 17
+[0m[32m[2019-10-28 19:29:00,7, playground.cpp:162] FASP(RAND)  capacity = 28 edgeCnt = 28 edgeList = [{12, 6}, {12, 5}, {2, 8}, {12, 8}, {12, 14}, {13, 8}, {3, 14}, {10, 9}, {7, 9}, {7, 14}, {5, 8}, {14, 8}, {12, 3}, {11, 3}, {7, 3}, {6, 3}, {5, 3}, {5, 14}, {2, 14}, {13, 5}, {4, 5}, {13, 1}, {7, 5}, {4, 2}, {13, 10}, {4, 12}, {13, 6}, {12, 11}]
+[0m[35m[2019-10-28 19:29:00,7, timer.h:61] NO_NAME [gr] = 3.6012e-05
+[0m===========> #WINS(NewRandom/Exact)=0/39     #DRAWS=78     #RUNS=117
+118 ======================= Processing [tournament-0118-14-91.al] {Graph V/E: 14/91}
+Exact solution=22 Time=0.044
+[35m[2019-10-28 19:29:01,2, timer.h:61] NO_NAME [--------RANDOM new] = 0.245378
+[0m[32m[2019-10-28 19:29:01,2, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 8 / 13
+[0m[32m[2019-10-28 19:29:01,2, playground.cpp:162] FASP(RAND)  capacity = 24 edgeCnt = 24 edgeList = [{12, 3}, {10, 3}, {14, 7}, {13, 9}, {12, 7}, {12, 14}, {3, 9}, {11, 7}, {11, 14}, {10, 14}, {1, 8}, {13, 8}, {11, 8}, {6, 7}, {6, 8}, {5, 7}, {2, 14}, {4, 9}, {6, 2}, {4, 2}, {6, 11}, {4, 12}, {10, 5}, {6, 3}]
+[0m[35m[2019-10-28 19:29:01,2, timer.h:61] NO_NAME [gr] = 3.3864e-05
+[0m===========> #WINS(NewRandom/Exact)=0/40     #DRAWS=78     #RUNS=118
+119 ======================= Processing [tournament-0119-14-91.al] {Graph V/E: 14/91}
+Exact solution=22 Time=0.06
+[35m[2019-10-28 19:29:01,0, timer.h:61] NO_NAME [--------RANDOM new] = 0.227004
+[0m[32m[2019-10-28 19:29:01,0, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 4 / 18
+[0m[32m[2019-10-28 19:29:01,0, playground.cpp:162] FASP(RAND)  capacity = 25 edgeCnt = 25 edgeList = [{10, 8}, {6, 14}, {3, 7}, {1, 14}, {1, 11}, {9, 11}, {9, 7}, {9, 6}, {9, 2}, {1, 8}, {9, 8}, {1, 4}, {2, 11}, {2, 10}, {2, 7}, {2, 6}, {5, 13}, {2, 4}, {5, 4}, {3, 14}, {12, 10}, {12, 7}, {3, 4}, {3, 11}, {10, 4}]
+[0m[35m[2019-10-28 19:29:01,0, timer.h:61] NO_NAME [gr] = 3.712e-05
+[0m===========> #WINS(NewRandom/Exact)=0/41     #DRAWS=78     #RUNS=119
+120 ======================= Processing [tournament-0120-14-91.al] {Graph V/E: 14/91}
+Exact solution=21 Time=0.088
+[35m[2019-10-28 19:29:01,5, timer.h:61] NO_NAME [--------RANDOM new] = 0.205501
+[0m[32m[2019-10-28 19:29:01,5, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 4 / 13
+[0m[32m[2019-10-28 19:29:01,5, playground.cpp:162] FASP(RAND)  capacity = 21 edgeCnt = 21 edgeList = [{13, 2}, {11, 7}, {3, 6}, {9, 7}, {14, 5}, {14, 12}, {14, 2}, {1, 13}, {1, 10}, {9, 13}, {9, 12}, {8, 5}, {8, 12}, {8, 10}, {8, 6}, {7, 6}, {4, 5}, {4, 10}, {11, 1}, {5, 2}, {13, 10}]
+[0m[35m[2019-10-28 19:29:01,5, timer.h:61] NO_NAME [gr] = 3.5188e-05
+[0m===========> #WINS(NewRandom/Exact)=0/41     #DRAWS=79     #RUNS=120
+121 ======================= Processing [tournament-0121-15-105.al] {Graph V/E: 15/105}
+Exact solution=23 Time=0.044
+[35m[2019-10-28 19:29:01,0, timer.h:61] NO_NAME [--------RANDOM new] = 0.264166
+[0m[32m[2019-10-28 19:29:01,0, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 5 / 16
+[0m[32m[2019-10-28 19:29:01,0, playground.cpp:162] FASP(RAND)  capacity = 25 edgeCnt = 25 edgeList = [{5, 9}, {11, 14}, {4, 7}, {3, 5}, {10, 14}, {10, 13}, {10, 12}, {10, 5}, {1, 9}, {10, 9}, {6, 14}, {6, 13}, {6, 12}, {6, 7}, {6, 4}, {3, 12}, {3, 9}, {2, 13}, {4, 9}, {7, 14}, {7, 13}, {7, 12}, {7, 9}, {7, 5}, {14, 13}]
+[0m[35m[2019-10-28 19:29:01,0, timer.h:61] NO_NAME [gr] = 3.5703e-05
+[0m===========> #WINS(NewRandom/Exact)=0/42     #DRAWS=79     #RUNS=121
+122 ======================= Processing [tournament-0122-15-105.al] {Graph V/E: 15/105}
+Exact solution=20 Time=0.052
+[35m[2019-10-28 19:29:02,6, timer.h:61] NO_NAME [--------RANDOM new] = 0.246207
+[0m[32m[2019-10-28 19:29:02,6, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 7 / 10
+[0m[32m[2019-10-28 19:29:02,6, playground.cpp:162] FASP(RAND)  capacity = 21 edgeCnt = 21 edgeList = [{14, 10}, {3, 7}, {7, 1}, {12, 15}, {15, 8}, {1, 13}, {15, 7}, {12, 8}, {11, 8}, {7, 13}, {11, 13}, {10, 8}, {1, 4}, {5, 8}, {10, 6}, {5, 6}, {3, 6}, {12, 5}, {12, 2}, {9, 1}, {5, 15}]
+[0m[35m[2019-10-28 19:29:02,6, timer.h:61] NO_NAME [gr] = 3.5838e-05
+[0m===========> #WINS(NewRandom/Exact)=0/43     #DRAWS=79     #RUNS=122
+123 ======================= Processing [tournament-0123-15-105.al] {Graph V/E: 15/105}
+Exact solution=25 Time=0.076
+[35m[2019-10-28 19:29:02,6, timer.h:61] NO_NAME [--------RANDOM new] = 0.339107
+[0m[32m[2019-10-28 19:29:02,6, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 9 / 16
+[0m[32m[2019-10-28 19:29:02,6, playground.cpp:162] FASP(RAND)  capacity = 28 edgeCnt = 28 edgeList = [{14, 9}, {11, 10}, {12, 8}, {1, 15}, {1, 14}, {11, 15}, {11, 14}, {5, 13}, {5, 12}, {7, 9}, {3, 13}, {3, 4}, {3, 2}, {1, 8}, {10, 8}, {5, 8}, {7, 8}, {9, 8}, {1, 6}, {11, 6}, {11, 7}, {7, 6}, {7, 10}, {11, 3}, {14, 4}, {2, 13}, {4, 13}, {12, 9}]
+[0m[35m[2019-10-28 19:29:02,6, timer.h:61] NO_NAME [gr] = 3.7087e-05
+[0m===========> #WINS(NewRandom/Exact)=0/44     #DRAWS=79     #RUNS=123
+124 ======================= Processing [tournament-0124-15-105.al] {Graph V/E: 15/105}
+Exact solution=30 Time=0.488
+[35m[2019-10-28 19:29:02,5, timer.h:61] NO_NAME [--------RANDOM new] = 0.419344
+[0m[32m[2019-10-28 19:29:02,5, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 10 / 23
+[0m[32m[2019-10-28 19:29:02,5, playground.cpp:162] FASP(RAND)  capacity = 36 edgeCnt = 36 edgeList = [{3, 15}, {3, 6}, {2, 11}, {15, 9}, {15, 13}, {11, 7}, {14, 12}, {14, 13}, {10, 9}, {8, 9}, {8, 12}, {8, 13}, {8, 7}, {6, 12}, {5, 9}, {5, 13}, {4, 13}, {12, 9}, {4, 7}, {2, 13}, {3, 12}, {2, 7}, {3, 7}, {15, 11}, {10, 11}, {6, 11}, {5, 11}, {3, 11}, {2, 15}, {2, 14}, {10, 15}, {10, 14}, {8, 4}, {8, 5}, {8, 14}, {4, 15}]
+[0m[35m[2019-10-28 19:29:02,5, timer.h:61] NO_NAME [gr] = 3.6254e-05
+[0m===========> #WINS(NewRandom/Exact)=0/45     #DRAWS=79     #RUNS=124
+125 ======================= Processing [tournament-0125-15-105.al] {Graph V/E: 15/105}
+Exact solution=26 Time=0.108
+[35m[2019-10-28 19:29:03,3, timer.h:61] NO_NAME [--------RANDOM new] = 0.307751
+[0m[32m[2019-10-28 19:29:03,3, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 7 / 17
+[0m[32m[2019-10-28 19:29:03,3, playground.cpp:162] FASP(RAND)  capacity = 27 edgeCnt = 27 edgeList = [{15, 3}, {10, 3}, {5, 1}, {1, 10}, {1, 9}, {11, 15}, {11, 12}, {7, 9}, {7, 6}, {5, 14}, {5, 15}, {5, 13}, {5, 2}, {11, 1}, {4, 13}, {10, 14}, {10, 9}, {8, 13}, {8, 1}, {8, 12}, {8, 6}, {1, 3}, {9, 13}, {15, 12}, {6, 14}, {2, 3}, {6, 13}]
+[0m[35m[2019-10-28 19:29:03,3, timer.h:61] NO_NAME [gr] = 3.6481e-05
+[0m===========> #WINS(NewRandom/Exact)=0/46     #DRAWS=79     #RUNS=125
+126 ======================= Processing [tournament-0126-15-105.al] {Graph V/E: 15/105}
+Exact solution=25 Time=0.064
+[35m[2019-10-28 19:29:03,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.273319
+[0m[32m[2019-10-28 19:29:03,7, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 5 / 17
+[0m[32m[2019-10-28 19:29:03,7, playground.cpp:162] FASP(RAND)  capacity = 25 edgeCnt = 25 edgeList = [{2, 3}, {5, 3}, {11, 10}, {13, 7}, {12, 7}, {10, 7}, {15, 9}, {1, 14}, {13, 9}, {13, 14}, {13, 4}, {13, 3}, {11, 9}, {11, 4}, {11, 3}, {11, 2}, {10, 14}, {6, 9}, {15, 5}, {6, 8}, {10, 2}, {5, 14}, {5, 8}, {5, 4}, {2, 8}]
+[0m[35m[2019-10-28 19:29:03,7, timer.h:61] NO_NAME [gr] = 3.4446e-05
+[0m===========> #WINS(NewRandom/Exact)=0/46     #DRAWS=80     #RUNS=126
+127 ======================= Processing [tournament-0127-15-105.al] {Graph V/E: 15/105}
+Exact solution=24 Time=0.048
+[35m[2019-10-28 19:29:03,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.319584
+[0m[32m[2019-10-28 19:29:03,7, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 6 / 15
+[0m[32m[2019-10-28 19:29:03,7, playground.cpp:162] FASP(RAND)  capacity = 26 edgeCnt = 26 edgeList = [{13, 15}, {7, 15}, {12, 4}, {1, 14}, {11, 1}, {11, 13}, {11, 12}, {10, 15}, {10, 4}, {14, 3}, {1, 9}, {14, 9}, {1, 8}, {6, 15}, {6, 7}, {6, 5}, {6, 4}, {2, 8}, {2, 4}, {2, 10}, {3, 15}, {12, 13}, {12, 7}, {9, 15}, {3, 8}, {13, 4}]
+[0m[35m[2019-10-28 19:29:03,7, timer.h:61] NO_NAME [gr] = 3.5186e-05
+[0m===========> #WINS(NewRandom/Exact)=0/47     #DRAWS=80     #RUNS=127
+128 ======================= Processing [tournament-0128-15-105.al] {Graph V/E: 15/105}
+Exact solution=27 Time=0.132
+[35m[2019-10-28 19:29:04,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.372545
+[0m[32m[2019-10-28 19:29:04,9, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 7 / 17
+[0m[32m[2019-10-28 19:29:04,9, playground.cpp:162] FASP(RAND)  capacity = 27 edgeCnt = 27 edgeList = [{8, 13}, {13, 1}, {11, 9}, {15, 4}, {1, 12}, {15, 12}, {1, 9}, {13, 9}, {8, 12}, {13, 6}, {8, 11}, {10, 14}, {8, 4}, {13, 4}, {5, 11}, {5, 9}, {3, 11}, {3, 7}, {2, 12}, {2, 9}, {7, 12}, {7, 4}, {11, 4}, {15, 2}, {8, 10}, {1, 2}, {8, 2}]
+[0m[35m[2019-10-28 19:29:04,9, timer.h:61] NO_NAME [gr] = 3.5998e-05
+[0m===========> #WINS(NewRandom/Exact)=0/47     #DRAWS=81     #RUNS=128
+129 ======================= Processing [tournament-0129-15-105.al] {Graph V/E: 15/105}
+Exact solution=30 Time=0.152
+[35m[2019-10-28 19:29:04,6, timer.h:61] NO_NAME [--------RANDOM new] = 0.466723
+[0m[32m[2019-10-28 19:29:04,6, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 6 / 27
+[0m[32m[2019-10-28 19:29:04,6, playground.cpp:162] FASP(RAND)  capacity = 36 edgeCnt = 36 edgeList = [{9, 4}, {6, 3}, {10, 5}, {15, 13}, {10, 14}, {10, 7}, {15, 2}, {11, 13}, {11, 14}, {11, 12}, {8, 7}, {8, 4}, {8, 2}, {1, 9}, {10, 9}, {1, 6}, {15, 6}, {10, 6}, {11, 6}, {5, 12}, {5, 2}, {1, 3}, {15, 3}, {5, 3}, {2, 14}, {8, 1}, {8, 15}, {10, 1}, {2, 7}, {2, 4}, {2, 3}, {6, 14}, {12, 9}, {12, 7}, {6, 4}, {14, 4}]
+[0m[35m[2019-10-28 19:29:04,6, timer.h:61] NO_NAME [gr] = 3.6331e-05
+[0m===========> #WINS(NewRandom/Exact)=0/48     #DRAWS=81     #RUNS=129
+130 ======================= Processing [tournament-0130-15-105.al] {Graph V/E: 15/105}
+Exact solution=23 Time=0.056
+[35m[2019-10-28 19:29:04,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.290405
+[0m[32m[2019-10-28 19:29:04,7, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 7 / 14
+[0m[32m[2019-10-28 19:29:04,7, playground.cpp:162] FASP(RAND)  capacity = 24 edgeCnt = 24 edgeList = [{13, 11}, {13, 3}, {9, 6}, {1, 15}, {1, 14}, {10, 15}, {10, 11}, {9, 15}, {12, 11}, {10, 7}, {12, 2}, {6, 13}, {12, 1}, {6, 15}, {7, 15}, {7, 14}, {7, 8}, {4, 2}, {7, 3}, {7, 4}, {5, 11}, {5, 2}, {13, 2}, {14, 11}]
+[0m[35m[2019-10-28 19:29:04,7, timer.h:61] NO_NAME [gr] = 3.6495e-05
+[0m===========> #WINS(NewRandom/Exact)=0/49     #DRAWS=81     #RUNS=130
+131 ======================= Processing [tournament-0131-16-120.al] {Graph V/E: 16/120}
+Exact solution=31 Time=0.148
+[35m[2019-10-28 19:29:05,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.551791
+[0m[32m[2019-10-28 19:29:05,9, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 8 / 27
+[0m[32m[2019-10-28 19:29:05,9, playground.cpp:162] FASP(RAND)  capacity = 38 edgeCnt = 38 edgeList = [{10, 6}, {6, 14}, {4, 8}, {15, 13}, {15, 14}, {12, 13}, {12, 16}, {1, 11}, {15, 11}, {9, 14}, {9, 11}, {1, 7}, {9, 7}, {1, 5}, {15, 5}, {12, 5}, {1, 4}, {15, 2}, {4, 13}, {4, 14}, {4, 11}, {8, 10}, {4, 6}, {1, 3}, {9, 3}, {2, 8}, {2, 14}, {2, 7}, {3, 16}, {3, 11}, {10, 16}, {10, 11}, {5, 16}, {10, 7}, {6, 11}, {13, 3}, {8, 7}, {8, 6}]
+[0m[35m[2019-10-28 19:29:05,9, timer.h:61] NO_NAME [gr] = 4.2179e-05
+[0m===========> #WINS(NewRandom/Exact)=0/50     #DRAWS=81     #RUNS=131
+132 ======================= Processing [tournament-0132-16-120.al] {Graph V/E: 16/120}
+Exact solution=32 Time=0.168
+[35m[2019-10-28 19:29:06,8, timer.h:61] NO_NAME [--------RANDOM new] = 0.569003
+[0m[32m[2019-10-28 19:29:06,8, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 7 / 21
+[0m[32m[2019-10-28 19:29:06,8, playground.cpp:162] FASP(RAND)  capacity = 33 edgeCnt = 33 edgeList = [{5, 3}, {6, 3}, {2, 5}, {2, 13}, {13, 16}, {1, 16}, {15, 16}, {15, 8}, {5, 12}, {1, 14}, {5, 14}, {3, 14}, {11, 13}, {11, 12}, {9, 12}, {9, 8}, {9, 7}, {6, 10}, {6, 14}, {6, 13}, {4, 13}, {4, 12}, {4, 8}, {4, 7}, {2, 16}, {2, 14}, {8, 16}, {2, 12}, {4, 6}, {4, 15}, {2, 6}, {2, 3}, {5, 1}]
+[0m[35m[2019-10-28 19:29:06,8, timer.h:61] NO_NAME [gr] = 4.2284e-05
+[0m===========> #WINS(NewRandom/Exact)=0/51     #DRAWS=81     #RUNS=132
+133 ======================= Processing [tournament-0133-16-120.al] {Graph V/E: 16/120}
+Exact solution=32 Time=0.184
+[35m[2019-10-28 19:29:06,3, timer.h:61] NO_NAME [--------RANDOM new] = 0.494288
+[0m[32m[2019-10-28 19:29:06,3, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 5 / 26
+[0m[32m[2019-10-28 19:29:06,3, playground.cpp:162] FASP(RAND)  capacity = 36 edgeCnt = 36 edgeList = [{9, 7}, {5, 7}, {2, 13}, {5, 4}, {7, 3}, {8, 6}, {13, 6}, {10, 6}, {1, 14}, {16, 14}, {11, 6}, {9, 6}, {9, 14}, {7, 14}, {1, 3}, {8, 3}, {15, 3}, {12, 3}, {16, 8}, {15, 4}, {1, 12}, {16, 12}, {11, 12}, {11, 8}, {9, 13}, {9, 4}, {7, 10}, {7, 8}, {7, 4}, {2, 4}, {5, 13}, {5, 10}, {5, 8}, {2, 8}, {2, 10}, {9, 11}]
+[0m[35m[2019-10-28 19:29:06,3, timer.h:61] NO_NAME [gr] = 4.2334e-05
+[0m===========> #WINS(NewRandom/Exact)=0/52     #DRAWS=81     #RUNS=133
+134 ======================= Processing [tournament-0134-16-120.al] {Graph V/E: 16/120}
+Exact solution=28 Time=0.092
+[35m[2019-10-28 19:29:06,5, timer.h:61] NO_NAME [--------RANDOM new] = 0.441924
+[0m[32m[2019-10-28 19:29:06,5, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 7 / 19
+[0m[32m[2019-10-28 19:29:06,5, playground.cpp:162] FASP(RAND)  capacity = 30 edgeCnt = 30 edgeList = [{5, 9}, {7, 8}, {2, 4}, {4, 10}, {16, 13}, {14, 7}, {14, 10}, {12, 13}, {3, 7}, {16, 4}, {1, 11}, {3, 11}, {1, 8}, {1, 6}, {14, 6}, {5, 8}, {5, 6}, {2, 13}, {2, 11}, {2, 10}, {8, 10}, {2, 8}, {16, 12}, {1, 15}, {16, 15}, {5, 12}, {2, 12}, {2, 14}, {16, 9}, {1, 9}]
+[0m[35m[2019-10-28 19:29:06,5, timer.h:61] NO_NAME [gr] = 4.3993e-05
+[0m===========> #WINS(NewRandom/Exact)=0/53     #DRAWS=81     #RUNS=134
+135 ======================= Processing [tournament-0135-16-120.al] {Graph V/E: 16/120}
+Exact solution=33 Time=0.308
+[35m[2019-10-28 19:29:07,1, timer.h:61] NO_NAME [--------RANDOM new] = 0.536005
+[0m[32m[2019-10-28 19:29:07,1, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 6 / 25
+[0m[32m[2019-10-28 19:29:07,1, playground.cpp:162] FASP(RAND)  capacity = 36 edgeCnt = 36 edgeList = [{14, 2}, {1, 6}, {4, 13}, {4, 9}, {15, 5}, {16, 5}, {7, 15}, {3, 8}, {3, 5}, {2, 15}, {13, 15}, {12, 5}, {1, 11}, {1, 10}, {14, 10}, {16, 10}, {2, 10}, {1, 9}, {14, 9}, {2, 9}, {6, 10}, {6, 9}, {4, 10}, {9, 5}, {15, 11}, {14, 3}, {7, 3}, {1, 13}, {16, 13}, {1, 12}, {14, 12}, {16, 12}, {1, 14}, {16, 7}, {1, 4}, {6, 4}]
+[0m[35m[2019-10-28 19:29:07,1, timer.h:61] NO_NAME [gr] = 4.1091e-05
+[0m===========> #WINS(NewRandom/Exact)=0/54     #DRAWS=81     #RUNS=135
+136 ======================= Processing [tournament-0136-16-120.al] {Graph V/E: 16/120}
+Exact solution=33 Time=0.208
+[35m[2019-10-28 19:29:08,6, timer.h:61] NO_NAME [--------RANDOM new] = 0.604631
+[0m[32m[2019-10-28 19:29:08,6, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 9 / 25
+[0m[32m[2019-10-28 19:29:08,6, playground.cpp:162] FASP(RAND)  capacity = 38 edgeCnt = 38 edgeList = [{13, 8}, {6, 16}, {11, 3}, {5, 10}, {1, 16}, {14, 6}, {14, 16}, {14, 9}, {3, 12}, {3, 9}, {5, 12}, {10, 6}, {10, 16}, {5, 7}, {10, 7}, {1, 13}, {11, 6}, {11, 13}, {1, 8}, {15, 8}, {5, 8}, {1, 4}, {3, 4}, {11, 4}, {1, 2}, {15, 2}, {3, 15}, {1, 15}, {11, 10}, {2, 16}, {12, 6}, {8, 16}, {4, 16}, {12, 7}, {12, 4}, {2, 4}, {2, 8}, {6, 4}]
+[0m[35m[2019-10-28 19:29:08,6, timer.h:61] NO_NAME [gr] = 4.2356e-05
+[0m===========> #WINS(NewRandom/Exact)=0/55     #DRAWS=81     #RUNS=136
+137 ======================= Processing [tournament-0137-16-120.al] {Graph V/E: 16/120}
+Exact solution=29 Time=0.092
+[35m[2019-10-28 19:29:08,4, timer.h:61] NO_NAME [--------RANDOM new] = 0.537415
+[0m[32m[2019-10-28 19:29:08,4, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 5 / 23
+[0m[32m[2019-10-28 19:29:08,4, playground.cpp:162] FASP(RAND)  capacity = 32 edgeCnt = 32 edgeList = [{11, 16}, {14, 7}, {3, 4}, {4, 9}, {16, 9}, {7, 9}, {7, 8}, {16, 3}, {1, 15}, {5, 9}, {12, 3}, {11, 15}, {11, 8}, {11, 3}, {1, 10}, {5, 10}, {6, 13}, {6, 9}, {1, 4}, {16, 4}, {11, 4}, {2, 10}, {2, 8}, {15, 10}, {3, 9}, {15, 9}, {14, 5}, {1, 12}, {6, 12}, {6, 5}, {7, 1}, {14, 16}]
+[0m[35m[2019-10-28 19:29:08,4, timer.h:61] NO_NAME [gr] = 4.1303e-05
+[0m===========> #WINS(NewRandom/Exact)=0/56     #DRAWS=81     #RUNS=137
+138 ======================= Processing [tournament-0138-16-120.al] {Graph V/E: 16/120}
+Exact solution=22 Time=0.04
+[35m[2019-10-28 19:29:09,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.372771
+[0m[32m[2019-10-28 19:29:09,7, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 7 / 11
+[0m[32m[2019-10-28 19:29:09,7, playground.cpp:162] FASP(RAND)  capacity = 22 edgeCnt = 22 edgeList = [{3, 5}, {4, 14}, {6, 13}, {11, 12}, {11, 3}, {8, 13}, {16, 4}, {11, 4}, {11, 9}, {16, 5}, {15, 13}, {15, 4}, {1, 14}, {1, 12}, {11, 6}, {11, 1}, {16, 12}, {2, 7}, {8, 1}, {7, 12}, {4, 13}, {3, 13}]
+[0m[35m[2019-10-28 19:29:09,7, timer.h:61] NO_NAME [gr] = 4.2379e-05
+[0m===========> #WINS(NewRandom/Exact)=0/56     #DRAWS=82     #RUNS=138
+139 ======================= Processing [tournament-0139-16-120.al] {Graph V/E: 16/120}
+Exact solution=29 Time=0.128
+[35m[2019-10-28 19:29:09,2, timer.h:61] NO_NAME [--------RANDOM new] = 0.475104
+[0m[32m[2019-10-28 19:29:09,2, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 8 / 26
+[0m[32m[2019-10-28 19:29:09,2, playground.cpp:162] FASP(RAND)  capacity = 36 edgeCnt = 36 edgeList = [{6, 14}, {2, 7}, {15, 9}, {14, 9}, {12, 9}, {10, 9}, {16, 4}, {15, 4}, {11, 4}, {6, 4}, {16, 13}, {16, 7}, {14, 3}, {12, 3}, {11, 3}, {11, 7}, {10, 13}, {10, 7}, {8, 3}, {8, 7}, {6, 3}, {6, 13}, {6, 7}, {5, 3}, {2, 13}, {5, 7}, {15, 5}, {2, 12}, {15, 12}, {16, 12}, {11, 12}, {14, 5}, {16, 2}, {10, 8}, {15, 11}, {10, 14}]
+[0m[35m[2019-10-28 19:29:09,2, timer.h:61] NO_NAME [gr] = 4.2314e-05
+[0m===========> #WINS(NewRandom/Exact)=0/57     #DRAWS=82     #RUNS=139
+140 ======================= Processing [tournament-0140-16-120.al] {Graph V/E: 16/120}
+Exact solution=32 Time=0.176
+[35m[2019-10-28 19:29:10,2, timer.h:61] NO_NAME [--------RANDOM new] = 0.569431
+[0m[32m[2019-10-28 19:29:10,2, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 9 / 31
+[0m[32m[2019-10-28 19:29:10,2, playground.cpp:162] FASP(RAND)  capacity = 43 edgeCnt = 43 edgeList = [{15, 10}, {12, 16}, {5, 10}, {1, 16}, {1, 13}, {1, 11}, {1, 10}, {9, 8}, {9, 5}, {9, 4}, {6, 13}, {6, 12}, {6, 10}, {6, 4}, {1, 3}, {9, 3}, {9, 2}, {6, 3}, {2, 16}, {2, 5}, {2, 13}, {2, 3}, {3, 16}, {3, 15}, {3, 14}, {3, 13}, {3, 12}, {11, 15}, {11, 14}, {11, 13}, {11, 12}, {11, 4}, {3, 7}, {11, 7}, {5, 16}, {5, 15}, {5, 7}, {5, 14}, {10, 16}, {7, 16}, {12, 14}, {15, 16}, {4, 10}]
+[0m[35m[2019-10-28 19:29:10,2, timer.h:61] NO_NAME [gr] = 4.4822e-05
+[0m===========> #WINS(NewRandom/Exact)=0/58     #DRAWS=82     #RUNS=140
+141 ======================= Processing [tournament-0141-17-136.al] {Graph V/E: 17/136}
+Exact solution=33 Time=0.2
+[35m[2019-10-28 19:29:10,7, timer.h:61] NO_NAME [--------RANDOM new] = 0.744938
+[0m[32m[2019-10-28 19:29:10,7, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 8 / 30
+[0m[32m[2019-10-28 19:29:10,7, playground.cpp:162] FASP(RAND)  capacity = 43 edgeCnt = 43 edgeList = [{12, 16}, {4, 12}, {7, 12}, {3, 7}, {2, 7}, {6, 15}, {5, 15}, {16, 15}, {14, 15}, {13, 15}, {1, 17}, {1, 16}, {1, 14}, {1, 13}, {1, 11}, {1, 10}, {9, 16}, {9, 14}, {9, 10}, {9, 7}, {1, 8}, {1, 4}, {9, 4}, {1, 3}, {2, 16}, {2, 14}, {2, 12}, {2, 11}, {2, 10}, {2, 8}, {6, 7}, {2, 5}, {17, 12}, {14, 4}, {3, 11}, {13, 11}, {5, 8}, {14, 16}, {13, 14}, {17, 10}, {3, 10}, {7, 16}, {4, 16}]
+[0m[35m[2019-10-28 19:29:10,7, timer.h:61] NO_NAME [gr] = 4.9744e-05
+[0m===========> #WINS(NewRandom/Exact)=0/59     #DRAWS=82     #RUNS=141
+142 ======================= Processing [tournament-0142-17-136.al] {Graph V/E: 17/136}
+Exact solution=34 Time=0.34
+[35m[2019-10-28 19:29:11,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.631711
+[0m[32m[2019-10-28 19:29:11,9, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 8 / 24
+[0m[32m[2019-10-28 19:29:11,9, playground.cpp:162] FASP(RAND)  capacity = 35 edgeCnt = 35 edgeList = [{2, 9}, {10, 9}, {2, 16}, {17, 15}, {12, 15}, {10, 15}, {7, 15}, {17, 14}, {12, 14}, {12, 16}, {13, 14}, {9, 14}, {11, 16}, {11, 3}, {11, 8}, {10, 16}, {7, 16}, {1, 6}, {9, 6}, {5, 8}, {5, 6}, {1, 4}, {11, 4}, {7, 4}, {3, 16}, {12, 13}, {11, 13}, {10, 13}, {2, 13}, {7, 17}, {9, 1}, {11, 9}, {11, 12}, {5, 12}, {5, 9}]
+[0m[35m[2019-10-28 19:29:11,9, timer.h:61] NO_NAME [gr] = 4.9525e-05
+[0m===========> #WINS(NewRandom/Exact)=0/60     #DRAWS=82     #RUNS=142
+143 ======================= Processing [tournament-0143-17-136.al] {Graph V/E: 17/136}
+Exact solution=28 Time=0.072
+[35m[2019-10-28 19:29:12,9, timer.h:61] NO_NAME [--------RANDOM new] = 0.609153
+[0m[32m[2019-10-28 19:29:12,9, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 10 / 18
+[0m[32m[2019-10-28 19:29:12,9, playground.cpp:162] FASP(RAND)  capacity = 31 edgeCnt = 31 edgeList = [{10, 1}, {4, 7}, {4, 13}, {16, 14}, {9, 13}, {9, 12}, {9, 2}, {16, 5}, {10, 12}, {10, 8}, {15, 2}, {11, 13}, {11, 5}, {6, 12}, {6, 8}, {6, 5}, {3, 13}, {3, 7}, {3, 5}, {12, 14}, {12, 4}, {2, 8}, {13, 8}, {16, 9}, {3, 10}, {3, 6}, {16, 11}, {17, 1}, {6, 10}, {17, 11}, {9, 1}]
+[0m[35m[2019-10-28 19:29:12,9, timer.h:61] NO_NAME [gr] = 4.9785e-05
+[0m===========> #WINS(NewRandom/Exact)=0/61     #DRAWS=82     #RUNS=143
+144 ======================= Processing [tournament-0144-17-136.al] {Graph V/E: 17/136}
+Exact solution=39 Time=1.072
+[35m[2019-10-28 19:29:12,8, timer.h:61] NO_NAME [--------RANDOM new] = 0.918745
+[0m[32m[2019-10-28 19:29:12,8, playground.cpp:161] SA / SA RND / RED RND edges: 2 / 10 / 30
+[0m[32m[2019-10-28 19:29:12,8, playground.cpp:162] FASP(RAND)  capacity = 42 edgeCnt = 42 edgeList = [{10, 16}, {3, 7}, {14, 12}, {13, 12}, {1, 11}, {15, 17}, {14, 9}, {15, 8}, {16, 8}, {15, 2}, {14, 2}, {13, 11}, {10, 12}, {10, 11}, {1, 7}, {1, 6}, {16, 6}, {13, 6}, {5, 12}, {5, 17}, {5, 7}, {5, 2}, {4, 12}, {4, 17}, {4, 9}, {4, 8}, {4, 7}, {4, 6}, {2, 17}, {4, 13}, {9, 7}, {9, 6}, {3, 17}, {7, 6}, {12, 17}, {8, 6}, {3, 11}, {5, 16}, {14, 13}, {14, 1}, {16, 1}, {14, 16}]
+[0m[35m[2019-10-28 19:29:12,8, timer.h:61] NO_NAME [gr] = 4.9097e-05
+[0m===========> #WINS(NewRandom/Exact)=0/62     #DRAWS=82     #RUNS=144
+145 ======================= Processing [tournament-0145-17-136.al] {Graph V/E: 17/136}
+Exact solution=36 Time=0.264
+[35m[2019-10-28 19:29:13,8, timer.h:61] NO_NAME [--------RANDOM new] = 0.81964
+[0m[32m[2019-10-28 19:29:13,8, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 6 / 29
+[0m[32m[2019-10-28 19:29:13,8, playground.cpp:162] FASP(RAND)  capacity = 39 edgeCnt = 39 edgeList = [{8, 10}, {7, 2}, {4, 6}, {13, 3}, {17, 13}, {17, 6}, {2, 6}, {2, 4}, {2, 5}, {15, 6}, {15, 5}, {1, 11}, {16, 11}, {15, 11}, {1, 9}, {16, 12}, {14, 12}, {8, 13}, {8, 9}, {8, 6}, {8, 5}, {7, 13}, {7, 11}, {7, 6}, {1, 3}, {16, 3}, {2, 3}, {15, 3}, {14, 3}, {10, 3}, {12, 9}, {17, 16}, {17, 2}, {17, 15}, {1, 15}, {8, 16}, {14, 2}, {1, 10}, {8, 2}]
+[0m[35m[2019-10-28 19:29:13,8, timer.h:61] NO_NAME [gr] = 4.8335e-05
+[0m===========> #WINS(NewRandom/Exact)=0/63     #DRAWS=82     #RUNS=145
+146 ======================= Processing [tournament-0146-17-136.al] {Graph V/E: 17/136}
+Exact solution=32 Time=0.088
+[35m[2019-10-28 19:29:14,8, timer.h:61] NO_NAME [--------RANDOM new] = 0.669756
+[0m[32m[2019-10-28 19:29:14,8, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 7 / 22
+[0m[32m[2019-10-28 19:29:14,8, playground.cpp:162] FASP(RAND)  capacity = 35 edgeCnt = 35 edgeList = [{6, 10}, {6, 11}, {2, 4}, {14, 3}, {12, 1}, {1, 3}, {1, 17}, {16, 15}, {16, 11}, {12, 6}, {12, 2}, {13, 7}, {1, 10}, {12, 10}, {8, 5}, {9, 5}, {9, 10}, {8, 7}, {8, 6}, {8, 2}, {1, 4}, {16, 4}, {13, 4}, {16, 13}, {8, 9}, {12, 3}, {2, 17}, {15, 17}, {7, 5}, {7, 17}, {5, 3}, {15, 6}, {2, 10}, {2, 14}, {5, 4}]
+[0m[35m[2019-10-28 19:29:14,8, timer.h:61] NO_NAME [gr] = 4.764e-05
+[0m===========> #WINS(NewRandom/Exact)=0/64     #DRAWS=82     #RUNS=146
+147 ======================= Processing [tournament-0147-17-136.al] {Graph V/E: 17/136}
+Exact solution=40 Time=0.516
+[35m[2019-10-28 19:29:15,2, timer.h:61] NO_NAME [--------RANDOM new] = 0.784347
+[0m[32m[2019-10-28 19:29:15,2, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 6 / 37
+[0m[32m[2019-10-28 19:29:15,2, playground.cpp:162] FASP(RAND)  capacity = 46 edgeCnt = 46 edgeList = [{8, 6}, {17, 13}, {7, 5}, {1, 17}, {1, 15}, {11, 14}, {11, 12}, {10, 17}, {10, 15}, {10, 12}, {11, 6}, {10, 6}, {11, 2}, {1, 8}, {10, 8}, {10, 1}, {1, 7}, {1, 5}, {11, 5}, {1, 4}, {2, 16}, {2, 15}, {2, 13}, {2, 8}, {2, 5}, {2, 3}, {3, 16}, {3, 13}, {3, 12}, {9, 16}, {9, 13}, {9, 12}, {9, 8}, {3, 7}, {3, 6}, {3, 5}, {12, 17}, {12, 16}, {12, 13}, {12, 8}, {12, 5}, {12, 4}, {14, 16}, {13, 5}, {7, 15}, {7, 6}]
+[0m[35m[2019-10-28 19:29:15,2, timer.h:61] NO_NAME [gr] = 4.9788e-05
+[0m===========> #WINS(NewRandom/Exact)=0/65     #DRAWS=82     #RUNS=147
+148 ======================= Processing [tournament-0148-17-136.al] {Graph V/E: 17/136}
+Exact solution=35 Time=0.38
+[35m[2019-10-28 19:29:16,4, timer.h:61] NO_NAME [--------RANDOM new] = 0.801451
+[0m[32m[2019-10-28 19:29:16,4, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 7 / 28
+[0m[32m[2019-10-28 19:29:16,4, playground.cpp:162] FASP(RAND)  capacity = 39 edgeCnt = 39 edgeList = [{6, 10}, {12, 11}, {15, 9}, {2, 5}, {8, 17}, {3, 14}, {2, 14}, {10, 17}, {10, 14}, {1, 9}, {1, 15}, {11, 15}, {7, 17}, {7, 14}, {6, 14}, {6, 9}, {1, 5}, {13, 2}, {13, 3}, {12, 2}, {12, 3}, {10, 5}, {7, 5}, {7, 3}, {6, 2}, {4, 17}, {4, 15}, {4, 9}, {5, 14}, {5, 9}, {8, 16}, {11, 16}, {6, 16}, {8, 1}, {8, 11}, {4, 13}, {4, 12}, {7, 13}, {4, 11}]
+[0m[35m[2019-10-28 19:29:16,4, timer.h:61] NO_NAME [gr] = 4.95e-05
+[0m===========> #WINS(NewRandom/Exact)=0/66     #DRAWS=82     #RUNS=148
+149 ======================= Processing [tournament-0149-17-136.al] {Graph V/E: 17/136}
+Exact solution=36 Time=0.448
+[35m[2019-10-28 19:29:16,0, timer.h:61] NO_NAME [--------RANDOM new] = 0.785266
+[0m[32m[2019-10-28 19:29:16,0, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 9 / 32
+[0m[32m[2019-10-28 19:29:16,0, playground.cpp:162] FASP(RAND)  capacity = 46 edgeCnt = 46 edgeList = [{14, 7}, {9, 2}, {6, 7}, {2, 13}, {2, 11}, {16, 11}, {10, 11}, {16, 4}, {15, 17}, {12, 17}, {12, 11}, {9, 17}, {9, 11}, {1, 8}, {14, 8}, {7, 11}, {7, 4}, {6, 17}, {5, 17}, {5, 11}, {5, 8}, {3, 17}, {3, 11}, {8, 4}, {2, 4}, {16, 10}, {14, 10}, {12, 10}, {9, 10}, {5, 10}, {3, 10}, {16, 13}, {15, 13}, {9, 13}, {5, 13}, {3, 15}, {3, 14}, {3, 12}, {3, 5}, {6, 15}, {6, 14}, {6, 9}, {7, 12}, {14, 12}, {15, 12}, {14, 5}]
+[0m[35m[2019-10-28 19:29:16,0, timer.h:61] NO_NAME [gr] = 5.0157e-05
+[0m===========> #WINS(NewRandom/Exact)=0/67     #DRAWS=82     #RUNS=149
+150 ======================= Processing [tournament-0150-17-136.al] {Graph V/E: 17/136}
+Exact solution=35 Time=0.228
+[35m[2019-10-28 19:29:17,3, timer.h:61] NO_NAME [--------RANDOM new] = 0.812874
+[0m[32m[2019-10-28 19:29:17,3, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 11 / 25
+[0m[32m[2019-10-28 19:29:17,3, playground.cpp:162] FASP(RAND)  capacity = 39 edgeCnt = 39 edgeList = [{9, 1}, {7, 9}, {2, 15}, {17, 6}, {3, 15}, {9, 16}, {17, 2}, {3, 2}, {13, 6}, {13, 12}, {1, 11}, {3, 11}, {9, 11}, {14, 11}, {8, 16}, {8, 12}, {7, 6}, {7, 12}, {7, 2}, {1, 5}, {14, 5}, {13, 5}, {8, 5}, {4, 12}, {4, 11}, {4, 10}, {16, 6}, {16, 5}, {10, 15}, {2, 12}, {6, 11}, {5, 11}, {17, 3}, {7, 3}, {7, 8}, {7, 14}, {17, 14}, {8, 4}, {3, 1}]
+[0m[35m[2019-10-28 19:29:17,3, timer.h:61] NO_NAME [gr] = 4.9223e-05
+[0m===========> #WINS(NewRandom/Exact)=0/68     #DRAWS=82     #RUNS=150
+151 ======================= Processing [tournament-0151-18-153.al] {Graph V/E: 18/153}
+Exact solution=44 Time=2.068
+[35m[2019-10-28 19:29:19,4, timer.h:61] NO_NAME [--------RANDOM new] = 1.37655
+[0m[32m[2019-10-28 19:29:19,4, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 10 / 37
+[0m[32m[2019-10-28 19:29:19,4, playground.cpp:162] FASP(RAND)  capacity = 51 edgeCnt = 51 edgeList = [{15, 9}, {14, 3}, {2, 4}, {3, 17}, {11, 17}, {4, 17}, {4, 8}, {4, 13}, {16, 17}, {16, 8}, {16, 13}, {15, 8}, {14, 10}, {14, 17}, {14, 13}, {12, 10}, {12, 17}, {12, 13}, {7, 8}, {6, 10}, {6, 17}, {6, 8}, {6, 13}, {5, 10}, {8, 17}, {18, 11}, {2, 13}, {4, 11}, {16, 11}, {12, 11}, {6, 11}, {5, 11}, {5, 8}, {18, 4}, {16, 4}, {14, 4}, {9, 4}, {6, 4}, {5, 4}, {3, 4}, {2, 16}, {2, 9}, {5, 14}, {5, 12}, {5, 7}, {5, 9}, {6, 12}, {14, 18}, {15, 18}, {16, 12}, {14, 9}]
+[0m[35m[2019-10-28 19:29:19,4, timer.h:61] NO_NAME [gr] = 6.0196e-05
+[0m===========> #WINS(NewRandom/Exact)=0/69     #DRAWS=82     #RUNS=151
+152 ======================= Processing [tournament-0152-18-153.al] {Graph V/E: 18/153}
+Exact solution=37 Time=0.192
+[35m[2019-10-28 19:29:20,1, timer.h:61] NO_NAME [--------RANDOM new] = 1.07698
+[0m[32m[2019-10-28 19:29:20,1, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 6 / 31
+[0m[32m[2019-10-28 19:29:20,1, playground.cpp:162] FASP(RAND)  capacity = 41 edgeCnt = 41 edgeList = [{14, 1}, {14, 9}, {8, 3}, {17, 6}, {14, 15}, {8, 15}, {1, 17}, {18, 17}, {8, 17}, {3, 12}, {1, 13}, {3, 13}, {2, 13}, {1, 11}, {14, 11}, {2, 11}, {9, 15}, {9, 10}, {1, 6}, {3, 6}, {1, 5}, {8, 5}, {16, 5}, {9, 5}, {4, 17}, {4, 15}, {4, 10}, {12, 17}, {12, 13}, {12, 6}, {17, 15}, {17, 13}, {11, 10}, {17, 10}, {1, 18}, {14, 3}, {4, 18}, {16, 2}, {9, 18}, {9, 3}, {9, 8}]
+[0m[35m[2019-10-28 19:29:20,2, timer.h:61] NO_NAME [gr] = 5.5877e-05
+[0m===========> #WINS(NewRandom/Exact)=0/70     #DRAWS=82     #RUNS=152
+153 ======================= Processing [tournament-0153-18-153.al] {Graph V/E: 18/153}
+Exact solution=40 Time=0.696
+[35m[2019-10-28 19:29:21,2, timer.h:61] NO_NAME [--------RANDOM new] = 1.04992
+[0m[32m[2019-10-28 19:29:21,2, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 5 / 33
+[0m[32m[2019-10-28 19:29:21,2, playground.cpp:162] FASP(RAND)  capacity = 44 edgeCnt = 44 edgeList = [{15, 6}, {15, 7}, {3, 4}, {4, 18}, {1, 17}, {9, 11}, {1, 18}, {14, 18}, {14, 12}, {14, 5}, {13, 8}, {13, 12}, {13, 3}, {9, 18}, {9, 3}, {11, 3}, {1, 16}, {1, 10}, {9, 10}, {11, 10}, {1, 7}, {14, 7}, {1, 6}, {14, 6}, {1, 4}, {14, 4}, {13, 4}, {2, 18}, {2, 15}, {2, 5}, {2, 11}, {3, 18}, {12, 18}, {10, 8}, {10, 18}, {6, 8}, {16, 15}, {10, 7}, {3, 6}, {16, 6}, {10, 5}, {10, 6}, {3, 5}, {4, 6}]
+[0m[35m[2019-10-28 19:29:21,2, timer.h:61] NO_NAME [gr] = 5.7386e-05
+[0m===========> #WINS(NewRandom/Exact)=0/71     #DRAWS=82     #RUNS=153
+154 ======================= Processing [tournament-0154-18-153.al] {Graph V/E: 18/153}
+Exact solution=39 Time=0.752
+[35m[2019-10-28 19:29:22,5, timer.h:61] NO_NAME [--------RANDOM new] = 1.16346
+[0m[32m[2019-10-28 19:29:22,5, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 9 / 28
+[0m[32m[2019-10-28 19:29:22,5, playground.cpp:162] FASP(RAND)  capacity = 43 edgeCnt = 43 edgeList = [{14, 18}, {5, 18}, {7, 5}, {4, 3}, {17, 9}, {9, 4}, {1, 18}, {16, 12}, {16, 18}, {16, 10}, {6, 10}, {4, 12}, {4, 8}, {3, 14}, {9, 18}, {9, 8}, {15, 18}, {1, 13}, {17, 13}, {1, 11}, {17, 11}, {6, 11}, {4, 11}, {1, 7}, {3, 7}, {9, 7}, {1, 5}, {2, 13}, {1, 2}, {6, 2}, {4, 2}, {10, 14}, {10, 8}, {15, 4}, {3, 2}, {15, 3}, {17, 16}, {7, 18}, {7, 11}, {5, 11}, {5, 12}, {13, 8}, {13, 18}]
+[0m[35m[2019-10-28 19:29:22,5, timer.h:61] NO_NAME [gr] = 5.6327e-05
+[0m===========> #WINS(NewRandom/Exact)=0/72     #DRAWS=82     #RUNS=154
+155 ======================= Processing [tournament-0155-18-153.al] {Graph V/E: 18/153}
+Exact solution=40 Time=0.636
+[35m[2019-10-28 19:29:23,7, timer.h:61] NO_NAME [--------RANDOM new] = 1.01125
+[0m[32m[2019-10-28 19:29:23,7, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 8 / 35
+[0m[32m[2019-10-28 19:29:23,7, playground.cpp:162] FASP(RAND)  capacity = 47 edgeCnt = 47 edgeList = [{5, 10}, {10, 9}, {14, 10}, {3, 1}, {18, 15}, {18, 17}, {18, 12}, {3, 10}, {3, 9}, {3, 6}, {3, 5}, {1, 16}, {13, 17}, {13, 14}, {13, 10}, {13, 6}, {1, 11}, {1, 8}, {1, 7}, {3, 7}, {13, 7}, {4, 16}, {4, 12}, {2, 17}, {2, 14}, {13, 4}, {13, 2}, {8, 14}, {8, 12}, {8, 10}, {8, 9}, {11, 16}, {11, 14}, {11, 9}, {11, 7}, {11, 6}, {11, 5}, {14, 17}, {14, 16}, {14, 12}, {14, 7}, {14, 6}, {17, 7}, {5, 9}, {16, 9}, {6, 12}, {5, 16}]
+[0m[35m[2019-10-28 19:29:23,7, timer.h:61] NO_NAME [gr] = 5.6891e-05
+[0m===========> #WINS(NewRandom/Exact)=0/73     #DRAWS=82     #RUNS=155
+156 ======================= Processing [tournament-0156-18-153.al] {Graph V/E: 18/153}
+Exact solution=38 Time=0.136
+[35m[2019-10-28 19:29:24,8, timer.h:61] NO_NAME [--------RANDOM new] = 1.05092
+[0m[32m[2019-10-28 19:29:24,8, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 10 / 32
+[0m[32m[2019-10-28 19:29:24,8, playground.cpp:162] FASP(RAND)  capacity = 45 edgeCnt = 45 edgeList = [{8, 16}, {15, 14}, {2, 10}, {1, 18}, {1, 15}, {1, 14}, {1, 9}, {1, 7}, {1, 6}, {1, 4}, {2, 18}, {10, 16}, {10, 14}, {10, 13}, {10, 9}, {5, 17}, {5, 13}, {5, 11}, {5, 8}, {2, 7}, {10, 7}, {2, 4}, {2, 3}, {3, 18}, {3, 14}, {3, 11}, {3, 8}, {3, 9}, {6, 18}, {6, 15}, {6, 14}, {6, 13}, {7, 18}, {7, 15}, {7, 14}, {7, 12}, {7, 9}, {7, 8}, {17, 11}, {12, 14}, {14, 11}, {12, 15}, {9, 4}, {18, 9}, {8, 4}]
+[0m[35m[2019-10-28 19:29:24,8, timer.h:61] NO_NAME [gr] = 5.6139e-05
+[0m===========> #WINS(NewRandom/Exact)=0/74     #DRAWS=82     #RUNS=156
+157 ======================= Processing [tournament-0157-18-153.al] {Graph V/E: 18/153}
+Exact solution=43 Time=0.576
+[35m[2019-10-28 19:29:25,0, timer.h:61] NO_NAME [--------RANDOM new] = 1.11184
+[0m[32m[2019-10-28 19:29:25,0, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 7 / 41
+[0m[32m[2019-10-28 19:29:25,0, playground.cpp:162] FASP(RAND)  capacity = 53 edgeCnt = 53 edgeList = [{9, 7}, {5, 7}, {18, 4}, {2, 12}, {16, 1}, {1, 18}, {11, 17}, {16, 13}, {16, 6}, {11, 15}, {16, 15}, {11, 12}, {1, 9}, {11, 9}, {8, 14}, {8, 18}, {8, 10}, {8, 6}, {1, 7}, {1, 5}, {11, 5}, {1, 4}, {1, 3}, {11, 3}, {2, 18}, {16, 8}, {2, 17}, {2, 13}, {2, 10}, {3, 17}, {3, 15}, {3, 13}, {3, 12}, {3, 9}, {3, 6}, {12, 15}, {12, 13}, {12, 10}, {12, 9}, {12, 6}, {12, 5}, {12, 4}, {18, 17}, {18, 13}, {18, 9}, {18, 5}, {17, 6}, {4, 13}, {10, 13}, {10, 7}, {10, 6}, {9, 6}, {9, 15}]
+[0m[35m[2019-10-28 19:29:25,0, timer.h:61] NO_NAME [gr] = 5.7854e-05
+[0m===========> #WINS(NewRandom/Exact)=0/75     #DRAWS=82     #RUNS=157
+158 ======================= Processing [tournament-0158-18-153.al] {Graph V/E: 18/153}
+Exact solution=38 Time=0.136
+[35m[2019-10-28 19:29:26,6, timer.h:61] NO_NAME [--------RANDOM new] = 1.10508
+[0m[32m[2019-10-28 19:29:26,6, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 9 / 30
+[0m[32m[2019-10-28 19:29:26,6, playground.cpp:162] FASP(RAND)  capacity = 43 edgeCnt = 43 edgeList = [{4, 8}, {10, 3}, {10, 17}, {18, 5}, {1, 18}, {1, 14}, {13, 18}, {16, 18}, {8, 5}, {16, 10}, {16, 17}, {16, 7}, {4, 10}, {8, 10}, {8, 7}, {13, 15}, {4, 15}, {13, 12}, {4, 12}, {9, 5}, {9, 15}, {9, 12}, {6, 15}, {11, 5}, {11, 18}, {11, 14}, {1, 3}, {9, 3}, {6, 3}, {12, 5}, {3, 18}, {10, 5}, {7, 5}, {10, 18}, {7, 14}, {12, 3}, {1, 13}, {1, 11}, {4, 13}, {6, 11}, {8, 13}, {6, 8}, {9, 11}]
+[0m[35m[2019-10-28 19:29:26,6, timer.h:61] NO_NAME [gr] = 5.5547e-05
+[0m===========> #WINS(NewRandom/Exact)=0/76     #DRAWS=82     #RUNS=158
+159 ======================= Processing [tournament-0159-18-153.al] {Graph V/E: 18/153}
+Exact solution=38 Time=0.144
+[35m[2019-10-28 19:29:27,2, timer.h:61] NO_NAME [--------RANDOM new] = 1.09633
+[0m[32m[2019-10-28 19:29:27,2, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 10 / 28
+[0m[32m[2019-10-28 19:29:27,2, playground.cpp:162] FASP(RAND)  capacity = 42 edgeCnt = 42 edgeList = [{15, 16}, {10, 16}, {1, 5}, {7, 8}, {14, 17}, {1, 13}, {16, 9}, {4, 13}, {4, 7}, {4, 3}, {2, 13}, {2, 8}, {15, 13}, {14, 9}, {15, 9}, {12, 8}, {12, 7}, {14, 3}, {1, 11}, {16, 11}, {2, 11}, {12, 11}, {10, 17}, {10, 9}, {6, 8}, {6, 7}, {6, 3}, {5, 9}, {11, 17}, {13, 17}, {1, 16}, {18, 8}, {11, 3}, {13, 8}, {1, 14}, {1, 10}, {6, 16}, {6, 15}, {6, 12}, {4, 5}, {12, 16}, {15, 10}]
+[0m[35m[2019-10-28 19:29:27,2, timer.h:61] NO_NAME [gr] = 5.7635e-05
+[0m===========> #WINS(NewRandom/Exact)=0/77     #DRAWS=82     #RUNS=159
+160 ======================= Processing [tournament-0160-18-153.al] {Graph V/E: 18/153}
+Exact solution=37 Time=0.1
+[35m[2019-10-28 19:29:28,9, timer.h:61] NO_NAME [--------RANDOM new] = 1.11668
+[0m[32m[2019-10-28 19:29:28,3, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 7 / 34
+[0m[32m[2019-10-28 19:29:28,3, playground.cpp:162] FASP(RAND)  capacity = 45 edgeCnt = 45 edgeList = [{2, 5}, {5, 11}, {11, 12}, {6, 10}, {1, 18}, {17, 18}, {17, 15}, {17, 12}, {17, 4}, {1, 16}, {17, 16}, {1, 13}, {17, 13}, {1, 10}, {8, 7}, {8, 18}, {14, 16}, {14, 12}, {14, 10}, {8, 13}, {8, 9}, {8, 14}, {1, 5}, {3, 18}, {3, 16}, {3, 13}, {3, 12}, {3, 11}, {3, 6}, {3, 4}, {1, 2}, {2, 18}, {2, 16}, {2, 15}, {2, 13}, {2, 11}, {2, 10}, {5, 10}, {2, 9}, {5, 16}, {4, 12}, {6, 15}, {6, 11}, {7, 5}, {14, 5}]
+[0m[35m[2019-10-28 19:29:28,3, timer.h:61] NO_NAME [gr] = 0.000165642
+[0m===========> #WINS(NewRandom/Exact)=0/78     #DRAWS=82     #RUNS=160
+161 ======================= Processing [tournament-0161-19-171.al] {Graph V/E: 19/171}
+Exact solution=42 Time=0.876
+[35m[2019-10-28 19:29:30,5, timer.h:61] NO_NAME [--------RANDOM new] = 1.67098
+[0m[32m[2019-10-28 19:29:30,5, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 10 / 34
+[0m[32m[2019-10-28 19:29:30,5, playground.cpp:162] FASP(RAND)  capacity = 48 edgeCnt = 48 edgeList = [{18, 11}, {4, 11}, {17, 7}, {16, 12}, {11, 9}, {5, 19}, {5, 13}, {4, 17}, {4, 6}, {18, 2}, {4, 2}, {1, 16}, {15, 17}, {15, 9}, {15, 13}, {14, 16}, {14, 2}, {1, 12}, {18, 12}, {11, 12}, {14, 12}, {1, 10}, {1, 8}, {11, 8}, {5, 8}, {14, 8}, {1, 7}, {11, 7}, {3, 13}, {3, 9}, {2, 17}, {2, 16}, {13, 10}, {13, 7}, {2, 12}, {13, 12}, {13, 9}, {2, 9}, {16, 17}, {16, 6}, {17, 6}, {9, 6}, {1, 18}, {4, 5}, {4, 1}, {15, 5}, {11, 5}, {15, 11}]
+[0m[35m[2019-10-28 19:29:30,5, timer.h:61] NO_NAME [gr] = 6.5476e-05
+[0m===========> #WINS(NewRandom/Exact)=0/79     #DRAWS=82     #RUNS=161
+162 ======================= Processing [tournament-0162-19-171.al] {Graph V/E: 19/171}
+Exact solution=42 Time=0.276
+[35m[2019-10-28 19:29:32,8, timer.h:61] NO_NAME [--------RANDOM new] = 1.50285
+[0m[32m[2019-10-28 19:29:32,8, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 12 / 37
+[0m[32m[2019-10-28 19:29:32,8, playground.cpp:162] FASP(RAND)  capacity = 52 edgeCnt = 52 edgeList = [{19, 12}, {4, 11}, {18, 15}, {16, 14}, {19, 8}, {19, 6}, {19, 5}, {16, 5}, {19, 2}, {1, 18}, {16, 18}, {11, 18}, {17, 3}, {1, 15}, {16, 15}, {17, 15}, {13, 2}, {12, 18}, {10, 18}, {10, 15}, {10, 3}, {10, 2}, {9, 14}, {9, 8}, {9, 2}, {7, 15}, {7, 5}, {7, 3}, {4, 8}, {18, 14}, {3, 14}, {15, 5}, {5, 14}, {6, 5}, {6, 15}, {19, 16}, {17, 16}, {13, 16}, {12, 16}, {10, 16}, {7, 16}, {13, 11}, {9, 11}, {7, 11}, {7, 17}, {7, 13}, {7, 12}, {9, 19}, {9, 10}, {9, 12}, {17, 4}, {17, 12}]
+[0m[35m[2019-10-28 19:29:32,8, timer.h:61] NO_NAME [gr] = 6.4818e-05
+[0m===========> #WINS(NewRandom/Exact)=0/80     #DRAWS=82     #RUNS=162
+163 ======================= Processing [tournament-0163-19-171.al] {Graph V/E: 19/171}
+Exact solution=41 Time=0.212
+[35m[2019-10-28 19:29:33,8, timer.h:61] NO_NAME [--------RANDOM new] = 1.47929
+[0m[32m[2019-10-28 19:29:33,8, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 7 / 34
+[0m[32m[2019-10-28 19:29:33,8, playground.cpp:162] FASP(RAND)  capacity = 44 edgeCnt = 44 edgeList = [{17, 1}, {4, 8}, {19, 8}, {1, 19}, {14, 19}, {17, 16}, {17, 11}, {7, 16}, {13, 15}, {13, 12}, {7, 4}, {1, 10}, {7, 10}, {9, 18}, {9, 19}, {9, 11}, {9, 4}, {9, 2}, {6, 18}, {6, 15}, {6, 11}, {5, 15}, {5, 8}, {5, 4}, {1, 3}, {14, 3}, {17, 3}, {13, 3}, {2, 16}, {2, 15}, {12, 18}, {12, 15}, {12, 11}, {10, 11}, {10, 4}, {2, 8}, {3, 16}, {3, 8}, {4, 16}, {4, 19}, {7, 13}, {9, 13}, {17, 5}, {7, 1}]
+[0m[35m[2019-10-28 19:29:33,8, timer.h:61] NO_NAME [gr] = 6.8889e-05
+[0m===========> #WINS(NewRandom/Exact)=0/81     #DRAWS=82     #RUNS=163
+164 ======================= Processing [tournament-0164-19-171.al] {Graph V/E: 19/171}
+Exact solution=45 Time=0.648
+[35m[2019-10-28 19:29:34,7, timer.h:61] NO_NAME [--------RANDOM new] = 1.45919
+[0m[32m[2019-10-28 19:29:34,7, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 8 / 48
+[0m[32m[2019-10-28 19:29:34,7, playground.cpp:162] FASP(RAND)  capacity = 59 edgeCnt = 59 edgeList = [{13, 12}, {4, 18}, {2, 5}, {19, 15}, {18, 15}, {17, 15}, {17, 14}, {13, 14}, {12, 15}, {12, 14}, {11, 14}, {10, 15}, {10, 14}, {9, 15}, {7, 15}, {7, 14}, {2, 14}, {3, 15}, {17, 16}, {12, 16}, {10, 16}, {9, 16}, {7, 16}, {6, 16}, {4, 16}, {2, 16}, {18, 5}, {17, 5}, {8, 5}, {6, 5}, {3, 5}, {18, 19}, {18, 9}, {8, 10}, {17, 10}, {13, 10}, {12, 19}, {12, 10}, {12, 9}, {11, 9}, {7, 19}, {7, 10}, {6, 19}, {4, 10}, {4, 9}, {2, 19}, {2, 17}, {2, 13}, {2, 11}, {8, 13}, {8, 12}, {8, 3}, {7, 18}, {7, 12}, {7, 6}, {4, 11}, {2, 6}, {18, 6}, {11, 6}]
+[0m[35m[2019-10-28 19:29:34,7, timer.h:61] NO_NAME [gr] = 6.6881e-05
+[0m===========> #WINS(NewRandom/Exact)=0/82     #DRAWS=82     #RUNS=164
+165 ======================= Processing [tournament-0165-19-171.al] {Graph V/E: 19/171}
+Exact solution=47 Time=1.648
+[35m[2019-10-28 19:29:36,8, timer.h:61] NO_NAME [--------RANDOM new] = 1.70021
+[0m[32m[2019-10-28 19:29:36,8, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 10 / 41
+[0m[32m[2019-10-28 19:29:36,8, playground.cpp:162] FASP(RAND)  capacity = 55 edgeCnt = 55 edgeList = [{10, 19}, {16, 19}, {6, 11}, {5, 8}, {19, 17}, {19, 8}, {1, 18}, {19, 6}, {19, 5}, {16, 18}, {14, 17}, {14, 8}, {14, 6}, {14, 3}, {16, 9}, {15, 8}, {15, 6}, {1, 13}, {16, 13}, {1, 11}, {10, 17}, {10, 11}, {10, 5}, {7, 12}, {7, 5}, {1, 4}, {15, 4}, {7, 4}, {2, 18}, {2, 12}, {2, 8}, {2, 6}, {2, 3}, {9, 17}, {12, 17}, {11, 17}, {3, 8}, {4, 8}, {13, 8}, {3, 18}, {3, 13}, {3, 12}, {3, 11}, {3, 5}, {4, 12}, {6, 18}, {6, 5}, {5, 11}, {6, 13}, {14, 1}, {19, 1}, {14, 2}, {10, 2}, {14, 19}, {14, 7}]
+[0m[35m[2019-10-28 19:29:36,8, timer.h:61] NO_NAME [gr] = 7.0246e-05
+[0m===========> #WINS(NewRandom/Exact)=0/83     #DRAWS=82     #RUNS=165
+166 ======================= Processing [tournament-0166-19-171.al] {Graph V/E: 19/171}
+Exact solution=46 Time=0.856
+[35m[2019-10-28 19:29:38,6, timer.h:61] NO_NAME [--------RANDOM new] = 1.72826
+[0m[32m[2019-10-28 19:29:38,6, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 7 / 43
+[0m[32m[2019-10-28 19:29:38,6, playground.cpp:162] FASP(RAND)  capacity = 54 edgeCnt = 54 edgeList = [{16, 11}, {16, 13}, {5, 6}, {4, 10}, {16, 19}, {16, 9}, {18, 10}, {8, 9}, {7, 14}, {7, 19}, {3, 9}, {18, 5}, {8, 5}, {18, 4}, {7, 4}, {1, 17}, {16, 17}, {8, 17}, {1, 15}, {13, 14}, {13, 15}, {13, 4}, {12, 15}, {12, 9}, {11, 14}, {11, 10}, {1, 6}, {8, 6}, {13, 6}, {11, 6}, {1, 2}, {8, 2}, {3, 2}, {11, 2}, {17, 19}, {17, 4}, {2, 15}, {2, 10}, {17, 10}, {2, 9}, {2, 6}, {2, 5}, {17, 5}, {4, 19}, {4, 6}, {5, 15}, {1, 18}, {1, 13}, {12, 3}, {1, 11}, {12, 11}, {8, 7}, {13, 7}, {18, 7}]
+[0m[35m[2019-10-28 19:29:38,6, timer.h:61] NO_NAME [gr] = 6.9149e-05
+[0m===========> #WINS(NewRandom/Exact)=0/84     #DRAWS=82     #RUNS=166
+167 ======================= Processing [tournament-0167-19-171.al] {Graph V/E: 19/171}
+Exact solution=49 Time=2.352
+[35m[2019-10-28 19:29:39,7, timer.h:61] NO_NAME [--------RANDOM new] = 1.53063
+[0m[32m[2019-10-28 19:29:39,7, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 8 / 40
+[0m[32m[2019-10-28 19:29:39,7, playground.cpp:162] FASP(RAND)  capacity = 54 edgeCnt = 54 edgeList = [{11, 5}, {5, 17}, {3, 5}, {4, 2}, {13, 2}, {10, 8}, {18, 19}, {14, 7}, {14, 4}, {8, 7}, {8, 15}, {8, 13}, {18, 3}, {14, 3}, {1, 16}, {18, 16}, {1, 12}, {18, 12}, {8, 12}, {1, 11}, {18, 11}, {10, 7}, {10, 19}, {10, 17}, {10, 15}, {10, 11}, {1, 5}, {14, 5}, {1, 2}, {18, 2}, {2, 17}, {18, 14}, {18, 8}, {16, 7}, {13, 17}, {13, 11}, {4, 11}, {2, 12}, {9, 17}, {9, 15}, {2, 6}, {13, 6}, {4, 6}, {9, 6}, {2, 5}, {9, 5}, {3, 12}, {13, 4}, {3, 11}, {3, 6}, {11, 12}, {5, 6}, {15, 17}, {7, 5}]
+[0m[35m[2019-10-28 19:29:39,7, timer.h:61] NO_NAME [gr] = 6.8e-05
+[0m===========> #WINS(NewRandom/Exact)=0/85     #DRAWS=82     #RUNS=167
+168 ======================= Processing [tournament-0168-19-171.al] {Graph V/E: 19/171}
+Exact solution=46 Time=1.508
+[35m[2019-10-28 19:29:41,7, timer.h:61] NO_NAME [--------RANDOM new] = 1.349
+[0m[32m[2019-10-28 19:29:41,7, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 7 / 42
+[0m[32m[2019-10-28 19:29:41,7, playground.cpp:162] FASP(RAND)  capacity = 55 edgeCnt = 55 edgeList = [{16, 4}, {16, 11}, {3, 10}, {3, 7}, {3, 9}, {2, 8}, {17, 18}, {14, 18}, {11, 18}, {10, 18}, {7, 18}, {6, 18}, {4, 18}, {9, 19}, {17, 8}, {16, 19}, {16, 15}, {14, 15}, {14, 8}, {13, 15}, {12, 19}, {12, 15}, {12, 8}, {10, 8}, {7, 19}, {7, 8}, {3, 19}, {3, 15}, {3, 8}, {17, 9}, {16, 9}, {14, 9}, {13, 9}, {11, 9}, {10, 9}, {7, 9}, {6, 9}, {13, 17}, {12, 4}, {12, 14}, {13, 4}, {12, 10}, {2, 7}, {13, 7}, {6, 7}, {13, 2}, {2, 5}, {12, 5}, {6, 5}, {10, 5}, {11, 7}, {4, 7}, {3, 4}, {3, 14}, {10, 4}]
+[0m[35m[2019-10-28 19:29:41,7, timer.h:61] NO_NAME [gr] = 6.5827e-05
+[0m===========> #WINS(NewRandom/Exact)=0/86     #DRAWS=82     #RUNS=168
+169 ======================= Processing [tournament-0169-19-171.al] {Graph V/E: 19/171}
+Exact solution=44 Time=0.332
+[35m[2019-10-28 19:29:42,8, timer.h:61] NO_NAME [--------RANDOM new] = 1.5509
+[0m[32m[2019-10-28 19:29:42,8, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 9 / 41
+[0m[32m[2019-10-28 19:29:42,8, playground.cpp:162] FASP(RAND)  capacity = 55 edgeCnt = 55 edgeList = [{13, 7}, {9, 8}, {18, 7}, {5, 4}, {2, 14}, {19, 11}, {19, 14}, {19, 12}, {19, 15}, {19, 3}, {18, 11}, {15, 12}, {18, 3}, {1, 17}, {18, 17}, {16, 14}, {16, 3}, {13, 11}, {13, 14}, {10, 11}, {10, 3}, {9, 17}, {9, 12}, {8, 17}, {8, 3}, {7, 11}, {7, 17}, {7, 12}, {7, 3}, {12, 17}, {5, 14}, {2, 3}, {12, 14}, {18, 15}, {10, 15}, {5, 15}, {2, 15}, {5, 12}, {2, 12}, {19, 4}, {18, 4}, {16, 4}, {13, 4}, {10, 4}, {8, 4}, {2, 4}, {18, 13}, {18, 10}, {18, 9}, {18, 5}, {18, 8}, {2, 6}, {10, 6}, {9, 6}, {9, 7}]
+[0m[35m[2019-10-28 19:29:42,8, timer.h:61] NO_NAME [gr] = 6.9372e-05
+[0m===========> #WINS(NewRandom/Exact)=0/87     #DRAWS=82     #RUNS=169
+170 ======================= Processing [tournament-0170-19-171.al] {Graph V/E: 19/171}
+Exact solution=41 Time=0.428
+[35m[2019-10-28 19:29:44,4, timer.h:61] NO_NAME [--------RANDOM new] = 1.50548
+[0m[32m[2019-10-28 19:29:44,4, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 9 / 32
+[0m[32m[2019-10-28 19:29:44,4, playground.cpp:162] FASP(RAND)  capacity = 45 edgeCnt = 45 edgeList = [{19, 6}, {12, 13}, {2, 17}, {19, 1}, {19, 8}, {19, 18}, {15, 11}, {5, 3}, {1, 17}, {1, 16}, {19, 16}, {15, 16}, {5, 16}, {5, 4}, {14, 3}, {13, 8}, {12, 11}, {12, 3}, {10, 8}, {10, 18}, {10, 16}, {9, 8}, {9, 4}, {9, 3}, {1, 7}, {3, 18}, {15, 7}, {6, 16}, {3, 16}, {6, 11}, {6, 17}, {6, 4}, {11, 8}, {14, 15}, {19, 15}, {10, 5}, {17, 4}, {13, 5}, {17, 7}, {2, 11}, {12, 15}, {9, 5}, {9, 15}, {6, 3}, {19, 13}]
+[0m[35m[2019-10-28 19:29:44,4, timer.h:61] NO_NAME [gr] = 6.7656e-05
+[0m===========> #WINS(NewRandom/Exact)=0/88     #DRAWS=82     #RUNS=170
+171 ======================= Processing [tournament-0171-20-190.al] {Graph V/E: 20/190}
+Exact solution=51 Time=1.372
+[35m[2019-10-28 19:29:46,1, timer.h:61] NO_NAME [--------RANDOM new] = 2.18684
+[0m[32m[2019-10-28 19:29:46,1, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 9 / 41
+[0m[32m[2019-10-28 19:29:46,1, playground.cpp:162] FASP(RAND)  capacity = 56 edgeCnt = 56 edgeList = [{5, 3}, {1, 6}, {9, 19}, {20, 10}, {10, 11}, {12, 16}, {19, 16}, {19, 15}, {14, 20}, {14, 15}, {9, 17}, {9, 15}, {9, 12}, {14, 4}, {9, 4}, {19, 10}, {8, 20}, {8, 16}, {8, 12}, {19, 7}, {1, 18}, {5, 18}, {8, 18}, {13, 16}, {13, 12}, {13, 10}, {1, 11}, {14, 11}, {5, 11}, {6, 20}, {6, 16}, {6, 11}, {3, 18}, {3, 16}, {3, 15}, {3, 12}, {2, 18}, {2, 16}, {2, 7}, {2, 4}, {4, 20}, {4, 16}, {4, 10}, {17, 18}, {10, 18}, {7, 16}, {20, 15}, {1, 19}, {13, 5}, {13, 14}, {9, 1}, {1, 3}, {1, 2}, {14, 2}, {5, 2}, {5, 19}]
+[0m[35m[2019-10-28 19:29:46,1, timer.h:61] NO_NAME [gr] = 8.5684e-05
+[0m===========> #WINS(NewRandom/Exact)=0/89     #DRAWS=82     #RUNS=171
+172 ======================= Processing [tournament-0172-20-190.al] {Graph V/E: 20/190}
+Exact solution=51 Time=1.128
+[35m[2019-10-28 19:29:48,8, timer.h:61] NO_NAME [--------RANDOM new] = 2.23242
+[0m[32m[2019-10-28 19:29:48,8, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 8 / 39
+[0m[32m[2019-10-28 19:29:48,8, playground.cpp:162] FASP(RAND)  capacity = 53 edgeCnt = 53 edgeList = [{19, 10}, {8, 14}, {2, 10}, {4, 11}, {3, 4}, {11, 20}, {1, 20}, {19, 9}, {17, 9}, {8, 3}, {14, 3}, {16, 5}, {16, 4}, {19, 13}, {1, 18}, {15, 9}, {15, 18}, {14, 5}, {15, 4}, {17, 4}, {15, 3}, {1, 12}, {15, 12}, {1, 11}, {19, 11}, {15, 11}, {8, 11}, {10, 7}, {10, 5}, {10, 4}, {6, 13}, {6, 5}, {2, 20}, {2, 18}, {2, 11}, {2, 7}, {2, 3}, {3, 20}, {13, 9}, {3, 18}, {12, 9}, {12, 20}, {12, 7}, {4, 20}, {7, 18}, {3, 5}, {15, 8}, {15, 14}, {1, 10}, {1, 19}, {6, 17}, {2, 14}, {16, 10}]
+[0m[35m[2019-10-28 19:29:48,8, timer.h:61] NO_NAME [gr] = 7.8314e-05
+[0m===========> #WINS(NewRandom/Exact)=0/90     #DRAWS=82     #RUNS=172
+173 ======================= Processing [tournament-0173-20-190.al] {Graph V/E: 20/190}
+Exact solution=49 Time=1.4
+[35m[2019-10-28 19:29:50,1, timer.h:61] NO_NAME [--------RANDOM new] = 1.99237
+[0m[32m[2019-10-28 19:29:50,1, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 10 / 39
+[0m[32m[2019-10-28 19:29:50,1, playground.cpp:162] FASP(RAND)  capacity = 53 edgeCnt = 53 edgeList = [{20, 19}, {4, 2}, {16, 14}, {18, 17}, {20, 12}, {10, 17}, {2, 18}, {7, 18}, {7, 14}, {20, 5}, {10, 5}, {7, 5}, {20, 3}, {19, 17}, {19, 12}, {15, 17}, {15, 16}, {15, 12}, {15, 3}, {1, 13}, {20, 13}, {11, 18}, {11, 14}, {11, 12}, {9, 17}, {9, 14}, {9, 13}, {9, 3}, {8, 16}, {8, 14}, {1, 6}, {8, 6}, {4, 18}, {6, 13}, {4, 14}, {16, 13}, {14, 17}, {3, 6}, {18, 14}, {20, 10}, {19, 10}, {11, 10}, {4, 10}, {20, 7}, {19, 7}, {15, 7}, {8, 7}, {4, 11}, {15, 11}, {2, 1}, {4, 9}, {9, 11}, {9, 8}]
+[0m[35m[2019-10-28 19:29:50,1, timer.h:61] NO_NAME [gr] = 8.1267e-05
+[0m===========> #WINS(NewRandom/Exact)=0/91     #DRAWS=82     #RUNS=173
+174 ======================= Processing [tournament-0174-20-190.al] {Graph V/E: 20/190}
+Exact solution=52 Time=1.752
+[35m[2019-10-28 19:29:52,7, timer.h:61] NO_NAME [--------RANDOM new] = 2.03567
+[0m[32m[2019-10-28 19:29:52,7, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 9 / 46
+[0m[32m[2019-10-28 19:29:52,7, playground.cpp:162] FASP(RAND)  capacity = 61 edgeCnt = 61 edgeList = [{5, 9}, {9, 6}, {15, 13}, {18, 2}, {2, 12}, {4, 17}, {20, 14}, {20, 17}, {13, 14}, {13, 17}, {13, 10}, {11, 14}, {19, 17}, {18, 17}, {12, 14}, {16, 14}, {15, 14}, {15, 17}, {7, 14}, {7, 17}, {6, 17}, {5, 17}, {11, 10}, {12, 10}, {16, 10}, {9, 10}, {6, 10}, {3, 10}, {20, 11}, {18, 12}, {18, 11}, {16, 12}, {16, 11}, {15, 19}, {15, 12}, {15, 11}, {9, 19}, {1, 8}, {15, 8}, {7, 19}, {7, 11}, {6, 12}, {6, 8}, {5, 19}, {5, 12}, {5, 11}, {4, 19}, {4, 12}, {3, 12}, {3, 19}, {9, 2}, {1, 2}, {20, 13}, {20, 7}, {18, 13}, {16, 13}, {5, 13}, {4, 18}, {5, 6}, {15, 18}, {5, 7}]
+[0m[35m[2019-10-28 19:29:52,7, timer.h:61] NO_NAME [gr] = 7.8691e-05
+[0m===========> #WINS(NewRandom/Exact)=0/92     #DRAWS=82     #RUNS=174
+175 ======================= Processing [tournament-0175-20-190.al] {Graph V/E: 20/190}
+Exact solution=52 Time=1.416
+[35m[2019-10-28 19:29:54,1, timer.h:61] NO_NAME [--------RANDOM new] = 2.03344
+[0m[32m[2019-10-28 19:29:54,1, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 8 / 57
+[0m[32m[2019-10-28 19:29:54,1, playground.cpp:162] FASP(RAND)  capacity = 68 edgeCnt = 68 edgeList = [{6, 13}, {7, 3}, {14, 3}, {1, 19}, {1, 15}, {1, 12}, {1, 10}, {1, 8}, {1, 3}, {1, 2}, {2, 20}, {2, 17}, {16, 20}, {16, 6}, {16, 5}, {2, 15}, {2, 14}, {2, 12}, {2, 11}, {16, 11}, {2, 8}, {2, 7}, {2, 4}, {16, 4}, {2, 3}, {16, 3}, {8, 19}, {8, 17}, {8, 15}, {8, 14}, {8, 11}, {8, 10}, {8, 6}, {8, 3}, {9, 20}, {9, 19}, {9, 12}, {9, 4}, {10, 20}, {10, 17}, {10, 15}, {10, 14}, {10, 12}, {10, 11}, {10, 7}, {10, 5}, {10, 3}, {14, 19}, {14, 17}, {14, 15}, {14, 11}, {14, 6}, {14, 5}, {14, 4}, {20, 12}, {20, 3}, {19, 13}, {19, 3}, {19, 6}, {17, 13}, {17, 12}, {17, 3}, {11, 12}, {6, 12}, {7, 13}, {7, 6}, {7, 15}, {6, 15}]
+[0m[35m[2019-10-28 19:29:54,1, timer.h:61] NO_NAME [gr] = 7.8429e-05
+[0m===========> #WINS(NewRandom/Exact)=0/93     #DRAWS=82     #RUNS=175
+176 ======================= Processing [tournament-0176-20-190.al] {Graph V/E: 20/190}
+Exact solution=51 Time=0.844
+[35m[2019-10-28 19:29:56,9, timer.h:61] NO_NAME [--------RANDOM new] = 1.91763
+[0m[32m[2019-10-28 19:29:56,9, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 12 / 40
+[0m[32m[2019-10-28 19:29:56,9, playground.cpp:162] FASP(RAND)  capacity = 57 edgeCnt = 57 edgeList = [{6, 3}, {7, 10}, {2, 12}, {15, 18}, {2, 15}, {1, 20}, {12, 9}, {12, 15}, {5, 20}, {5, 18}, {5, 15}, {4, 20}, {17, 9}, {16, 20}, {14, 18}, {14, 15}, {1, 11}, {1, 19}, {17, 11}, {13, 11}, {5, 11}, {10, 11}, {4, 11}, {16, 19}, {14, 19}, {8, 9}, {6, 19}, {6, 15}, {3, 20}, {19, 11}, {3, 15}, {2, 11}, {2, 18}, {17, 13}, {5, 12}, {10, 13}, {17, 4}, {16, 12}, {16, 4}, {14, 13}, {14, 4}, {1, 8}, {5, 8}, {7, 12}, {6, 8}, {6, 4}, {3, 8}, {3, 12}, {5, 10}, {14, 10}, {5, 1}, {6, 10}, {5, 2}, {17, 3}, {14, 7}, {14, 17}, {6, 7}]
+[0m[35m[2019-10-28 19:29:56,9, timer.h:61] NO_NAME [gr] = 7.5601e-05
+[0m===========> #WINS(NewRandom/Exact)=0/94     #DRAWS=82     #RUNS=176
+177 ======================= Processing [tournament-0177-20-190.al] {Graph V/E: 20/190}
+Exact solution=50 Time=1.212
+[35m[2019-10-28 19:29:58,5, timer.h:61] NO_NAME [--------RANDOM new] = 1.96608
+[0m[32m[2019-10-28 19:29:58,5, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 6 / 41
+[0m[32m[2019-10-28 19:29:58,5, playground.cpp:162] FASP(RAND)  capacity = 53 edgeCnt = 53 edgeList = [{13, 7}, {19, 1}, {5, 6}, {9, 11}, {11, 8}, {8, 14}, {1, 20}, {18, 17}, {18, 14}, {18, 8}, {7, 20}, {7, 17}, {19, 9}, {19, 17}, {19, 14}, {7, 11}, {4, 8}, {2, 10}, {1, 16}, {4, 16}, {19, 16}, {15, 17}, {15, 16}, {15, 10}, {13, 9}, {13, 20}, {1, 12}, {7, 12}, {15, 12}, {13, 12}, {6, 14}, {6, 12}, {5, 12}, {5, 11}, {5, 8}, {3, 20}, {3, 12}, {16, 17}, {9, 8}, {1, 18}, {15, 4}, {15, 2}, {1, 13}, {19, 7}, {6, 18}, {19, 18}, {5, 7}, {5, 4}, {3, 7}, {3, 13}, {3, 4}, {19, 15}, {13, 18}]
+[0m[35m[2019-10-28 19:29:58,5, timer.h:61] NO_NAME [gr] = 7.7357e-05
+[0m===========> #WINS(NewRandom/Exact)=0/95     #DRAWS=82     #RUNS=177
+178 ======================= Processing [tournament-0178-20-190.al] {Graph V/E: 20/190}
+Exact solution=54 Time=2.264
+[35m[2019-10-28 19:30:00,7, timer.h:61] NO_NAME [--------RANDOM new] = 2.0816
+[0m[32m[2019-10-28 19:30:00,7, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 8 / 57
+[0m[32m[2019-10-28 19:30:00,7, playground.cpp:162] FASP(RAND)  capacity = 68 edgeCnt = 68 edgeList = [{19, 16}, {14, 9}, {8, 10}, {1, 19}, {1, 16}, {1, 14}, {13, 11}, {20, 14}, {20, 5}, {13, 18}, {20, 18}, {8, 11}, {8, 19}, {8, 16}, {10, 17}, {10, 15}, {4, 16}, {4, 15}, {13, 3}, {20, 3}, {8, 3}, {13, 2}, {1, 12}, {13, 12}, {20, 12}, {10, 12}, {4, 12}, {1, 9}, {1, 7}, {10, 7}, {1, 6}, {8, 6}, {1, 13}, {2, 17}, {2, 16}, {10, 6}, {2, 9}, {2, 7}, {2, 5}, {3, 18}, {3, 15}, {3, 14}, {3, 9}, {3, 7}, {3, 5}, {6, 19}, {6, 18}, {6, 17}, {6, 15}, {6, 14}, {6, 5}, {14, 19}, {14, 18}, {14, 17}, {14, 16}, {15, 19}, {15, 18}, {15, 16}, {15, 12}, {15, 7}, {14, 7}, {7, 17}, {7, 12}, {9, 19}, {9, 16}, {7, 5}, {18, 12}, {5, 16}]
+[0m[35m[2019-10-28 19:30:00,7, timer.h:61] NO_NAME [gr] = 7.5545e-05
+[0m===========> #WINS(NewRandom/Exact)=0/96     #DRAWS=82     #RUNS=178
+179 ======================= Processing [tournament-0179-20-190.al] {Graph V/E: 20/190}
+Exact solution=52 Time=4.176
+[35m[2019-10-28 19:30:02,4, timer.h:61] NO_NAME [--------RANDOM new] = 2.1664
+[0m[32m[2019-10-28 19:30:02,4, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 5 / 45
+[0m[32m[2019-10-28 19:30:02,4, playground.cpp:162] FASP(RAND)  capacity = 56 edgeCnt = 56 edgeList = [{6, 3}, {18, 6}, {11, 8}, {13, 11}, {10, 4}, {19, 9}, {20, 16}, {18, 16}, {18, 9}, {17, 16}, {15, 5}, {15, 11}, {17, 9}, {15, 9}, {17, 8}, {14, 8}, {20, 10}, {14, 10}, {1, 19}, {14, 19}, {1, 13}, {20, 13}, {18, 13}, {12, 9}, {12, 8}, {7, 10}, {7, 9}, {7, 5}, {6, 11}, {6, 9}, {6, 5}, {1, 4}, {18, 4}, {12, 4}, {7, 4}, {1, 2}, {20, 2}, {14, 2}, {3, 2}, {8, 16}, {11, 19}, {10, 9}, {5, 16}, {2, 4}, {13, 4}, {13, 8}, {1, 20}, {12, 14}, {1, 7}, {12, 7}, {18, 1}, {1, 6}, {1, 3}, {15, 3}, {15, 20}, {6, 7}]
+[0m[35m[2019-10-28 19:30:02,4, timer.h:61] NO_NAME [gr] = 8.0234e-05
+[0m===========> #WINS(NewRandom/Exact)=0/97     #DRAWS=82     #RUNS=179
+180 ======================= Processing [tournament-0180-20-190.al] {Graph V/E: 20/190}
+Exact solution=47 Time=0.616
+[35m[2019-10-28 19:30:04,2, timer.h:61] NO_NAME [--------RANDOM new] = 1.95789
+[0m[32m[2019-10-28 19:30:04,2, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 9 / 42
+[0m[32m[2019-10-28 19:30:04,2, playground.cpp:162] FASP(RAND)  capacity = 57 edgeCnt = 57 edgeList = [{5, 2}, {5, 8}, {2, 16}, {16, 14}, {17, 15}, {13, 17}, {1, 20}, {19, 17}, {19, 20}, {14, 20}, {4, 15}, {3, 13}, {18, 17}, {18, 20}, {18, 13}, {12, 17}, {12, 20}, {12, 13}, {11, 15}, {10, 15}, {1, 9}, {16, 9}, {3, 9}, {12, 9}, {11, 9}, {8, 13}, {1, 7}, {19, 7}, {6, 17}, {6, 15}, {5, 15}, {5, 13}, {5, 9}, {13, 15}, {19, 14}, {19, 16}, {11, 14}, {10, 16}, {8, 14}, {8, 16}, {1, 6}, {4, 6}, {10, 6}, {2, 13}, {5, 14}, {19, 4}, {1, 18}, {12, 4}, {11, 4}, {10, 4}, {8, 4}, {2, 18}, {19, 3}, {3, 1}, {10, 12}, {10, 3}, {10, 2}]
+[0m[35m[2019-10-28 19:30:04,2, timer.h:61] NO_NAME [gr] = 7.7373e-05
+[0m===========> #WINS(NewRandom/Exact)=0/98     #DRAWS=82     #RUNS=180
+181 ======================= Processing [tournament-0181-21-210.al] {Graph V/E: 21/210}
+Exact solution=52 Time=1.06
+[35m[2019-10-28 19:30:07,9, timer.h:61] NO_NAME [--------RANDOM new] = 2.52688
+[0m[32m[2019-10-28 19:30:07,9, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 11 / 42
+[0m[32m[2019-10-28 19:30:07,9, playground.cpp:162] FASP(RAND)  capacity = 59 edgeCnt = 59 edgeList = [{5, 10}, {5, 18}, {18, 21}, {12, 1}, {4, 17}, {15, 17}, {1, 14}, {21, 4}, {12, 4}, {1, 13}, {19, 4}, {20, 14}, {18, 16}, {18, 14}, {10, 17}, {19, 17}, {10, 15}, {20, 15}, {12, 13}, {11, 13}, {11, 3}, {10, 7}, {1, 9}, {11, 9}, {8, 14}, {8, 7}, {8, 3}, {6, 15}, {6, 13}, {5, 4}, {5, 17}, {5, 15}, {5, 14}, {2, 17}, {2, 13}, {2, 9}, {2, 7}, {16, 4}, {16, 15}, {7, 9}, {3, 15}, {13, 15}, {4, 9}, {1, 10}, {8, 21}, {8, 20}, {12, 19}, {12, 11}, {8, 10}, {6, 21}, {6, 20}, {5, 20}, {12, 6}, {12, 2}, {21, 11}, {10, 21}, {19, 21}, {19, 10}, {2, 11}]
+[0m[35m[2019-10-28 19:30:07,9, timer.h:61] NO_NAME [gr] = 7.9518e-05
+[0m===========> #WINS(NewRandom/Exact)=0/99     #DRAWS=82     #RUNS=181
+182 ======================= Processing [tournament-0182-21-210.al] {Graph V/E: 21/210}
+Exact solution=60 Time=6.42
+[35m[2019-10-28 19:30:10,2, timer.h:61] NO_NAME [--------RANDOM new] = 3.13238
+[0m[32m[2019-10-28 19:30:10,2, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 11 / 51
+[0m[32m[2019-10-28 19:30:10,2, playground.cpp:162] FASP(RAND)  capacity = 66 edgeCnt = 66 edgeList = [{5, 4}, {5, 21}, {6, 17}, {17, 13}, {20, 14}, {20, 13}, {21, 16}, {20, 11}, {20, 7}, {3, 17}, {20, 2}, {18, 19}, {21, 12}, {18, 15}, {3, 15}, {3, 12}, {18, 2}, {3, 2}, {10, 17}, {10, 15}, {10, 13}, {10, 11}, {10, 7}, {9, 17}, {9, 13}, {9, 11}, {9, 2}, {8, 16}, {8, 14}, {8, 11}, {1, 6}, {21, 6}, {10, 6}, {9, 6}, {5, 19}, {5, 14}, {5, 13}, {5, 12}, {4, 16}, {4, 15}, {4, 7}, {4, 2}, {16, 17}, {16, 13}, {14, 19}, {2, 12}, {11, 15}, {11, 13}, {11, 12}, {7, 19}, {11, 6}, {7, 17}, {7, 14}, {7, 13}, {19, 13}, {6, 15}, {18, 3}, {21, 3}, {10, 3}, {5, 20}, {8, 3}, {4, 3}, {10, 4}, {21, 1}, {20, 8}, {21, 4}]
+[0m[35m[2019-10-28 19:30:10,2, timer.h:61] NO_NAME [gr] = 7.8484e-05
+[0m===========> #WINS(NewRandom/Exact)=0/100     #DRAWS=82     #RUNS=182
+183 ======================= Processing [tournament-0183-21-210.al] {Graph V/E: 21/210}
+Exact solution=57 Time=11.116
+[35m[2019-10-28 19:30:13,9, timer.h:61] NO_NAME [--------RANDOM new] = 2.84245
+[0m[32m[2019-10-28 19:30:13,9, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 8 / 51
+[0m[32m[2019-10-28 19:30:13,9, playground.cpp:162] FASP(RAND)  capacity = 63 edgeCnt = 63 edgeList = [{18, 3}, {17, 5}, {3, 8}, {13, 20}, {14, 7}, {21, 13}, {21, 6}, {14, 6}, {21, 4}, {8, 4}, {21, 2}, {14, 2}, {18, 19}, {18, 13}, {17, 19}, {17, 6}, {16, 13}, {16, 6}, {16, 4}, {15, 20}, {15, 13}, {15, 4}, {12, 13}, {12, 6}, {12, 2}, {11, 19}, {10, 7}, {10, 13}, {9, 20}, {9, 13}, {9, 6}, {9, 2}, {5, 19}, {5, 13}, {3, 20}, {3, 6}, {2, 20}, {19, 7}, {4, 6}, {21, 14}, {21, 8}, {18, 14}, {17, 8}, {15, 14}, {15, 8}, {12, 14}, {10, 14}, {9, 8}, {3, 14}, {11, 16}, {11, 15}, {11, 12}, {11, 9}, {11, 3}, {17, 18}, {17, 12}, {17, 10}, {10, 15}, {10, 5}, {10, 3}, {12, 15}, {12, 3}, {9, 16}]
+[0m[35m[2019-10-28 19:30:13,9, timer.h:61] NO_NAME [gr] = 7.8475e-05
+[0m===========> #WINS(NewRandom/Exact)=0/101     #DRAWS=82     #RUNS=183
+184 ======================= Processing [tournament-0184-21-210.al] {Graph V/E: 21/210}
+Exact solution=61 Time=12.14
+[35m[2019-10-28 19:30:16,6, timer.h:61] NO_NAME [--------RANDOM new] = 3.39694
+[0m[32m[2019-10-28 19:30:16,6, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 13 / 52
+[0m[32m[2019-10-28 19:30:16,6, playground.cpp:162] FASP(RAND)  capacity = 69 edgeCnt = 69 edgeList = [{8, 19}, {5, 14}, {14, 10}, {7, 3}, {1, 20}, {18, 5}, {18, 21}, {18, 15}, {12, 5}, {12, 21}, {12, 15}, {12, 2}, {18, 10}, {8, 20}, {19, 13}, {8, 15}, {8, 10}, {8, 7}, {19, 7}, {8, 2}, {18, 3}, {1, 17}, {12, 17}, {1, 16}, {11, 20}, {11, 16}, {11, 15}, {11, 13}, {11, 10}, {11, 3}, {11, 2}, {9, 5}, {9, 20}, {9, 15}, {9, 14}, {9, 3}, {6, 5}, {6, 21}, {6, 15}, {6, 14}, {6, 13}, {1, 4}, {16, 5}, {16, 20}, {2, 14}, {13, 20}, {13, 14}, {13, 10}, {7, 17}, {7, 15}, {7, 10}, {13, 3}, {7, 4}, {2, 4}, {2, 3}, {3, 21}, {5, 3}, {14, 3}, {14, 21}, {15, 17}, {4, 21}, {4, 10}, {1, 18}, {11, 18}, {11, 6}, {12, 1}, {12, 8}, {9, 19}, {8, 1}]
+[0m[35m[2019-10-28 19:30:16,6, timer.h:61] NO_NAME [gr] = 7.8589e-05
+[0m===========> #WINS(NewRandom/Exact)=0/102     #DRAWS=82     #RUNS=184
+185 ======================= Processing [tournament-0185-21-210.al] {Graph V/E: 21/210}
+Exact solution=53 Time=1.916
+[35m[2019-10-28 19:30:19,7, timer.h:61] NO_NAME [--------RANDOM new] = 2.67984
+[0m[32m[2019-10-28 19:30:19,7, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 8 / 47
+[0m[32m[2019-10-28 19:30:19,7, playground.cpp:162] FASP(RAND)  capacity = 60 edgeCnt = 60 edgeList = [{15, 4}, {4, 20}, {3, 18}, {1, 11}, {4, 21}, {1, 21}, {19, 13}, {18, 13}, {10, 13}, {10, 20}, {10, 2}, {18, 6}, {12, 13}, {12, 21}, {12, 15}, {12, 20}, {12, 14}, {8, 14}, {8, 2}, {17, 13}, {17, 21}, {1, 16}, {11, 15}, {1, 9}, {18, 9}, {11, 9}, {1, 7}, {19, 7}, {1, 5}, {17, 5}, {1, 4}, {19, 4}, {3, 21}, {3, 16}, {3, 9}, {3, 5}, {16, 13}, {15, 21}, {15, 9}, {14, 9}, {7, 13}, {7, 21}, {7, 9}, {5, 13}, {4, 13}, {1, 19}, {17, 18}, {8, 10}, {8, 18}, {8, 1}, {17, 11}, {1, 3}, {19, 18}, {16, 6}, {6, 2}, {14, 15}, {14, 7}, {14, 4}, {6, 20}, {15, 5}]
+[0m[35m[2019-10-28 19:30:19,7, timer.h:61] NO_NAME [gr] = 8.0023e-05
+[0m===========> #WINS(NewRandom/Exact)=0/103     #DRAWS=82     #RUNS=185
+186 ======================= Processing [tournament-0186-21-210.al] {Graph V/E: 21/210}
+Exact solution=57 Time=5.596
+[35m[2019-10-28 19:30:22,7, timer.h:61] NO_NAME [--------RANDOM new] = 2.85001
+[0m[32m[2019-10-28 19:30:22,7, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 8 / 47
+[0m[32m[2019-10-28 19:30:22,7, playground.cpp:162] FASP(RAND)  capacity = 60 edgeCnt = 60 edgeList = [{21, 6}, {11, 6}, {7, 20}, {4, 12}, {4, 5}, {19, 9}, {21, 12}, {21, 10}, {6, 4}, {6, 16}, {6, 12}, {3, 4}, {3, 16}, {19, 18}, {14, 9}, {14, 16}, {19, 13}, {3, 13}, {8, 20}, {8, 10}, {17, 20}, {17, 12}, {17, 10}, {17, 7}, {1, 15}, {21, 15}, {6, 15}, {14, 15}, {11, 9}, {11, 16}, {11, 7}, {1, 5}, {6, 5}, {14, 5}, {8, 5}, {11, 5}, {1, 2}, {19, 2}, {21, 2}, {20, 15}, {20, 16}, {13, 9}, {18, 5}, {2, 12}, {10, 12}, {7, 9}, {7, 16}, {7, 12}, {4, 9}, {15, 9}, {13, 2}, {4, 18}, {7, 10}, {19, 21}, {19, 14}, {19, 8}, {1, 17}, {11, 8}, {11, 14}, {21, 14}]
+[0m[35m[2019-10-28 19:30:22,7, timer.h:61] NO_NAME [gr] = 7.7424e-05
+[0m===========> #WINS(NewRandom/Exact)=0/104     #DRAWS=82     #RUNS=186
+187 ======================= Processing [tournament-0187-21-210.al] {Graph V/E: 21/210}
+Exact solution=62 Time=47.364
+[35m[2019-10-28 19:30:25,5, timer.h:61] NO_NAME [--------RANDOM new] = 2.90745
+[0m[32m[2019-10-28 19:30:25,5, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 6 / 57
+[0m[32m[2019-10-28 19:30:25,5, playground.cpp:162] FASP(RAND)  capacity = 68 edgeCnt = 68 edgeList = [{11, 16}, {17, 19}, {6, 4}, {13, 10}, {7, 5}, {1, 21}, {20, 21}, {14, 9}, {3, 13}, {3, 10}, {4, 9}, {4, 10}, {4, 5}, {4, 2}, {19, 13}, {19, 5}, {19, 2}, {1, 18}, {14, 18}, {19, 18}, {17, 13}, {17, 10}, {16, 9}, {16, 21}, {16, 2}, {15, 9}, {15, 21}, {15, 5}, {12, 21}, {12, 10}, {12, 5}, {11, 9}, {11, 18}, {11, 5}, {11, 2}, {8, 18}, {8, 10}, {1, 7}, {20, 7}, {15, 7}, {12, 7}, {6, 5}, {6, 2}, {13, 5}, {2, 10}, {9, 18}, {20, 4}, {20, 14}, {19, 4}, {17, 3}, {16, 3}, {15, 4}, {15, 14}, {12, 14}, {12, 3}, {11, 14}, {11, 3}, {8, 4}, {8, 14}, {8, 3}, {8, 16}, {8, 15}, {12, 19}, {12, 17}, {12, 16}, {20, 19}, {15, 19}, {15, 17}]
+[0m[35m[2019-10-28 19:30:25,5, timer.h:61] NO_NAME [gr] = 7.7617e-05
+[0m===========> #WINS(NewRandom/Exact)=0/105     #DRAWS=82     #RUNS=187
+188 ======================= Processing [tournament-0188-21-210.al] {Graph V/E: 21/210}
+Exact solution=60 Time=8.868
+[35m[2019-10-28 19:30:28,8, timer.h:61] NO_NAME [--------RANDOM new] = 2.86256
+[0m[32m[2019-10-28 19:30:28,8, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 10 / 61
+[0m[32m[2019-10-28 19:30:28,8, playground.cpp:162] FASP(RAND)  capacity = 77 edgeCnt = 77 edgeList = [{13, 6}, {8, 13}, {8, 9}, {2, 18}, {16, 12}, {2, 14}, {21, 15}, {21, 19}, {21, 14}, {17, 15}, {18, 15}, {17, 14}, {18, 14}, {5, 15}, {5, 20}, {5, 14}, {13, 19}, {13, 16}, {1, 12}, {17, 12}, {18, 12}, {11, 15}, {11, 16}, {10, 15}, {10, 19}, {10, 16}, {10, 14}, {9, 19}, {9, 20}, {8, 15}, {8, 19}, {8, 20}, {8, 16}, {8, 12}, {7, 14}, {6, 16}, {6, 12}, {4, 19}, {4, 20}, {3, 14}, {2, 16}, {20, 19}, {17, 5}, {18, 5}, {11, 5}, {10, 5}, {8, 5}, {6, 5}, {3, 5}, {17, 18}, {13, 18}, {9, 18}, {6, 18}, {4, 18}, {2, 17}, {2, 11}, {2, 7}, {2, 6}, {2, 4}, {2, 3}, {7, 17}, {7, 10}, {7, 9}, {7, 8}, {7, 6}, {7, 4}, {11, 10}, {11, 9}, {11, 8}, {11, 6}, {11, 3}, {21, 17}, {3, 13}, {13, 9}, {3, 10}, {6, 9}, {8, 6}]
+[0m[35m[2019-10-28 19:30:28,8, timer.h:61] NO_NAME [gr] = 7.8965e-05
+[0m===========> #WINS(NewRandom/Exact)=0/106     #DRAWS=82     #RUNS=188
+189 ======================= Processing [tournament-0189-21-210.al] {Graph V/E: 21/210}
+Exact solution=52 Time=1.62
+[35m[2019-10-28 19:30:30,5, timer.h:61] NO_NAME [--------RANDOM new] = 2.28679
+[0m[32m[2019-10-28 19:30:30,5, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 6 / 43
+[0m[32m[2019-10-28 19:30:30,5, playground.cpp:162] FASP(RAND)  capacity = 54 edgeCnt = 54 edgeList = [{3, 16}, {13, 3}, {20, 7}, {2, 18}, {17, 12}, {1, 21}, {6, 21}, {6, 9}, {20, 14}, {20, 12}, {20, 11}, {6, 11}, {19, 11}, {16, 12}, {16, 9}, {13, 21}, {13, 14}, {13, 11}, {10, 15}, {8, 17}, {7, 17}, {7, 14}, {5, 15}, {5, 9}, {4, 14}, {4, 12}, {4, 11}, {3, 15}, {3, 12}, {3, 11}, {2, 12}, {12, 21}, {15, 14}, {15, 9}, {9, 14}, {20, 18}, {16, 6}, {13, 6}, {10, 6}, {10, 18}, {8, 6}, {7, 18}, {5, 6}, {4, 18}, {3, 6}, {2, 19}, {2, 16}, {5, 16}, {5, 8}, {5, 7}, {2, 3}, {13, 19}, {3, 7}, {13, 8}]
+[0m[35m[2019-10-28 19:30:30,5, timer.h:61] NO_NAME [gr] = 8.2834e-05
+[0m===========> #WINS(NewRandom/Exact)=0/107     #DRAWS=82     #RUNS=189
+190 ======================= Processing [tournament-0190-21-210.al] {Graph V/E: 21/210}
+Exact solution=59 Time=11.14
+[35m[2019-10-28 19:30:33,3, timer.h:61] NO_NAME [--------RANDOM new] = 2.9582
+[0m[32m[2019-10-28 19:30:33,3, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 9 / 55
+[0m[32m[2019-10-28 19:30:33,3, playground.cpp:162] FASP(RAND)  capacity = 70 edgeCnt = 70 edgeList = [{19, 6}, {12, 20}, {2, 14}, {18, 2}, {5, 3}, {2, 4}, {21, 15}, {21, 17}, {21, 11}, {3, 17}, {3, 8}, {20, 17}, {20, 11}, {9, 11}, {20, 8}, {20, 4}, {19, 15}, {19, 4}, {18, 4}, {16, 15}, {16, 17}, {16, 4}, {14, 17}, {13, 15}, {13, 17}, {13, 11}, {12, 15}, {12, 17}, {1, 10}, {7, 11}, {7, 10}, {7, 8}, {6, 15}, {6, 4}, {5, 15}, {5, 17}, {5, 11}, {5, 10}, {5, 8}, {2, 8}, {8, 17}, {10, 8}, {10, 4}, {20, 9}, {18, 9}, {16, 9}, {6, 9}, {5, 9}, {2, 9}, {2, 10}, {21, 3}, {20, 3}, {14, 3}, {13, 3}, {12, 3}, {7, 3}, {6, 3}, {2, 3}, {2, 20}, {2, 19}, {16, 20}, {18, 20}, {16, 12}, {16, 6}, {18, 6}, {18, 14}, {13, 6}, {13, 14}, {2, 5}, {5, 6}]
+[0m[35m[2019-10-28 19:30:33,3, timer.h:61] NO_NAME [gr] = 7.7786e-05
+[0m===========> #WINS(NewRandom/Exact)=0/108     #DRAWS=82     #RUNS=190
+191 ======================= Processing [tournament-0191-22-231.al] {Graph V/E: 22/231}
+Exact solution=65 Time=15.28
+[35m[2019-10-28 19:30:37,4, timer.h:61] NO_NAME [--------RANDOM new] = 4.30649
+[0m[32m[2019-10-28 19:30:37,4, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 10 / 58
+[0m[32m[2019-10-28 19:30:37,4, playground.cpp:162] FASP(RAND)  capacity = 72 edgeCnt = 72 edgeList = [{20, 9}, {15, 13}, {19, 5}, {5, 2}, {22, 17}, {22, 15}, {22, 8}, {22, 6}, {21, 20}, {21, 8}, {21, 6}, {21, 4}, {21, 2}, {19, 15}, {19, 13}, {19, 3}, {18, 20}, {18, 15}, {18, 4}, {18, 3}, {18, 2}, {1, 16}, {22, 16}, {21, 16}, {14, 16}, {14, 8}, {14, 3}, {1, 12}, {21, 12}, {18, 12}, {11, 17}, {11, 12}, {11, 8}, {11, 3}, {10, 17}, {10, 15}, {10, 13}, {10, 12}, {10, 4}, {1, 9}, {14, 9}, {7, 20}, {7, 16}, {7, 13}, {7, 6}, {5, 20}, {5, 17}, {5, 13}, {5, 12}, {5, 9}, {5, 8}, {2, 15}, {2, 13}, {2, 8}, {6, 17}, {2, 6}, {2, 4}, {3, 17}, {3, 16}, {3, 12}, {3, 9}, {3, 8}, {17, 12}, {14, 5}, {6, 12}, {6, 15}, {11, 22}, {19, 21}, {18, 5}, {15, 17}, {4, 16}, {6, 9}]
+[0m[35m[2019-10-28 19:30:37,4, timer.h:61] NO_NAME [gr] = 8.8144e-05
+[0m===========> #WINS(NewRandom/Exact)=0/109     #DRAWS=82     #RUNS=191
+192 ======================= Processing [tournament-0192-22-231.al] {Graph V/E: 22/231}
+Exact solution=66 Time=48.66
+[35m[2019-10-28 19:30:41,7, timer.h:61] NO_NAME [--------RANDOM new] = 3.99287
+[0m[32m[2019-10-28 19:30:41,7, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 5 / 63
+[0m[32m[2019-10-28 19:30:41,7, playground.cpp:162] FASP(RAND)  capacity = 74 edgeCnt = 74 edgeList = [{21, 16}, {18, 7}, {6, 3}, {14, 8}, {11, 19}, {4, 15}, {21, 22}, {20, 15}, {21, 11}, {21, 8}, {3, 8}, {1, 19}, {21, 19}, {20, 19}, {3, 19}, {18, 14}, {18, 11}, {18, 4}, {17, 22}, {17, 15}, {17, 14}, {17, 11}, {16, 22}, {16, 19}, {16, 4}, {1, 13}, {21, 13}, {17, 13}, {12, 19}, {12, 14}, {12, 8}, {12, 4}, {1, 10}, {9, 22}, {9, 14}, {9, 8}, {7, 22}, {7, 15}, {7, 14}, {7, 8}, {6, 14}, {6, 11}, {6, 10}, {6, 8}, {6, 4}, {5, 15}, {5, 13}, {5, 10}, {5, 8}, {2, 15}, {2, 11}, {2, 4}, {13, 15}, {13, 11}, {13, 10}, {13, 4}, {14, 15}, {14, 11}, {14, 10}, {21, 3}, {21, 20}, {12, 20}, {9, 3}, {7, 3}, {7, 20}, {2, 20}, {6, 12}, {6, 7}, {9, 7}, {6, 5}, {6, 2}, {17, 12}, {17, 5}, {2, 5}]
+[0m[35m[2019-10-28 19:30:41,8, timer.h:61] NO_NAME [gr] = 9.0566e-05
+[0m===========> #WINS(NewRandom/Exact)=0/110     #DRAWS=82     #RUNS=192
+193 ======================= Processing [tournament-0193-22-231.al] {Graph V/E: 22/231}
+Exact solution=59 Time=1.848
+[35m[2019-10-28 19:30:44,2, timer.h:61] NO_NAME [--------RANDOM new] = 3.29414
+[0m[32m[2019-10-28 19:30:44,2, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 10 / 54
+[0m[32m[2019-10-28 19:30:44,2, playground.cpp:162] FASP(RAND)  capacity = 69 edgeCnt = 69 edgeList = [{12, 7}, {16, 13}, {7, 5}, {14, 17}, {14, 15}, {10, 11}, {5, 11}, {18, 11}, {1, 15}, {22, 15}, {19, 15}, {22, 14}, {22, 21}, {22, 17}, {5, 14}, {22, 3}, {20, 21}, {20, 14}, {18, 21}, {18, 3}, {16, 15}, {16, 17}, {16, 14}, {12, 11}, {12, 3}, {9, 21}, {8, 14}, {7, 17}, {7, 3}, {6, 11}, {6, 15}, {6, 17}, {4, 15}, {3, 15}, {4, 21}, {4, 17}, {1, 2}, {22, 2}, {13, 2}, {9, 2}, {14, 2}, {22, 10}, {20, 19}, {20, 10}, {16, 19}, {16, 10}, {13, 19}, {13, 10}, {12, 19}, {9, 10}, {8, 19}, {8, 10}, {7, 10}, {6, 19}, {4, 19}, {22, 5}, {20, 5}, {18, 5}, {12, 5}, {8, 5}, {9, 20}, {9, 13}, {9, 4}, {16, 18}, {16, 8}, {20, 7}, {20, 12}, {8, 4}, {12, 4}]
+[0m[35m[2019-10-28 19:30:44,2, timer.h:61] NO_NAME [gr] = 8.8682e-05
+[0m===========> #WINS(NewRandom/Exact)=0/111     #DRAWS=82     #RUNS=193
+194 ======================= Processing [tournament-0194-22-231.al] {Graph V/E: 22/231}
+Exact solution=63 Time=13.256
+[35m[2019-10-28 19:30:48,5, timer.h:61] NO_NAME [--------RANDOM new] = 3.66223
+[0m[32m[2019-10-28 19:30:48,5, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 8 / 50
+[0m[32m[2019-10-28 19:30:48,5, playground.cpp:162] FASP(RAND)  capacity = 64 edgeCnt = 64 edgeList = [{13, 6}, {6, 22}, {7, 9}, {5, 3}, {15, 10}, {16, 20}, {8, 16}, {21, 20}, {8, 20}, {19, 16}, {21, 14}, {21, 5}, {8, 5}, {19, 5}, {21, 3}, {8, 3}, {2, 3}, {1, 17}, {22, 17}, {1, 15}, {21, 15}, {19, 15}, {13, 17}, {13, 14}, {13, 10}, {1, 12}, {8, 12}, {11, 16}, {11, 20}, {11, 18}, {11, 15}, {11, 14}, {9, 14}, {7, 16}, {7, 20}, {7, 14}, {7, 10}, {7, 5}, {6, 16}, {6, 17}, {6, 18}, {6, 14}, {6, 10}, {1, 4}, {13, 4}, {3, 20}, {12, 17}, {12, 14}, {4, 20}, {4, 14}, {5, 20}, {3, 10}, {4, 18}, {4, 3}, {12, 3}, {21, 19}, {11, 19}, {1, 9}, {21, 9}, {22, 9}, {21, 22}, {21, 2}, {8, 1}, {13, 11}]
+[0m[35m[2019-10-28 19:30:48,5, timer.h:61] NO_NAME [gr] = 8.8685e-05
+[0m===========> #WINS(NewRandom/Exact)=0/112     #DRAWS=82     #RUNS=194
+195 ======================= Processing [tournament-0195-22-231.al] {Graph V/E: 22/231}
+Exact solution=64 Time=24.932
+[35m[2019-10-28 19:30:52,9, timer.h:61] NO_NAME [--------RANDOM new] = 3.894
+[0m[32m[2019-10-28 19:30:52,9, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 11 / 53
+[0m[32m[2019-10-28 19:30:52,9, playground.cpp:162] FASP(RAND)  capacity = 69 edgeCnt = 69 edgeList = [{17, 10}, {18, 8}, {15, 16}, {20, 22}, {3, 13}, {1, 21}, {18, 22}, {18, 15}, {12, 22}, {12, 20}, {12, 15}, {12, 11}, {12, 4}, {9, 16}, {9, 22}, {9, 13}, {9, 11}, {9, 4}, {9, 2}, {8, 16}, {8, 21}, {8, 20}, {8, 11}, {10, 21}, {10, 20}, {6, 16}, {6, 21}, {6, 11}, {18, 5}, {12, 5}, {8, 5}, {10, 5}, {6, 5}, {17, 22}, {17, 14}, {17, 13}, {17, 4}, {17, 2}, {7, 22}, {7, 21}, {7, 5}, {1, 3}, {9, 3}, {17, 3}, {2, 22}, {19, 21}, {19, 20}, {19, 14}, {19, 11}, {2, 5}, {19, 5}, {3, 20}, {3, 14}, {13, 22}, {13, 20}, {3, 4}, {4, 22}, {4, 21}, {14, 5}, {20, 5}, {16, 14}, {13, 14}, {15, 21}, {1, 7}, {1, 18}, {8, 7}, {1, 17}, {9, 8}, {17, 8}]
+[0m[35m[2019-10-28 19:30:52,9, timer.h:61] NO_NAME [gr] = 9.04e-05
+[0m===========> #WINS(NewRandom/Exact)=0/113     #DRAWS=82     #RUNS=195
+196 ======================= Processing [tournament-0196-22-231.al] {Graph V/E: 22/231}
+Exact solution=71 Time=40.668
+[35m[2019-10-28 19:30:56,3, timer.h:61] NO_NAME [--------RANDOM new] = 4.27346
+[0m[32m[2019-10-28 19:30:56,3, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 9 / 72
+[0m[32m[2019-10-28 19:30:56,3, playground.cpp:162] FASP(RAND)  capacity = 85 edgeCnt = 85 edgeList = [{2, 14}, {4, 6}, {15, 19}, {8, 13}, {21, 17}, {21, 15}, {21, 12}, {21, 9}, {3, 22}, {3, 19}, {16, 22}, {16, 19}, {3, 15}, {3, 12}, {3, 9}, {16, 9}, {6, 17}, {6, 22}, {6, 19}, {20, 17}, {20, 22}, {18, 19}, {18, 15}, {18, 12}, {14, 17}, {14, 22}, {14, 19}, {14, 9}, {1, 13}, {21, 13}, {18, 13}, {11, 22}, {11, 15}, {11, 12}, {11, 9}, {10, 17}, {10, 12}, {10, 9}, {1, 8}, {3, 8}, {20, 8}, {11, 8}, {7, 22}, {7, 13}, {7, 8}, {5, 15}, {4, 17}, {4, 19}, {4, 13}, {2, 15}, {2, 13}, {9, 19}, {15, 22}, {8, 9}, {8, 17}, {21, 3}, {20, 3}, {18, 3}, {14, 3}, {11, 3}, {10, 3}, {7, 3}, {5, 3}, {4, 3}, {20, 16}, {18, 16}, {5, 16}, {4, 16}, {2, 16}, {11, 6}, {5, 6}, {2, 6}, {4, 20}, {18, 21}, {18, 11}, {4, 5}, {4, 2}, {20, 21}, {11, 21}, {5, 7}, {2, 21}, {11, 20}, {2, 7}, {20, 7}, {20, 14}]
+[0m[35m[2019-10-28 19:30:56,3, timer.h:61] NO_NAME [gr] = 8.9033e-05
+[0m===========> #WINS(NewRandom/Exact)=0/114     #DRAWS=82     #RUNS=196
+197 ======================= Processing [tournament-0197-22-231.al] {Graph V/E: 22/231}
+Exact solution=60 Time=5.144
+[35m[2019-10-28 19:31:00,0, timer.h:61] NO_NAME [--------RANDOM new] = 3.91647
+[0m[32m[2019-10-28 19:31:00,0, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 11 / 51
+[0m[32m[2019-10-28 19:31:00,0, playground.cpp:162] FASP(RAND)  capacity = 66 edgeCnt = 66 edgeList = [{19, 18}, {17, 22}, {8, 1}, {10, 21}, {1, 22}, {1, 18}, {16, 22}, {16, 9}, {2, 19}, {15, 19}, {12, 22}, {21, 22}, {21, 19}, {8, 18}, {2, 18}, {12, 18}, {21, 18}, {8, 17}, {15, 17}, {12, 17}, {21, 17}, {8, 9}, {8, 5}, {20, 5}, {4, 9}, {4, 3}, {1, 14}, {16, 14}, {2, 14}, {12, 14}, {13, 11}, {13, 19}, {13, 14}, {10, 17}, {10, 9}, {10, 5}, {1, 7}, {16, 7}, {8, 7}, {10, 7}, {1, 6}, {16, 6}, {20, 2}, {16, 4}, {20, 4}, {13, 2}, {13, 21}, {1, 10}, {20, 10}, {12, 21}, {2, 6}, {10, 4}, {3, 22}, {20, 16}, {20, 1}, {3, 18}, {3, 17}, {3, 14}, {3, 7}, {4, 6}, {11, 9}, {6, 22}, {18, 22}, {7, 22}, {9, 17}, {9, 18}]
+[0m[35m[2019-10-28 19:31:00,0, timer.h:61] NO_NAME [gr] = 8.6731e-05
+[0m===========> #WINS(NewRandom/Exact)=0/115     #DRAWS=82     #RUNS=197
+198 ======================= Processing [tournament-0198-22-231.al] {Graph V/E: 22/231}
+Exact solution=62 Time=10.74
+[35m[2019-10-28 19:31:04,5, timer.h:61] NO_NAME [--------RANDOM new] = 3.89496
+[0m[32m[2019-10-28 19:31:04,5, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 7 / 56
+[0m[32m[2019-10-28 19:31:04,5, playground.cpp:162] FASP(RAND)  capacity = 69 edgeCnt = 69 edgeList = [{11, 18}, {11, 15}, {1, 11}, {20, 13}, {7, 5}, {7, 8}, {17, 16}, {15, 5}, {14, 16}, {22, 7}, {18, 7}, {17, 7}, {15, 7}, {18, 10}, {17, 10}, {15, 10}, {14, 6}, {4, 19}, {4, 16}, {4, 10}, {21, 16}, {1, 20}, {15, 20}, {14, 20}, {1, 13}, {22, 13}, {21, 13}, {1, 12}, {14, 12}, {9, 12}, {11, 13}, {11, 5}, {1, 8}, {22, 8}, {15, 8}, {14, 8}, {9, 8}, {11, 8}, {1, 3}, {4, 3}, {21, 3}, {1, 2}, {18, 2}, {17, 2}, {4, 2}, {21, 2}, {16, 5}, {3, 5}, {13, 19}, {2, 12}, {6, 12}, {2, 8}, {6, 8}, {7, 19}, {5, 19}, {2, 16}, {2, 13}, {7, 20}, {7, 16}, {3, 13}, {1, 22}, {21, 4}, {17, 4}, {17, 22}, {17, 15}, {15, 22}, {1, 21}, {9, 18}, {14, 18}]
+[0m[35m[2019-10-28 19:31:04,5, timer.h:61] NO_NAME [gr] = 8.7396e-05
+[0m===========> #WINS(NewRandom/Exact)=0/116     #DRAWS=82     #RUNS=198
+199 ======================= Processing [tournament-0199-22-231.al] {Graph V/E: 22/231}
+Exact solution=66 Time=27.852
+[35m[2019-10-28 19:31:08,1, timer.h:61] NO_NAME [--------RANDOM new] = 3.99618
+[0m[32m[2019-10-28 19:31:08,1, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 9 / 56
+[0m[32m[2019-10-28 19:31:08,2, playground.cpp:162] FASP(RAND)  capacity = 70 edgeCnt = 70 edgeList = [{1, 20}, {20, 15}, {12, 18}, {7, 12}, {6, 14}, {20, 22}, {20, 8}, {2, 22}, {9, 21}, {9, 22}, {9, 19}, {2, 12}, {9, 12}, {11, 22}, {2, 8}, {9, 8}, {2, 7}, {17, 7}, {9, 7}, {11, 7}, {2, 3}, {11, 3}, {1, 18}, {20, 18}, {2, 18}, {1, 16}, {20, 16}, {17, 16}, {11, 16}, {15, 21}, {15, 22}, {15, 10}, {15, 7}, {15, 3}, {1, 14}, {20, 14}, {13, 18}, {13, 14}, {13, 10}, {1, 6}, {20, 6}, {1, 5}, {20, 5}, {13, 5}, {4, 22}, {1, 4}, {4, 19}, {6, 22}, {4, 6}, {5, 18}, {5, 12}, {5, 10}, {8, 18}, {8, 16}, {8, 10}, {8, 7}, {8, 3}, {5, 6}, {6, 19}, {6, 16}, {6, 3}, {16, 14}, {16, 12}, {16, 3}, {19, 22}, {7, 3}, {2, 17}, {2, 11}, {1, 13}, {1, 15}]
+[0m[35m[2019-10-28 19:31:08,2, timer.h:61] NO_NAME [gr] = 8.739e-05
+[0m===========> #WINS(NewRandom/Exact)=0/117     #DRAWS=82     #RUNS=199
+200 ======================= Processing [tournament-0200-22-231.al] {Graph V/E: 22/231}
+Exact solution=66 Time=54.412
+[35m[2019-10-28 19:31:12,1, timer.h:61] NO_NAME [--------RANDOM new] = 3.59947
+[0m[32m[2019-10-28 19:31:12,1, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 8 / 59
+[0m[32m[2019-10-28 19:31:12,1, playground.cpp:162] FASP(RAND)  capacity = 73 edgeCnt = 73 edgeList = [{21, 4}, {21, 6}, {17, 11}, {15, 2}, {3, 14}, {9, 2}, {11, 22}, {7, 22}, {19, 9}, {19, 12}, {8, 22}, {8, 9}, {7, 9}, {11, 9}, {13, 22}, {13, 9}, {10, 22}, {21, 5}, {17, 5}, {10, 5}, {21, 2}, {19, 2}, {10, 2}, {1, 20}, {13, 20}, {18, 14}, {18, 12}, {16, 22}, {1, 15}, {21, 15}, {8, 15}, {16, 15}, {6, 15}, {6, 14}, {6, 12}, {4, 22}, {4, 20}, {4, 5}, {1, 3}, {19, 3}, {8, 3}, {11, 3}, {13, 3}, {18, 3}, {4, 3}, {9, 22}, {9, 5}, {5, 14}, {15, 20}, {1, 21}, {1, 18}, {1, 16}, {1, 6}, {1, 4}, {8, 21}, {17, 16}, {8, 17}, {8, 7}, {8, 6}, {8, 4}, {10, 18}, {10, 13}, {10, 7}, {10, 6}, {16, 21}, {16, 18}, {19, 16}, {17, 13}, {17, 7}, {4, 18}, {7, 16}, {13, 6}, {13, 4}]
+[0m[35m[2019-10-28 19:31:12,1, timer.h:61] NO_NAME [gr] = 9.1385e-05
+[0m===========> #WINS(NewRandom/Exact)=0/118     #DRAWS=82     #RUNS=200
+201 ======================= Processing [tournament-0201-23-253.al] {Graph V/E: 23/253}
+Exact solution=67 Time=9.044
+[35m[2019-10-28 19:31:16,7, timer.h:61] NO_NAME [--------RANDOM new] = 4.75561
+[0m[32m[2019-10-28 19:31:16,7, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 11 / 55
+[0m[32m[2019-10-28 19:31:16,7, playground.cpp:162] FASP(RAND)  capacity = 71 edgeCnt = 71 edgeList = [{4, 13}, {19, 18}, {6, 16}, {22, 6}, {17, 7}, {1, 22}, {1, 21}, {1, 17}, {15, 23}, {18, 23}, {8, 21}, {8, 17}, {8, 12}, {18, 5}, {15, 16}, {19, 16}, {13, 23}, {13, 5}, {15, 6}, {8, 6}, {15, 3}, {18, 3}, {13, 3}, {1, 14}, {19, 14}, {13, 14}, {1, 11}, {8, 11}, {10, 22}, {10, 17}, {10, 12}, {10, 5}, {10, 3}, {9, 20}, {9, 21}, {9, 16}, {9, 3}, {1, 7}, {15, 7}, {19, 7}, {13, 7}, {9, 7}, {4, 17}, {4, 5}, {4, 2}, {17, 20}, {11, 20}, {23, 21}, {17, 3}, {2, 14}, {20, 3}, {23, 14}, {12, 20}, {14, 3}, {12, 14}, {2, 7}, {22, 7}, {5, 7}, {2, 22}, {12, 16}, {12, 11}, {2, 5}, {17, 11}, {22, 16}, {1, 15}, {1, 10}, {9, 8}, {4, 18}, {8, 15}, {13, 8}, {4, 19}]
+[0m[35m[2019-10-28 19:31:16,7, timer.h:61] NO_NAME [gr] = 9.6899e-05
+[0m===========> #WINS(NewRandom/Exact)=0/119     #DRAWS=82     #RUNS=201
+202 ======================= Processing [tournament-0202-23-253.al] {Graph V/E: 23/253}
+Exact solution=73 Time=121.212
+[35m[2019-10-28 19:31:21,6, timer.h:61] NO_NAME [--------RANDOM new] = 4.98799
+[0m[32m[2019-10-28 19:31:21,6, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 9 / 59
+[0m[32m[2019-10-28 19:31:21,6, playground.cpp:162] FASP(RAND)  capacity = 74 edgeCnt = 74 edgeList = [{11, 19}, {23, 10}, {2, 4}, {8, 16}, {20, 7}, {6, 14}, {1, 22}, {1, 21}, {1, 20}, {23, 15}, {23, 20}, {23, 18}, {23, 14}, {4, 15}, {4, 18}, {4, 7}, {2, 20}, {2, 14}, {19, 21}, {12, 15}, {12, 21}, {12, 18}, {16, 21}, {10, 21}, {10, 18}, {9, 21}, {9, 7}, {5, 15}, {5, 20}, {5, 7}, {1, 17}, {19, 17}, {2, 17}, {16, 17}, {1, 13}, {12, 13}, {11, 21}, {11, 17}, {11, 14}, {11, 7}, {8, 15}, {8, 22}, {8, 21}, {8, 17}, {8, 14}, {8, 13}, {1, 6}, {4, 6}, {2, 6}, {9, 6}, {8, 6}, {1, 3}, {4, 3}, {10, 3}, {22, 20}, {22, 17}, {3, 18}, {13, 18}, {13, 7}, {20, 18}, {21, 7}, {20, 14}, {1, 19}, {1, 11}, {8, 23}, {8, 2}, {2, 19}, {12, 23}, {12, 16}, {12, 5}, {12, 11}, {2, 10}, {4, 19}, {11, 16}]
+[0m[35m[2019-10-28 19:31:21,6, timer.h:61] NO_NAME [gr] = 9.5067e-05
+[0m===========> #WINS(NewRandom/Exact)=0/120     #DRAWS=82     #RUNS=202
+203 ======================= Processing [tournament-0203-23-253.al] {Graph V/E: 23/253}
+Exact solution=66 Time=18.824
+[35m[2019-10-28 19:31:26,5, timer.h:61] NO_NAME [--------RANDOM new] = 4.74892
+[0m[32m[2019-10-28 19:31:26,5, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 7 / 58
+[0m[32m[2019-10-28 19:31:26,5, playground.cpp:162] FASP(RAND)  capacity = 69 edgeCnt = 69 edgeList = [{9, 16}, {10, 19}, {12, 10}, {6, 8}, {18, 19}, {3, 10}, {22, 4}, {9, 4}, {23, 13}, {3, 14}, {9, 14}, {5, 14}, {23, 12}, {18, 12}, {23, 6}, {9, 6}, {5, 6}, {1, 21}, {5, 21}, {1, 20}, {23, 20}, {5, 20}, {1, 17}, {23, 17}, {3, 17}, {9, 17}, {16, 20}, {16, 13}, {16, 10}, {15, 13}, {15, 6}, {11, 14}, {11, 12}, {11, 10}, {1, 8}, {16, 8}, {15, 8}, {1, 7}, {3, 7}, {9, 7}, {15, 7}, {11, 7}, {1, 2}, {2, 20}, {2, 17}, {2, 13}, {2, 12}, {21, 8}, {4, 20}, {21, 20}, {4, 17}, {14, 13}, {14, 8}, {12, 8}, {17, 8}, {12, 20}, {10, 20}, {12, 17}, {12, 13}, {14, 6}, {23, 22}, {1, 16}, {1, 15}, {1, 11}, {2, 16}, {2, 11}, {9, 18}, {3, 22}, {5, 16}]
+[0m[35m[2019-10-28 19:31:26,5, timer.h:61] NO_NAME [gr] = 9.4911e-05
+[0m===========> #WINS(NewRandom/Exact)=0/121     #DRAWS=82     #RUNS=203
+204 ======================= Processing [tournament-0204-23-253.al] {Graph V/E: 23/253}
+Exact solution=74 Time=61.632
+[35m[2019-10-28 19:31:32,0, timer.h:61] NO_NAME [--------RANDOM new] = 5.32508
+[0m[32m[2019-10-28 19:31:32,1, playground.cpp:161] SA / SA RND / RED RND edges: 7 / 10 / 63
+[0m[32m[2019-10-28 19:31:32,1, playground.cpp:162] FASP(RAND)  capacity = 80 edgeCnt = 80 edgeList = [{23, 1}, {6, 13}, {7, 9}, {4, 8}, {14, 8}, {10, 5}, {5, 11}, {22, 12}, {22, 21}, {20, 12}, {23, 14}, {23, 8}, {20, 9}, {20, 3}, {22, 18}, {22, 4}, {23, 4}, {22, 2}, {19, 12}, {19, 21}, {19, 4}, {17, 21}, {17, 14}, {17, 8}, {17, 3}, {1, 16}, {19, 16}, {15, 12}, {15, 21}, {15, 18}, {15, 16}, {15, 11}, {13, 12}, {13, 14}, {13, 11}, {1, 10}, {22, 10}, {23, 10}, {19, 10}, {17, 10}, {15, 10}, {1, 7}, {13, 7}, {6, 11}, {6, 8}, {6, 7}, {6, 4}, {6, 3}, {1, 5}, {20, 5}, {23, 5}, {15, 5}, {13, 5}, {14, 12}, {14, 21}, {9, 21}, {14, 5}, {18, 10}, {4, 21}, {4, 11}, {8, 21}, {8, 11}, {7, 21}, {7, 16}, {3, 21}, {3, 11}, {3, 5}, {10, 12}, {14, 9}, {3, 10}, {14, 2}, {4, 2}, {22, 20}, {19, 23}, {19, 20}, {19, 15}, {17, 15}, {17, 20}, {6, 20}, {23, 6}]
+[0m[35m[2019-10-28 19:31:32,1, timer.h:61] NO_NAME [gr] = 9.6038e-05
+[0m===========> #WINS(NewRandom/Exact)=0/122     #DRAWS=82     #RUNS=204
+205 ======================= Processing [tournament-0205-23-253.al] {Graph V/E: 23/253}
+Exact solution=74 Time=76.672
+[35m[2019-10-28 19:31:37,7, timer.h:61] NO_NAME [--------RANDOM new] = 5.39617
+[0m[32m[2019-10-28 19:31:37,7, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 8 / 65
+[0m[32m[2019-10-28 19:31:37,7, playground.cpp:162] FASP(RAND)  capacity = 79 edgeCnt = 79 edgeList = [{9, 21}, {4, 2}, {1, 5}, {18, 5}, {14, 22}, {19, 3}, {1, 21}, {20, 17}, {18, 17}, {18, 23}, {16, 22}, {16, 21}, {16, 4}, {18, 14}, {16, 14}, {18, 11}, {15, 17}, {15, 14}, {15, 4}, {20, 12}, {16, 12}, {20, 9}, {15, 9}, {6, 17}, {6, 23}, {6, 22}, {6, 14}, {1, 19}, {20, 19}, {16, 19}, {6, 19}, {13, 17}, {13, 22}, {13, 14}, {10, 23}, {10, 19}, {10, 12}, {10, 4}, {1, 8}, {10, 8}, {1, 7}, {20, 7}, {10, 7}, {5, 17}, {5, 23}, {5, 19}, {1, 3}, {13, 3}, {1, 2}, {20, 2}, {18, 2}, {13, 2}, {2, 23}, {21, 17}, {21, 19}, {11, 22}, {11, 12}, {4, 23}, {4, 22}, {2, 14}, {9, 22}, {10, 13}, {9, 12}, {8, 14}, {7, 12}, {2, 3}, {21, 3}, {7, 3}, {23, 17}, {22, 17}, {14, 17}, {1, 20}, {1, 13}, {10, 18}, {16, 20}, {21, 8}, {8, 7}, {11, 2}, {11, 4}]
+[0m[35m[2019-10-28 19:31:37,7, timer.h:61] NO_NAME [gr] = 9.6381e-05
+[0m===========> #WINS(NewRandom/Exact)=0/123     #DRAWS=82     #RUNS=205
+206 ======================= Processing [tournament-0206-23-253.al] {Graph V/E: 23/253}
+Exact solution=69 Time=26.016
+[35m[2019-10-28 19:31:42,1, timer.h:61] NO_NAME [--------RANDOM new] = 5.11934
+[0m[32m[2019-10-28 19:31:42,1, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 6 / 66
+[0m[32m[2019-10-28 19:31:42,1, playground.cpp:162] FASP(RAND)  capacity = 78 edgeCnt = 78 edgeList = [{13, 2}, {2, 15}, {3, 15}, {20, 12}, {19, 12}, {18, 7}, {23, 20}, {17, 20}, {23, 18}, {16, 14}, {16, 11}, {2, 21}, {2, 11}, {2, 9}, {15, 14}, {13, 14}, {13, 21}, {13, 18}, {13, 9}, {23, 7}, {16, 7}, {17, 7}, {23, 4}, {2, 4}, {17, 4}, {22, 18}, {22, 10}, {22, 4}, {1, 19}, {16, 19}, {17, 19}, {15, 19}, {22, 19}, {1, 12}, {17, 12}, {8, 21}, {8, 18}, {8, 4}, {6, 21}, {6, 11}, {6, 9}, {6, 7}, {5, 18}, {5, 9}, {3, 10}, {3, 9}, {3, 7}, {3, 4}, {4, 20}, {4, 19}, {11, 21}, {11, 18}, {11, 10}, {4, 9}, {4, 7}, {11, 7}, {10, 21}, {10, 20}, {10, 19}, {10, 9}, {18, 19}, {18, 9}, {7, 21}, {23, 13}, {23, 16}, {23, 15}, {1, 22}, {17, 16}, {17, 22}, {23, 6}, {8, 2}, {1, 6}, {17, 1}, {1, 5}, {3, 22}, {3, 16}, {13, 22}, {6, 15}]
+[0m[35m[2019-10-28 19:31:42,6, timer.h:61] NO_NAME [gr] = 0.000279028
+[0m===========> #WINS(NewRandom/Exact)=0/124     #DRAWS=82     #RUNS=206
+207 ======================= Processing [tournament-0207-23-253.al] {Graph V/E: 23/253}
+Exact solution=69 Time=58.228
+[35m[2019-10-28 19:31:47,5, timer.h:61] NO_NAME [--------RANDOM new] = 4.89824
+[0m[32m[2019-10-28 19:31:47,5, playground.cpp:161] SA / SA RND / RED RND edges: 4 / 9 / 62
+[0m[32m[2019-10-28 19:31:47,5, playground.cpp:162] FASP(RAND)  capacity = 75 edgeCnt = 75 edgeList = [{15, 14}, {14, 20}, {10, 18}, {5, 11}, {23, 6}, {20, 11}, {19, 6}, {21, 3}, {23, 17}, {19, 17}, {23, 16}, {21, 16}, {18, 16}, {22, 6}, {15, 17}, {15, 16}, {15, 11}, {15, 3}, {14, 16}, {1, 13}, {22, 13}, {12, 16}, {12, 11}, {12, 7}, {12, 3}, {10, 6}, {10, 11}, {9, 6}, {1, 8}, {19, 8}, {22, 8}, {14, 8}, {10, 8}, {9, 8}, {1, 5}, {15, 5}, {10, 5}, {4, 17}, {4, 7}, {4, 5}, {1, 2}, {23, 2}, {21, 2}, {18, 2}, {22, 2}, {14, 2}, {10, 2}, {16, 17}, {16, 11}, {13, 11}, {5, 16}, {5, 17}, {3, 11}, {23, 19}, {20, 19}, {23, 18}, {22, 18}, {15, 21}, {15, 19}, {15, 18}, {14, 21}, {12, 21}, {12, 19}, {9, 18}, {12, 18}, {4, 21}, {23, 20}, {22, 20}, {15, 20}, {9, 20}, {15, 10}, {12, 4}, {10, 4}, {9, 14}, {12, 14}]
+[0m[35m[2019-10-28 19:31:47,5, timer.h:61] NO_NAME [gr] = 0.000101208
+[0m===========> #WINS(NewRandom/Exact)=0/125     #DRAWS=82     #RUNS=207
+208 ======================= Processing [tournament-0208-23-253.al] {Graph V/E: 23/253}
+Exact solution=68 Time=22.628
+[35m[2019-10-28 19:31:51,6, timer.h:61] NO_NAME [--------RANDOM new] = 4.22095
+[0m[32m[2019-10-28 19:31:51,6, playground.cpp:161] SA / SA RND / RED RND edges: 7 / 6 / 63
+[0m[32m[2019-10-28 19:31:51,6, playground.cpp:162] FASP(RAND)  capacity = 76 edgeCnt = 76 edgeList = [{2, 9}, {4, 17}, {18, 8}, {3, 8}, {3, 19}, {20, 11}, {20, 22}, {21, 23}, {19, 22}, {19, 14}, {7, 20}, {21, 15}, {18, 22}, {18, 20}, {18, 15}, {18, 14}, {17, 20}, {17, 23}, {17, 14}, {16, 20}, {16, 14}, {13, 14}, {12, 22}, {12, 20}, {12, 11}, {10, 20}, {10, 11}, {9, 22}, {9, 23}, {9, 11}, {8, 20}, {8, 14}, {8, 11}, {6, 22}, {6, 23}, {6, 15}, {5, 22}, {5, 14}, {4, 23}, {19, 7}, {18, 7}, {17, 7}, {16, 7}, {6, 7}, {5, 7}, {4, 7}, {3, 15}, {3, 11}, {3, 20}, {21, 19}, {10, 19}, {9, 19}, {8, 19}, {6, 19}, {5, 19}, {4, 19}, {12, 21}, {12, 10}, {13, 21}, {13, 17}, {13, 10}, {3, 9}, {18, 9}, {8, 9}, {8, 5}, {3, 6}, {16, 6}, {13, 6}, {8, 6}, {3, 4}, {18, 4}, {18, 16}, {9, 17}, {21, 17}, {21, 5}, {4, 5}]
+[0m[35m[2019-10-28 19:31:51,6, timer.h:61] NO_NAME [gr] = 9.8074e-05
+[0m===========> #WINS(NewRandom/Exact)=0/126     #DRAWS=82     #RUNS=208
+209 ======================= Processing [tournament-0209-23-253.al] {Graph V/E: 23/253}
+Exact solution=75 Time=202.06
+[35m[2019-10-28 19:31:56,1, timer.h:61] NO_NAME [--------RANDOM new] = 5.11469
+[0m[32m[2019-10-28 19:31:56,1, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 9 / 73
+[0m[32m[2019-10-28 19:31:56,1, playground.cpp:162] FASP(RAND)  capacity = 87 edgeCnt = 87 edgeList = [{16, 13}, {9, 7}, {21, 4}, {14, 19}, {2, 18}, {1, 23}, {18, 12}, {22, 21}, {22, 6}, {2, 23}, {2, 21}, {2, 20}, {2, 6}, {18, 19}, {22, 19}, {18, 16}, {22, 16}, {18, 9}, {22, 9}, {17, 16}, {17, 9}, {17, 8}, {17, 7}, {17, 6}, {15, 23}, {15, 21}, {15, 7}, {15, 6}, {15, 3}, {1, 14}, {2, 14}, {17, 14}, {1, 13}, {18, 13}, {22, 13}, {15, 13}, {1, 11}, {15, 11}, {1, 10}, {2, 10}, {5, 16}, {5, 9}, {5, 8}, {1, 4}, {18, 4}, {22, 4}, {2, 4}, {15, 4}, {20, 12}, {20, 23}, {20, 11}, {15, 18}, {22, 1}, {10, 13}, {2, 1}, {10, 9}, {10, 6}, {19, 13}, {3, 16}, {19, 16}, {14, 16}, {14, 11}, {14, 9}, {14, 6}, {3, 8}, {10, 8}, {19, 8}, {14, 8}, {3, 7}, {10, 7}, {10, 3}, {19, 7}, {11, 23}, {11, 9}, {11, 7}, {11, 6}, {11, 4}, {21, 13}, {21, 8}, {21, 7}, {21, 6}, {23, 4}, {7, 16}, {9, 16}, {8, 13}, {16, 4}, {7, 13}]
+[0m[35m[2019-10-28 19:31:56,1, timer.h:61] NO_NAME [gr] = 9.5345e-05
+[0m===========> #WINS(NewRandom/Exact)=0/127     #DRAWS=82     #RUNS=209
+210 ======================= Processing [tournament-0210-23-253.al] {Graph V/E: 23/253}
+Exact solution=70 Time=16.792
+[35m[2019-10-28 19:32:01,7, timer.h:61] NO_NAME [--------RANDOM new] = 4.41506
+[0m[32m[2019-10-28 19:32:01,7, playground.cpp:161] SA / SA RND / RED RND edges: 7 / 8 / 67
+[0m[32m[2019-10-28 19:32:01,7, playground.cpp:162] FASP(RAND)  capacity = 82 edgeCnt = 82 edgeList = [{15, 22}, {9, 7}, {16, 7}, {12, 10}, {13, 19}, {4, 13}, {2, 13}, {1, 22}, {19, 21}, {11, 22}, {11, 20}, {11, 15}, {11, 14}, {13, 22}, {13, 17}, {13, 16}, {13, 14}, {19, 8}, {19, 6}, {19, 5}, {13, 5}, {18, 23}, {18, 20}, {18, 8}, {18, 7}, {18, 3}, {1, 12}, {19, 12}, {1, 10}, {13, 10}, {18, 10}, {1, 9}, {19, 9}, {13, 9}, {18, 9}, {4, 20}, {4, 16}, {4, 14}, {4, 6}, {2, 15}, {2, 12}, {2, 10}, {2, 7}, {2, 3}, {2, 19}, {1, 19}, {3, 22}, {3, 17}, {3, 15}, {3, 10}, {3, 9}, {3, 8}, {3, 6}, {5, 21}, {5, 17}, {5, 16}, {5, 14}, {12, 22}, {12, 21}, {5, 12}, {5, 9}, {5, 8}, {5, 6}, {8, 17}, {8, 16}, {8, 15}, {8, 12}, {8, 10}, {8, 6}, {12, 20}, {12, 17}, {12, 16}, {12, 15}, {6, 22}, {14, 21}, {20, 14}, {20, 7}, {6, 16}, {17, 10}, {9, 16}, {17, 16}, {17, 7}]
+[0m[35m[2019-10-28 19:32:01,7, timer.h:61] NO_NAME [gr] = 9.7693e-05
+[0m===========> #WINS(NewRandom/Exact)=0/128     #DRAWS=82     #RUNS=210
+211 ======================= Processing [tournament-0211-24-276.al] {Graph V/E: 24/276}
+Exact solution=83 Time=538.64
+[35m[2019-10-28 19:32:08,1, timer.h:61] NO_NAME [--------RANDOM new] = 7.38352
+[0m[32m[2019-10-28 19:32:08,1, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 12 / 70
+[0m[32m[2019-10-28 19:32:08,1, playground.cpp:162] FASP(RAND)  capacity = 88 edgeCnt = 88 edgeList = [{18, 9}, {20, 21}, {21, 24}, {12, 23}, {8, 13}, {8, 6}, {1, 23}, {17, 22}, {24, 11}, {3, 13}, {3, 9}, {21, 23}, {17, 23}, {3, 23}, {21, 18}, {21, 12}, {21, 8}, {17, 8}, {7, 12}, {20, 22}, {20, 18}, {20, 13}, {20, 8}, {1, 19}, {21, 19}, {24, 19}, {17, 19}, {20, 19}, {1, 16}, {17, 16}, {1, 15}, {20, 15}, {1, 10}, {21, 10}, {24, 10}, {17, 10}, {20, 10}, {5, 23}, {5, 22}, {5, 14}, {5, 13}, {5, 12}, {5, 11}, {4, 19}, {4, 18}, {4, 14}, {4, 12}, {4, 11}, {4, 10}, {1, 2}, {17, 2}, {3, 2}, {7, 2}, {5, 2}, {4, 2}, {22, 19}, {22, 13}, {22, 12}, {18, 23}, {18, 19}, {18, 12}, {16, 6}, {16, 19}, {15, 23}, {15, 12}, {14, 6}, {14, 13}, {11, 23}, {11, 13}, {2, 10}, {22, 10}, {15, 10}, {9, 23}, {9, 19}, {6, 19}, {7, 24}, {20, 24}, {9, 11}, {16, 11}, {7, 17}, {21, 4}, {4, 17}, {7, 1}, {7, 5}, {14, 16}, {18, 8}, {18, 16}, {15, 9}]
+[0m[35m[2019-10-28 19:32:08,1, timer.h:61] NO_NAME [gr] = 0.000109694
+[0m===========> #WINS(NewRandom/Exact)=0/129     #DRAWS=82     #RUNS=211
+212 ======================= Processing [tournament-0212-24-276.al] {Graph V/E: 24/276}
+Exact solution=84 Time=502.976
+[35m[2019-10-28 19:32:15,8, timer.h:61] NO_NAME [--------RANDOM new] = 6.99721
+[0m[32m[2019-10-28 19:32:15,8, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 9 / 79
+[0m[32m[2019-10-28 19:32:15,8, playground.cpp:162] FASP(RAND)  capacity = 94 edgeCnt = 94 edgeList = [{4, 14}, {8, 9}, {13, 2}, {19, 13}, {13, 21}, {24, 7}, {1, 24}, {1, 23}, {19, 24}, {19, 22}, {21, 23}, {21, 22}, {18, 20}, {18, 8}, {18, 7}, {21, 14}, {2, 23}, {2, 22}, {13, 14}, {13, 7}, {5, 24}, {5, 23}, {5, 10}, {5, 7}, {19, 4}, {2, 4}, {19, 3}, {2, 3}, {13, 3}, {17, 14}, {17, 10}, {17, 8}, {17, 7}, {17, 3}, {16, 10}, {16, 8}, {16, 3}, {1, 15}, {19, 15}, {21, 15}, {13, 15}, {17, 15}, {1, 12}, {18, 12}, {13, 12}, {11, 20}, {11, 22}, {11, 14}, {11, 4}, {1, 9}, {19, 9}, {13, 9}, {17, 9}, {16, 9}, {1, 6}, {21, 6}, {2, 6}, {13, 6}, {11, 6}, {3, 22}, {3, 15}, {3, 14}, {3, 10}, {3, 9}, {3, 8}, {3, 7}, {10, 23}, {10, 22}, {10, 8}, {10, 7}, {10, 6}, {10, 4}, {24, 23}, {24, 22}, {24, 9}, {24, 4}, {11, 21}, {11, 18}, {19, 21}, {19, 5}, {16, 5}, {19, 11}, {13, 1}, {17, 18}, {6, 23}, {6, 14}, {12, 14}, {12, 4}, {6, 8}, {8, 23}, {8, 22}, {15, 9}, {8, 14}, {7, 23}]
+[0m[35m[2019-10-28 19:32:15,8, timer.h:61] NO_NAME [gr] = 0.000106372
+[0m===========> #WINS(NewRandom/Exact)=0/130     #DRAWS=82     #RUNS=212
+213 ======================= Processing [tournament-0213-24-276.al] {Graph V/E: 24/276}
+Exact solution=84 Time=570.568
+[35m[2019-10-28 19:32:22,2, timer.h:61] NO_NAME [--------RANDOM new] = 7.00313
+[0m[32m[2019-10-28 19:32:22,2, playground.cpp:161] SA / SA RND / RED RND edges: 8 / 5 / 78
+[0m[32m[2019-10-28 19:32:22,2, playground.cpp:162] FASP(RAND)  capacity = 91 edgeCnt = 91 edgeList = [{1, 6}, {1, 10}, {8, 23}, {20, 23}, {1, 17}, {7, 21}, {13, 22}, {11, 19}, {24, 19}, {18, 19}, {16, 19}, {1, 22}, {17, 19}, {16, 13}, {4, 13}, {23, 21}, {23, 9}, {20, 19}, {20, 21}, {20, 13}, {17, 2}, {16, 2}, {1, 15}, {24, 15}, {16, 15}, {16, 22}, {4, 22}, {18, 22}, {3, 15}, {1, 14}, {17, 14}, {23, 14}, {3, 14}, {1, 12}, {24, 12}, {20, 12}, {18, 12}, {3, 12}, {1, 11}, {17, 11}, {10, 22}, {10, 21}, {10, 13}, {10, 9}, {10, 2}, {8, 19}, {8, 12}, {8, 11}, {8, 2}, {1, 7}, {4, 7}, {20, 7}, {3, 7}, {8, 7}, {6, 21}, {6, 14}, {6, 13}, {6, 11}, {6, 2}, {1, 5}, {18, 5}, {10, 5}, {6, 5}, {15, 19}, {13, 19}, {2, 11}, {22, 11}, {22, 12}, {5, 21}, {5, 12}, {15, 14}, {13, 12}, {9, 19}, {9, 12}, {9, 22}, {5, 2}, {2, 7}, {11, 21}, {23, 24}, {23, 3}, {20, 10}, {20, 24}, {18, 10}, {18, 6}, {4, 17}, {16, 17}, {16, 6}, {8, 24}, {10, 17}, {8, 6}, {8, 3}]
+[0m[35m[2019-10-28 19:32:22,2, timer.h:61] NO_NAME [gr] = 0.000105876
+[0m===========> #WINS(NewRandom/Exact)=0/131     #DRAWS=82     #RUNS=213
+214 ======================= Processing [tournament-0214-24-276.al] {Graph V/E: 24/276}
+Exact solution=78 Time=307.56
+[35m[2019-10-28 19:32:28,1, timer.h:61] NO_NAME [--------RANDOM new] = 6.20862
+[0m[32m[2019-10-28 19:32:28,1, playground.cpp:161] SA / SA RND / RED RND edges: 7 / 9 / 68
+[0m[32m[2019-10-28 19:32:28,1, playground.cpp:162] FASP(RAND)  capacity = 84 edgeCnt = 84 edgeList = [{18, 15}, {12, 9}, {13, 3}, {21, 14}, {4, 7}, {8, 17}, {10, 14}, {24, 8}, {23, 8}, {23, 22}, {23, 10}, {24, 21}, {24, 19}, {23, 19}, {3, 19}, {15, 8}, {15, 21}, {15, 17}, {15, 10}, {9, 21}, {9, 17}, {9, 11}, {1, 20}, {24, 20}, {18, 19}, {1, 16}, {23, 16}, {1, 14}, {24, 14}, {23, 14}, {13, 22}, {13, 20}, {12, 8}, {1, 7}, {3, 7}, {18, 7}, {6, 8}, {6, 20}, {6, 16}, {6, 14}, {6, 11}, {5, 21}, {5, 20}, {5, 16}, {5, 7}, {1, 4}, {24, 4}, {18, 4}, {5, 4}, {1, 2}, {3, 2}, {18, 2}, {13, 2}, {22, 14}, {22, 17}, {2, 21}, {2, 20}, {2, 19}, {22, 19}, {11, 8}, {11, 17}, {11, 4}, {10, 19}, {16, 17}, {16, 7}, {10, 16}, {4, 20}, {4, 17}, {7, 17}, {16, 14}, {23, 18}, {23, 1}, {5, 15}, {13, 12}, {13, 24}, {5, 9}, {13, 6}, {5, 6}, {5, 3}, {24, 3}, {6, 3}, {1, 6}, {24, 6}, {12, 3}]
+[0m[35m[2019-10-28 19:32:28,1, timer.h:61] NO_NAME [gr] = 0.000112717
+[0m===========> #WINS(NewRandom/Exact)=0/132     #DRAWS=82     #RUNS=214
+215 ======================= Processing [tournament-0215-24-276.al] {Graph V/E: 24/276}
+Exact solution=77 Time=103.744
+[35m[2019-10-28 19:32:34,4, timer.h:61] NO_NAME [--------RANDOM new] = 5.84242
+[0m[32m[2019-10-28 19:32:34,4, playground.cpp:161] SA / SA RND / RED RND edges: 7 / 7 / 73
+[0m[32m[2019-10-28 19:32:34,4, playground.cpp:162] FASP(RAND)  capacity = 87 edgeCnt = 87 edgeList = [{5, 1}, {11, 22}, {14, 15}, {7, 3}, {2, 6}, {13, 16}, {23, 13}, {22, 18}, {24, 8}, {21, 18}, {22, 16}, {22, 13}, {5, 18}, {5, 23}, {5, 13}, {5, 8}, {20, 18}, {20, 16}, {19, 9}, {1, 17}, {24, 17}, {15, 17}, {15, 16}, {15, 9}, {15, 8}, {14, 23}, {14, 13}, {14, 9}, {12, 18}, {12, 23}, {12, 17}, {11, 17}, {11, 9}, {11, 8}, {1, 10}, {14, 10}, {7, 9}, {6, 18}, {6, 17}, {6, 16}, {6, 9}, {4, 17}, {4, 16}, {4, 10}, {4, 9}, {3, 13}, {3, 8}, {2, 23}, {2, 13}, {2, 10}, {2, 9}, {2, 8}, {10, 17}, {10, 16}, {10, 13}, {23, 16}, {2, 15}, {2, 14}, {24, 11}, {24, 14}, {24, 1}, {6, 22}, {6, 19}, {2, 5}, {2, 4}, {2, 3}, {3, 22}, {3, 21}, {20, 21}, {20, 15}, {7, 11}, {7, 15}, {20, 5}, {3, 19}, {3, 14}, {12, 22}, {12, 15}, {12, 5}, {6, 3}, {12, 4}, {3, 4}, {4, 21}, {4, 19}, {4, 15}, {21, 19}, {4, 14}, {21, 1}]
+[0m[35m[2019-10-28 19:32:34,4, timer.h:61] NO_NAME [gr] = 0.000111728
+[0m===========> #WINS(NewRandom/Exact)=0/133     #DRAWS=82     #RUNS=215
+216 ======================= Processing [tournament-0216-24-276.al] {Graph V/E: 24/276}
+Exact solution=76 Time=99.852
+[35m[2019-10-28 19:32:40,0, timer.h:61] NO_NAME [--------RANDOM new] = 6.08564
+[0m[32m[2019-10-28 19:32:40,0, playground.cpp:161] SA / SA RND / RED RND edges: 7 / 7 / 67
+[0m[32m[2019-10-28 19:32:40,0, playground.cpp:162] FASP(RAND)  capacity = 81 edgeCnt = 81 edgeList = [{14, 4}, {13, 19}, {5, 10}, {13, 2}, {20, 24}, {6, 7}, {17, 16}, {22, 23}, {9, 23}, {9, 21}, {9, 16}, {9, 12}, {2, 24}, {2, 17}, {2, 7}, {18, 23}, {18, 17}, {18, 7}, {14, 17}, {13, 21}, {13, 17}, {1, 11}, {19, 11}, {14, 11}, {10, 24}, {10, 21}, {10, 16}, {10, 12}, {10, 15}, {10, 7}, {8, 17}, {8, 12}, {1, 6}, {9, 6}, {14, 6}, {13, 6}, {8, 6}, {5, 23}, {5, 24}, {5, 20}, {5, 15}, {5, 12}, {5, 7}, {4, 23}, {4, 20}, {4, 15}, {4, 11}, {3, 21}, {3, 17}, {3, 16}, {3, 12}, {3, 11}, {3, 6}, {11, 21}, {11, 16}, {15, 7}, {15, 6}, {11, 12}, {15, 12}, {12, 24}, {12, 20}, {12, 16}, {12, 7}, {12, 6}, {17, 24}, {17, 7}, {20, 16}, {9, 19}, {10, 2}, {8, 22}, {8, 13}, {8, 2}, {9, 1}, {22, 2}, {5, 19}, {3, 4}, {3, 9}, {5, 9}, {5, 4}, {9, 4}, {10, 4}]
+[0m[35m[2019-10-28 19:32:40,0, timer.h:61] NO_NAME [gr] = 0.000112546
+[0m===========> #WINS(NewRandom/Exact)=0/134     #DRAWS=82     #RUNS=216
+217 ======================= Processing [tournament-0217-24-276.al] {Graph V/E: 24/276}
+Exact solution=80 Time=307.292
+[35m[2019-10-28 19:32:46,1, timer.h:61] NO_NAME [--------RANDOM new] = 6.2508
+[0m[32m[2019-10-28 19:32:46,1, playground.cpp:161] SA / SA RND / RED RND edges: 7 / 8 / 76
+[0m[32m[2019-10-28 19:32:46,1, playground.cpp:162] FASP(RAND)  capacity = 91 edgeCnt = 91 edgeList = [{9, 20}, {20, 23}, {2, 9}, {21, 13}, {14, 10}, {6, 14}, {18, 14}, {23, 19}, {20, 19}, {20, 24}, {20, 3}, {15, 19}, {15, 24}, {13, 19}, {13, 3}, {23, 10}, {13, 10}, {22, 24}, {1, 18}, {23, 18}, {22, 18}, {17, 19}, {16, 19}, {16, 24}, {1, 14}, {12, 14}, {15, 14}, {23, 6}, {16, 14}, {16, 6}, {11, 24}, {11, 3}, {9, 19}, {9, 18}, {9, 14}, {9, 10}, {9, 6}, {1, 8}, {20, 8}, {12, 8}, {16, 8}, {7, 18}, {7, 6}, {5, 19}, {5, 24}, {5, 14}, {5, 8}, {5, 3}, {4, 19}, {4, 24}, {4, 18}, {4, 14}, {2, 18}, {2, 10}, {24, 19}, {18, 10}, {6, 8}, {24, 10}, {23, 22}, {23, 21}, {16, 21}, {15, 1}, {11, 17}, {5, 22}, {5, 21}, {20, 1}, {2, 13}, {23, 13}, {16, 13}, {15, 13}, {20, 13}, {12, 17}, {12, 13}, {12, 1}, {9, 22}, {2, 7}, {9, 7}, {2, 4}, {16, 4}, {12, 4}, {9, 4}, {17, 4}, {21, 1}, {2, 23}, {2, 20}, {12, 11}, {12, 23}, {16, 20}, {12, 15}, {5, 11}, {9, 23}]
+[0m[35m[2019-10-28 19:32:46,1, timer.h:61] NO_NAME [gr] = 0.000111753
+[0m===========> #WINS(NewRandom/Exact)=0/135     #DRAWS=82     #RUNS=217
+218 ======================= Processing [tournament-0218-24-276.al] {Graph V/E: 24/276}
+Exact solution=74 Time=52.712
+[35m[2019-10-28 19:32:53,0, timer.h:61] NO_NAME [--------RANDOM new] = 6.2685
+[0m[32m[2019-10-28 19:32:53,0, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 8 / 69
+[0m[32m[2019-10-28 19:32:53,0, playground.cpp:162] FASP(RAND)  capacity = 83 edgeCnt = 83 edgeList = [{1, 19}, {13, 10}, {9, 24}, {15, 4}, {22, 4}, {7, 5}, {1, 24}, {17, 16}, {12, 5}, {1, 22}, {1, 21}, {20, 24}, {23, 22}, {12, 22}, {12, 7}, {12, 6}, {12, 2}, {17, 9}, {17, 7}, {17, 6}, {3, 14}, {3, 11}, {3, 2}, {20, 5}, {3, 5}, {19, 21}, {19, 11}, {19, 9}, {19, 6}, {1, 18}, {1, 15}, {23, 15}, {13, 18}, {13, 14}, {13, 11}, {13, 9}, {10, 24}, {10, 21}, {10, 7}, {10, 6}, {10, 2}, {8, 16}, {8, 22}, {8, 18}, {8, 14}, {8, 5}, {1, 4}, {23, 4}, {12, 4}, {3, 4}, {2, 24}, {2, 21}, {2, 11}, {2, 9}, {7, 24}, {7, 22}, {7, 14}, {7, 9}, {18, 21}, {11, 15}, {18, 15}, {11, 9}, {11, 6}, {11, 5}, {18, 5}, {22, 15}, {22, 14}, {22, 6}, {21, 15}, {21, 14}, {8, 17}, {12, 20}, {12, 17}, {13, 19}, {12, 1}, {13, 8}, {8, 10}, {8, 3}, {23, 1}, {20, 10}, {23, 19}, {20, 17}, {1, 10}]
+[0m[35m[2019-10-28 19:32:53,0, timer.h:61] NO_NAME [gr] = 0.000105887
+[0m===========> #WINS(NewRandom/Exact)=0/136     #DRAWS=82     #RUNS=218
+219 ======================= Processing [tournament-0219-24-276.al] {Graph V/E: 24/276}
+Exact solution=74 Time=63.32
+[35m[2019-10-28 19:32:59,1, timer.h:61] NO_NAME [--------RANDOM new] = 6.221
+[0m[32m[2019-10-28 19:32:59,1, playground.cpp:161] SA / SA RND / RED RND edges: 7 / 8 / 71
+[0m[32m[2019-10-28 19:32:59,2, playground.cpp:162] FASP(RAND)  capacity = 86 edgeCnt = 86 edgeList = [{10, 4}, {4, 7}, {3, 19}, {3, 24}, {23, 12}, {6, 8}, {8, 5}, {24, 9}, {24, 11}, {10, 9}, {24, 5}, {10, 5}, {13, 9}, {23, 8}, {13, 8}, {22, 5}, {22, 11}, {21, 9}, {21, 8}, {21, 11}, {19, 9}, {18, 11}, {17, 8}, {17, 11}, {16, 9}, {16, 8}, {16, 11}, {15, 9}, {15, 8}, {14, 9}, {14, 5}, {12, 9}, {7, 9}, {7, 11}, {6, 9}, {4, 21}, {22, 21}, {14, 16}, {14, 24}, {14, 21}, {14, 19}, {10, 16}, {10, 23}, {10, 1}, {22, 6}, {20, 2}, {18, 16}, {18, 24}, {18, 2}, {17, 24}, {17, 23}, {17, 19}, {17, 2}, {13, 24}, {13, 21}, {13, 2}, {13, 1}, {4, 12}, {22, 12}, {14, 12}, {4, 8}, {7, 23}, {7, 21}, {7, 19}, {7, 12}, {7, 2}, {4, 3}, {10, 3}, {6, 23}, {6, 21}, {6, 11}, {3, 11}, {3, 8}, {15, 24}, {15, 12}, {23, 24}, {23, 2}, {10, 20}, {21, 2}, {17, 7}, {17, 22}, {14, 20}, {18, 20}, {4, 20}, {13, 7}, {14, 4}]
+[0m[35m[2019-10-28 19:32:59,2, timer.h:61] NO_NAME [gr] = 0.000111213
+[0m===========> #WINS(NewRandom/Exact)=0/137     #DRAWS=82     #RUNS=219
+220 ======================= Processing [tournament-0220-24-276.al] {Graph V/E: 24/276}
+Exact solution=73 Time=12.588
+[35m[2019-10-28 19:33:04,4, timer.h:61] NO_NAME [--------RANDOM new] = 4.94209
+[0m[32m[2019-10-28 19:33:04,4, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 11 / 71
+[0m[32m[2019-10-28 19:33:04,4, playground.cpp:162] FASP(RAND)  capacity = 88 edgeCnt = 88 edgeList = [{8, 23}, {19, 23}, {10, 24}, {22, 10}, {13, 3}, {1, 9}, {1, 23}, {1, 21}, {20, 14}, {20, 23}, {20, 12}, {20, 2}, {1, 19}, {1, 16}, {1, 13}, {11, 14}, {11, 23}, {11, 21}, {7, 14}, {7, 23}, {7, 18}, {7, 12}, {11, 6}, {7, 6}, {1, 10}, {20, 10}, {7, 1}, {9, 14}, {9, 24}, {9, 21}, {16, 23}, {16, 22}, {16, 21}, {16, 17}, {16, 6}, {13, 23}, {13, 19}, {13, 17}, {9, 8}, {16, 8}, {13, 8}, {5, 24}, {5, 22}, {5, 18}, {11, 3}, {5, 17}, {5, 8}, {4, 23}, {4, 21}, {4, 18}, {4, 12}, {4, 10}, {4, 8}, {4, 3}, {1, 3}, {5, 3}, {2, 24}, {2, 21}, {2, 12}, {2, 3}, {3, 24}, {3, 22}, {3, 19}, {3, 18}, {15, 23}, {15, 19}, {15, 18}, {15, 12}, {3, 6}, {15, 6}, {12, 24}, {12, 23}, {12, 21}, {12, 19}, {12, 8}, {22, 24}, {22, 23}, {22, 19}, {22, 18}, {22, 6}, {6, 18}, {6, 17}, {10, 19}, {17, 21}, {17, 18}, {8, 18}, {19, 18}, {8, 19}]
+[0m[35m[2019-10-28 19:33:04,4, timer.h:61] NO_NAME [gr] = 0.000110673
+[0m===========> #WINS(NewRandom/Exact)=0/138     #DRAWS=82     #RUNS=220
+221 ======================= Processing [tournament-0222-25-300.al] {Graph V/E: 25/300}
+Exact solution=88 Time=1113.4
+[35m[2019-10-28 19:33:12,1, timer.h:61] NO_NAME [--------RANDOM new] = 8.06672
+[0m[32m[2019-10-28 19:33:12,1, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 12 / 74
+[0m[32m[2019-10-28 19:33:12,1, playground.cpp:162] FASP(RAND)  capacity = 92 edgeCnt = 92 edgeList = [{7, 12}, {12, 1}, {8, 3}, {21, 4}, {13, 19}, {13, 5}, {24, 19}, {18, 16}, {12, 16}, {12, 14}, {10, 16}, {10, 14}, {3, 14}, {23, 19}, {23, 13}, {22, 19}, {22, 25}, {22, 14}, {21, 25}, {21, 16}, {21, 13}, {20, 19}, {20, 13}, {17, 25}, {11, 19}, {11, 13}, {9, 19}, {9, 25}, {9, 16}, {9, 13}, {8, 25}, {8, 14}, {7, 13}, {1, 6}, {18, 6}, {23, 6}, {21, 6}, {20, 6}, {11, 6}, {9, 6}, {1, 5}, {24, 5}, {3, 5}, {17, 5}, {11, 5}, {8, 5}, {4, 19}, {4, 16}, {4, 6}, {1, 2}, {2, 6}, {24, 2}, {3, 2}, {20, 2}, {17, 2}, {11, 2}, {7, 2}, {14, 6}, {4, 2}, {25, 19}, {5, 16}, {4, 22}, {4, 20}, {18, 22}, {21, 22}, {21, 20}, {18, 1}, {4, 12}, {10, 20}, {10, 15}, {10, 12}, {10, 8}, {10, 1}, {9, 24}, {9, 20}, {9, 15}, {9, 8}, {4, 7}, {10, 7}, {9, 7}, {21, 3}, {4, 3}, {8, 24}, {17, 24}, {17, 20}, {8, 12}, {8, 7}, {22, 24}, {3, 15}, {23, 22}, {22, 15}, {3, 1}]
+[0m[35m[2019-10-28 19:33:12,1, timer.h:61] NO_NAME [gr] = 0.00011885
+[0m===========> #WINS(NewRandom/Exact)=0/139     #DRAWS=82     #RUNS=221
+222 ======================= Processing [tournament-0223-25-300.al] {Graph V/E: 25/300}
+Exact solution=85 Time=353.872
+[35m[2019-10-28 19:33:20,3, timer.h:61] NO_NAME [--------RANDOM new] = 8.09091
+[0m[32m[2019-10-28 19:33:20,3, playground.cpp:161] SA / SA RND / RED RND edges: 5 / 12 / 70
+[0m[32m[2019-10-28 19:33:20,3, playground.cpp:162] FASP(RAND)  capacity = 87 edgeCnt = 87 edgeList = [{12, 16}, {19, 16}, {24, 13}, {8, 9}, {17, 21}, {25, 18}, {25, 9}, {7, 6}, {7, 5}, {7, 3}, {24, 11}, {24, 6}, {23, 18}, {23, 11}, {23, 10}, {23, 9}, {23, 8}, {23, 5}, {23, 4}, {1, 22}, {25, 22}, {23, 22}, {21, 11}, {20, 18}, {20, 10}, {20, 9}, {20, 8}, {20, 6}, {20, 3}, {19, 18}, {19, 22}, {19, 10}, {19, 9}, {19, 5}, {17, 10}, {17, 6}, {17, 4}, {16, 18}, {16, 9}, {16, 8}, {16, 6}, {16, 3}, {15, 4}, {15, 3}, {1, 14}, {7, 14}, {16, 14}, {13, 6}, {13, 11}, {13, 5}, {13, 4}, {12, 22}, {12, 11}, {12, 10}, {12, 9}, {12, 4}, {12, 3}, {2, 10}, {2, 6}, {5, 18}, {6, 18}, {4, 18}, {14, 11}, {10, 11}, {9, 11}, {4, 11}, {20, 21}, {25, 7}, {5, 3}, {23, 15}, {24, 21}, {7, 1}, {5, 9}, {4, 22}, {8, 14}, {10, 9}, {25, 20}, {23, 20}, {24, 7}, {19, 7}, {17, 20}, {13, 20}, {13, 7}, {23, 2}, {17, 13}, {17, 24}, {12, 25}]
+[0m[35m[2019-10-28 19:33:20,3, timer.h:61] NO_NAME [gr] = 0.000125448
+[0m===========> #WINS(NewRandom/Exact)=0/140     #DRAWS=82     #RUNS=222
+223 ======================= Processing [tournament-0224-25-300.al] {Graph V/E: 25/300}
+Exact solution=85 Time=871.876
+[35m[2019-10-28 19:33:27,5, timer.h:61] NO_NAME [--------RANDOM new] = 7.43225
+[0m[32m[2019-10-28 19:33:27,5, playground.cpp:161] SA / SA RND / RED RND edges: 8 / 10 / 73
+[0m[32m[2019-10-28 19:33:27,5, playground.cpp:162] FASP(RAND)  capacity = 91 edgeCnt = 91 edgeList = [{8, 17}, {22, 13}, {15, 9}, {4, 22}, {10, 24}, {9, 7}, {5, 18}, {18, 20}, {24, 25}, {24, 21}, {24, 12}, {7, 25}, {7, 18}, {23, 21}, {23, 20}, {23, 18}, {22, 6}, {22, 25}, {22, 5}, {22, 21}, {19, 25}, {17, 20}, {17, 18}, {17, 12}, {17, 5}, {16, 6}, {16, 21}, {16, 18}, {16, 12}, {14, 6}, {14, 20}, {13, 6}, {13, 25}, {13, 21}, {13, 20}, {11, 25}, {11, 12}, {11, 5}, {10, 25}, {10, 12}, {10, 5}, {10, 21}, {9, 6}, {9, 20}, {9, 12}, {8, 18}, {8, 5}, {4, 25}, {4, 18}, {3, 25}, {3, 21}, {3, 20}, {3, 12}, {2, 25}, {2, 18}, {5, 25}, {24, 7}, {22, 7}, {2, 5}, {16, 7}, {14, 7}, {11, 7}, {10, 7}, {8, 7}, {24, 17}, {24, 13}, {2, 23}, {2, 22}, {2, 19}, {16, 23}, {16, 19}, {16, 17}, {10, 14}, {10, 13}, {16, 8}, {2, 15}, {2, 9}, {24, 9}, {10, 9}, {10, 2}, {4, 23}, {15, 23}, {15, 13}, {15, 8}, {8, 23}, {22, 9}, {22, 23}, {22, 14}, {14, 23}, {9, 13}, {14, 3}]
+[0m[35m[2019-10-28 19:33:27,5, timer.h:61] NO_NAME [gr] = 0.000124241
+[0m===========> #WINS(NewRandom/Exact)=0/141     #DRAWS=82     #RUNS=223
+224 ======================= Processing [tournament-0225-25-300.al] {Graph V/E: 25/300}
+Exact solution=82 Time=546.952
+[35m[2019-10-28 19:33:35,9, timer.h:61] NO_NAME [--------RANDOM new] = 7.99324
+[0m[32m[2019-10-28 19:33:35,9, playground.cpp:161] SA / SA RND / RED RND edges: 7 / 13 / 70
+[0m[32m[2019-10-28 19:33:35,9, playground.cpp:162] FASP(RAND)  capacity = 90 edgeCnt = 90 edgeList = [{10, 4}, {22, 4}, {8, 6}, {24, 4}, {6, 9}, {3, 7}, {15, 17}, {24, 14}, {24, 18}, {24, 13}, {9, 25}, {23, 3}, {22, 25}, {22, 17}, {22, 3}, {21, 7}, {20, 25}, {20, 18}, {20, 7}, {19, 25}, {19, 17}, {16, 17}, {16, 3}, {16, 13}, {1, 15}, {12, 25}, {12, 18}, {12, 15}, {11, 14}, {11, 25}, {11, 18}, {11, 15}, {11, 7}, {10, 25}, {10, 17}, {10, 3}, {10, 13}, {8, 14}, {8, 18}, {8, 15}, {6, 14}, {6, 18}, {6, 17}, {6, 7}, {5, 14}, {5, 18}, {4, 25}, {4, 18}, {4, 7}, {4, 3}, {2, 25}, {2, 18}, {2, 17}, {2, 3}, {13, 3}, {2, 13}, {15, 25}, {15, 18}, {15, 7}, {17, 18}, {3, 18}, {23, 9}, {22, 9}, {21, 9}, {12, 9}, {11, 9}, {4, 9}, {24, 21}, {24, 2}, {23, 2}, {5, 20}, {5, 19}, {5, 16}, {24, 16}, {12, 20}, {5, 10}, {23, 10}, {12, 4}, {24, 6}, {5, 6}, {5, 4}, {8, 22}, {8, 19}, {8, 10}, {8, 4}, {22, 16}, {22, 6}, {19, 4}, {16, 20}, {10, 6}]
+[0m[35m[2019-10-28 19:33:35,9, timer.h:61] NO_NAME [gr] = 0.000125789
+[0m===========> #WINS(NewRandom/Exact)=0/142     #DRAWS=82     #RUNS=224
+225 ======================= Processing [tournament-0227-25-300.al] {Graph V/E: 25/300}
+Exact solution=81 Time=253.972
+[35m[2019-10-28 19:33:43,9, timer.h:61] NO_NAME [--------RANDOM new] = 7.06915
+[0m[32m[2019-10-28 19:33:43,9, playground.cpp:161] SA / SA RND / RED RND edges: 3 / 7 / 82
+[0m[32m[2019-10-28 19:33:43,9, playground.cpp:162] FASP(RAND)  capacity = 92 edgeCnt = 92 edgeList = [{1, 23}, {6, 25}, {9, 13}, {16, 15}, {14, 15}, {14, 17}, {12, 17}, {1, 25}, {24, 6}, {24, 25}, {21, 9}, {24, 17}, {24, 12}, {8, 25}, {5, 12}, {23, 17}, {22, 6}, {22, 15}, {22, 17}, {22, 9}, {22, 12}, {20, 17}, {20, 12}, {1, 19}, {8, 19}, {14, 19}, {5, 19}, {18, 15}, {18, 9}, {1, 13}, {24, 13}, {21, 13}, {14, 13}, {22, 13}, {11, 25}, {11, 17}, {11, 15}, {10, 9}, {7, 12}, {4, 17}, {4, 15}, {3, 19}, {3, 15}, {3, 9}, {3, 12}, {2, 25}, {2, 19}, {12, 9}, {17, 25}, {17, 15}, {17, 13}, {17, 9}, {3, 24}, {22, 20}, {4, 24}, {4, 23}, {4, 16}, {4, 14}, {4, 11}, {4, 10}, {3, 21}, {22, 21}, {4, 3}, {18, 20}, {18, 14}, {18, 7}, {3, 5}, {22, 5}, {18, 5}, {24, 20}, {2, 20}, {21, 20}, {11, 20}, {1, 20}, {2, 24}, {2, 16}, {8, 21}, {8, 14}, {8, 1}, {2, 7}, {2, 5}, {10, 24}, {10, 23}, {10, 16}, {14, 24}, {11, 14}, {5, 23}, {21, 7}, {16, 7}, {16, 23}, {1, 24}, {1, 7}]
+[0m[35m[2019-10-28 19:33:43,9, timer.h:61] NO_NAME [gr] = 0.000122272
+[0m===========> #WINS(NewRandom/Exact)=0/143     #DRAWS=82     #RUNS=225
+226 ======================= Processing [tournament-0229-25-300.al] {Graph V/E: 25/300}
+Exact solution=85 Time=199.152
+[35m[2019-10-28 19:33:50,0, timer.h:61] NO_NAME [--------RANDOM new] = 7.92076
+[0m[32m[2019-10-28 19:33:50,0, playground.cpp:161] SA / SA RND / RED RND edges: 6 / 9 / 91
+[0m[32m[2019-10-28 19:33:50,0, playground.cpp:162] FASP(RAND)  capacity = 106 edgeCnt = 106 edgeList = [{19, 15}, {22, 15}, {15, 5}, {11, 12}, {10, 6}, {23, 13}, {23, 21}, {23, 14}, {13, 19}, {13, 18}, {16, 25}, {16, 22}, {16, 21}, {13, 14}, {13, 4}, {16, 4}, {23, 5}, {23, 2}, {13, 2}, {16, 2}, {1, 20}, {1, 17}, {16, 17}, {1, 15}, {13, 15}, {16, 15}, {1, 12}, {1, 11}, {23, 11}, {1, 10}, {8, 25}, {8, 18}, {8, 15}, {8, 14}, {8, 4}, {8, 3}, {8, 2}, {7, 25}, {1, 7}, {23, 7}, {13, 7}, {8, 7}, {1, 6}, {23, 6}, {13, 6}, {8, 6}, {2, 22}, {2, 20}, {2, 19}, {8, 16}, {8, 13}, {2, 18}, {2, 17}, {2, 14}, {2, 11}, {2, 9}, {2, 6}, {2, 5}, {2, 4}, {3, 25}, {2, 3}, {3, 22}, {3, 21}, {3, 20}, {3, 18}, {3, 17}, {3, 15}, {3, 14}, {3, 7}, {3, 4}, {7, 22}, {7, 21}, {7, 19}, {7, 11}, {7, 10}, {7, 9}, {7, 6}, {7, 5}, {10, 22}, {10, 18}, {10, 15}, {10, 12}, {10, 11}, {19, 9}, {17, 25}, {15, 25}, {15, 9}, {4, 12}, {22, 21}, {22, 11}, {20, 12}, {18, 21}, {19, 14}, {17, 12}, {21, 12}, {4, 6}, {22, 6}, {17, 14}, {15, 6}, {4, 5}, {20, 5}, {18, 5}, {21, 6}, {17, 5}, {22, 20}, {18, 4}]
+[0m[35m[2019-10-28 19:33:50,0, timer.h:61] NO_NAME [gr] = 0.000122939
+[0m===========> #WINS(NewRandom/Exact)=0/144     #DRAWS=82     #RUNS=226
+227 ======================= Processing [tournament-0239-26-325.al] {Graph V/E: 26/325}
+Exact solution=92 Time=1188.12
+[35m[2019-10-28 19:34:01,7, timer.h:61] NO_NAME [--------RANDOM new] = 10.1867
+[0m[32m[2019-10-28 19:34:01,7, playground.cpp:161] SA / SA RND / RED RND edges: 7 / 11 / 81
+[0m[32m[2019-10-28 19:34:01,7, playground.cpp:162] FASP(RAND)  capacity = 99 edgeCnt = 99 edgeList = [{21, 8}, {11, 1}, {11, 17}, {25, 7}, {4, 7}, {19, 4}, {24, 3}, {1, 24}, {22, 20}, {22, 26}, {22, 25}, {17, 26}, {17, 25}, {17, 23}, {17, 16}, {13, 26}, {13, 19}, {12, 23}, {12, 16}, {13, 2}, {8, 25}, {8, 24}, {8, 19}, {8, 15}, {8, 2}, {17, 3}, {14, 20}, {14, 24}, {14, 16}, {14, 15}, {11, 19}, {11, 15}, {11, 3}, {5, 20}, {5, 19}, {22, 4}, {12, 4}, {14, 4}, {5, 4}, {21, 26}, {21, 16}, {21, 15}, {21, 4}, {1, 18}, {5, 18}, {10, 25}, {10, 18}, {10, 3}, {1, 9}, {8, 9}, {11, 9}, {1, 7}, {22, 7}, {12, 7}, {5, 7}, {10, 7}, {6, 20}, {6, 25}, {6, 23}, {6, 18}, {6, 16}, {6, 7}, {6, 4}, {6, 2}, {24, 20}, {24, 4}, {23, 20}, {23, 19}, {15, 25}, {15, 19}, {23, 9}, {23, 4}, {23, 15}, {18, 20}, {18, 25}, {18, 4}, {2, 7}, {3, 26}, {2, 3}, {3, 25}, {19, 20}, {19, 16}, {15, 7}, {25, 20}, {9, 20}, {16, 26}, {6, 17}, {6, 13}, {6, 11}, {22, 17}, {22, 14}, {6, 10}, {22, 5}, {21, 14}, {12, 17}, {8, 13}, {10, 13}, {11, 12}, {11, 8}]
+[0m[35m[2019-10-28 19:34:01,7, timer.h:61] NO_NAME [gr] = 0.000133477
+[0m===========> #WINS(NewRandom/Exact)=0/145     #DRAWS=82     #RUNS=227
+228 ======================= Processing [tournament-0242-27-351.al] {Graph V/E: 27/351}
+Exact solution=91 Time=1281.19
+[35m[2019-10-28 19:34:12,5, timer.h:61] NO_NAME [--------RANDOM new] = 11.4975
+[0m[32m[2019-10-28 19:34:12,5, playground.cpp:161] SA / SA RND / RED RND edges: 8 / 10 / 75
+[0m[32m[2019-10-28 19:34:12,5, playground.cpp:162] FASP(RAND)  capacity = 93 edgeCnt = 93 edgeList = [{18, 12}, {6, 4}, {15, 2}, {1, 5}, {10, 20}, {20, 26}, {13, 11}, {4, 13}, {1, 16}, {22, 4}, {12, 14}, {20, 16}, {10, 4}, {21, 16}, {21, 4}, {18, 16}, {18, 14}, {25, 15}, {12, 15}, {9, 15}, {21, 15}, {1, 24}, {22, 24}, {20, 24}, {23, 16}, {1, 19}, {25, 19}, {12, 19}, {21, 19}, {1, 13}, {25, 13}, {22, 13}, {10, 13}, {21, 13}, {18, 13}, {1, 11}, {12, 11}, {10, 11}, {20, 27}, {9, 27}, {18, 27}, {23, 27}, {8, 15}, {8, 14}, {7, 17}, {7, 24}, {7, 16}, {1, 6}, {5, 14}, {5, 13}, {5, 11}, {5, 6}, {1, 3}, {10, 3}, {9, 3}, {1, 2}, {26, 2}, {22, 2}, {12, 2}, {18, 2}, {23, 2}, {7, 2}, {3, 16}, {2, 13}, {6, 13}, {2, 11}, {27, 11}, {6, 11}, {15, 11}, {4, 16}, {25, 26}, {21, 20}, {21, 9}, {18, 26}, {23, 26}, {23, 20}, {23, 10}, {1, 8}, {21, 8}, {23, 22}, {7, 26}, {22, 8}, {7, 10}, {1, 25}, {23, 12}, {3, 19}, {3, 2}, {6, 2}, {6, 14}, {3, 15}, {23, 7}, {1, 7}, {18, 7}]
+[0m[35m[2019-10-28 19:34:12,5, timer.h:61] NO_NAME [gr] = 0.000158103
+[0m===========> #WINS(NewRandom/Exact)=0/146     #DRAWS=82     #RUNS=228
+229 ======================= Processing [tournament-0244-27-351.al] {Graph V/E: 27/351}
+Exact solution=94 Time=280.676
+[35m[2019-10-28 19:34:24,2, timer.h:61] NO_NAME [--------RANDOM new] = 11.5765
+[0m[32m[2019-10-28 19:34:24,2, playground.cpp:161] SA / SA RND / RED RND edges: 7 / 9 / 99
+[0m[32m[2019-10-28 19:34:24,2, playground.cpp:162] FASP(RAND)  capacity = 115 edgeCnt = 115 edgeList = [{11, 8}, {21, 8}, {13, 20}, {25, 5}, {3, 8}, {1, 3}, {24, 19}, {1, 26}, {24, 23}, {24, 26}, {24, 11}, {24, 9}, {7, 21}, {7, 18}, {7, 9}, {7, 5}, {22, 18}, {22, 12}, {22, 9}, {2, 27}, {2, 26}, {2, 11}, {1, 20}, {2, 20}, {19, 27}, {19, 20}, {19, 18}, {19, 13}, {19, 11}, {19, 10}, {19, 5}, {1, 17}, {24, 17}, {7, 17}, {2, 17}, {1, 16}, {7, 16}, {1, 15}, {24, 15}, {2, 15}, {1, 8}, {24, 8}, {2, 8}, {19, 8}, {6, 27}, {6, 18}, {6, 17}, {6, 16}, {6, 11}, {6, 9}, {6, 5}, {1, 4}, {24, 7}, {7, 4}, {19, 4}, {3, 26}, {3, 25}, {3, 17}, {3, 16}, {3, 15}, {1, 22}, {3, 11}, {3, 9}, {4, 21}, {4, 20}, {4, 18}, {4, 17}, {4, 15}, {4, 13}, {4, 11}, {4, 10}, {4, 9}, {14, 16}, {14, 12}, {14, 11}, {14, 10}, {14, 9}, {14, 8}, {25, 26}, {25, 21}, {25, 20}, {25, 17}, {25, 16}, {25, 15}, {25, 13}, {25, 12}, {25, 9}, {25, 8}, {20, 10}, {20, 5}, {9, 26}, {27, 11}, {13, 11}, {20, 11}, {9, 21}, {16, 21}, {9, 18}, {27, 18}, {13, 18}, {9, 17}, {27, 17}, {16, 17}, {15, 21}, {9, 8}, {16, 8}, {13, 8}, {26, 10}, {13, 15}, {9, 15}, {9, 27}, {26, 5}, {11, 21}, {18, 10}, {18, 5}, {18, 8}]
+[0m[35m[2019-10-28 19:34:24,2, timer.h:61] NO_NAME [gr] = 0.000152132
+[0m===========> #WINS(NewRandom/Exact)=0/147     #DRAWS=82     #RUNS=229
+TIME exact/random: 9650.48/328.16

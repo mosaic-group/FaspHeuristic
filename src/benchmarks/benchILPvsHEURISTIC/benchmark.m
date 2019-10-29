@@ -2,7 +2,7 @@ function benchmark
 
 addpath('../matlabHelpers/')
 
-dataFile = loadHDF5('./data/random.h5');
+dataFile = loadHDF5('./data/new/small-world.h5');
 data = dataFile.Analysis_data;
 
 % ----------------- histogram of results ----------------------------------
@@ -10,11 +10,19 @@ figure(1);
 clf;
 hold on;
 
-s = data.random ./ data.exact;
+es=data.exact;
+rs=data.random;
+gs=data.gr;
+
+es(es==0)=0.00001;
+rs(rs==0)=0.00001;
+gs(gs==0)=0.00001;
+
+s = rs ./ es;
 [min(s), mean(s), max(s)] %print range of solutions
 h1 = histogram(s);
 
-d = data.gr ./ data.exact;
+d = gs ./ es;
 [min(d), mean(d), max(d)]
 h2 = histogram(d);
 
@@ -31,15 +39,12 @@ et(et==0)=0.00001;
 rt(rt==0)=0.00001;
 gt(gt==0)=0.00001;
 
-es=data.exactTime;
-rs=data.randomTime;
-gs=data.gr;
 
 
 figure(2)
 clf;
 % showData(uniqueVals, calcMeanOnUniqueValues(rs./es, startIdx)', 6);
-showData(uniqueVals, calcMeanOnUniqueValues(rt./et, startIdx)', 6);
+showData(uniqueVals, calcMeanOnUniqueValues(rt./et, startIdx)', 5);
 % showData(uniqueVals, calcMeanOnUniqueValues(es, startIdx)', 6);
 
 
