@@ -2,7 +2,7 @@ function benchmark
 
 addpath('../matlabHelpers/')
 
-dataFile = loadHDF5('./data/new/random-large.h5');
+dataFile = loadHDF5('./data/new/tournaments.h5');
 data = dataFile.Analysis_data;
 
 % ----------------- histogram of results ----------------------------------
@@ -34,6 +34,12 @@ min(data.vertices)
 max(data.vertices)
 min(data.exact)
 max(data.exact)
+
+disp('----------------RANDOM----------------')
+min(data.randomTime)
+mean(data.randomTime)
+max(data.randomTime)
+disp('--------------------------')
 
 % -------------------------------------------------------------------------
 

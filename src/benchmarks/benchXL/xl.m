@@ -13,6 +13,7 @@ for i=100:100:1000
         dataFile = loadHDF5(file);
         data = dataFile.Analysis_data;
         gs = [gs; mean(data.gr)];
+        data.gr
         gsd = [gsd; std(data.gr)];
         rs = [rs; mean(data.random)];
         rsd = [rsd; std(data.random)];
