@@ -16,7 +16,6 @@ void benchImaseItoh(const std::string &outputDir, const std::string &inputDir) {
 
     auto checkIfExist = [](const std::vector<std::string> &files, const std::string &file) -> bool {return std::find(files.begin(), files.end(), file) != files.end();};
 
-    double timeExact=0.0;
     double timeRandom=0.0;
 
     auto files = Graph::IO::getFilesInDir(std::string(dir));
