@@ -6,7 +6,6 @@
 #include "tools/easylogging++.h"
 #include "hdf5/dataHdf5.h"
 #include "graph/graph.h"
-#include "graph/graphTools.h"
 #include "graph/graphFasp.h"
 #include "graph/graphFaspFastFinal.h"
 #include "graph/graphIO.h"

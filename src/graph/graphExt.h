@@ -8,6 +8,7 @@
 #include "graph.h"
 #include <cstddef>
 #include <map>
+#include <unordered_map>
 
 namespace Graph::Ext {
     template <typename VERTEX_TYPE>

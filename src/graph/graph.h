@@ -75,7 +75,6 @@ namespace Graph {
 
         // -------- Type defnitions -----------------------------------------------
         using GraphDef = std::unordered_map<VERTEX_TYPE, NeighborVertices>;
-//        using GraphDef = std::map<VERTEX_TYPE, NeighborVertices>;
 
     private:
         // -------- Internal data -------------------------------------------------
@@ -154,8 +153,8 @@ namespace Graph {
          */
         void addEdge(const Edge &aE) {
             // Check if vertices exist
-            assert(graph.count(aE.src) == 1 && "Vertex does not exists!");
-            assert(graph.count(aE.dst) == 1 && "Vertex does not exists!");
+            assert(graph.count(aE.src) == 1 && "Source vertex does not exists!");
+            assert(graph.count(aE.dst) == 1 && "Destination vertex does not exists!");
 
             Vertices &to = graph[aE.src].to;
             Vertices &from = graph[aE.dst].from;
@@ -200,8 +199,8 @@ namespace Graph {
          * @param aE edge to be removed
          */
         void removeEdge(const Edge &aE) {
-            assert(graph.count(aE.src) == 1 && "Vertex does not exists!");
-            assert(graph.count(aE.dst) == 1 && "Vertex does not exists!");
+            assert(graph.count(aE.src) == 1 && "Source vertex does not exists!");
+            assert(graph.count(aE.dst) == 1 && "Destination vertex does not exists!");
 
             auto &vTo = graph[aE.src].to;
             vTo.erase(std::remove(vTo.begin(), vTo.end(), aE.dst), vTo.end());
@@ -264,7 +263,7 @@ namespace Graph {
         /**
          * @return String representation of graph
          */
-        std::string getStrRepresentationOfGraph() const {
+        std::string toString() const {
             std::ostringstream os;
             for (const auto &entry : graph) {
                 os << entry.first << "->{";

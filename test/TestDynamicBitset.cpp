@@ -14,17 +14,18 @@ TYPED_TEST_SUITE(BitSetTest, BitsetElementTypes,);
 
 TYPED_TEST(BitSetTest, easyTest) {
     for (int bitsetSize = 0; bitsetSize <= 129; ++bitsetSize) {
+        // create object to test
         DynamicBitset<TypeParam> bitset(bitsetSize);
 
         // check size
         ASSERT_EQ(bitsetSize, bitset.getSize());
 
-        // check if all 0
+        // initially bitset should be zeroed
         for (int i = 0; i < bitsetSize; ++i) {
             ASSERT_FALSE(bitset.test(i));
         }
 
-        // set only one and check then clear and set next
+        // set only one bit and check if works then clear it and set next
         for (int i = 0; i < bitsetSize; ++i) {
             bitset.set(i);
             for (int b = 0; b < bitsetSize; ++b) {
@@ -35,33 +36,38 @@ TYPED_TEST(BitSetTest, easyTest) {
             bitset.clear(i);
         }
 
+        // set all bits...
         for (int i = 0; i < bitsetSize; ++i) {
             bitset.set(i);
         }
 
+        // ...and test if clearAll works properly
         bitset.clearAll();
 
-        // check if all 0
         for (int i = 0; i < bitsetSize; ++i) {
             ASSERT_FALSE(bitset.test(i));
         }
     }
 }
 
+// In release mode there are no assertions...
+#ifndef NDEBUG
+
 TYPED_TEST(BitSetTest, assertionsTest) {
     int bitsetSize = 65;
     DynamicBitset<TypeParam> bitset(bitsetSize);
 
     // Beyond element capacity of bitset
-    ASSERT_DEATH(bitset.get(200), ".*Wrong index.*");
+    ASSERT_DEATH(bitset.test(200), ".*Wrong index.*");
 
     // beyond offset (such element exists but its bit are not fully used)
-    ASSERT_DEATH(bitset.get(66), ".*Wrong offset.*");
+    ASSERT_DEATH(bitset.test(66), ".*Wrong offset.*");
 
     // negative indices are not allowed
-    ASSERT_DEATH(bitset.get(-1), ".*Wrong index.*");
+    ASSERT_DEATH(bitset.test(-1), ".*Wrong index.*");
 }
 
+#endif
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
