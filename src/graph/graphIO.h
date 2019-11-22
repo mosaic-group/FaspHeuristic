@@ -127,8 +127,8 @@ namespace Graph::IO {
                     files.push_back(std::string{ent->d_name});
                 }
             }
+            closedir(dir);
         }
-        closedir(dir);
         return files;
     }
 
@@ -156,14 +156,14 @@ namespace Graph::IO {
     }
 
     /**
-* Reads data provided as adjacency list (fist number in a line is a src vertex,
-* and next number(s) are outgoing veritces)
-*
-* <b>NOTE:</b> no error handlihng is implemented, if file is not correct this function will fail
-*
-* @param aFileName inputFileName
-* @return created graph
-*/
+    * Reads data provided as adjacency list (fist number in a line is a src vertex,
+    * and next number(s) are outgoing veritces)
+    *
+    * <b>NOTE:</b> no error handlihng is implemented, if file is not correct this function will fail
+    *
+    * @param aFileName inputFileName
+    * @return created graph
+    */
     template<typename VERTEX_TYPE = uint16_t, typename EDGE_PROP_TYPE>
     static auto graphWithWeightsFromFile(const std::string &aFileName) {
         std::ifstream infile(aFileName);

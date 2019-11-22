@@ -5,7 +5,6 @@
 #include "tools/dynamicBitset.h"
 
 #include "gtest/gtest.h"
-#include "gmock/gmock.h"
 
 template <typename T>
 class BitSetTest : public ::testing::Test{};
@@ -30,21 +29,37 @@ TYPED_TEST(BitSetTest, easyTest) {
             bitset.set(i);
             for (int b = 0; b < bitsetSize; ++b) {
                 if (b != i) ASSERT_FALSE(bitset.test(b));
-                else ASSERT_TRUE(bitset.test(b));
+                else
+                    ASSERT_TRUE(bitset.test(b));
             }
             bitset.clear(i);
         }
 
+        for (int i = 0; i < bitsetSize; ++i) {
+            bitset.set(i);
+        }
 
         bitset.clearAll();
+
         // check if all 0
         for (int i = 0; i < bitsetSize; ++i) {
             ASSERT_FALSE(bitset.test(i));
         }
-
-        // TODO: Check for trying to use bit larger than initial size
-        //       check asserts etc.
     }
+}
+
+TYPED_TEST(BitSetTest, assertionsTest) {
+    int bitsetSize = 65;
+    DynamicBitset<TypeParam> bitset(bitsetSize);
+
+    // Beyond element capacity of bitset
+    ASSERT_DEATH(bitset.get(200), ".*Wrong index.*");
+
+    // beyond offset (such element exists but its bit are not fully used)
+    ASSERT_DEATH(bitset.get(66), ".*Wrong offset.*");
+
+    // negative indices are not allowed
+    ASSERT_DEATH(bitset.get(-1), ".*Wrong index.*");
 }
 
 

@@ -101,7 +101,7 @@ void test(const char *inputDir) {
 
     DataHdf5<double> f("/tmp/out.h5");
     std::string dir;
-    dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/random/";
+    dir = "/Users/gonciarz/ws2/repo/FASP-benchmarks/data/random/";
 //    dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/de-bruijn/";
 //    dir = "/Users/gonciarz/Documents/MOSAIC/work/repo/FASP-benchmarks/data/tournaments";
 

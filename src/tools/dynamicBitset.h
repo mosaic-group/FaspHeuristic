@@ -20,20 +20,20 @@ class DynamicBitset {
     static constexpr int BitsPerElement = sizeof(ELEMENT_TYPE) * 8;
     static constexpr ELEMENT_TYPE Bit = 1;
 
-    const IDX iSize;
-    size_t numOfElements;
+    const IDX iSize; // size of bitset in bits
+    size_t iNumOfElements; // size of bitset in data elements
     std::unique_ptr<ELEMENT_TYPE[]> iData;
 
 public:
     DynamicBitset(IDX aSize) : iSize(aSize) {
-        numOfElements = (iSize + BitsPerElement - 1) / BitsPerElement;
-        iData.reset(new ELEMENT_TYPE[numOfElements]);
+        iNumOfElements = (iSize + BitsPerElement - 1) / BitsPerElement;
+        iData.reset(new ELEMENT_TYPE[iNumOfElements]);
         clearAll();
     }
     DynamicBitset(DynamicBitset &obj) : iSize(obj.iSize) {
-        numOfElements = obj.numOfElements;
-        iData.reset(new ELEMENT_TYPE[numOfElements]);
-        memcpy(iData.get(), obj.iData.get(), sizeof(ELEMENT_TYPE) * numOfElements);
+        iNumOfElements = obj.iNumOfElements;
+        iData.reset(new ELEMENT_TYPE[iNumOfElements]);
+        memcpy(iData.get(), obj.iData.get(), sizeof(ELEMENT_TYPE) * iNumOfElements);
     }
 
     DynamicBitset(DynamicBitset&&) = default;
@@ -44,7 +44,7 @@ public:
     auto get(IDX aBitNum) {
         IDX idx = aBitNum / BitsPerElement;
         IDX off = aBitNum % BitsPerElement;
-        assert(idx < iSize && "Wrong index (bit number too big)");
+        assert(idx >= 0 && idx < iNumOfElements && "Wrong index (bit number too big)");
         assert(idx * BitsPerElement + off < iSize && "Wrong offset (bit number too big)");
         return std::pair{std::ref(iData[idx]), Bit << off};
     }
@@ -65,12 +65,12 @@ public:
     }
 
     void clearAll() {
-        memset(iData.get(), 0, sizeof(ELEMENT_TYPE) * numOfElements);
+        memset(iData.get(), 0, sizeof(ELEMENT_TYPE) * iNumOfElements);
     }
 
     friend std::ostream &operator<<(std::ostream &os, const DynamicBitset &obj) {
         os << "DynamicBitset<" << BitsPerElement << ">{";
-        for (size_t i = 0; i < obj.numOfElements; ++i) {
+        for (size_t i = 0; i < obj.iNumOfElements; ++i) {
             std::bitset<BitsPerElement> bs(obj.iData[i]);
             os << bs;
             if (i < obj.iData.size() - 1) os << ", ";
