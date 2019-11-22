@@ -24,6 +24,8 @@ namespace Graph {
 
     template <typename VERTEX_TYPE>
     class GraphBase {
+        static_assert(std::is_integral<VERTEX_TYPE>::value && "VERTEX_TYPE is expected to be a integral number");
+
     protected:
         // -------- Base Type defnitions ---------------------------------------
         using VertexId = VERTEX_TYPE;
@@ -77,7 +79,6 @@ namespace Graph {
         using GraphDef = std::unordered_map<VERTEX_TYPE, NeighborVertices>;
 
     private:
-        // -------- Internal data -------------------------------------------------
         GraphDef graph;
 
     public:
