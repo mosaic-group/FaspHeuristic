@@ -22,6 +22,15 @@
 
 namespace Tools {
 
+    /**
+     * Demangle (only for g++)
+     * Usage:
+     *
+     * demangle(typeid(someVar).name());
+     *
+     * @param name
+     * @return
+     */
     [[maybe_unused]]
     static std::string demangle(const char* name) {
         int status = -4; // some arbitrary value to eliminate the compiler warning
@@ -33,6 +42,20 @@ namespace Tools {
         return (status==0) ? res.get() : name ;
     }
 
+    /**
+     * Gets type name of provided type.
+     * Use as:
+     *
+     * MySuperType v;
+     *
+     * printType<MySuperType>();
+     *
+     * or
+     *
+     * printType<decltype(v)>();
+     *
+     * @tparam A
+     */
     template <class T>
     static constexpr std::string_view type_name() {
         using namespace std;
@@ -52,18 +75,32 @@ namespace Tools {
         #endif
     }
 
+    /**
+     * Prints type name of provided type.
+     * Use as:
+     *
+     * MySuperType v;
+     *
+     * printType<MySuperType>();
+     *
+     * or
+     *
+     * printType<decltype(v)>();
+     *
+     * @tparam A
+     */
     template <typename A>
     static void printType() {
         std::cout << type_name<A>() << std::endl;
     }
 
-    template<typename A>
+    template<typename A, typename... ARGS>
     static void printConstructorsAvailability() {
         std::ostringstream typeInfo{};
         typeInfo << "================= " << type_name<A>() << " =================";
 
         std::cout << typeInfo.str() << std::endl;
-        std::cout << "constructible:      " << std::is_constructible<A>::value << " (default_constructible: " << std::is_default_constructible<A>::value << ")" << std::endl;
+        std::cout << "constructible:      " << std::is_constructible<A, ARGS...>::value << " (default_constructible: " << std::is_default_constructible<A>::value << ")" << std::endl;
         std::cout << "destructible:       " << std::is_destructible<A>::value << std::endl;
         std::cout << "copy_assignable:    " << std::is_copy_assignable<A>::value << std::endl;
         std::cout << "copy_constructible: " << std::is_copy_constructible<A>::value << std::endl;
@@ -72,16 +109,34 @@ namespace Tools {
         std::cout << std::string(typeInfo.str().length(), '=') << std::endl;
     }
 
+    /**
+     * Checks if input string ends with provided suffix
+     * @param str
+     * @param suffix
+     * @return true if ends with suffix
+     */
     [[maybe_unused]]
     static bool endsWith(const std::string& str, const std::string& suffix) {
         return str.size() >= suffix.size() && 0 == str.compare(str.size()-suffix.size(), suffix.size(), suffix);
     }
 
+    /**
+     * Checks if input string starts with provided prefix
+     * @param str
+     * @param prefix
+     * @return true if starts with prefix
+     */
     [[maybe_unused]]
     static bool startsWith(const std::string& str, const std::string& prefix) {
         return str.size() >= prefix.size() && 0 == str.compare(0, prefix.size(), prefix);
     }
 
+    /**
+     * Replace every occurence 'from' to 'to' in input string 'str'
+     * @param str
+     * @param from
+     * @param to
+     */
     [[maybe_unused]]
     static void replace(std::string &str, const std::string &from, const std::string &to) {
         if (from.empty()) return;
@@ -93,6 +148,12 @@ namespace Tools {
         }
     }
 
+    /**
+     * Converts aNumber to string with number of leading zeros
+     * @param aNumber
+     * @param aNumOfLeadingZeros
+     * @return string with provided number of leading zeros
+     */
     [[maybe_unused]]
     static auto convertToStrWithLeadingZeros(int aNumber, uint16_t aNumOfLeadingZeros = 4) {
         std::stringstream ss;

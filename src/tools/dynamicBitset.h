@@ -44,14 +44,6 @@ public:
         clearAll();
     }
 
-    DynamicBitset(const DynamicBitset &obj) : iSize(obj.iSize), iNumOfElements(obj.iNumOfElements) {
-        iData.reset(new ELEMENT_TYPE[iNumOfElements]);
-        memcpy(iData.get(), obj.iData.get(), sizeof(ELEMENT_TYPE) * iNumOfElements);
-    }
-
-    DynamicBitset(DynamicBitset&&) = default;
-    DynamicBitset& operator=(DynamicBitset&&) = default;
-
     IDX getSize() const {return iSize;}
 
     /**

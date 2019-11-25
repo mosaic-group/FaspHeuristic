@@ -52,7 +52,10 @@ TYPED_TEST(BitSetTest, easyTest) {
 
 // In release mode there are no assertions...
 #ifndef NDEBUG
+#include "tools.h"
+class A {
 
+};
 TYPED_TEST(BitSetTest, assertionsTest) {
     int bitsetSize = 65;
     DynamicBitset<TypeParam> bitset(bitsetSize);
@@ -65,6 +68,9 @@ TYPED_TEST(BitSetTest, assertionsTest) {
 
     // negative indices are not allowed
     ASSERT_DEATH(bitset.test(-1), ".*Wrong index.*");
+
+
+    Tools::printConstructorsAvailability<decltype(bitset), int>();
 }
 
 #endif
