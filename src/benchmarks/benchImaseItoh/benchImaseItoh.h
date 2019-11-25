@@ -48,7 +48,7 @@ void benchImaseItoh(const std::string &outputDir, const std::string &inputDir) {
         timeRandom+=thisStep;
 
         t.start_timer("gr");
-        auto gr = Graph::Fasp::GR(g, c);
+        auto gr = Graph::FaspTools::GR(g, c);
         auto grTime = t.stop_timer();
 
         f.put("gr", gr.first);

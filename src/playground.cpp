@@ -7,10 +7,9 @@ INITIALIZE_EASYLOGGINGPP
 #include "graph/graph.h"
 #include "graph/graphIO.h"
 #include "hdf5/dataHdf5.h"
-#include "graph/graphFaspFastFinal.h"
+#include "graph/graphFasp.h"
 
 #include <string>
-#include <cstddef>
 using std::size_t;
 
 void configureLogger() {
@@ -164,7 +163,7 @@ void test(const char *inputDir) {
         timeRandom+=thisStep;
 
         t.start_timer("gr");
-        auto gr = Graph::Fasp::GR(g, c);
+        auto gr = Graph::FaspTools::GR(g, c);
         auto grTime = t.stop_timer();
 
 //        t.start_timer("---------Orig");
@@ -201,47 +200,9 @@ void test(const char *inputDir) {
     std::cout << "TIME exact/random: " << timeExact << "/" << timeRandom << std::endl;
 }
 
-//void testBlueEdges() {
-//    FaspSolutionResult fsr;
-//    Timer<true, false> t("");
-//
-//    for (int i = 77; i <= 77; i += 30) {
-//        int rep = 10;
-//
-//        for (int r = 0; r < rep; ++r) {
-//            std::cout << "\n\n\n";
-//
-////                auto [ge, cc] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int, Graph::GraphMap>(i, 15, 4 * i);
-//            auto[ge, cc] = Graph::Tools::generateErdosRenyiGraph<int, int, Graph::GraphMap>(i, 1.9 * (double) i / (i * (i - 1)));
-//            Graph::IO::graphToFile<int, Graph::GraphMap>("/tmp/graph.txt", ge);
-//            Graph::Graph gg = Graph::IO::graphFromFile<int, Graph::GraphMap>("/tmp/graph.txt");
-//
-//            auto g2{gg};
-//            auto c2 = Graph::Ext::getEdgeProperties<int>(g2, 1);
-//
-//            t.start_timer("G2 orig");
-//            fsr.getCnt("OrigRandom") = Graph::FaspFast2::randomFASP_orig(g2, c2);
-//            t.stop_timer();
-//
-//            t.start_timer("GR");
-//            auto[ca, ed] = Graph::Fasp::GR(g2, c2);
-//            std::cout << "GR CAPACITY = " << ca << std::endl;
-//            fsr.getCnt("GR") = ca;
-//            t.stop_timer();
-//
-//            t.start_timer("G2 new");
-//            fsr.getCnt("NewRandom") = Graph::FaspFast2::randomFASP_blueEdges(g2, c2);
-//            t.stop_timer();
-//
-//            std::cout << "===========> ";
-//            fsr.calculateAndPrint();
-//        }
-//    }
-//}
 
 int main(int argc, char *argv[]) {
     configureLogger();
-//    testBlueEdges();
     test((argc > 1 ? argv[1] : ""));
 
     return 0;

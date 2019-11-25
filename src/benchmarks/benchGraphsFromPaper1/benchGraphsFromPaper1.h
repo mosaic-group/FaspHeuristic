@@ -11,8 +11,8 @@
 #include "tools/easylogging++.h"
 #include "hdf5/dataHdf5.h"
 #include "graph/graph.h"
+#include "graph/graphFaspTools.h"
 #include "graph/graphFasp.h"
-#include "graph/graphFaspFastFinal.h"
 #include <regex>
 
 /*

@@ -12,8 +12,8 @@
 #include "tools/easylogging++.h"
 #include "hdf5/dataHdf5.h"
 #include "graph/graph.h"
+#include "graph/graphFaspTools.h"
 #include "graph/graphFasp.h"
-#include "graph/graphFaspFastFinal.h"
 #include <string>
 
 std::string getFilenameOfBenchmarkSAFaspWithConstVE(int v, int e, int fmin, int fmax, int steps, int reps, bool logDistr) {
@@ -42,7 +42,7 @@ void benchSuperAlgorithmConstWeightVarFaspConstVE(const std::string &outputDir, 
     for (auto &faspSize : faspValues) {
         for (int r = 0; r < numOfReps; ++r) {
             LOG(TRACE) << "--- Progress --- Fasp size=" << faspSize  << "/" << maxFasp << " Reps=" << r + 1 << "/" << numOfReps << "";
-            auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int>(numOfVertices, faspSize, numOfEdges);
+            auto[g, c] = Graph::FaspTools::generateGraphWithKnownFaspAndSameWeights<int, int>(numOfVertices, faspSize, numOfEdges);
 
             f1.put("vertices", g.getNumOfVertices());
             f1.put("edges", g.getNumOfEdges());

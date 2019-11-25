@@ -6,8 +6,8 @@
 #include "tools/easylogging++.h"
 #include "hdf5/dataHdf5.h"
 #include "graph/graph.h"
+#include "graph/graphFaspTools.h"
 #include "graph/graphFasp.h"
-#include "graph/graphFaspFastFinal.h"
 #include "graph/graphIO.h"
 
 static std::string getFilenameOfBenchmarkTimingVarWeightVarFaspConstVE(int v, int e, int fmin, int fmax, int steps, int reps, bool logDistr) {
@@ -40,13 +40,13 @@ void benchTimingVarWeightVarFaspConstVE(const std::string &outputDir, int numOfV
         for (int r = 0; r < numOfReps; ++r) {
             fidx++;
             LOG(TRACE) << "--- Progress --- Fasp size=" << faspSize  << "/" << maxFasp << " Reps=" << r + 1 << "/" << numOfReps << "";
-            auto[g, c, graphcapacity] = Graph::Fasp::generateGraphWithKnownFasp<int, int>(numOfVertices, faspSize, numOfEdges, 10, true, false);
+            auto[g, c, graphcapacity] = Graph::FaspTools::generateGraphWithKnownFasp<int, int>(numOfVertices, faspSize, numOfEdges, 10, true, false);
 
             f1.put("vertices", g.getNumOfVertices());
             f1.put("edges", g.getNumOfEdges());
 
             t.start_timer("gr");
-            auto gr = Graph::Fasp::GR(g, c);
+            auto gr = Graph::FaspTools::GR(g, c);
             auto grTime = t.stop_timer();
 
             t.start_timer("random");

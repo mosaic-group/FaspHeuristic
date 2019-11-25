@@ -11,8 +11,8 @@
 #include "tools/easylogging++.h"
 #include "hdf5/dataHdf5.h"
 #include "graph/graph.h"
+#include "graph/graphFaspTools.h"
 #include "graph/graphFasp.h"
-#include "graph/graphFaspFastFinal.h"
 
 
 std::string getFilenameOfBenchResultsDistr(int v, int e, int fmin, int fmax, int steps, int reps, bool logDistr) {
@@ -41,13 +41,13 @@ void benchResultsDistr(const std::string &outputDir, int numOfVertices, int numO
     for (auto &faspSize : faspValues) {
         for (int r = 0; r < numOfReps; ++r) {
             LOG(TRACE) << "--- Progress --- Fasp size=" << faspSize  << "/" << maxFasp << " Reps=" << r + 1 << "/" << numOfReps << "";
-            auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int>(numOfVertices, faspSize, numOfEdges);
+            auto[g, c] = Graph::FaspTools::generateGraphWithKnownFaspAndSameWeights<int, int>(numOfVertices, faspSize, numOfEdges);
 
             auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::FaspFastFinal::randomFASP(g, c);
 
             f1.put("vertices", g.getNumOfVertices());
             f1.put("edges", g.getNumOfEdges());
-            f1.put("gr", Graph::Fasp::GR(g, c).first);
+            f1.put("gr", Graph::FaspTools::GR(g, c).first);
             f1.put("random", capacity);
             f1.put("exact", faspSize);
             f1.put("saEdges", saEdgesCnt);

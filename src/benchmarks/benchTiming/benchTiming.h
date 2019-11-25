@@ -6,8 +6,8 @@
 #include "tools/easylogging++.h"
 #include "hdf5/dataHdf5.h"
 #include "graph/graph.h"
+#include "graph/graphFaspTools.h"
 #include "graph/graphFasp.h"
-#include "graph/graphFaspFastFinal.h"
 #include "graph/graphIO.h"
 
 static std::string getFilenameOfBenchmarkTiming(int v, int e, int fmin, int fmax, int steps, int reps, bool logDistr) {
@@ -40,13 +40,13 @@ void benchTimingConstWeightVarFaspConstVE(const std::string &outputDir, int numO
         for (int r = 0; r < numOfReps; ++r) {
             fidx++;
             LOG(TRACE) << "--- Progress --- Fasp size=" << faspSize  << "/" << maxFasp << " Reps=" << r + 1 << "/" << numOfReps << "";
-            auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int>(numOfVertices, faspSize, numOfEdges);
+            auto[g, c] = Graph::FaspTools::generateGraphWithKnownFaspAndSameWeights<int, int>(numOfVertices, faspSize, numOfEdges);
 
             f1.put("vertices", g.getNumOfVertices());
             f1.put("edges", g.getNumOfEdges());
 
             t.start_timer("gr");
-            auto gr = Graph::Fasp::GR(g, c);
+            auto gr = Graph::FaspTools::GR(g, c);
             auto grTime = t.stop_timer();
 
 //            t.start_timer("delta");
@@ -108,13 +108,13 @@ void benchTimingConstDensityAndFaspGrowingsize(const std::string &outputDir, int
         Timer<true, false> t("");
         for (int r = 0; r < numOfReps; ++r) {
             LOG(TRACE) << "--- Progress --- V size=" << cv  << "/" << maxNumOfVertices << " Reps=" << r + 1 << "/" << numOfReps << "";
-            auto[g, c] = Graph::Fasp::generateGraphWithKnownFaspAndSameWeights<int, int>(cv, fasp, cv * density);
+            auto[g, c] = Graph::FaspTools::generateGraphWithKnownFaspAndSameWeights<int, int>(cv, fasp, cv * density);
 
             f1.put("vertices", g.getNumOfVertices());
             f1.put("edges", g.getNumOfEdges());
 
             t.start_timer("gr");
-            auto gr = Graph::Fasp::GR(g, c);
+            auto gr = Graph::FaspTools::GR(g, c);
             auto grTime = t.stop_timer();
 
             t.start_timer("random");

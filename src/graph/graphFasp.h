@@ -1,333 +1,608 @@
-//
-// Created by gonciarz on 2019-03-18.
-//
+#ifndef FASPHEURISTIC_GRAPHFASP_H
+#define FASPHEURISTIC_GRAPHFASP_H
 
-#ifndef GRAPHFASP_H
-#define GRAPHFASP_H
-
-
-#include "graph.h"
-#include "graphExt.h"
+#include "graph/graph.h"
+#include "graph/graphExt.h"
+#include "graph/graphFaspTools.h"
+#include "tools/dynamicBitset.h"
+#include "tools/stack.h"
 #include "tools/tools.h"
-#include "tools/easylogging++.h"
-#include "tools/prettyprint.h"
-#include "tools/timer.h"
-#include <algorithm>
-#include <random>
-#include <chrono>
+#include <future>
+#include <cstddef>
+#include <vector>
+#include "graph/hipr/hi_pr.h"
 
+namespace Graph::FaspFastFinal {
 
-namespace Graph::Fasp {
+    template <typename VERTEX_TYPE>
+    using EdgesSet = std::unordered_set<typename Graph<VERTEX_TYPE>::Edge, Ext::EdgeHasher<VERTEX_TYPE>>;
 
     /**
-     * FASP heuristic - implementation of "A fast and effective heuristic for the feedback arc set problem" Eades, Lin, Smyth 1993
-     * @tparam EDGE_PROP_TYPE type of edge property - must be a signed number with weight of each edge in a graph
+     * PathHero... class is a approach to speed up things. For all algorithms it has implemented it uses
+     * pre-allocated memory - that is why it need to be initialized with maximum number of vertices (or if not
+     * in sequence 0, 1, 2 ... then with a maximum value of vertex id + 1.
      * @tparam VERTEX_TYPE
-     * @tparam GRAPH_TYPE
-     * @param aGraph input graph
-     * @param aWeights input weights
-     * @return capacity of cut edges
      */
+    template<typename VERTEX_TYPE>
+    class alignas (64) PathHero {
+
+        // Allocation of structures/memory/containers shared by all algorithms from PathHero class
+        DynamicBitset <uint32_t, uint16_t> iVisited;
+        Stack <VERTEX_TYPE> stack;
+        std::vector<VERTEX_TYPE> parents;
+        typename Graph<VERTEX_TYPE>::Vertices path;
+        std::vector<int16_t> lowLinks;
+        std::vector<int16_t> index;
+
+    public:
+        explicit PathHero(std::size_t aN) : iVisited(aN), stack(aN), parents(aN, 0), lowLinks(aN, -1), index(aN, -1) {
+            // both can have at most aN in/outgoing edges
+            path.reserve(aN);
+        }
+
+        /**
+         * @return true if path from src to dst exists
+         */
+        template<bool FORWARD_SEARCH=true>
+        bool pathExistsDFS(const Graph <VERTEX_TYPE> &aGraph,
+                           const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
+                           const typename Graph<VERTEX_TYPE>::VertexId &aDst,
+                           bool aReversedSearch = false) {
+            if (aSrc == aDst) return true;
+
+            iVisited.clearAll();
+
+            stack.clear();
+            stack.push(aSrc);
+            iVisited.set(aSrc);
+
+            while (!stack.empty()) {
+                const auto currentVertex = stack.pop();
+
+                // find all not visted vertices and add them to stack
+                const auto &vertices = FORWARD_SEARCH ? aGraph.getOutVertices(currentVertex) : aGraph.getInVertices(currentVertex);
+                for (const auto &v : vertices) {
+                    if (v == aDst) return true;
+                    else if (iVisited.test(v) == 0) {
+                        stack.push(v);
+                        iVisited.set(v);
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /**
+         * Finds all edges with cycles, that is if we have edge a->b there is a path from b to a
+         * @param aGraph input graph
+         * @return true if there are still cycles
+         */
+        bool isAcyclic(const Graph <VERTEX_TYPE> &aGraph) {
+            for (const auto &e : aGraph.getEdges()) {
+                if (pathExistsDFS(aGraph, e.dst, e.src)) return false;
+            }
+
+            return true;
+        }
+
+        /**
+         * Finds all edges with cycles, that is if we have edge a->b there is a path from b to a
+         * @param aGraph input graph
+         * @return container with edges
+         */
+        auto findEdgesWithCycles(const Graph <VERTEX_TYPE> &aGraph) {
+            typename Graph<VERTEX_TYPE>::Edges edges;
+            for (const auto &e : aGraph.getEdges()) {
+                if (pathExistsDFS(aGraph, e.dst, e.src)) {
+                    edges.emplace_back(e);
+                }
+            }
+            return edges;
+        }
+
+        template<typename EDGE_PROP_TYPE>
+        auto getRedEdge(Graph <VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
+            using Edge = typename Graph<VERTEX_TYPE>::Edge;
+            Edge redEdge{};
+            int maxMcRedEdge = 0;
+
+            for (const auto &e : aGraph.getEdges()) {
+                EDGE_PROP_TYPE eCapacity = aWeights.at(e);
+                if (!pathExistsDFS(aGraph, e.dst, e.src)) continue; // optimization
+
+                auto pathExists = findPathDfs(aGraph, e.dst, e.src);
+                if (!pathExists) continue;
+                auto somePath = path;
+
+                aGraph.removeEdge(e);
+                auto scc = stronglyConnectedComponents2(aGraph);
+
+                std::vector<Edge> redEdges;
+                bool prevCandidate = false;
+                for (std::size_t i = 0; i < somePath.size(); ++i) {
+                    typename Graph<VERTEX_TYPE>::VertexId v = somePath[i];
+
+                    bool currCandidate = false;
+                    for (auto &s : scc) if (s.size() > 1 && s.find(v) != s.end()) {currCandidate = true; break;}
+                    if (currCandidate && prevCandidate) redEdges.emplace_back(Edge{somePath[i - 1], somePath[i]});
+                    prevCandidate = currCandidate;
+                }
+
+
+                aGraph.addEdge(e);
+                for (auto &ee : redEdges) {
+                    auto d = minStCutFordFulkerson(aGraph, ee.dst, ee.src, aWeights);
+                    if (d > maxMcRedEdge) {
+                        maxMcRedEdge = d;
+                        redEdge = ee;
+                    }
+                }
+
+                if (maxMcRedEdge > eCapacity) break;
+            }
+
+            return std::pair{maxMcRedEdge, redEdge};
+        }
+
+        bool GStarBlue(Graph <VERTEX_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge, EdgesSet<VERTEX_TYPE> &aBlueEdges, bool weighted) {
+            // 1. Remove an edge of interest 'aEdge' and find all connected components bigger than 1
+            //    They consist from edges which are cycles not belonging only to aEdge so remove them.
+            aGraph.removeEdge(aEdge);
+            const auto scc = stronglyConnectedComponents2(aGraph);//Tools::stronglyConnectedComponents2(aGraph);
+            for (const auto &s : scc) {
+                if (s.size() == 1) continue;
+                // we get sets of vertices from SCC, find all edges connecting vertices in given SCC and remove
+                for (const auto &v : s) {
+                    const auto outV = aGraph.getOutVertices(v);
+                    for (const auto &vo : outV) {
+                        if (s.find(vo) != s.end()) {
+                            aGraph.removeEdge({v, vo});
+                        }
+                    }
+                }
+            }
+
+            // 1.5 update blue edges
+            if (!weighted)
+            for (auto &e : aGraph.getEdges()) {
+                aBlueEdges.emplace(e);
+            }
+
+            // 2. There can be only one (or none) connected component with size > 1, if it is found
+            // then it consist aEdge and all its isolated cycles
+            if (pathExistsDFS(aGraph, aEdge.dst, aEdge.src)) return true;
+//            aGraph.addEdge(aEdge);
+
+
+//            auto scc2 = Tools::stronglyConnectedComponents(aGraph);
+//            for (const auto &s : scc2) {
+//                if (s.size() > 1) return true;
+//            }
+
+            return false;
+        }
+
+        /**
+         * Implementation of maximum flow / min cut algorithm:
+         * https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm
+         * @return maxFlow value
+         */
+        template<typename EDGE_PROP_TYPE>
+        auto minStCutFordFulkerson(const Graph <VERTEX_TYPE> &aGraph,
+                                   const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
+                                   const typename Graph<VERTEX_TYPE>::VertexId &aDst,
+                                   const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
+            assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
+//            auto maxFlow = std::get<0>(minStCutFordFulkersonBase(aGraph, aSrc, aDst, aWeights));
+
+//            Graph<int, GraphMap> g;
+//            std::unordered_map<int, int> em;
+//            int nv = 0;
+//            for (auto &v : aGraph.getVertices()) {
+//                if (em.find(v) == em.end()) {
+//                    em[v] = nv++;
+//                }
+//                g.addVertexSafe(em[v]);
+//                for (auto &vo : aGraph.getOutVertices(v)) {
+//                    if (em.find(vo) == em.end()) {
+//                        em[vo] = nv++;
+//                    }
+//                    g.addVertexSafe(em[vo]);
+//                    g.addEdge({em[v], em[vo]});
+//                }
+//            }
+//            std::cout << "DINIC:" << g << " " << nv << std::endl;
+//            auto c = Dinic().runDinic(g, em[aSrc], em[aDst], aWeights, em);
+//            auto c = Dinic().runDinic(aGraph, aSrc, aDst, aWeights, stack.capacity());
+            auto c = HIPR().runHipr(aGraph, aSrc, aDst, aWeights, stack.capacity(), parents);
+//            std::cout << "VS: " << dinicc << " " << hiprc << std::endl;
+            auto maxFlow = c;
+        return maxFlow;
+        }
+
+
+        auto getRandomSubgraphNotBlue(Graph <VERTEX_TYPE> &aGraph, int aNumEdgesToRemove, const EdgesSet<VERTEX_TYPE> &blueEdges) {
+            int edgesRemovedCnt = 0;
+            typename Graph<VERTEX_TYPE>::Edge lastRndEdge{};
+            while (edgesRemovedCnt < aNumEdgesToRemove) {
+                auto edgesWithCycles = findEdgesWithCycles(aGraph);
+//                auto edgesWithCycles = findNotBlueEdges(aGraph);
+//                auto weights = Ext::getEdgeProperties(aGraph, 1);
+//                auto [_, edgesWithCycles] = Fasp::GR(aGraph, weights);
+                auto n = edgesWithCycles.size();
+//                std::cout << "n: " << n << std::endl;
+                if (n == 0) {
+                    if (edgesRemovedCnt > 0) aGraph.addEdge(lastRndEdge);
+                    else LOG(TRACE) << "Removed less edges than requested (" << edgesRemovedCnt << ", " << aNumEdgesToRemove << ")";
+//                    LOG(TRACE) << edgesWithCycles;
+                    return (edgesRemovedCnt > 0);
+                } else {
+                    lastRndEdge = edgesWithCycles[::Tools::randInt(0, n - 1)];
+                    while (blueEdges.find(lastRndEdge) != blueEdges.end()) {lastRndEdge = edgesWithCycles[::Tools::randInt(0, n - 1)];}
+                    aGraph.removeEdge(lastRndEdge);
+                    ++edgesRemovedCnt;
+                }
+            }
+
+            return (aNumEdgesToRemove > 0);
+        }
+
+        /**
+         * Finds path from src to dst
+         */
+        auto findPathDfs(const Graph <VERTEX_TYPE> &aGraph,
+                         const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
+                         const typename Graph<VERTEX_TYPE>::VertexId &aDst) {
+
+            path.clear();
+            if (aGraph.hasVertex(aSrc) && aGraph.hasVertex(aDst)) {
+                if (aSrc == aDst) {
+                    path.emplace_back(aSrc);
+                    return true;
+                }
+
+                iVisited.clearAll();
+
+                stack.clear();
+                stack.push(aSrc);
+                iVisited.set(aSrc);
+
+                while (!stack.empty()) {
+                    auto currentVertex = stack.pop();
+                    if (currentVertex == aDst) {
+                        // Traverse path back to source and build the path
+                        path.emplace_back(currentVertex);
+                        while (true) {
+                            currentVertex = parents[currentVertex];
+                            path.emplace_back(currentVertex);
+                            if (currentVertex == aSrc) break;
+                        }
+                        // Finally reverse it to have path from src to dst
+                        std::reverse(path.begin(), path.end());
+                        return true;
+                    }
+
+                    const auto &vertices = aGraph.getOutVertices(currentVertex);
+                    for (const auto &v : vertices) {
+                        if (iVisited.test(v) == 0) {
+                            parents[v] = currentVertex;
+                            stack.push(v);
+                            iVisited.set(v);
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        auto stronglyConnectedComponents2(const Graph<VERTEX_TYPE> &aGraph) {
+            iVisited.clearAll();
+            auto &sh = iVisited;
+            stack.clear();
+
+            int index_counter = 0;
+            const int numOfV = aGraph.getNumOfVertices();
+            for (std::size_t i = 0; i < lowLinks.size(); ++i) lowLinks[i] = -1;
+
+            std::vector<std::unordered_set<VERTEX_TYPE>> result; result.reserve(numOfV);
+
+            std::function<void(const VERTEX_TYPE &)> strongconnect = [&](const VERTEX_TYPE &node) {
+
+                struct R {
+                    const VERTEX_TYPE v;
+                    const VERTEX_TYPE idx;
+                    R(VERTEX_TYPE aV, VERTEX_TYPE aIdx) : v(aV), idx(aIdx) {}
+                };
+
+                std::vector<R> r; r.reserve(numOfV);
+                r.push_back(R{node, 0});
+
+                bool initRun = true;
+
+                while (r.size() > 0) {
+
+                    auto &b = r.back();
+                    VERTEX_TYPE currentNode =  b.v;
+                    int ci = b.idx;
+                    r.pop_back();
+
+                    processSuccessor:
+
+                    if (initRun) {
+                        index[currentNode] = index_counter;
+                        lowLinks[currentNode] = index_counter;
+                        ++index_counter;
+                        stack.push(currentNode);
+                        sh.set(currentNode);
+                        initRun = false;
+                    }
+                    auto ov = aGraph.getOutVertices(currentNode);
+                    for(std::size_t i = ci; i < ov.size(); ++i) {
+                        auto successor = ov[i];
+                        if (lowLinks[successor] == -1) {
+                            // save the state (it would be recurrent call in default version of Trajan's algorithm)
+                            r.push_back(R(currentNode, i + 1));
+                            // set values for successor and repeat from beginning ('goto' is bad... I know).
+                            currentNode = successor;
+                            ci = 0;
+                            initRun = true;
+                            goto processSuccessor;
+                        }
+                        else if (sh.test(successor)) {
+                            // the successor is in the stack and hence in the current strongly connected component (SCC)
+                            lowLinks[currentNode] = std::min(lowLinks.at(currentNode), index[successor]);
+                        }
+                    }
+
+                    // If `node` is a root node, pop the stack and generate an SCC
+                    if (lowLinks.at(currentNode) == index[currentNode]) {
+                        std::unordered_set<VERTEX_TYPE> connectedComponent; connectedComponent.reserve(stack.size());
+
+                        while (true) {
+                            auto successor = stack.pop();
+                            sh.clear(successor);
+                            connectedComponent.emplace(successor);
+                            if (successor == currentNode) break;
+                        }
+                        result.emplace_back(std::move(connectedComponent));
+                    }
+                    if (r.size() > 0) {
+                        auto predecessor = r.back().v;
+                        lowLinks[predecessor] = std::min(lowLinks.at(predecessor), lowLinks.at(currentNode));
+                    }
+                }
+            };
+
+            for (auto &node : aGraph.getVertices()) {
+                if (lowLinks[node] == -1) {
+                    strongconnect(node);
+                }
+            }
+
+            return result;
+        }
+    };
+
+    // ------------------------------------------------------------------------
+
     template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
-    static auto GR(const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<EDGE_PROP_TYPE, VERTEX_TYPE> &aWeights) {
+    static auto superAlgorithmBlue(Graph<VERTEX_TYPE> &outGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, PathHero<VERTEX_TYPE> &path, bool aUseWeights = false, bool relaxSA = false) {
         assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
+        typename Graph<VERTEX_TYPE>::Edges removedEdgesSA;
+        typename Graph<VERTEX_TYPE>::Edges removedEdgesGR;
 
-        typename Graph<VERTEX_TYPE>::Vertices s1, s2;
-        s1.reserve(aGraph.getNumOfVertices());
-        s2.reserve(aGraph.getNumOfVertices());
-        Graph<VERTEX_TYPE> g(aGraph);
+        EdgesSet<VERTEX_TYPE> setOfEdges{};
 
+        int cnt = 0;
+        while(true) {
+            cnt++;
+            bool wasGraphModified = false;
+
+            setOfEdges.clear();
+
+            for (const auto &e : outGraph.getEdges()) {
+                if (setOfEdges.find(e) != setOfEdges.end()) continue; // e is in 'blue edges' set
+
+                // Optimization, if there is no path back from dst to src, then edge has no cycles.
+                if (!path.pathExistsDFS(outGraph, e.dst, e.src)) continue;
+
+                auto workGraph{outGraph};
+                if (!path.GStarBlue(workGraph, e, setOfEdges, aUseWeights)) continue;
+
+                // If we have weights assigned to edges then we need to do min-cut, if not it is always safe to remove current edge
+                bool shouldRemoveCurrentEdge = true;
+                if (aUseWeights) {
+                    auto mc = path.minStCutFordFulkerson(workGraph, e.dst, e.src, aWeights);
+                    if (mc < aWeights.at(e)) {
+                        // Do not remove that edge
+                        shouldRemoveCurrentEdge = false;
+                    }
+                }
+
+                if (shouldRemoveCurrentEdge) {
+                    wasGraphModified = true;
+                    outGraph.removeEdge(e);
+                    removedEdgesSA.emplace_back(e);
+                }
+            }
+            if (!wasGraphModified) break;
+        }
+        if (removedEdgesSA.size() == 0 && relaxSA) {
+            auto [maxMcRedEdge, redEdge] = path.getRedEdge(outGraph, aWeights);
+            if (maxMcRedEdge > 0) {
+                removedEdgesGR.push_back(redEdge);
+            }
+//            else {
+//                auto ed = Fasp::GR(outGraph, aWeights).second;
+//                auto n = ed.size();
+//                if (n > 0) {
+//                    removedEdgesGR.push_back(ed[0]);
+//                }
+//            }
+        }
+        return std::tuple{removedEdgesSA, setOfEdges, removedEdgesGR};
+    }
+
+    /**
+     * Working original idea of how random FASP heuristic should work
+     */
+    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, bool WEIGHTED = false>
+    static auto randomFASP(const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
+        if (WEIGHTED) std::cout << "Graph with WEIGHTS!\n";
+        auto cleanGraphWithScc = [](Graph<VERTEX_TYPE> &aGraph, PathHero<VERTEX_TYPE> &path) {
+            int cnt1 = 0, cntBig = 0;
+            auto scc = path.stronglyConnectedComponents2(aGraph);
+            for (const auto &s : scc) {
+                if (s.size() == 1) {cnt1++; aGraph.removeVertex(*s.begin());}
+                else cntBig++;
+            }
+//            std::cout << "SCC  #1=" << cnt1 << " #BIG=" << cntBig << "\n";
+        };
+
+        constexpr int numOfReps = 20;
+
+
+
+        auto g{aGraph};
+        // find max vertex id in graph and setup PathHero
+        auto vertices = g.getVertices();
+        auto maxId = std::max_element(vertices.begin(), vertices.end());
+        PathHero<VERTEX_TYPE> path{static_cast<std::size_t>(maxId == vertices.end() ? 1 : *maxId + 1)};
+//        std::cout << g << std::endl;
+//        std::cout << "Max V = " << (maxId == vertices.end() ? 0 : *maxId) << std::endl;
+
+        cleanGraphWithScc(g, path);
+
+        typename Graph<VERTEX_TYPE>::Edges removedEdges;
+
+        int saEdgesCnt = 0;
+        int saRndEdgesCnt = 0;
+        int redRndEdgesCnt = 0;
+        // initial run of superAlgorithm (SA)
+        auto [edgesToRemove, blueEdgesx, dummy2] = superAlgorithmBlue(g, aWeights, path, WEIGHTED);
+        auto blueEdges = blueEdgesx;
+        g.removeEdges(edgesToRemove);
+        saEdgesCnt += edgesToRemove.size();
+        removedEdges.reserve(removedEdges.size() + edgesToRemove.size());
+        removedEdges.insert(removedEdges.begin(), edgesToRemove.begin(), edgesToRemove.end());
+
+        int numEdgesToRemoveInitVal = 3;
+        //auto [dummy1, grEdges] = Fasp::GR(g, aWeights); int faspSize = grEdges.size(); numEdgesToRemoveInitVal = faspSize == 0 ? 1 : g.getNumOfEdges() / faspSize / 2;
+//        std::cout << "EDGES TO REMOVE INIT VAL = " << numEdgesToRemoveInitVal << std::endl;
+        int numEdgesToRemove = numEdgesToRemoveInitVal;
+        [[maybe_unused]] int cnt = 1;
         while (true) {
-            // Handle sinks
-            bool changed = false;
-            do {
-                changed = false;
-                for (const auto &v : g.getVertices()) {
-                    if (g.getOutVertices(v).size() == 0) {
-                        changed = true;
-                        g.removeVertex(v);
-                        s2.insert(s2.begin(), v);
-                    }
-                }
-            } while (changed);
 
-            // Handle sources
-            do {
-                changed = false;
-                for (const auto &v : g.getVertices()) {
-                    if (g.getInVertices(v).size() == 0) {
-                        changed = true;
-                        g.removeVertex(v);
-                        s1.emplace_back(v);
-                    }
-                }
-            } while (changed);
+//            std::cout << "----- loop=" << cnt++ << "\n";
+            if (path.isAcyclic(g)) break;
 
-            // Handle deltas
-            const auto &vertices = g.getVertices();
-            if (vertices.empty()) break;
-            EDGE_PROP_TYPE maxDelta = std::numeric_limits<EDGE_PROP_TYPE>().lowest();
-            typename Graph<VERTEX_TYPE>::VertexId maxDeltaVertex;
-            for (const auto &v : vertices) {
-                EDGE_PROP_TYPE temp = 0;
-                for (const auto &vo : g.getOutVertices(v)){ temp += aWeights.at({v, vo});}
-                for (const auto &vi : g.getInVertices(v)) { temp -= aWeights.at({vi, v});}
-                if (temp > maxDelta) {
-                    maxDelta = temp;
-                    maxDeltaVertex = v;
-                }
+            cleanGraphWithScc(g, path);
+
+            // if we are here there are still cycles not handled by SA
+            std::unordered_map<typename Graph<VERTEX_TYPE>::Edge, int, Ext::EdgeHasher<VERTEX_TYPE>> edgesCnt;
+            std::unordered_map<typename Graph<VERTEX_TYPE>::Edge, int, Ext::EdgeHasher<VERTEX_TYPE>> edgesCntGR;
+
+            // Run each randomly generated graph in seperate thread and later collect all solutions found
+//            t.start_timer("random graphs");
+//            alignas(64) Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> props[numOfReps];
+//            for (auto &p : props) p = aWeights;
+//            alignas(64) std::future<std::pair<typename Graph<VERTEX_TYPE>::Edges, typename Graph<VERTEX_TYPE>::Edges>> tasks[numOfReps];
+//            int i = 0;
+//            for (auto &task : tasks) {
+//
+//                task= std::async(std::launch::async,
+//                     [&, i, numEdgesToRemove] () {
+//                         Timer<false, false> tt(true);
+//                         if (i == 0) tt.start_timer("1 - copy graph");
+//                         auto workGraph{g};
+//                         if (i == 0) {tt.stop_timer();}
+//
+//                         if (i == 0) tt.start_timer("2 - prepare path hero");
+//                         auto vertices = workGraph.getVertices();
+//                         auto maxId = std::max_element(vertices.begin(), vertices.end());
+//                         PathHero<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
+//                         if (i == 0) tt.stop_timer();
+//
+//                         if (i == 0) tt.start_timer("3 - random subgraph");
+//                         path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove, blueEdges);
+//                         if (i == 0) tt.stop_timer();
+//
+//                         if (i == 0) tt.start_timer("4 - SA blue");
+//                         auto [edgesSA, _, edgesGR] = superAlgorithmBlue(workGraph, props[i], path, false, true);
+//                         if (i == 0) tt.stop_timer();
+//                         return std::pair{edgesSA, edgesGR};
+//                     });
+//                i++;
+//            }
+//
+//            for (auto &task : tasks) {
+//                auto [edgesToRemove, edgesToRemoveGR] = task.get();
+//                for (auto &e : edgesToRemove) edgesCnt.try_emplace(e, 0).first->second++;
+//                for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
+//            }
+//            t.stop_timer();
+            for (int i = 0; i < numOfReps; ++i) {
+                 Timer<false, false, false> tt("RAND_GRAPHS");
+                 if (i == 0) tt.start_timer("1 - copy graph");
+                 auto workGraph{g};
+                 if (i == 0) {tt.stop_timer();}
+
+                 if (i == 0) tt.start_timer("2 - prepare path hero");
+                 auto vertices = workGraph.getVertices();
+                 auto maxId = std::max_element(vertices.begin(), vertices.end());
+                 PathHero<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
+                 if (i == 0) tt.stop_timer();
+
+                 if (i == 0) tt.start_timer("3 - random subgraph");
+                 path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove, blueEdges);
+                 if (i == 0) tt.stop_timer();
+
+                 if (i == 0) tt.start_timer("4 - SA blue");
+                 auto [edgesSA, _, edgesGR] = superAlgorithmBlue(workGraph, aWeights, path, WEIGHTED, true);
+                 if (i == 0) tt.stop_timer();
+
+                 if (i == 0) tt.start_timer("5 - Getting edges");
+                 auto [edgesToRemove, edgesToRemoveGR] = std::pair{edgesSA, edgesGR};
+                 for (auto &e : edgesToRemove) edgesCnt.try_emplace(e, 0).first->second++;
+                 for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
+                 if (i == 0) tt.stop_timer();
             }
-            s1.emplace_back(maxDeltaVertex);
-            g.removeVertex(maxDeltaVertex);
+
+            if (edgesCnt.size() > 0) saRndEdgesCnt++;
+            else if (edgesCntGR.size() > 0) redRndEdgesCnt++;
+            if (edgesCnt.size() == 0) {
+//                std::cout << "------ USING alternative (GR/RED_EDGE) ------ " << edgesCntGR.size() <<"\n";
+                edgesCnt.swap(edgesCntGR); // In case when SA didn't find any edges use these from GR heuristic
+//                std::cout << "ER2: " << edgesCnt << "\n";
+            }
+            if (edgesCnt.size() == 0) {
+                numEdgesToRemove++;
+                continue; // reapeat loop - we have not found any solutions
+            }
+            numEdgesToRemove = numEdgesToRemoveInitVal;
+
+            if (edgesCnt.size() > 0) {
+                auto maxCnt = std::max_element(edgesCnt.begin(), edgesCnt.end(), [](const auto &a, const auto &b) -> bool { return a.second < b.second; });
+                // Remove best candidate
+                g.removeEdge(maxCnt->first);
+                removedEdges.emplace_back(std::move(maxCnt->first));
+            }
+
+            // Try to solve the rest with superAlgoritm - maybe it will now succeed!
+            auto [edgesToRemove, blueEdges2, dummy3] = superAlgorithmBlue(g, aWeights, path, WEIGHTED);
+            blueEdges = blueEdges2;
+            g.removeEdges(edgesToRemove);
+            saEdgesCnt += edgesToRemove.size();
+            removedEdges.reserve(removedEdges.size() + edgesToRemove.size());
+            removedEdges.insert(removedEdges.begin(), edgesToRemove.begin(), edgesToRemove.end());
         }
 
-        // Calculate capacity, and find all edges to cut
-        s1.insert(s1.end(), s2.begin(), s2.end());
-        size_t idx = 1;
         EDGE_PROP_TYPE capacity = 0;
-        typename Graph<VERTEX_TYPE>::Edges edges;
-        for (const auto &v : s1) {
-            for (const auto &vi : aGraph.getInVertices(v)) {
-                if (std::find(s1.begin(), s1.begin() + idx, vi) == s1.begin() + idx) {
-                    capacity += aWeights.at({vi, v});
-                    edges.emplace_back(typename Graph<VERTEX_TYPE>::Edge{vi ,v});
-                }
-            }
-            ++idx;
-        }
+        for (const auto &e : removedEdges) { capacity += aWeights.at(e); }
 
-        return std::pair{capacity, edges};
-    }
-
-    /**
-     * Generates a graph with known FASP solution (minimal capacity size of edges to cut).
-     *
-     * @tparam EDGE_PROP_TYPE
-     * @tparam VERTEX_TYPE
-     * @tparam GRAPH_TYPE
-     * @param aNumOfVertices number of vertices in a graph
-     * @param aFaspCapacity wanted size of fasp solution (capacity of edges to cut)
-     * @param aLowerBondOfNumOfEdges minimum number of edges (more edges might be added if needed to achieve wanted FASP)
-     * @param aOnlyNewEdges if true it adds new edges only (filler edges), if false then if edge exists increases it weight.
-     *
-     * @return generated graph
-     */
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
-    static auto generateGraphWithKnownFasp(int aNumOfVertices, int aFaspCapacity, int aLowerBondOfNumOfEdges, int aMaxRandomFaspValue = 10, bool aAddRandomFaspWeights = false, bool aOnlyNewEdges = true) {
-        Graph<VERTEX_TYPE> g;
-        Ext::EdgeProperties<EDGE_PROP_TYPE, VERTEX_TYPE> c;
-
-        // helper for easier generation of random ints - gives rand int in range [min, max]
-        auto randInt = [](int min, int max) -> int {
-            static std::mt19937 mt(std::random_device{}());
-            return std::uniform_int_distribution<>(min, max)(mt);
-        };
-
-        // add vertices in range: 0..aNumOfVertices-1
-        for (int i = 0; i < aNumOfVertices; ++i) g.addVertex(i);
-
-        // generate mapping to random order of generated vertices
-        std::vector<VERTEX_TYPE> verticesShuffle(aNumOfVertices);
-        for (size_t i = 0; i < verticesShuffle.size(); ++i) verticesShuffle[i] = i;
-        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-        std::shuffle (verticesShuffle.begin(), verticesShuffle.end(), std::default_random_engine(seed));
-
-
-        int numOfArcs = 0;
-        EDGE_PROP_TYPE finalCapacity = aFaspCapacity;
-
-        // add requested number of feedback arcs
-        for (int f = 0; f < aFaspCapacity; ++f) {
-            // add random leftward arc (arcs to be cut) from i to j
-            int i, j;
-            int randomValueDelta = 0;
-
-            while (true) {
-                i = randInt(1, aNumOfVertices - 1);
-                j = randInt(0, i - 1);
-
-                typename Graph<VERTEX_TYPE>::Edge newEdge = {verticesShuffle[i], verticesShuffle[j]};
-                if (g.hasEdge(newEdge)) continue; // make sure we add new arc
-                c[newEdge] = 1;
-                g.addEdge(std::move(newEdge));
-                numOfArcs++;
-                if (aAddRandomFaspWeights) {
-                    // increase randomly weight of edge
-                    randomValueDelta = randInt(0, aMaxRandomFaspValue - 1);
-                    c[newEdge] += randomValueDelta;
-                    finalCapacity += randomValueDelta;
-                }
-                break;
-            }
-
-
-            // finish the cycle by adding rightward arc(s) from j to i
-            std::vector<typename Graph<VERTEX_TYPE>::Edge> backEdges;
-            while (j != i) {
-                int k = randInt(j + 1, i);
-                typename Graph<VERTEX_TYPE>::Edge e = {verticesShuffle[j], verticesShuffle[k]};
-                if (aAddRandomFaspWeights) backEdges.push_back(e);
-                if (g.hasEdge(e)) {
-                    c.at(e) += 1;
-                }
-                else {
-                    c[e] = 1;
-                    g.addEdge(std::move(e));
-                    numOfArcs++;
-                }
-                j = k;
-            }
-
-            if (aAddRandomFaspWeights) {
-                // we need to increase weights of righward arcs to be sure that cutting them is not
-                // better option than FASP arcs which is our goal.
-                for (const auto &e : backEdges) c[e] += randomValueDelta;
-            }
-        }
-
-        // add additional rightward arcs (till lower bond is reached)
-        while (numOfArcs < aLowerBondOfNumOfEdges) {
-            int i = randInt(0, aNumOfVertices - 2);
-            int j = randInt(i + 1, aNumOfVertices - 1);
-
-            typename Graph<VERTEX_TYPE>::Edge e = {verticesShuffle[i], verticesShuffle[j]};
-            if (g.hasEdge(e)) {
-                if (aOnlyNewEdges) continue;
-                c.at(e) += 1;
-            }
-            else {
-                c[e] = 1;
-                g.addEdge(std::move(e));
-                numOfArcs++;
-            }
-        }
-
-        return std::tuple{g, c, finalCapacity};
-    }
-
-
-    /**
-      * Generates a graph with known FASP solution - all edges will have same (=1) capacity.
-      *
-      * @tparam EDGE_PROP_TYPE
-      * @tparam VERTEX_TYPE
-      * @tparam GRAPH_TYPE
-      * @param aNumOfVertices number of vertices in a graph
-      * @param aFaspCapacity wanted size of fasp solution (capacity of edges to cut)
-      * @param aNumOfEdges number of edges
-      * @param aOnlyNewEdges if true it adds new edges only (filler edges), if false then if edge exists increases it weight.
-      *
-      * @return generated graph or empty graph in case when input parameters (#V/#E/#FASP) are wrong
-     */
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
-    static auto generateGraphWithKnownFaspAndSameWeights(int aNumOfVertices, int aFaspCapacity, int aNumOfEdges) {
-        // Create graph and property container for capacity
-        Graph<VERTEX_TYPE> g;
-        Ext::EdgeProperties<EDGE_PROP_TYPE, VERTEX_TYPE> c;
-
-        // If requested parameters are wrong, return empty graph.
-        const int maxNumOfEdges = aNumOfVertices * (aNumOfVertices - 1);
-        bool wrongMaxNumberOfLeftwardEdges = aFaspCapacity > maxNumOfEdges/2; // max number of leftward edges
-        bool wrongNumOfRequestedEdgesTooLow = aNumOfEdges < 2 * aFaspCapacity; // requested num of edges lower than needed to generate fasp
-        bool wrongNumOfRequestedEdgesTooHigh = aNumOfEdges > maxNumOfEdges/2 + aFaspCapacity; // requested num of edges higher than sum of leftward edges and max number of rightward edges
-        if (wrongMaxNumberOfLeftwardEdges || wrongNumOfRequestedEdgesTooLow || wrongNumOfRequestedEdgesTooHigh) {
-                LOG(ERROR) << "Graph not generated!!! " << wrongMaxNumberOfLeftwardEdges << "/" << wrongNumOfRequestedEdgesTooLow << "/" << wrongNumOfRequestedEdgesTooHigh;
-                return std::pair{g, c};
-        }
-
-        // add vertices in range: 0..aNumOfVertices-1
-        for (int i = 0; i < aNumOfVertices; ++i) g.addVertex(i);
-
-        // generate mapping to random order of generated vertices
-        std::vector<VERTEX_TYPE> verticesShuffle(aNumOfVertices);
-        for (size_t i = 0; i < verticesShuffle.size(); ++i) verticesShuffle[i] = i;
-        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-        std::shuffle (verticesShuffle.begin(), verticesShuffle.end(), std::default_random_engine(seed));
-
-        // helper for easier generation of random ints - gives rand int in range [min, max]
-        auto randInt = [](int min, int max) -> int {
-            static std::mt19937 mt(std::random_device{}());
-            return std::uniform_int_distribution<>(min, max)(mt);
-        };
-
-        // Let's keep a log of all fasp arc created it will be useful later
-        std::vector<std::pair<int, int>> faspSet;
-        int numOfArcs = 0;
-
-        // Generate random fasp set arcs with backward arcs forming nice cycles (i ---> j (fasp arc leftward) and j ---> i (cycle arc rightward))
-        for (int f = 0; f < aFaspCapacity; ++f) {
-            while (true) {
-                int i = randInt(1, aNumOfVertices - 1);
-                int j = randInt(0, i - 1);
-
-                typename Graph<VERTEX_TYPE>::Edge faspEdge = {verticesShuffle[i], verticesShuffle[j]};
-                typename Graph<VERTEX_TYPE>::Edge cycleEdge = {verticesShuffle[j], verticesShuffle[i]};
-
-                if (g.hasEdge(faspEdge)) continue; // make sure we add new arc
-
-                // Add edges to graph and update capacities
-                c[faspEdge] = 1;
-                c[cycleEdge] = 1;
-                g.addEdge(std::move(faspEdge));
-                g.addEdge(std::move(cycleEdge));
-                numOfArcs += 2;
-                faspSet.emplace_back(std::pair{i, j});
-                break;
-            }
-        }
-
-        // Try to randomize cycle arcs a litte bit. For cyccle edge from j ---> i try to find random number
-        // k and divide this edge into two  j ---> k and k ---> i. Then repeat process. If not lucky in finding new
-        // edges just leave it as it is.
-        for (int f = 0; f < aFaspCapacity; ++f) {
-            int randIdx = randInt(0, faspSet.size() - 1);
-            //  j ---> i
-            auto [i, j] = faspSet[randIdx];
-            faspSet.erase(faspSet.begin() + randIdx);
-
-            while (j != i) {
-                // Control number of edges
-                if (numOfArcs >= aNumOfEdges) break;
-
-                if (j + 1 == i) break; // no more intermediate points
-
-                int k = randInt(j + 1, i - 1);
-
-                // j =====> k =====> i
-                typename Graph<VERTEX_TYPE>::Edge e1 = {verticesShuffle[j], verticesShuffle[k]};
-                typename Graph<VERTEX_TYPE>::Edge e2 = {verticesShuffle[k], verticesShuffle[i]};
-
-                if (g.hasEdge(e1) || g.hasEdge(e2)) break; // no luck - give  up
-
-                // Add two new edges j->k and k->i and remove old one j->i
-                c[e1] = 1;
-                c[e2] = 1;
-                g.addEdge(std::move(e1));
-                g.addEdge(std::move(e2));
-                g.removeEdge({verticesShuffle[j], verticesShuffle[i]});
-                c.erase({verticesShuffle[j], verticesShuffle[i]});
-                ++numOfArcs; // one edge removed and two added so +1
-                j = k;
-            }
-        }
-
-        // add additional rightward arcs (till lower bond is reached)
-        while (numOfArcs < aNumOfEdges) {
-            int i = randInt(0, aNumOfVertices - 2);
-            int j = randInt(i + 1, aNumOfVertices - 1);
-
-            typename Graph<VERTEX_TYPE>::Edge e = {verticesShuffle[i], verticesShuffle[j]};
-
-            if (g.hasEdge(e)) continue;
-
-            c[e] = 1;
-            g.addEdge(std::move(e));
-            ++numOfArcs;
-        }
-
-        return std::pair{g, c};
+        return std::tuple{capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt};
     }
 }
 
-
-#endif
+#endif //FASPHEURISTIC_GRAPHFASP_H

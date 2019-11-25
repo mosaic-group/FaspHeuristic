@@ -1,5 +1,5 @@
 #include "graph/graph.h"
-#include "graph/graphFasp.h"
+#include "graph/graphFaspTools.h"
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
