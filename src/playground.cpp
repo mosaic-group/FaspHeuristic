@@ -108,7 +108,7 @@ void test(const char *inputDir) {
     if (strcmp(inputDir, "") != 0) dir = inputDir;
 
     FaspSolutionResult fsr;
-    Timer<true, false> t(true);
+    Timer<true, false> t{};
     [[maybe_unused]] int limitCnt = 23;
     int cnt = 0;
 

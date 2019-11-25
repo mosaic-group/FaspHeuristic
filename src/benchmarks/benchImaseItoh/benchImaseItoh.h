@@ -10,7 +10,7 @@ void benchImaseItoh(const std::string &outputDir, const std::string &inputDir) {
     DataHdf5<double> f(outputDir + "/imaseItoh.h5");
     std::string dir = inputDir;
 
-    Timer<true, false> t(true);
+    Timer<true, false> t{};
     int cnt = 0;
 
 

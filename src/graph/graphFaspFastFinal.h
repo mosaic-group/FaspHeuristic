@@ -400,7 +400,6 @@ namespace Graph::FaspFastFinal {
         EdgesSet<VERTEX_TYPE> setOfEdges{};
 
         int cnt = 0;
-        Timer<false, false> t(true);
         while(true) {
             cnt++;
             bool wasGraphModified = false;
@@ -466,7 +465,6 @@ namespace Graph::FaspFastFinal {
 //            std::cout << "SCC  #1=" << cnt1 << " #BIG=" << cntBig << "\n";
         };
 
-        Timer<false, false, true> t(true);
         constexpr int numOfReps = 20;
 
 
@@ -479,9 +477,7 @@ namespace Graph::FaspFastFinal {
 //        std::cout << g << std::endl;
 //        std::cout << "Max V = " << (maxId == vertices.end() ? 0 : *maxId) << std::endl;
 
-        t.start_timer("init scc");
         cleanGraphWithScc(g, path);
-        t.stop_timer();
 
         typename Graph<VERTEX_TYPE>::Edges removedEdges;
 
@@ -501,7 +497,6 @@ namespace Graph::FaspFastFinal {
 //        std::cout << "EDGES TO REMOVE INIT VAL = " << numEdgesToRemoveInitVal << std::endl;
         int numEdgesToRemove = numEdgesToRemoveInitVal;
         [[maybe_unused]] int cnt = 1;
-        t.start_timer("rand loop");
         while (true) {
 
 //            std::cout << "----- loop=" << cnt++ << "\n";
@@ -552,9 +547,8 @@ namespace Graph::FaspFastFinal {
 //                for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
 //            }
 //            t.stop_timer();
-            t.start_timer("random graphs");
             for (int i = 0; i < numOfReps; ++i) {
-                                     Timer<false, false> tt(true);
+                                     Timer<false, false, false> tt("RAND_GRAPHS");
                                      if (i == 0) tt.start_timer("1 - copy graph");
                                      auto workGraph{g};
                                      if (i == 0) {tt.stop_timer();}
@@ -579,7 +573,6 @@ namespace Graph::FaspFastFinal {
                                      for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
                                      if (i == 0) tt.stop_timer();
             }
-            t.stop_timer();
 
             if (edgesCnt.size() > 0) saRndEdgesCnt++;
             else if (edgesCntGR.size() > 0) redRndEdgesCnt++;
@@ -601,7 +594,6 @@ namespace Graph::FaspFastFinal {
                 removedEdges.emplace_back(std::move(maxCnt->first));
             }
 
-            t.start_timer("main SA");
             // Try to solve the rest with superAlgoritm - maybe it will now succeed!
             auto [edgesToRemove, blueEdges2, dummy3] = superAlgorithmBlue(g, aWeights, path, WEIGHTED);
             blueEdges = blueEdges2;
@@ -609,15 +601,10 @@ namespace Graph::FaspFastFinal {
             saEdgesCnt += edgesToRemove.size();
             removedEdges.reserve(removedEdges.size() + edgesToRemove.size());
             removedEdges.insert(removedEdges.begin(), edgesToRemove.begin(), edgesToRemove.end());
-            t.stop_timer();
         }
-        t.stop_timer();
 
         EDGE_PROP_TYPE capacity = 0;
         for (const auto &e : removedEdges) { capacity += aWeights.at(e); }
-
-
-//        LOG(TRACE) << "Edges with cycles: " << Tools::findEdgesWithCycles(g);
 
         return std::tuple{capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt};
     }
