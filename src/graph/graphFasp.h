@@ -12,7 +12,7 @@
 #include <vector>
 #include "graph/hipr/hi_pr.h"
 
-namespace Graph::FaspFastFinal {
+namespace Graph::Fasp {
 
     template <typename VERTEX_TYPE>
     using EdgesSet = std::unordered_set<typename Graph<VERTEX_TYPE>::Edge, Ext::EdgeHasher<VERTEX_TYPE>>;

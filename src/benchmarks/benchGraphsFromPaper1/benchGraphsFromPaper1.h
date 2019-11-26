@@ -56,7 +56,7 @@ void benchGraphsFromPaper1(const std::string &outputDir, const std::string &inpu
         Graph::Graph gv = Graph::IO::graphFromFile<int>(inputDir + "/" + file);
         auto c = Graph::Ext::getEdgeProperties<int>(gv, 1);
 
-        auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::FaspFastFinal::randomFASP(gv, c);
+        auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::Fasp::randomFASP(gv, c);
         f.put("random", capacity);
         f.put("exact", correct);
         f.put("saEdges", saEdgesCnt);

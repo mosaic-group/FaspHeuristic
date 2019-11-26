@@ -36,14 +36,14 @@ void benchHeuristicsConstWeightVarFaspConstVE(const std::string &outputDir, int 
 
     auto faspValues =  logDistribution ? Tools::logspace(minFasp, maxFasp, numOfSteps) : Tools::linspace(minFasp, maxFasp, numOfSteps);
 
-    Graph::FaspFastFinal::PathHero<int> path(numOfVertices + 1); // maxId included
+    Graph::Fasp::PathHero<int> path(numOfVertices + 1); // maxId included
 
     for (auto &faspSize : faspValues) {
         for (int r = 0; r < numOfReps; ++r) {
             LOG(TRACE) << "--- Progress --- Fasp size=" << faspSize  << "/" << maxFasp << " Reps=" << r + 1 << "/" << numOfReps << "";
             auto[g, c] = Graph::FaspTools::generateGraphWithKnownFaspAndSameWeights<int, int>(numOfVertices, faspSize, numOfEdges);
 
-            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::FaspFastFinal::randomFASP(g, c);
+            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::Fasp::randomFASP(g, c);
 
             f.put("vertices", g.getNumOfVertices());
             f.put("edges", g.getNumOfEdges());

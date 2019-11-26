@@ -54,7 +54,7 @@ void benchTimingConstWeightVarFaspConstVE(const std::string &outputDir, int numO
 //            auto deltaTime = t.stop_timer();
 
             t.start_timer("random");
-            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::FaspFastFinal::randomFASP(g, c);
+            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::Fasp::randomFASP(g, c);
             auto randomTime = t.stop_timer();
 
             Graph::IO::graphToFile(outputDir + "/" + "xl-" + Tools::convertToStrWithLeadingZeros(fidx) + "-" + std::to_string(numOfVertices) + "-" + std::to_string(numOfEdges)+"-"+std::to_string(faspSize)+".al", g);
@@ -118,7 +118,7 @@ void benchTimingConstDensityAndFaspGrowingsize(const std::string &outputDir, int
             auto grTime = t.stop_timer();
 
             t.start_timer("random");
-            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::FaspFastFinal::randomFASP(g, c);
+            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::Fasp::randomFASP(g, c);
             auto randomTime = t.stop_timer();
 
             f1.put("gr", gr.first);

@@ -41,7 +41,7 @@ void benchBruijnGraphs(const std::string &outputDir) {
         Timer<true, false> t("");
 
         t.start_timer("final");
-        Graph::FaspFastFinal::randomFASP(g, c);
+        Graph::Fasp::randomFASP(g, c);
         t.stop_timer();
 }
 
