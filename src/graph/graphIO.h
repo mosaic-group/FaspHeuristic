@@ -1,7 +1,3 @@
-//
-// Created by gonciarz on 2019-03-18.
-//
-
 #ifndef GRAPHIO_H
 #define GRAPHIO_H
 
@@ -12,14 +8,18 @@
 
 namespace Graph::IO {
     /**
-    * Reads data provided as adjacency list (fist number in a line is a src vertex,
-    * and next number(s) are outgoing veritces)
-    *
-    * <b>NOTE:</b> no error handlihng is implemented, if file is not correct this function will fail
-    *
-    * @param aFileName inputFileName
-    * @return created graph
-    */
+     * Reads data provided as adjacency list (fist number in a line is a src vertex,
+     * and next number(s) are outgoing veritces). Example file content.
+     *
+     * 1 4
+     * 3 10
+     * 11 5
+     *
+     * <b>NOTE:</b> no error handlihng is implemented, if file is not correct this function will fail
+     *
+     * @param aFileName inputFileName
+     * @return read graph
+     */
     template<typename VERTEX_TYPE = uint16_t>
     static Graph<VERTEX_TYPE> graphFromFile(const std::string &aFileName) {
         std::ifstream infile(aFileName);
@@ -48,6 +48,19 @@ namespace Graph::IO {
         return graph;
     }
 
+    /**
+     * Save provided graph as adjacency list (fist number in a line is a src vertex,
+     * and next number(s) are outgoing veritces). Example file content.
+     *
+     * 1 4
+     * 3 10
+     * 11
+     *
+     * <b>NOTE:</b> no error handlihng is implemented, if file is not correct this function will fail
+     *
+     * @param aFileName outputFileName
+     * @param aGraph graph to save
+     */
     template<typename VERTEX_TYPE = uint16_t>
     void graphToFile(const std::string &aFileName, const Graph<VERTEX_TYPE> &aGraph) {
         std::ofstream outfile(aFileName, std::ios_base::out); // overwrite output file if exists
@@ -67,7 +80,12 @@ namespace Graph::IO {
     }
 
     /**
-     * Reads solution from "*.fas.txt" files to get exact capacity
+     * Reads solution from files to get exact capacity. Solution is in form of list FASP edges:
+     *
+     * 1 5
+     * 4 3
+     * 3 1
+     *
      * @param aFileName full (with path) filename
      * @return capacity of cut edges
      */
@@ -91,7 +109,8 @@ namespace Graph::IO {
     }
 
     /**
-     * Reads timing from "*.timing" files to get time of exact solver (no check for errors done!)
+     * Reads timing from files to get time of exact solver (no check for errors done!). File should contain
+     * exactly one number representing number of seconds (can be float number).
      * @param aFileName full (with path) filename
      * @return timing
      */
@@ -105,7 +124,9 @@ namespace Graph::IO {
         return num;
     }
 
-    enum FileType {FT_REGULAR_FILE = DT_REG, FT_DIRECTORY = DT_DIR};
+    enum FileType {
+        FT_REGULAR_FILE = DT_REG, FT_DIRECTORY = DT_DIR
+    };
 
     /**
      * Returns list of files in given directory
@@ -132,6 +153,20 @@ namespace Graph::IO {
         return files;
     }
 
+    /**
+     * Reads data provided as adjacency list with weights. File should contain 3 numbers in each row
+     * representing: srcVertex dstVertex weightOfEdge. For example:
+     *
+     * 1 4 3
+     * 1 3 10
+     * 4 3 2
+     *
+     * <b>NOTE:</b> no error handlihng is implemented, if file is not correct this function will fail
+     *
+     * @param aFileName inputFileName
+     * @param aGraph graph to save
+     * @param aWeights weights of edges in aGraph
+     */
     template<typename VERTEX_TYPE = uint16_t, typename EDGE_PROP_TYPE>
     void graphWithWeightsToFile(const std::string &aFileName, const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
         std::ofstream outfile(aFileName, std::ios_base::out); // overwrite output file if exists
@@ -156,14 +191,18 @@ namespace Graph::IO {
     }
 
     /**
-    * Reads data provided as adjacency list (fist number in a line is a src vertex,
-    * and next number(s) are outgoing veritces)
-    *
-    * <b>NOTE:</b> no error handlihng is implemented, if file is not correct this function will fail
-    *
-    * @param aFileName inputFileName
-    * @return created graph
-    */
+     * Reads data provided as adjacency list with weights. File should contain 3 numbers in each row
+     * representing: srcVertex dstVertex weightOfEdge. For example:
+     *
+     * 1 4 3
+     * 1 3 10
+     * 4 3 2
+     *
+     * <b>NOTE:</b> no error handlihng is implemented, if file is not correct this function will fail
+     *
+     * @param aFileName inputFileName
+     * @return pair {created graph, edgePropertiesWithWeighs}
+     */
     template<typename VERTEX_TYPE = uint16_t, typename EDGE_PROP_TYPE>
     static auto graphWithWeightsFromFile(const std::string &aFileName) {
         std::ifstream infile(aFileName);

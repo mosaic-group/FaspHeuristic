@@ -9,4 +9,4 @@ endmacro(buildTarget)
 
 buildTarget(testGraph TestGraph.cpp ON)
 buildTarget(testDynamicBitset TestDynamicBitset.cpp ON)
-
+buildTarget(testGraphIO TestGraphIO.cpp ON)
