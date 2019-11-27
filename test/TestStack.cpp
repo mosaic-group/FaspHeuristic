@@ -1,7 +1,6 @@
 #include "tools/stack.h"
 
 #include "gtest/gtest.h"
-#include "gmock/gmock.h"
 
 #include <iostream>
 

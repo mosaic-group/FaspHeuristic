@@ -565,9 +565,7 @@ namespace Graph::Fasp {
             if (edgesCnt.size() > 0) saRndEdgesCnt++;
             else if (edgesCntGR.size() > 0) redRndEdgesCnt++;
             if (edgesCnt.size() == 0) {
-//                std::cout << "------ USING alternative (GR/RED_EDGE) ------ " << edgesCntGR.size() <<"\n";
                 edgesCnt.swap(edgesCntGR); // In case when SA didn't find any edges use these from GR heuristic
-//                std::cout << "ER2: " << edgesCnt << "\n";
             }
             if (edgesCnt.size() == 0) {
                 numEdgesToRemove++;
