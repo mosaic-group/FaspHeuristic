@@ -7,9 +7,12 @@
 
 #include <memory>
 #include <cassert>
+#include <ostream>
+
 
 /**
- * Simple implementation of fixed size stack.
+ * Simple implementation of fixed size stack. As fast as possible. When compiled to
+ * release mode there is no checks done! (only in debug there are asserts).
  * @tparam ELEMENT_TYPE - type of stored element in a stack
  * @tparam IDX - index type (for few elements stacks it can be int8_t (it must be signed type)
  */
