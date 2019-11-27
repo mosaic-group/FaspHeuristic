@@ -33,12 +33,12 @@ namespace Graph::IO {
 
             // We expect at least vertex without any outgoing connections
             if (tokens.size() >= 1) {
-                typename Graph<VERTEX_TYPE>::VertexId src = std::stoi(tokens[0]);
+                typename Graph<VERTEX_TYPE>::Vertex src = std::stoi(tokens[0]);
                 graph.addVertexSafe(src);
 
                 // Add edges to destination vertices if defined
                 for (size_t i = 1; i < tokens.size(); ++i) {
-                    typename Graph<VERTEX_TYPE>::VertexId dst = std::stoi(tokens[i]);
+                    typename Graph<VERTEX_TYPE>::Vertex dst = std::stoi(tokens[i]);
                     graph.addVertexSafe(dst);
                     graph.addEdge(src, dst);
                 }
@@ -217,11 +217,11 @@ namespace Graph::IO {
             // We expect 1 (just vertex) or 3 numbers in line (srcVertex dstVertex edgeWeight)
             if (tokens.size() == 1 || tokens.size() == 3) {
                 // Read vertices and create edge
-                typename Graph<VERTEX_TYPE>::VertexId src = std::stoi(tokens[0]);
+                typename Graph<VERTEX_TYPE>::Vertex src = std::stoi(tokens[0]);
                 graph.addVertexSafe(src);
 
                 if (tokens.size() == 3) {
-                    typename Graph<VERTEX_TYPE>::VertexId dst = std::stoi(tokens[1]);
+                    typename Graph<VERTEX_TYPE>::Vertex dst = std::stoi(tokens[1]);
                     graph.addVertexSafe(dst);
                     graph.addEdge(src, dst);
 

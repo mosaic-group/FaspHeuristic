@@ -16,8 +16,8 @@ namespace Graph::Ext {
     public:
         std::size_t operator() (const typename Graph<VERTEX_TYPE>::Edge &key) const {
             typedef std::size_t result_type;
-            const result_type s = std::hash<typename Graph<VERTEX_TYPE>::VertexId >{}(key.src);
-            const result_type d = std::hash<typename Graph<VERTEX_TYPE>::VertexId >{}(key.dst);
+            const result_type s = std::hash<typename Graph<VERTEX_TYPE>::Vertex >{}(key.src);
+            const result_type d = std::hash<typename Graph<VERTEX_TYPE>::Vertex >{}(key.dst);
             return (17 * 31 + s) * 31 + d;
         }
     };
@@ -26,7 +26,7 @@ namespace Graph::Ext {
     using EdgeProperties = std::unordered_map<typename Graph<VERTEX_TYPE>::Edge, EDGE_PROP_TYPE, EdgeHasher<VERTEX_TYPE>>;
 
     template<typename VERTEX_TYPE, typename VERTEX_PROP_TYPE>
-    using VertexProperties = std::unordered_map<typename Graph<VERTEX_TYPE>::VertexId, VERTEX_PROP_TYPE>;
+    using VertexProperties = std::unordered_map<typename Graph<VERTEX_TYPE>::Vertex, VERTEX_PROP_TYPE>;
 
     /**
      * Generates map to store properties with initial value for each edge.

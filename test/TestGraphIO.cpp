@@ -5,6 +5,13 @@
 #include "gmock/gmock.h"
 
 #include <iostream>
+
+
+/**
+ * This test is using c++17 features included in 'filesystem' header. On some older compiler this is not yet implemented.
+ * So it skips these tests... 
+ */
+#if __has_include(<filesystem>)
 #include <filesystem>
 
 namespace {
@@ -139,3 +146,6 @@ int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
+
+#endif
+

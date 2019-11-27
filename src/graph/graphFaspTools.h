@@ -67,7 +67,7 @@ namespace Graph::FaspTools {
             const auto &vertices = g.getVertices();
             if (vertices.empty()) break;
             EDGE_PROP_TYPE maxDelta = std::numeric_limits<EDGE_PROP_TYPE>().lowest();
-            typename Graph<VERTEX_TYPE>::VertexId maxDeltaVertex;
+            typename Graph<VERTEX_TYPE>::Vertex maxDeltaVertex;
             for (const auto &v : vertices) {
                 EDGE_PROP_TYPE temp = 0;
                 for (const auto &vo : g.getOutVertices(v)){ temp += aWeights.at({v, vo});}

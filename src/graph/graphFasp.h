@@ -30,7 +30,7 @@ namespace Graph::Fasp {
         DynamicBitset <uint32_t, uint16_t> iVisited;
         Stack <VERTEX_TYPE> stack;
         std::vector<VERTEX_TYPE> parents;
-        typename Graph<VERTEX_TYPE>::Vertices path;
+        std::vector<VERTEX_TYPE> path;
         std::vector<int16_t> lowLinks;
         std::vector<int16_t> index;
 
@@ -45,9 +45,10 @@ namespace Graph::Fasp {
          */
         template<bool FORWARD_SEARCH=true>
         bool pathExistsDFS(const Graph <VERTEX_TYPE> &aGraph,
-                           const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
-                           const typename Graph<VERTEX_TYPE>::VertexId &aDst,
+                           const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
+                           const typename Graph<VERTEX_TYPE>::Vertex &aDst,
                            bool aReversedSearch = false) {
+            // If we are already in destination job is done
             if (aSrc == aDst) return true;
 
             iVisited.clearAll();
@@ -121,7 +122,7 @@ namespace Graph::Fasp {
                 std::vector<Edge> redEdges;
                 bool prevCandidate = false;
                 for (std::size_t i = 0; i < somePath.size(); ++i) {
-                    typename Graph<VERTEX_TYPE>::VertexId v = somePath[i];
+                    typename Graph<VERTEX_TYPE>::Vertex v = somePath[i];
 
                     bool currCandidate = false;
                     for (auto &s : scc) if (s.size() > 1 && s.find(v) != s.end()) {currCandidate = true; break;}
@@ -190,8 +191,8 @@ namespace Graph::Fasp {
          */
         template<typename EDGE_PROP_TYPE>
         auto minStCutFordFulkerson(const Graph <VERTEX_TYPE> &aGraph,
-                                   const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
-                                   const typename Graph<VERTEX_TYPE>::VertexId &aDst,
+                                   const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
+                                   const typename Graph<VERTEX_TYPE>::Vertex &aDst,
                                    const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
             assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
 //            auto maxFlow = std::get<0>(minStCutFordFulkersonBase(aGraph, aSrc, aDst, aWeights));
@@ -252,8 +253,8 @@ namespace Graph::Fasp {
          * Finds path from src to dst
          */
         auto findPathDfs(const Graph <VERTEX_TYPE> &aGraph,
-                         const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
-                         const typename Graph<VERTEX_TYPE>::VertexId &aDst) {
+                         const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
+                         const typename Graph<VERTEX_TYPE>::Vertex &aDst) {
 
             path.clear();
             if (aGraph.hasVertex(aSrc) && aGraph.hasVertex(aDst)) {
@@ -433,13 +434,6 @@ namespace Graph::Fasp {
             if (maxMcRedEdge > 0) {
                 removedEdgesGR.push_back(redEdge);
             }
-//            else {
-//                auto ed = Fasp::GR(outGraph, aWeights).second;
-//                auto n = ed.size();
-//                if (n > 0) {
-//                    removedEdgesGR.push_back(ed[0]);
-//                }
-//            }
         }
         return std::tuple{removedEdgesSA, setOfEdges, removedEdgesGR};
     }
@@ -447,7 +441,7 @@ namespace Graph::Fasp {
     /**
      * Working original idea of how random FASP heuristic should work
      */
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, bool WEIGHTED = false>
+    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, bool WEIGHTED = false, bool PARALLELIZED=false>
     static auto randomFASP(const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
         if (WEIGHTED) std::cout << "Graph with WEIGHTS!\n";
         auto cleanGraphWithScc = [](Graph<VERTEX_TYPE> &aGraph, PathHero<VERTEX_TYPE> &path) {
@@ -457,7 +451,6 @@ namespace Graph::Fasp {
                 if (s.size() == 1) {cnt1++; aGraph.removeVertex(*s.begin());}
                 else cntBig++;
             }
-//            std::cout << "SCC  #1=" << cnt1 << " #BIG=" << cntBig << "\n";
         };
 
         constexpr int numOfReps = 20;
@@ -469,8 +462,6 @@ namespace Graph::Fasp {
         auto vertices = g.getVertices();
         auto maxId = std::max_element(vertices.begin(), vertices.end());
         PathHero<VERTEX_TYPE> path{static_cast<std::size_t>(maxId == vertices.end() ? 1 : *maxId + 1)};
-//        std::cout << g << std::endl;
-//        std::cout << "Max V = " << (maxId == vertices.end() ? 0 : *maxId) << std::endl;
 
         cleanGraphWithScc(g, path);
 
@@ -504,69 +495,71 @@ namespace Graph::Fasp {
             std::unordered_map<typename Graph<VERTEX_TYPE>::Edge, int, Ext::EdgeHasher<VERTEX_TYPE>> edgesCntGR;
 
             // Run each randomly generated graph in seperate thread and later collect all solutions found
-//            t.start_timer("random graphs");
-//            alignas(64) Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> props[numOfReps];
-//            for (auto &p : props) p = aWeights;
-//            alignas(64) std::future<std::pair<typename Graph<VERTEX_TYPE>::Edges, typename Graph<VERTEX_TYPE>::Edges>> tasks[numOfReps];
-//            int i = 0;
-//            for (auto &task : tasks) {
-//
-//                task= std::async(std::launch::async,
-//                     [&, i, numEdgesToRemove] () {
-//                         Timer<false, false> tt(true);
-//                         if (i == 0) tt.start_timer("1 - copy graph");
-//                         auto workGraph{g};
-//                         if (i == 0) {tt.stop_timer();}
-//
-//                         if (i == 0) tt.start_timer("2 - prepare path hero");
-//                         auto vertices = workGraph.getVertices();
-//                         auto maxId = std::max_element(vertices.begin(), vertices.end());
-//                         PathHero<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
-//                         if (i == 0) tt.stop_timer();
-//
-//                         if (i == 0) tt.start_timer("3 - random subgraph");
-//                         path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove, blueEdges);
-//                         if (i == 0) tt.stop_timer();
-//
-//                         if (i == 0) tt.start_timer("4 - SA blue");
-//                         auto [edgesSA, _, edgesGR] = superAlgorithmBlue(workGraph, props[i], path, false, true);
-//                         if (i == 0) tt.stop_timer();
-//                         return std::pair{edgesSA, edgesGR};
-//                     });
-//                i++;
-//            }
-//
-//            for (auto &task : tasks) {
-//                auto [edgesToRemove, edgesToRemoveGR] = task.get();
-//                for (auto &e : edgesToRemove) edgesCnt.try_emplace(e, 0).first->second++;
-//                for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
-//            }
-//            t.stop_timer();
-            for (int i = 0; i < numOfReps; ++i) {
-                 Timer<false, false, false> tt("RAND_GRAPHS");
-                 if (i == 0) tt.start_timer("1 - copy graph");
-                 auto workGraph{g};
-                 if (i == 0) {tt.stop_timer();}
+            if (PARALLELIZED) {
+                alignas(64) Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> props[numOfReps];
+                for (auto &p : props) p = aWeights;
+                alignas(64) std::future<std::pair<typename Graph<VERTEX_TYPE>::Edges, typename Graph<VERTEX_TYPE>::Edges>> tasks[numOfReps];
+                int i = 0;
+                for (auto &task : tasks) {
 
-                 if (i == 0) tt.start_timer("2 - prepare path hero");
-                 auto vertices = workGraph.getVertices();
-                 auto maxId = std::max_element(vertices.begin(), vertices.end());
-                 PathHero<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
-                 if (i == 0) tt.stop_timer();
+                    task= std::async(std::launch::async,
+                         [&, i, numEdgesToRemove] () {
+                             Timer<false, false> tt{};
+                             if (i == 0) tt.start_timer("1 - copy graph");
+                             auto workGraph{g};
+                             if (i == 0) {tt.stop_timer();}
 
-                 if (i == 0) tt.start_timer("3 - random subgraph");
-                 path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove, blueEdges);
-                 if (i == 0) tt.stop_timer();
+                             if (i == 0) tt.start_timer("2 - prepare path hero");
+                             auto vertices = workGraph.getVertices();
+                             auto maxId = std::max_element(vertices.begin(), vertices.end());
+                             PathHero<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
+                             if (i == 0) tt.stop_timer();
 
-                 if (i == 0) tt.start_timer("4 - SA blue");
-                 auto [edgesSA, _, edgesGR] = superAlgorithmBlue(workGraph, aWeights, path, WEIGHTED, true);
-                 if (i == 0) tt.stop_timer();
+                             if (i == 0) tt.start_timer("3 - random subgraph");
+                             path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove, blueEdges);
+                             if (i == 0) tt.stop_timer();
 
-                 if (i == 0) tt.start_timer("5 - Getting edges");
-                 auto [edgesToRemove, edgesToRemoveGR] = std::pair{edgesSA, edgesGR};
-                 for (auto &e : edgesToRemove) edgesCnt.try_emplace(e, 0).first->second++;
-                 for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
-                 if (i == 0) tt.stop_timer();
+                             if (i == 0) tt.start_timer("4 - SA blue");
+                             auto [edgesSA, _, edgesGR] = superAlgorithmBlue(workGraph, props[i], path, false, true);
+                             if (i == 0) tt.stop_timer();
+                             return std::pair{edgesSA, edgesGR};
+                         });
+                    i++;
+                }
+
+                for (auto &task : tasks) {
+                    auto [edgesToRemove, edgesToRemoveGR] = task.get();
+                    for (auto &e : edgesToRemove) edgesCnt.try_emplace(e, 0).first->second++;
+                    for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
+                }
+            }
+            else {
+                for (int i = 0; i < numOfReps; ++i) {
+                    Timer<false, false, false> tt("RAND_GRAPHS");
+                    if (i == 0) tt.start_timer("1 - copy graph");
+                    auto workGraph{g};
+                    if (i == 0) { tt.stop_timer(); }
+
+                    if (i == 0) tt.start_timer("2 - prepare path hero");
+                    auto vertices = workGraph.getVertices();
+                    auto maxId = std::max_element(vertices.begin(), vertices.end());
+                    PathHero<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
+                    if (i == 0) tt.stop_timer();
+
+                    if (i == 0) tt.start_timer("3 - random subgraph");
+                    path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove, blueEdges);
+                    if (i == 0) tt.stop_timer();
+
+                    if (i == 0) tt.start_timer("4 - SA blue");
+                    auto[edgesSA, _, edgesGR] = superAlgorithmBlue(workGraph, aWeights, path, WEIGHTED, true);
+                    if (i == 0) tt.stop_timer();
+
+                    if (i == 0) tt.start_timer("5 - Getting edges");
+                    auto[edgesToRemove, edgesToRemoveGR] = std::pair{edgesSA, edgesGR};
+                    for (auto &e : edgesToRemove) edgesCnt.try_emplace(e, 0).first->second++;
+                    for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
+                    if (i == 0) tt.stop_timer();
+                }
             }
 
             if (edgesCnt.size() > 0) saRndEdgesCnt++;

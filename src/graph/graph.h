@@ -28,11 +28,11 @@ namespace Graph {
 
     protected:
         // -------- Base Type defnitions ---------------------------------------
-        using VertexId = VERTEX_TYPE;
+        using Vertex = VERTEX_TYPE;
         class Edge {
         public:
-            VertexId src;
-            VertexId dst;
+            Vertex src;
+            Vertex dst;
 
             friend std::ostream &operator<<(std::ostream &os, const Edge &obj) {
                 os << "{" << obj.src << ", " << obj.dst << "}";
@@ -53,8 +53,8 @@ namespace Graph {
         }
 
         using Edges = std::vector<Edge>;
-        using Vertices = std::vector<VertexId>;
-        using VerticesSet = std::set<VertexId>;
+        using Vertices = std::vector<Vertex>;
+        using VerticesSet = std::set<Vertex>;
         struct NeighborVertices {
             Vertices to;
             Vertices from;
@@ -68,7 +68,7 @@ namespace Graph {
         using MyType = Graph<VERTEX_TYPE>;
 
         // Base type aliases
-        using typename GraphBase<VERTEX_TYPE>::VertexId;
+        using typename GraphBase<VERTEX_TYPE>::Vertex;
         using typename GraphBase<VERTEX_TYPE>::Edge;
         using typename GraphBase<VERTEX_TYPE>::Edges;
         using typename GraphBase<VERTEX_TYPE>::Vertices;
@@ -76,7 +76,7 @@ namespace Graph {
         using typename GraphBase<VERTEX_TYPE>::NeighborVertices;
 
         // -------- Type defnitions -----------------------------------------------
-        using GraphDef = std::unordered_map<VERTEX_TYPE, NeighborVertices>;
+        using GraphDef = std::unordered_map<Vertex, NeighborVertices>;
 
     private:
         GraphDef graph;
@@ -106,7 +106,7 @@ namespace Graph {
          * Adds vertex to graph
          * @param aId id of a vertex
          */
-        void addVertex(const VERTEX_TYPE &aId) {
+        void addVertex(const Vertex &aId) {
             assert(graph.count(aId) == 0 && "Vertex already exists!");
             graph.emplace(aId, NeighborVertices());
         }
@@ -115,7 +115,7 @@ namespace Graph {
           * Adds vertex to graph or ignores if already there
           * @param aId id of a vertex
           */
-        void addVertexSafe(const VERTEX_TYPE &aId) {
+        void addVertexSafe(const Vertex &aId) {
             if (graph.find(aId) == graph.end()) {
                 graph.emplace(aId, NeighborVertices());
             }
@@ -125,7 +125,7 @@ namespace Graph {
          * Removes vertex from graph with all edges that involve that vertex
          * @param aId id of a vertex
          */
-        void removeVertex(const VERTEX_TYPE &aId) {
+        void removeVertex(const Vertex &aId) {
             assert(graph.count(aId) == 1 && "Vertex does not exists!");
 
             for (const auto &src : graph[aId].from) {
@@ -143,7 +143,7 @@ namespace Graph {
          * @param aV vertex
          * @return true if vertex exists
          */
-        bool hasVertex(const VERTEX_TYPE &aV) const {
+        bool hasVertex(const Vertex &aV) const {
             if (graph.find(aV) == graph.end()) return false;
             return true;
         }
@@ -181,7 +181,7 @@ namespace Graph {
          * @param aSrc source vertex
          * @param aDst destination vertex
          */
-        void addEdge(const VERTEX_TYPE &aSrc, const VERTEX_TYPE &aDst) {addEdge({aSrc, aDst});}
+        void addEdge(const Vertex &aSrc, const Vertex &aDst) {addEdge({aSrc, aDst});}
 
         /**
          * Check if there is an edge in graph
@@ -221,7 +221,7 @@ namespace Graph {
          * @param aId vertex of interest
          * @return vertices outgoing from vertex aId
          */
-        const Vertices& getOutVertices(const VERTEX_TYPE &aId) const {
+        const Vertices& getOutVertices(const Vertex &aId) const {
             assert(graph.count(aId) == 1 && "Vertex does not exists!");
 
             return graph.at(aId).to;
@@ -231,7 +231,7 @@ namespace Graph {
          * @param aId vertex of interest
          * @return vertices incoming to vertex aId
          */
-        const Vertices& getInVertices(const VERTEX_TYPE &aId) const {
+        const Vertices& getInVertices(const Vertex &aId) const {
             assert(graph.count(aId) == 1 && "Vertex does not exists!");
 
             return graph.at(aId).from;

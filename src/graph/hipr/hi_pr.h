@@ -807,8 +807,8 @@ template <typename T> T min(const T &a, const T &b) {return ( ( (a) < (b) ) ? a 
 
         template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
         double runHipr(const Graph <VERTEX_TYPE> &aGraph,
-                       const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
-                       const typename Graph<VERTEX_TYPE>::VertexId &aDst,
+                       const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
+                       const typename Graph<VERTEX_TYPE>::Vertex &aDst,
                        const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights,
                        int maxV, std::vector<VERTEX_TYPE> &mapVertices) {
 #if (defined(PRINT_FLOW) || defined(CHECK_SOLUTION))
@@ -854,10 +854,10 @@ template <typename T> T min(const T &a, const T &b) {return ( ( (a) < (b) ) ? a 
 
 
         template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
-        int parse( long    *n_ad, long    *m_ad, node    **nodes_ad, arc     **arcs_ad, unsigned long    **cap_ad,
-                   node    **source_ad, node    **sink_ad, long    *node_min_ad, node **nodesPtr, const Graph <VERTEX_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::VertexId &aSrc,
-            const typename Graph<VERTEX_TYPE>::VertexId &aDst, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights,
-            int maxV, std::vector<VERTEX_TYPE> &mapVertices) {
+        int parse(long    *n_ad, long    *m_ad, node    **nodes_ad, arc     **arcs_ad, unsigned long    **cap_ad,
+                  node    **source_ad, node    **sink_ad, long    *node_min_ad, node **nodesPtr, const Graph <VERTEX_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
+                  const typename Graph<VERTEX_TYPE>::Vertex &aDst, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights,
+                  int maxV, std::vector<VERTEX_TYPE> &mapVertices) {
 
             long n = aGraph.getNumOfVertices();
             long m = aGraph.getNumOfEdges();
