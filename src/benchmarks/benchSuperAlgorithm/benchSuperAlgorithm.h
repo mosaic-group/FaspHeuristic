@@ -37,7 +37,7 @@ void benchSuperAlgorithmConstWeightVarFaspConstVE(const std::string &outputDir, 
 
     auto faspValues =  logDistribution ? Tools::logspace(minFasp, maxFasp, numOfSteps) : Tools::linspace(minFasp, maxFasp, numOfSteps);
 
-    Graph::Fasp::PathHero<int> path(numOfVertices + 1); // maxId included
+    Graph::Fasp::GraphSpeedUtils<int> path(numOfVertices + 1); // maxId included
 
     for (auto &faspSize : faspValues) {
         for (int r = 0; r < numOfReps; ++r) {

@@ -2,8 +2,8 @@
 // Created by gonciarz on 2019-03-18.
 //
 
-#ifndef GRAPHFASP_H
-#define GRAPHFASP_H
+#ifndef GRAPHFASPTOOLS_H
+#define GRAPHFASPTOOLS_H
 
 
 #include "graph.h"

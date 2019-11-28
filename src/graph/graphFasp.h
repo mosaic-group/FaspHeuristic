@@ -1,5 +1,6 @@
-#ifndef FASPHEURISTIC_GRAPHFASP_H
-#define FASPHEURISTIC_GRAPHFASP_H
+#ifndef GRAPHFASP_H
+#define GRAPHFASP_H
+
 
 #include "graph/graph.h"
 #include "graph/graphExt.h"
@@ -18,15 +19,15 @@ namespace Graph::Fasp {
     using EdgesSet = std::unordered_set<typename Graph<VERTEX_TYPE>::Edge, Ext::EdgeHasher<VERTEX_TYPE>>;
 
     /**
-     * PathHero... class is a approach to speed up things. For all algorithms it has implemented it uses
+     * GraphSpeedUtils... class is a approach to speed up things. For all algorithms it has implemented it uses
      * pre-allocated memory - that is why it need to be initialized with maximum number of vertices (or if not
      * in sequence 0, 1, 2 ... then with a maximum value of vertex id + 1.
      * @tparam VERTEX_TYPE
      */
     template<typename VERTEX_TYPE>
-    class alignas (64) PathHero {
+    class alignas (64) GraphSpeedUtils {
 
-        // Allocation of structures/memory/containers shared by all algorithms from PathHero class
+        // Allocation of structures/memory/containers shared by all algorithms from GraphSpeedUtils class
         DynamicBitset <uint32_t, uint16_t> iVisited;
         Stack <VERTEX_TYPE> stack;
         std::vector<VERTEX_TYPE> parents;
@@ -35,12 +36,17 @@ namespace Graph::Fasp {
         std::vector<int16_t> index;
 
     public:
-        explicit PathHero(std::size_t aN) : iVisited(aN), stack(aN), parents(aN, 0), lowLinks(aN, -1), index(aN, -1) {
-            // both can have at most aN in/outgoing edges
+        explicit GraphSpeedUtils(std::size_t aN) : iVisited(aN), stack(aN), parents(aN, 0), lowLinks(aN, -1), index(aN, -1) {
             path.reserve(aN);
         }
 
         /**
+         * Checks if there is a path from src to dst in given graph
+         * @tparam aReversedSearch if true search is done by going from head to tail of each edge instead
+         *                         of normal direction
+         * @param aGraph input graph
+         * @param aSrc start vertex
+         * @param aDst destination vertex
          * @return true if path from src to dst exists
          */
         template<bool FORWARD_SEARCH=true>
@@ -51,11 +57,11 @@ namespace Graph::Fasp {
             // If we are already in destination job is done
             if (aSrc == aDst) return true;
 
+            // Initialize needed structures
             iVisited.clearAll();
-
+            iVisited.set(aSrc);
             stack.clear();
             stack.push(aSrc);
-            iVisited.set(aSrc);
 
             while (!stack.empty()) {
                 const auto currentVertex = stack.pop();
@@ -64,7 +70,7 @@ namespace Graph::Fasp {
                 const auto &vertices = FORWARD_SEARCH ? aGraph.getOutVertices(currentVertex) : aGraph.getInVertices(currentVertex);
                 for (const auto &v : vertices) {
                     if (v == aDst) return true;
-                    else if (iVisited.test(v) == 0) {
+                    if (iVisited.test(v) == 0) {
                         stack.push(v);
                         iVisited.set(v);
                     }
@@ -219,7 +225,7 @@ namespace Graph::Fasp {
             auto c = HIPR().runHipr(aGraph, aSrc, aDst, aWeights, stack.capacity(), parents);
 //            std::cout << "VS: " << dinicc << " " << hiprc << std::endl;
             auto maxFlow = c;
-        return maxFlow;
+            return maxFlow;
         }
 
 
@@ -388,7 +394,7 @@ namespace Graph::Fasp {
     // ------------------------------------------------------------------------
 
     template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
-    static auto superAlgorithmBlue(Graph<VERTEX_TYPE> &outGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, PathHero<VERTEX_TYPE> &path, bool aUseWeights = false, bool relaxSA = false) {
+    static auto superAlgorithmBlue(Graph<VERTEX_TYPE> &outGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, GraphSpeedUtils<VERTEX_TYPE> &path, bool aUseWeights = false, bool relaxSA = false) {
         assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
         typename Graph<VERTEX_TYPE>::Edges removedEdgesSA;
         typename Graph<VERTEX_TYPE>::Edges removedEdgesGR;
@@ -444,7 +450,7 @@ namespace Graph::Fasp {
     template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, bool WEIGHTED = false, bool PARALLELIZED=false>
     static auto randomFASP(const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
         if (WEIGHTED) std::cout << "Graph with WEIGHTS!\n";
-        auto cleanGraphWithScc = [](Graph<VERTEX_TYPE> &aGraph, PathHero<VERTEX_TYPE> &path) {
+        auto cleanGraphWithScc = [](Graph<VERTEX_TYPE> &aGraph, GraphSpeedUtils<VERTEX_TYPE> &path) {
             int cnt1 = 0, cntBig = 0;
             auto scc = path.stronglyConnectedComponents2(aGraph);
             for (const auto &s : scc) {
@@ -458,10 +464,10 @@ namespace Graph::Fasp {
 
 
         auto g{aGraph};
-        // find max vertex id in graph and setup PathHero
+        // find max vertex id in graph and setup GraphSpeedUtils
         auto vertices = g.getVertices();
         auto maxId = std::max_element(vertices.begin(), vertices.end());
-        PathHero<VERTEX_TYPE> path{static_cast<std::size_t>(maxId == vertices.end() ? 1 : *maxId + 1)};
+        GraphSpeedUtils<VERTEX_TYPE> path{static_cast<std::size_t>(maxId == vertices.end() ? 1 : *maxId + 1)};
 
         cleanGraphWithScc(g, path);
 
@@ -512,7 +518,7 @@ namespace Graph::Fasp {
                              if (i == 0) tt.start_timer("2 - prepare path hero");
                              auto vertices = workGraph.getVertices();
                              auto maxId = std::max_element(vertices.begin(), vertices.end());
-                             PathHero<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
+                             GraphSpeedUtils<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
                              if (i == 0) tt.stop_timer();
 
                              if (i == 0) tt.start_timer("3 - random subgraph");
@@ -543,7 +549,7 @@ namespace Graph::Fasp {
                     if (i == 0) tt.start_timer("2 - prepare path hero");
                     auto vertices = workGraph.getVertices();
                     auto maxId = std::max_element(vertices.begin(), vertices.end());
-                    PathHero<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
+                    GraphSpeedUtils<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
                     if (i == 0) tt.stop_timer();
 
                     if (i == 0) tt.start_timer("3 - random subgraph");
@@ -596,4 +602,4 @@ namespace Graph::Fasp {
     }
 }
 
-#endif //FASPHEURISTIC_GRAPHFASP_H
+#endif
