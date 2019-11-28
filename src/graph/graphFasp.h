@@ -31,18 +31,18 @@ namespace Graph::Fasp {
         DynamicBitset <uint32_t, uint16_t> iVisited;
         Stack <VERTEX_TYPE> stack;
         std::vector<VERTEX_TYPE> parents;
-        std::vector<VERTEX_TYPE> path;
         std::vector<int16_t> lowLinks;
         std::vector<int16_t> index;
-
     public:
+
+        std::vector<VERTEX_TYPE> path;
         explicit GraphSpeedUtils(std::size_t aN) : iVisited(aN), stack(aN), parents(aN, 0), lowLinks(aN, -1), index(aN, -1) {
             path.reserve(aN);
         }
 
         /**
          * Checks if there is a path from src to dst in given graph
-         * @tparam aReversedSearch if true search is done by going from head to tail of each edge instead
+         * @tparam FORWARD_SEARCH if false search is done by going from head to tail of each edge instead
          *                         of normal direction
          * @param aGraph input graph
          * @param aSrc start vertex
@@ -52,8 +52,7 @@ namespace Graph::Fasp {
         template<bool FORWARD_SEARCH=true>
         bool pathExistsDFS(const Graph <VERTEX_TYPE> &aGraph,
                            const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
-                           const typename Graph<VERTEX_TYPE>::Vertex &aDst,
-                           bool aReversedSearch = false) {
+                           const typename Graph<VERTEX_TYPE>::Vertex &aDst) {
             // If we are already in destination job is done
             if (aSrc == aDst) return true;
 
@@ -81,9 +80,61 @@ namespace Graph::Fasp {
         }
 
         /**
-         * Finds all edges with cycles, that is if we have edge a->b there is a path from b to a
+         * Checks if there is a path from src to dst in given graph
          * @param aGraph input graph
-         * @return true if there are still cycles
+         * @param aSrc start vertex
+         * @param aDst destination vertex
+         * @return pair [pathExist, path] if (pathExist) then path contain vertices of path from src to dst, otherwise path may contain garbage
+         */
+        auto findPathDFS(const Graph <VERTEX_TYPE> &aGraph,
+                         const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
+                         const typename Graph<VERTEX_TYPE>::Vertex &aDst) {
+
+            path.clear();
+            if (aGraph.hasVertex(aSrc) && aGraph.hasVertex(aDst)) {
+                if (aSrc == aDst) {
+                    path.emplace_back(aSrc);
+                    return std::pair{true, path};
+                }
+
+                iVisited.clearAll();
+
+                stack.clear();
+                stack.push(aSrc);
+                iVisited.set(aSrc);
+
+                while (!stack.empty()) {
+                    auto currentVertex = stack.pop();
+                    if (currentVertex == aDst) {
+                        // Traverse path back to source and build the path
+                        path.emplace_back(currentVertex);
+                        while (true) {
+                            currentVertex = parents[currentVertex];
+                            path.emplace_back(currentVertex);
+                            if (currentVertex == aSrc) break;
+                        }
+                        // Finally reverse it to have path from src to dst
+                        std::reverse(path.begin(), path.end());
+                        return std::pair{true, path};
+                    }
+
+                    const auto &vertices = aGraph.getOutVertices(currentVertex);
+                    for (const auto &v : vertices) {
+                        if (iVisited.test(v) == 0) {
+                            parents[v] = currentVertex;
+                            stack.push(v);
+                            iVisited.set(v);
+                        }
+                    }
+                }
+            }
+            return std::pair{false, path};
+        }
+
+        /**
+         * Checks if graph is acyclic
+         * @param aGraph input graph
+         * @return true if graph is acyclic
          */
         bool isAcyclic(const Graph <VERTEX_TYPE> &aGraph) {
             for (const auto &e : aGraph.getEdges()) {
@@ -118,9 +169,8 @@ namespace Graph::Fasp {
                 EDGE_PROP_TYPE eCapacity = aWeights.at(e);
                 if (!pathExistsDFS(aGraph, e.dst, e.src)) continue; // optimization
 
-                auto pathExists = findPathDfs(aGraph, e.dst, e.src);
+                auto [pathExists, somePath] = findPathDFS(aGraph, e.dst, e.src);
                 if (!pathExists) continue;
-                auto somePath = path;
 
                 aGraph.removeEdge(e);
                 auto scc = stronglyConnectedComponents2(aGraph);
@@ -139,7 +189,7 @@ namespace Graph::Fasp {
 
                 aGraph.addEdge(e);
                 for (auto &ee : redEdges) {
-                    auto d = minStCutFordFulkerson(aGraph, ee.dst, ee.src, aWeights);
+                    auto d = minStCut(aGraph, ee.dst, ee.src, aWeights);
                     if (d > maxMcRedEdge) {
                         maxMcRedEdge = d;
                         redEdge = ee;
@@ -196,35 +246,12 @@ namespace Graph::Fasp {
          * @return maxFlow value
          */
         template<typename EDGE_PROP_TYPE>
-        auto minStCutFordFulkerson(const Graph <VERTEX_TYPE> &aGraph,
-                                   const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
-                                   const typename Graph<VERTEX_TYPE>::Vertex &aDst,
-                                   const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
+        auto minStCut(const Graph <VERTEX_TYPE> &aGraph,
+                      const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
+                      const typename Graph<VERTEX_TYPE>::Vertex &aDst,
+                      const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
             assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
-//            auto maxFlow = std::get<0>(minStCutFordFulkersonBase(aGraph, aSrc, aDst, aWeights));
-
-//            Graph<int, GraphMap> g;
-//            std::unordered_map<int, int> em;
-//            int nv = 0;
-//            for (auto &v : aGraph.getVertices()) {
-//                if (em.find(v) == em.end()) {
-//                    em[v] = nv++;
-//                }
-//                g.addVertexSafe(em[v]);
-//                for (auto &vo : aGraph.getOutVertices(v)) {
-//                    if (em.find(vo) == em.end()) {
-//                        em[vo] = nv++;
-//                    }
-//                    g.addVertexSafe(em[vo]);
-//                    g.addEdge({em[v], em[vo]});
-//                }
-//            }
-//            std::cout << "DINIC:" << g << " " << nv << std::endl;
-//            auto c = Dinic().runDinic(g, em[aSrc], em[aDst], aWeights, em);
-//            auto c = Dinic().runDinic(aGraph, aSrc, aDst, aWeights, stack.capacity());
-            auto c = HIPR().runHipr(aGraph, aSrc, aDst, aWeights, stack.capacity(), parents);
-//            std::cout << "VS: " << dinicc << " " << hiprc << std::endl;
-            auto maxFlow = c;
+            auto maxFlow = HIPR().runHipr(aGraph, aSrc, aDst, aWeights, stack.capacity(), parents);
             return maxFlow;
         }
 
@@ -253,54 +280,6 @@ namespace Graph::Fasp {
             }
 
             return (aNumEdgesToRemove > 0);
-        }
-
-        /**
-         * Finds path from src to dst
-         */
-        auto findPathDfs(const Graph <VERTEX_TYPE> &aGraph,
-                         const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
-                         const typename Graph<VERTEX_TYPE>::Vertex &aDst) {
-
-            path.clear();
-            if (aGraph.hasVertex(aSrc) && aGraph.hasVertex(aDst)) {
-                if (aSrc == aDst) {
-                    path.emplace_back(aSrc);
-                    return true;
-                }
-
-                iVisited.clearAll();
-
-                stack.clear();
-                stack.push(aSrc);
-                iVisited.set(aSrc);
-
-                while (!stack.empty()) {
-                    auto currentVertex = stack.pop();
-                    if (currentVertex == aDst) {
-                        // Traverse path back to source and build the path
-                        path.emplace_back(currentVertex);
-                        while (true) {
-                            currentVertex = parents[currentVertex];
-                            path.emplace_back(currentVertex);
-                            if (currentVertex == aSrc) break;
-                        }
-                        // Finally reverse it to have path from src to dst
-                        std::reverse(path.begin(), path.end());
-                        return true;
-                    }
-
-                    const auto &vertices = aGraph.getOutVertices(currentVertex);
-                    for (const auto &v : vertices) {
-                        if (iVisited.test(v) == 0) {
-                            parents[v] = currentVertex;
-                            stack.push(v);
-                            iVisited.set(v);
-                        }
-                    }
-                }
-            }
-            return false;
         }
 
         auto stronglyConnectedComponents2(const Graph<VERTEX_TYPE> &aGraph) {
@@ -420,7 +399,7 @@ namespace Graph::Fasp {
                 // If we have weights assigned to edges then we need to do min-cut, if not it is always safe to remove current edge
                 bool shouldRemoveCurrentEdge = true;
                 if (aUseWeights) {
-                    auto mc = path.minStCutFordFulkerson(workGraph, e.dst, e.src, aWeights);
+                    auto mc = path.minStCut(workGraph, e.dst, e.src, aWeights);
                     if (mc < aWeights.at(e)) {
                         // Do not remove that edge
                         shouldRemoveCurrentEdge = false;
