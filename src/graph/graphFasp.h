@@ -173,7 +173,7 @@ namespace Graph::Fasp {
                 if (!pathExists) continue;
 
                 aGraph.removeEdge(e);
-                auto scc = stronglyConnectedComponents2(aGraph);
+                auto scc = stronglyConnectedComponents(aGraph);
 
                 std::vector<Edge> redEdges;
                 bool prevCandidate = false;
@@ -206,7 +206,7 @@ namespace Graph::Fasp {
             // 1. Remove an edge of interest 'aEdge' and find all connected components bigger than 1
             //    They consist from edges which are cycles not belonging only to aEdge so remove them.
             aGraph.removeEdge(aEdge);
-            const auto scc = stronglyConnectedComponents2(aGraph);//Tools::stronglyConnectedComponents2(aGraph);
+            const auto scc = stronglyConnectedComponents(aGraph);//Tools::stronglyConnectedComponents2(aGraph);
             for (const auto &s : scc) {
                 if (s.size() == 1) continue;
                 // we get sets of vertices from SCC, find all edges connecting vertices in given SCC and remove
@@ -282,37 +282,48 @@ namespace Graph::Fasp {
             return (aNumEdgesToRemove > 0);
         }
 
-        auto stronglyConnectedComponents2(const Graph<VERTEX_TYPE> &aGraph) {
-            iVisited.clearAll();
-            auto &sh = iVisited;
+        /**
+         * Finds strongly connected components in the provided graph. It is an implementation
+         * of Trajan's algorithm converted from recursive to iterative version (it is
+         * about 2x faster and much more cache friendly):
+         * <a href=https://en.wikipedia.org/wiki/Tarjan%27s_strongly_connected_components_algorithm>Trajan's algorithm on wiki</a>
+         * @param aGraph - input graph
+         * @return vector of sets, each element of vector is one SCC
+         */
+        auto stronglyConnectedComponents(const Graph<VERTEX_TYPE> &aGraph) {
             stack.clear();
+            // we will use iVisited to keep track of all elements in the stack - this is O(1) check instead of going
+            // through all the stack elements
+            iVisited.clearAll();
 
             int index_counter = 0;
             const int numOfV = aGraph.getNumOfVertices();
-            for (std::size_t i = 0; i < lowLinks.size(); ++i) lowLinks[i] = -1;
+            for (auto &lowLink : lowLinks) lowLink = -1;
 
             std::vector<std::unordered_set<VERTEX_TYPE>> result; result.reserve(numOfV);
 
             std::function<void(const VERTEX_TYPE &)> strongconnect = [&](const VERTEX_TYPE &node) {
 
-                struct R {
-                    const VERTEX_TYPE v;
-                    const VERTEX_TYPE idx;
-                    R(VERTEX_TYPE aV, VERTEX_TYPE aIdx) : v(aV), idx(aIdx) {}
+                // state vector and 'S' structure are for storing current index and vertex to roll back to it after processing
+                // children of this vertex. In regular Trajan algorithm this is not needed since we just call strongconnect recurently so
+                // when we are back everything is there. In iterative approach we need to somehow rollback to previous values.
+                struct S {
+                    VERTEX_TYPE vertex;
+                    VERTEX_TYPE childIndex;
+                    S(VERTEX_TYPE aV, VERTEX_TYPE aIdx) : vertex(aV), childIndex(aIdx) {}
                 };
-
-                std::vector<R> r; r.reserve(numOfV);
-                r.push_back(R{node, 0});
+                std::vector<S> state; state.reserve(numOfV);
+                state.push_back(S{node, 0});
 
                 bool initRun = true;
 
-                while (r.size() > 0) {
+                while (state.size() > 0) {
+                    // we have process all the children so roll back to previous state
+                    auto [currentNode, currChildIndex] = state.back();
+                    state.pop_back();
 
-                    auto &b = r.back();
-                    VERTEX_TYPE currentNode =  b.v;
-                    int ci = b.idx;
-                    r.pop_back();
-
+                    // Yes, this is label for 'goto'. You cannot blame me if you do not try to write
+                    // iterative approach by yourself.
                     processSuccessor:
 
                     if (initRun) {
@@ -320,22 +331,22 @@ namespace Graph::Fasp {
                         lowLinks[currentNode] = index_counter;
                         ++index_counter;
                         stack.push(currentNode);
-                        sh.set(currentNode);
+                        iVisited.set(currentNode);
                         initRun = false;
                     }
                     auto ov = aGraph.getOutVertices(currentNode);
-                    for(std::size_t i = ci; i < ov.size(); ++i) {
+                    for(std::size_t i = currChildIndex; i < ov.size(); ++i) {
                         auto successor = ov[i];
                         if (lowLinks[successor] == -1) {
                             // save the state (it would be recurrent call in default version of Trajan's algorithm)
-                            r.push_back(R(currentNode, i + 1));
+                            state.push_back(S(currentNode, i + 1));
                             // set values for successor and repeat from beginning ('goto' is bad... I know).
                             currentNode = successor;
-                            ci = 0;
+                            currChildIndex = 0;
                             initRun = true;
                             goto processSuccessor;
                         }
-                        else if (sh.test(successor)) {
+                        else if (iVisited.test(successor)) {
                             // the successor is in the stack and hence in the current strongly connected component (SCC)
                             lowLinks[currentNode] = std::min(lowLinks.at(currentNode), index[successor]);
                         }
@@ -347,14 +358,14 @@ namespace Graph::Fasp {
 
                         while (true) {
                             auto successor = stack.pop();
-                            sh.clear(successor);
+                            iVisited.clear(successor);
                             connectedComponent.emplace(successor);
                             if (successor == currentNode) break;
                         }
                         result.emplace_back(std::move(connectedComponent));
                     }
-                    if (r.size() > 0) {
-                        auto predecessor = r.back().v;
+                    if (state.size() > 0) {
+                        auto predecessor = state.back().vertex;
                         lowLinks[predecessor] = std::min(lowLinks.at(predecessor), lowLinks.at(currentNode));
                     }
                 }
@@ -431,7 +442,7 @@ namespace Graph::Fasp {
         if (WEIGHTED) std::cout << "Graph with WEIGHTS!\n";
         auto cleanGraphWithScc = [](Graph<VERTEX_TYPE> &aGraph, GraphSpeedUtils<VERTEX_TYPE> &path) {
             int cnt1 = 0, cntBig = 0;
-            auto scc = path.stronglyConnectedComponents2(aGraph);
+            auto scc = path.stronglyConnectedComponents(aGraph);
             for (const auto &s : scc) {
                 if (s.size() == 1) {cnt1++; aGraph.removeVertex(*s.begin());}
                 else cntBig++;

@@ -5,6 +5,7 @@
 #include "gmock/gmock.h"
 #include <iostream>
 
+using ::testing::UnorderedElementsAreArray;
 using ::testing::UnorderedElementsAre;
 using ::testing::ElementsAre;
 
@@ -15,8 +16,8 @@ namespace {
 	using VERTEX_TYPE = uint16_t;
         Graph::Fasp::GraphSpeedUtils<VERTEX_TYPE> u{7};
         // Test graph:
-        //                  /---> 3
-        //                 /---> 4
+        //           /---> 2
+        //          /---> 4
         //  0 ---> 1 ---> 3 ---> 5 ---> 6
         //                ^-------------
 
@@ -55,6 +56,10 @@ namespace {
 
             auto [pathExist2, path2] = u.findPathDFS(g, 6, 1);
             ASSERT_FALSE(pathExist2);
+
+            auto [pathExist3, path3] = u.findPathDFS(g, 2, 2);
+            ASSERT_TRUE(pathExist3);
+            ASSERT_THAT(path3, ElementsAre(2));
         }
 
         {   // 'isAcyclic'
@@ -73,6 +78,22 @@ namespace {
             auto gg = g; // copy 'g'
             gg.removeEdge({5, 6});
             ASSERT_EQ(u.findEdgesWithCycles(gg).size(), 0);
+        }
+
+        { // 'stronglyConnectedComponents'
+            auto scc = u.stronglyConnectedComponents(g);
+
+            // We should get (order not important):
+            // {6, 3, 5}, {4}, {2}, {1}, {0}
+            std::vector<std::unordered_set<VERTEX_TYPE>> expected;
+            expected.emplace_back(std::unordered_set<VERTEX_TYPE>{0});
+            expected.emplace_back(std::unordered_set<VERTEX_TYPE>{1});
+            expected.emplace_back(std::unordered_set<VERTEX_TYPE>{2});
+            expected.emplace_back(std::unordered_set<VERTEX_TYPE>{4});
+            expected.emplace_back(std::unordered_set<VERTEX_TYPE>{3, 5, 6});
+
+            ASSERT_EQ(scc.size(), 5);
+            ASSERT_THAT(scc, UnorderedElementsAreArray(expected));
         }
 
     }
