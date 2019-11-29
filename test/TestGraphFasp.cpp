@@ -96,6 +96,30 @@ namespace {
             ASSERT_THAT(scc, UnorderedElementsAreArray(expected));
         }
 
+        { // 'minStCut'
+            Graph::Graph<VERTEX_TYPE> g;
+            Graph::Fasp::GraphSpeedUtils<VERTEX_TYPE> u{6};
+            for (int i = 0; i < 5; ++i) g.addVertex(i);
+            // forward edge
+            g.addEdge({0, 1});
+
+            // backward edge
+            g.addEdge({1, 0});
+
+            // double-edge backward path
+            g.addEdge({1, 2});
+            g.addEdge({2, 0});
+
+            // triple-edge backward path
+            g.addEdge({1, 3});
+            g.addEdge({3, 4});
+            g.addEdge({4, 0});
+
+            auto ep = Graph::Ext::getEdgeProperties(g, 1);
+
+            // We need to cut one edge in each backward path so result should be 3
+            ASSERT_EQ(u.minStCut(g, 1, 0, ep), 3);
+        }
     }
 }
 

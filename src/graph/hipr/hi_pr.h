@@ -810,7 +810,7 @@ template <typename T> T min(const T &a, const T &b) {return ( ( (a) < (b) ) ? a 
                        const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
                        const typename Graph<VERTEX_TYPE>::Vertex &aDst,
                        const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights,
-                       int maxV, std::vector<VERTEX_TYPE> &mapVertices) {
+                       std::vector<VERTEX_TYPE> &mapVertices) {
 #if (defined(PRINT_FLOW) || defined(CHECK_SOLUTION))
                 node *i;
                 arc *a;
@@ -833,7 +833,7 @@ template <typename T> T min(const T &a, const T &b) {return ( ( (a) < (b) ) ? a 
                 globUpdtFreq = GLOB_UPDT_FREQ;
 
                 node *nodesPtr;
-                parse(&n, &m, &nodes, &arcs, &cap, &source, &sink, &nMin, &nodesPtr, aGraph, aSrc, aDst, aWeights, maxV, mapVertices);
+                parse(&n, &m, &nodes, &arcs, &cap, &source, &sink, &nMin, &nodesPtr, aGraph, aSrc, aDst, aWeights, mapVertices);
 
                 cc = allocDS();
                 if (cc) {
@@ -857,7 +857,7 @@ template <typename T> T min(const T &a, const T &b) {return ( ( (a) < (b) ) ? a 
         int parse(long    *n_ad, long    *m_ad, node    **nodes_ad, arc     **arcs_ad, unsigned long    **cap_ad,
                   node    **source_ad, node    **sink_ad, long    *node_min_ad, node **nodesPtr, const Graph <VERTEX_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
                   const typename Graph<VERTEX_TYPE>::Vertex &aDst, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights,
-                  int maxV, std::vector<VERTEX_TYPE> &mapVertices) {
+                  std::vector<VERTEX_TYPE> &mapVertices) {
 
             long n = aGraph.getNumOfVertices();
             long m = aGraph.getNumOfEdges();
@@ -884,13 +884,13 @@ template <typename T> T min(const T &a, const T &b) {return ( ( (a) < (b) ) ? a 
             node    *ndp;
             long arc_num;
 
-            for (std::size_t i = 0; i < mapVertices.size(); ++i) mapVertices[i] = -1;
+            for (std::size_t i = 0; i < mapVertices.size(); ++i) mapVertices[i] = static_cast<VERTEX_TYPE>(-1);
 
             int newIdx = 0;
             for (auto &e : aGraph.getEdges()) {
                 auto capacity = aWeights.at(e);
-                if (mapVertices[e.src] == -1) mapVertices[e.src] = newIdx++;
-                if (mapVertices[e.dst] == -1) mapVertices[e.dst] = newIdx++;
+                if (mapVertices[e.src] == static_cast<VERTEX_TYPE>(-1)) mapVertices[e.src] = newIdx++;
+                if (mapVertices[e.dst] == static_cast<VERTEX_TYPE>(-1)) mapVertices[e.dst] = newIdx++;
                 tail = mapVertices[e.src];
                 head = mapVertices[e.dst];
                 cap = capacity;

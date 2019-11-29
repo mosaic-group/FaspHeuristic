@@ -241,8 +241,8 @@ namespace Graph::Fasp {
         }
 
         /**
-         * Implementation of maximum flow / min cut algorithm:
-         * https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm
+         * Find maximum flow / min cut using HIPR implementation from:
+         * http://www.avglab.com/andrew/soft.html
          * @return maxFlow value
          */
         template<typename EDGE_PROP_TYPE>
@@ -251,7 +251,7 @@ namespace Graph::Fasp {
                       const typename Graph<VERTEX_TYPE>::Vertex &aDst,
                       const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
             assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
-            auto maxFlow = HIPR().runHipr(aGraph, aSrc, aDst, aWeights, stack.capacity(), parents);
+            auto maxFlow = HIPR().runHipr(aGraph, aSrc, aDst, aWeights, parents);
             return maxFlow;
         }
 
