@@ -275,9 +275,9 @@ namespace Graph::Fasp {
         /**
          * Generates subgraph of input graph (modifies it) by removing wanted number of edges with cycles.
          * There will be one cycle left in a input graph (if there was at least one cycle in input graph).
-         * @param aGraph input/output graph
-         * @param aNumEdgesToRemove number of edges to be removed (migh be less if not sufficient number of edges with cycles).
-         * @param aBlueEdges edges that should not be removed
+         * @param[in, out] aGraph input/output graph
+         * @param[in] aNumEdgesToRemove number of edges to be removed (migh be less if not sufficient number of edges with cycles).
+         * @param[in]aBlueEdges edges that should not be removed
          */
         void getRandomSubgraph(Graph <VERTEX_TYPE> &aGraph, int aNumEdgesToRemove, const EdgesSet<VERTEX_TYPE> &aBlueEdges) {
             int edgesRemovedCnt = 0;
@@ -285,23 +285,20 @@ namespace Graph::Fasp {
 
             while (edgesRemovedCnt < aNumEdgesToRemove) {
                 // We need to find edges with cycles each time (previously removed edge could kill a cycle with a lot of edges).
+                // From found edges remove 'blue edges' which should not be processed
                 auto edgesWithCycles = findEdgesWithCycles(aGraph);
+                edgesWithCycles.erase(
+                        std::remove_if(edgesWithCycles.begin(), edgesWithCycles.end(), [&aBlueEdges] (const typename EdgesSet<VERTEX_TYPE>::value_type &edge) { return aBlueEdges.find(edge) != aBlueEdges.end(); }),
+                        edgesWithCycles.end());
+
                 auto n = edgesWithCycles.size();
+
                 if (n == 0) {
                     // If there is no more cycles revert last removed edge - we still want ISO-CUT algorithm to have something to cut.
                     if (edgesRemovedCnt > 0) aGraph.addEdge(lastRemovedRndEdge);
                     return;
                 } else {
-                    // Try to remove random edge which is not 'blue'
-                    // NOTE: we could first calculate set (edgesWithCycles - aBlueEdges) and then choose randomly one edge
-
-//                    std::vector<int> result;
-//                    std::copy_if(lhs.begin(), lhs.end(), std::back_inserter(result),
-//                                 [&rhs] (int needle) { return rhs.find(needle) == rhs.end(); });
-//
-                    do {
-                        lastRemovedRndEdge = edgesWithCycles[::Tools::randInt(0, n - 1)];
-                    } while (aBlueEdges.find(lastRemovedRndEdge) != aBlueEdges.end());
+                    lastRemovedRndEdge = edgesWithCycles[::Tools::randInt(0, n - 1)];
                     aGraph.removeEdge(lastRemovedRndEdge);
                     ++edgesRemovedCnt;
                 }
@@ -309,12 +306,11 @@ namespace Graph::Fasp {
         }
 
         template<typename EDGE_PROP_TYPE>
-        auto getRedEdge(Graph <VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
+        auto getRedEdge(Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, const typename Graph<VERTEX_TYPE>::Edges &aEdges) {
             using Edge = typename Graph<VERTEX_TYPE>::Edge;
             Edge redEdge{};
             int maxMcRedEdge = 0;
-
-            for (const auto &e : aGraph.getEdges()) {
+            for (const auto &e : aEdges) {
                 EDGE_PROP_TYPE eCapacity = aWeights.at(e);
                 if (!pathExistsDFS(aGraph, e.dst, e.src)) continue; // optimization
 
@@ -334,7 +330,6 @@ namespace Graph::Fasp {
                     if (currCandidate && prevCandidate) redEdges.emplace_back(Edge{somePath[i - 1], somePath[i]});
                     prevCandidate = currCandidate;
                 }
-
 
                 aGraph.addEdge(e);
                 for (auto &ee : redEdges) {
@@ -441,7 +436,7 @@ namespace Graph::Fasp {
             if (!wasGraphModified) break;
         }
         if (removedEdgesSA.size() == 0 && relaxSA) {
-            auto [maxMcRedEdge, redEdge] = path.getRedEdge(outGraph, aWeights);
+            auto [maxMcRedEdge, redEdge] = path.getRedEdge(outGraph, aWeights, outGraph.getEdges());
             if (maxMcRedEdge > 0) {
                 removedEdgesGR.push_back(redEdge);
             }

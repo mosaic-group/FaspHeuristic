@@ -202,7 +202,7 @@ namespace {
             }
             Graph::Fasp::EdgesSet<VERTEX_TYPE> blueEdges;
 
-            // First test - no blue edges provided
+            // ------------ First test - no blue edges provided
             // Complete graph with 5 vertices has 20 edges
             auto gg = g;
             ASSERT_EQ(gg.getNumOfEdges(), 20);
@@ -217,7 +217,7 @@ namespace {
             ASSERT_TRUE(gg.getNumOfEdges() > 0);
             ASSERT_TRUE(u.findEdgesWithCycles(gg).size() > 0);
 
-            // Second test - blue edges provided
+            // ------------ Second test - blue edges provided
             // Add to blueEdges all outgoing edges for vertices 0, 1, 2
             for (VERTEX_TYPE s = 0; s < 3; ++s) {
                 for (VERTEX_TYPE t = 0; t < 5; ++t) {
@@ -237,7 +237,56 @@ namespace {
             u.getRandomSubgraph(gg, 15, blueEdges);
             ASSERT_TRUE(gg.getNumOfEdges() > 0);
             ASSERT_TRUE(u.findEdgesWithCycles(gg).size() > 0);
-            std::cout << gg.getNumOfEdges() << std::endl;
+            // Check if all 'blue edges' are still in graph
+            for (VERTEX_TYPE s = 0; s < 3; ++s) {
+                for (VERTEX_TYPE t = 0; t < 5; ++t) {
+                    if (s != t) {
+                        ASSERT_TRUE(gg.hasEdge(Edge{s, t}));
+                    }
+                }
+            }
+        }
+
+        { // 'getRedEdge'
+
+            Graph::Graph<VERTEX_TYPE> g;
+            Graph::Fasp::GraphSpeedUtils<VERTEX_TYPE> u{8};
+            for (int i = 0; i < 8; ++i) g.addVertex(i);
+            g.addEdge({0, 1});
+            g.addEdge({1, 2});
+            g.addEdge({2, 3});
+            g.addEdge({3, 4});
+            g.addEdge({4, 5});
+            g.addEdge({5, 0});
+
+            g.addEdge({3, 6});
+            g.addEdge({6, 2});
+
+            g.addEdge({5, 7});
+            g.addEdge({7, 4});
+
+            auto ep = Graph::Ext::getEdgeProperties(g, 1);
+            ep[{5, 7}] = 2;
+            ep[{7, 4}] = 3;
+            ep[{3, 6}] = 4;
+            ep[{6, 2}] = 5;
+
+            typename Graph::Graph<VERTEX_TYPE>::Edges edges{};
+            edges.emplace_back(Edge{0, 1});
+
+            // From two candidates ({2, 3}, {4, 5}) the first one should be preferred since it has
+            // higher min-cut
+            auto [mc, e] = u.getRedEdge(g, ep, edges);
+            ASSERT_EQ(mc, 5);
+            ASSERT_EQ(e, (Edge{2, 3}));
+
+            // Modified a little bit weights in graph to change preferred edge to {4, 5}
+            ep[{5, 7}] = 6;
+            ep[{7, 4}] = 7;
+
+            auto [mc2, e2] = u.getRedEdge(g, ep, edges);
+            ASSERT_EQ(mc2, 7);
+            ASSERT_EQ(e2, Edge(4, 5) );
         }
     }
 }

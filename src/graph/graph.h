@@ -33,7 +33,8 @@ namespace Graph {
         public:
             Vertex src;
             Vertex dst;
-
+            Edge() : src(-1), dst(-1) {}
+            Edge(VERTEX_TYPE aSrc, VERTEX_TYPE aDst) : src(aSrc), dst(aDst) {}
             friend std::ostream &operator<<(std::ostream &os, const Edge &obj) {
                 os << "{" << obj.src << ", " << obj.dst << "}";
                 return os;
@@ -254,7 +255,7 @@ namespace Graph {
         Edges getEdges() const {
             Edges edges;
             for (const auto &entry : graph) {
-                for(const auto &dst : entry.second.to) {
+                for (const auto &dst : entry.second.to) {
                     edges.emplace_back(Edge{entry.first, dst});
                 }
             }
