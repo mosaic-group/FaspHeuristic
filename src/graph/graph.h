@@ -160,7 +160,7 @@ namespace Graph {
             Vertices &to = graph[aE.src].to;
             Vertices &from = graph[aE.dst].from;
 
-            // Check if there is no such a edge already (no dupplication allowed)
+            // Check if there is no such a edge already (no duplication allowed)
             assert(std::find(to.begin(), to.end(), aE.dst) == to.end() && "Destination vertex exists!");
             assert(std::find(from.begin(), from.end(), aE.src) == from.end() && "Source vertex exists!");
 

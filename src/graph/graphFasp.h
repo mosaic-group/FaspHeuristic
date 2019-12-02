@@ -159,87 +159,6 @@ namespace Graph::Fasp {
             return edges;
         }
 
-        template<typename EDGE_PROP_TYPE>
-        auto getRedEdge(Graph <VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
-            using Edge = typename Graph<VERTEX_TYPE>::Edge;
-            Edge redEdge{};
-            int maxMcRedEdge = 0;
-
-            for (const auto &e : aGraph.getEdges()) {
-                EDGE_PROP_TYPE eCapacity = aWeights.at(e);
-                if (!pathExistsDFS(aGraph, e.dst, e.src)) continue; // optimization
-
-                auto [pathExists, somePath] = findPathDFS(aGraph, e.dst, e.src);
-                if (!pathExists) continue;
-
-                aGraph.removeEdge(e);
-                auto scc = stronglyConnectedComponents(aGraph);
-
-                std::vector<Edge> redEdges;
-                bool prevCandidate = false;
-                for (std::size_t i = 0; i < somePath.size(); ++i) {
-                    typename Graph<VERTEX_TYPE>::Vertex v = somePath[i];
-
-                    bool currCandidate = false;
-                    for (auto &s : scc) if (s.size() > 1 && s.find(v) != s.end()) {currCandidate = true; break;}
-                    if (currCandidate && prevCandidate) redEdges.emplace_back(Edge{somePath[i - 1], somePath[i]});
-                    prevCandidate = currCandidate;
-                }
-
-
-                aGraph.addEdge(e);
-                for (auto &ee : redEdges) {
-                    auto d = minStCut(aGraph, ee.dst, ee.src, aWeights);
-                    if (d > maxMcRedEdge) {
-                        maxMcRedEdge = d;
-                        redEdge = ee;
-                    }
-                }
-
-                if (maxMcRedEdge > eCapacity) break;
-            }
-
-            return std::pair{maxMcRedEdge, redEdge};
-        }
-
-        bool GStarBlue(Graph <VERTEX_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge, EdgesSet<VERTEX_TYPE> &aBlueEdges, bool weighted) {
-            // 1. Remove an edge of interest 'aEdge' and find all connected components bigger than 1
-            //    They consist from edges which are cycles not belonging only to aEdge so remove them.
-            aGraph.removeEdge(aEdge);
-            const auto scc = stronglyConnectedComponents(aGraph);//Tools::stronglyConnectedComponents2(aGraph);
-            for (const auto &s : scc) {
-                if (s.size() == 1) continue;
-                // we get sets of vertices from SCC, find all edges connecting vertices in given SCC and remove
-                for (const auto &v : s) {
-                    const auto outV = aGraph.getOutVertices(v);
-                    for (const auto &vo : outV) {
-                        if (s.find(vo) != s.end()) {
-                            aGraph.removeEdge({v, vo});
-                        }
-                    }
-                }
-            }
-
-            // 1.5 update blue edges
-            if (!weighted)
-            for (auto &e : aGraph.getEdges()) {
-                aBlueEdges.emplace(e);
-            }
-
-            // 2. There can be only one (or none) connected component with size > 1, if it is found
-            // then it consist aEdge and all its isolated cycles
-            if (pathExistsDFS(aGraph, aEdge.dst, aEdge.src)) return true;
-//            aGraph.addEdge(aEdge);
-
-
-//            auto scc2 = Tools::stronglyConnectedComponents(aGraph);
-//            for (const auto &s : scc2) {
-//                if (s.size() > 1) return true;
-//            }
-
-            return false;
-        }
-
         /**
          * Find maximum flow / min cut using HIPR implementation from:
          * http://www.avglab.com/andrew/soft.html
@@ -253,33 +172,6 @@ namespace Graph::Fasp {
             assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
             auto maxFlow = HIPR().runHipr(aGraph, aSrc, aDst, aWeights, parents);
             return maxFlow;
-        }
-
-
-        auto getRandomSubgraphNotBlue(Graph <VERTEX_TYPE> &aGraph, int aNumEdgesToRemove, const EdgesSet<VERTEX_TYPE> &blueEdges) {
-            int edgesRemovedCnt = 0;
-            typename Graph<VERTEX_TYPE>::Edge lastRndEdge{};
-            while (edgesRemovedCnt < aNumEdgesToRemove) {
-                auto edgesWithCycles = findEdgesWithCycles(aGraph);
-//                auto edgesWithCycles = findNotBlueEdges(aGraph);
-//                auto weights = Ext::getEdgeProperties(aGraph, 1);
-//                auto [_, edgesWithCycles] = Fasp::GR(aGraph, weights);
-                auto n = edgesWithCycles.size();
-//                std::cout << "n: " << n << std::endl;
-                if (n == 0) {
-                    if (edgesRemovedCnt > 0) aGraph.addEdge(lastRndEdge);
-                    else LOG(TRACE) << "Removed less edges than requested (" << edgesRemovedCnt << ", " << aNumEdgesToRemove << ")";
-//                    LOG(TRACE) << edgesWithCycles;
-                    return (edgesRemovedCnt > 0);
-                } else {
-                    lastRndEdge = edgesWithCycles[::Tools::randInt(0, n - 1)];
-                    while (blueEdges.find(lastRndEdge) != blueEdges.end()) {lastRndEdge = edgesWithCycles[::Tools::randInt(0, n - 1)];}
-                    aGraph.removeEdge(lastRndEdge);
-                    ++edgesRemovedCnt;
-                }
-            }
-
-            return (aNumEdgesToRemove > 0);
         }
 
         /**
@@ -379,6 +271,129 @@ namespace Graph::Fasp {
 
             return result;
         }
+
+        /**
+         * Generates subgraph of input graph (modifies it) by removing wanted number of edges with cycles.
+         * There will be one cycle left in a input graph (if there was at least one cycle in input graph).
+         * @param aGraph input/output graph
+         * @param aNumEdgesToRemove number of edges to be removed (migh be less if not sufficient number of edges with cycles).
+         * @param aBlueEdges edges that should not be removed
+         */
+        void getRandomSubgraph(Graph <VERTEX_TYPE> &aGraph, int aNumEdgesToRemove, const EdgesSet<VERTEX_TYPE> &aBlueEdges) {
+            int edgesRemovedCnt = 0;
+            typename Graph<VERTEX_TYPE>::Edge lastRemovedRndEdge{};
+
+            while (edgesRemovedCnt < aNumEdgesToRemove) {
+                // We need to find edges with cycles each time (previously removed edge could kill a cycle with a lot of edges).
+                auto edgesWithCycles = findEdgesWithCycles(aGraph);
+                auto n = edgesWithCycles.size();
+                if (n == 0) {
+                    // If there is no more cycles revert last removed edge - we still want ISO-CUT algorithm to have something to cut.
+                    if (edgesRemovedCnt > 0) aGraph.addEdge(lastRemovedRndEdge);
+                    return;
+                } else {
+                    // Try to remove random edge which is not 'blue'
+                    // NOTE: we could first calculate set (edgesWithCycles - aBlueEdges) and then choose randomly one edge
+
+//                    std::vector<int> result;
+//                    std::copy_if(lhs.begin(), lhs.end(), std::back_inserter(result),
+//                                 [&rhs] (int needle) { return rhs.find(needle) == rhs.end(); });
+//
+                    do {
+                        lastRemovedRndEdge = edgesWithCycles[::Tools::randInt(0, n - 1)];
+                    } while (aBlueEdges.find(lastRemovedRndEdge) != aBlueEdges.end());
+                    aGraph.removeEdge(lastRemovedRndEdge);
+                    ++edgesRemovedCnt;
+                }
+            }
+        }
+
+        template<typename EDGE_PROP_TYPE>
+        auto getRedEdge(Graph <VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
+            using Edge = typename Graph<VERTEX_TYPE>::Edge;
+            Edge redEdge{};
+            int maxMcRedEdge = 0;
+
+            for (const auto &e : aGraph.getEdges()) {
+                EDGE_PROP_TYPE eCapacity = aWeights.at(e);
+                if (!pathExistsDFS(aGraph, e.dst, e.src)) continue; // optimization
+
+                auto [pathExists, somePath] = findPathDFS(aGraph, e.dst, e.src);
+                if (!pathExists) continue;
+
+                aGraph.removeEdge(e);
+                auto scc = stronglyConnectedComponents(aGraph);
+
+                std::vector<Edge> redEdges;
+                bool prevCandidate = false;
+                for (std::size_t i = 0; i < somePath.size(); ++i) {
+                    typename Graph<VERTEX_TYPE>::Vertex v = somePath[i];
+
+                    bool currCandidate = false;
+                    for (auto &s : scc) if (s.size() > 1 && s.find(v) != s.end()) {currCandidate = true; break;}
+                    if (currCandidate && prevCandidate) redEdges.emplace_back(Edge{somePath[i - 1], somePath[i]});
+                    prevCandidate = currCandidate;
+                }
+
+
+                aGraph.addEdge(e);
+                for (auto &ee : redEdges) {
+                    auto d = minStCut(aGraph, ee.dst, ee.src, aWeights);
+                    if (d > maxMcRedEdge) {
+                        maxMcRedEdge = d;
+                        redEdge = ee;
+                    }
+                }
+
+                if (maxMcRedEdge > eCapacity) break;
+            }
+
+            return std::pair{maxMcRedEdge, redEdge};
+        }
+
+        /**
+         * Takes input graph aGraph and removes all edges which are not isolated w.r.t. aEdge
+         * Also updates 'blue edges' container with all edges that are left after removing SCCs. These edges
+         * don't need to be processed since they would have same isolated cycles as aEdge.
+         * @param aGraph - input graph (it will be modified).
+         * @param aEdge - edge to work with
+         * @param aBlueEdges - container to be updated with newly found 'blue edges'
+         * @param weighted - set to true if graph is weighted (skips 'blue edges' optimization)
+         * @return true if isolated cycles found, false otherwise
+         */
+        bool findIsolatedCycles(Graph <VERTEX_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge, EdgesSet<VERTEX_TYPE> &aBlueEdges, bool weighted) {
+            // 1. Remove an edge of interest 'aEdge' and find all connected components bigger than 1
+            //    They consist from edges which are cycles not belonging only to aEdge so remove them.
+            aGraph.removeEdge(aEdge);
+            const auto scc = stronglyConnectedComponents(aGraph);
+            for (const auto &s : scc) {
+                // If SCC contain single vertex then continue
+                if (s.size() == 1) continue;
+
+                // we get sets of vertices from SCC, find all edges connecting vertices in given SCC and remove
+                for (const auto &v : s) {
+                    const auto outVertices = aGraph.getOutVertices(v);
+                    for (const auto &vo : outVertices) {
+                        if (s.find(vo) != s.end()) {
+                            aGraph.removeEdge({v, vo});
+                        }
+                    }
+                }
+            }
+
+            // 2 update blue edges
+            if (!weighted)
+                for (auto &e : aGraph.getEdges()) {
+                    aBlueEdges.emplace(e);
+                }
+
+            // 3. Check if there is stil a path from head to tail of aEdge, if yes we have
+            //    isolated cycles.
+            if (pathExistsDFS(aGraph, aEdge.dst, aEdge.src)) return true;
+
+            return false;
+        }
+
     };
 
     // ------------------------------------------------------------------------
@@ -405,7 +420,7 @@ namespace Graph::Fasp {
                 if (!path.pathExistsDFS(outGraph, e.dst, e.src)) continue;
 
                 auto workGraph{outGraph};
-                if (!path.GStarBlue(workGraph, e, setOfEdges, aUseWeights)) continue;
+                if (!path.findIsolatedCycles(workGraph, e, setOfEdges, aUseWeights)) continue;
 
                 // If we have weights assigned to edges then we need to do min-cut, if not it is always safe to remove current edge
                 bool shouldRemoveCurrentEdge = true;
@@ -512,7 +527,7 @@ namespace Graph::Fasp {
                              if (i == 0) tt.stop_timer();
 
                              if (i == 0) tt.start_timer("3 - random subgraph");
-                             path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove, blueEdges);
+                             path.getRandomSubgraph(workGraph, numEdgesToRemove, blueEdges);
                              if (i == 0) tt.stop_timer();
 
                              if (i == 0) tt.start_timer("4 - SA blue");
@@ -543,7 +558,7 @@ namespace Graph::Fasp {
                     if (i == 0) tt.stop_timer();
 
                     if (i == 0) tt.start_timer("3 - random subgraph");
-                    path.getRandomSubgraphNotBlue(workGraph, numEdgesToRemove, blueEdges);
+                    path.getRandomSubgraph(workGraph, numEdgesToRemove, blueEdges);
                     if (i == 0) tt.stop_timer();
 
                     if (i == 0) tt.start_timer("4 - SA blue");
