@@ -12,7 +12,7 @@ using ::testing::ElementsAre;
 
 namespace {
 
-    TEST(TestGraphFasp, testPathHero) {
+    TEST(TestGraphFasp, testGraphSpeedUtils) {
 	using VERTEX_TYPE = uint16_t;
         Graph::Fasp::GraphSpeedUtils<VERTEX_TYPE> u{7};
         // Test graph:
@@ -94,6 +94,11 @@ namespace {
 
             ASSERT_EQ(scc.size(), 5);
             ASSERT_THAT(scc, UnorderedElementsAreArray(expected));
+
+            scc = u.stronglyConnectedComponents(g, true);
+            ASSERT_EQ(scc.size(), 1);
+            ASSERT_THAT(scc, UnorderedElementsAre(std::unordered_set<VERTEX_TYPE>{3, 5, 6}));
+
         }
 
         { // 'minStCut'
@@ -215,7 +220,7 @@ namespace {
             // It should remove as many as possible but still one cycle should be there
             u.getRandomSubgraph(gg, 15, blueEdges);
             ASSERT_TRUE(gg.getNumOfEdges() > 0);
-            ASSERT_TRUE(u.findEdgesWithCycles(gg).size() > 0);
+            ASSERT_FALSE(u.findEdgesWithCycles(gg).empty());
 
             // ------------ Second test - blue edges provided
             // Add to blueEdges all outgoing edges for vertices 0, 1, 2
@@ -236,7 +241,7 @@ namespace {
             // It should remove as many as possible but still one cycle should be there
             u.getRandomSubgraph(gg, 15, blueEdges);
             ASSERT_TRUE(gg.getNumOfEdges() > 0);
-            ASSERT_TRUE(u.findEdgesWithCycles(gg).size() > 0);
+            ASSERT_FALSE(u.findEdgesWithCycles(gg).empty());
             // Check if all 'blue edges' are still in graph
             for (VERTEX_TYPE s = 0; s < 3; ++s) {
                 for (VERTEX_TYPE t = 0; t < 5; ++t) {

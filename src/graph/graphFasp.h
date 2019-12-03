@@ -28,14 +28,14 @@ namespace Graph::Fasp {
     class alignas (64) GraphSpeedUtils {
 
         // Allocation of structures/memory/containers shared by all algorithms from GraphSpeedUtils class
-        DynamicBitset <uint32_t, uint16_t> iVisited;
+        DynamicBitset <uint32_t, VERTEX_TYPE> iVisited;
         Stack <VERTEX_TYPE> stack;
         std::vector<VERTEX_TYPE> parents;
-        std::vector<int16_t> lowLinks;
-        std::vector<int16_t> index;
-    public:
-
+        std::vector<VERTEX_TYPE> lowLinks;
+        std::vector<VERTEX_TYPE> index;
         std::vector<VERTEX_TYPE> path;
+
+    public:
         explicit GraphSpeedUtils(std::size_t aN) : iVisited(aN), stack(aN), parents(aN, 0), lowLinks(aN, -1), index(aN, -1) {
             path.reserve(aN);
         }
@@ -179,10 +179,13 @@ namespace Graph::Fasp {
          * of Trajan's algorithm converted from recursive to iterative version (it is
          * about 2x faster and much more cache friendly):
          * <a href=https://en.wikipedia.org/wiki/Tarjan%27s_strongly_connected_components_algorithm>Trajan's algorithm on wiki</a>
+         *
+         * NOTE: It is using max value of VERTEX_TYPE to indicate unprocessed vertex
+         *
          * @param aGraph - input graph
          * @return vector of sets, each element of vector is one SCC
          */
-        auto stronglyConnectedComponents(const Graph<VERTEX_TYPE> &aGraph) {
+        auto stronglyConnectedComponents(const Graph<VERTEX_TYPE> &aGraph, bool aSkipSingleVertexSCCs = false) {
             stack.clear();
             // we will use iVisited to keep track of all elements in the stack - this is O(1) check instead of going
             // through all the stack elements
@@ -190,7 +193,10 @@ namespace Graph::Fasp {
 
             int index_counter = 0;
             const int numOfV = aGraph.getNumOfVertices();
-            for (auto &lowLink : lowLinks) lowLink = -1;
+
+            const auto unprocessedVertex = std::numeric_limits<VERTEX_TYPE>::max();
+
+            for (auto &lowLink : lowLinks) lowLink = unprocessedVertex;
 
             std::vector<std::unordered_set<VERTEX_TYPE>> result; result.reserve(numOfV);
 
@@ -229,7 +235,7 @@ namespace Graph::Fasp {
                     auto ov = aGraph.getOutVertices(currentNode);
                     for(std::size_t i = currChildIndex; i < ov.size(); ++i) {
                         auto successor = ov[i];
-                        if (lowLinks[successor] == -1) {
+                        if (lowLinks[successor] == unprocessedVertex) {
                             // save the state (it would be recurrent call in default version of Trajan's algorithm)
                             state.push_back(S(currentNode, i + 1));
                             // set values for successor and repeat from beginning ('goto' is bad... I know).
@@ -240,12 +246,12 @@ namespace Graph::Fasp {
                         }
                         else if (iVisited.test(successor)) {
                             // the successor is in the stack and hence in the current strongly connected component (SCC)
-                            lowLinks[currentNode] = std::min(lowLinks.at(currentNode), index[successor]);
+                            lowLinks[currentNode] = std::min(lowLinks[currentNode], index[successor]);
                         }
                     }
 
                     // If `node` is a root node, pop the stack and generate an SCC
-                    if (lowLinks.at(currentNode) == index[currentNode]) {
+                    if (lowLinks[currentNode] == index[currentNode]) {
                         std::unordered_set<VERTEX_TYPE> connectedComponent; connectedComponent.reserve(stack.size());
 
                         while (true) {
@@ -254,17 +260,17 @@ namespace Graph::Fasp {
                             connectedComponent.emplace(successor);
                             if (successor == currentNode) break;
                         }
-                        result.emplace_back(std::move(connectedComponent));
+                        if (!aSkipSingleVertexSCCs || connectedComponent.size() > 1) result.emplace_back(std::move(connectedComponent));
                     }
                     if (state.size() > 0) {
                         auto predecessor = state.back().vertex;
-                        lowLinks[predecessor] = std::min(lowLinks.at(predecessor), lowLinks.at(currentNode));
+                        lowLinks[predecessor] = std::min(lowLinks[predecessor], lowLinks[currentNode]);
                     }
                 }
             };
 
             for (auto &node : aGraph.getVertices()) {
-                if (lowLinks[node] == -1) {
+                if (lowLinks[node] == unprocessedVertex) {
                     strongconnect(node);
                 }
             }
@@ -305,45 +311,60 @@ namespace Graph::Fasp {
             }
         }
 
+        /**
+         * Finds 'red edge' in a graph (edge which is a part of cycle of some edge 'e' and at the same time is
+         * a part of another cycle of G\e). After finding first 'red edge' which is good enough (mincut of such edge is
+         * bigger then capacity of edge 'e' we consider that good 'red edge' was found.
+         * @tparam EDGE_PROP_TYPE
+         * @param aGraph - input graph
+         * @param aWeights - weights of edges
+         * @param aEdges - set of edges to search
+         * @return pair of mincut and red edge
+         */
         template<typename EDGE_PROP_TYPE>
         auto getRedEdge(Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, const typename Graph<VERTEX_TYPE>::Edges &aEdges) {
             using Edge = typename Graph<VERTEX_TYPE>::Edge;
-            Edge redEdge{};
-            int maxMcRedEdge = 0;
-            for (const auto &e : aEdges) {
-                EDGE_PROP_TYPE eCapacity = aWeights.at(e);
-                if (!pathExistsDFS(aGraph, e.dst, e.src)) continue; // optimization
 
-                auto [pathExists, somePath] = findPathDFS(aGraph, e.dst, e.src);
+            Edge maxRedEdge{};
+            int maxMincutOfRedEdge = 0;
+
+            for (const auto &e : aEdges) {
+                // find any path being a part of cycle for this edge
+                const auto [pathExists, path] = findPathDFS(aGraph, e.dst, e.src);
                 if (!pathExists) continue;
 
+                // find SCCs not including edge 'e'
                 aGraph.removeEdge(e);
-                auto scc = stronglyConnectedComponents(aGraph);
-
-                std::vector<Edge> redEdges;
-                bool prevCandidate = false;
-                for (std::size_t i = 0; i < somePath.size(); ++i) {
-                    typename Graph<VERTEX_TYPE>::Vertex v = somePath[i];
-
-                    bool currCandidate = false;
-                    for (auto &s : scc) if (s.size() > 1 && s.find(v) != s.end()) {currCandidate = true; break;}
-                    if (currCandidate && prevCandidate) redEdges.emplace_back(Edge{somePath[i - 1], somePath[i]});
-                    prevCandidate = currCandidate;
-                }
-
+                auto scc = stronglyConnectedComponents(aGraph, true);
                 aGraph.addEdge(e);
-                for (auto &ee : redEdges) {
-                    auto d = minStCut(aGraph, ee.dst, ee.src, aWeights);
-                    if (d > maxMcRedEdge) {
-                        maxMcRedEdge = d;
-                        redEdge = ee;
+
+                // find 'red edges' in a found path
+                std::vector<Edge> redEdges;
+                for (std::size_t i = 0; i < path.size(); ++i) {
+                    for (auto &s : scc) {
+                        // if edge is a part of any connected component it is a 'red edge'!
+                        if (s.find(path[i - 1]) != s.end() && s.find(path[i]) != s.end()) {
+                            redEdges.emplace_back(Edge{path[i - 1], path[i]});
+                            break;
+                        }
                     }
                 }
 
-                if (maxMcRedEdge > eCapacity) break;
+                // find the 'red edge' with highest mincut
+                for (auto &redEdge : redEdges) {
+                    auto mc = minStCut(aGraph, redEdge.dst, redEdge.src, aWeights);
+                    if (mc > maxMincutOfRedEdge) {
+                        maxMincutOfRedEdge = mc;
+                        maxRedEdge = redEdge;
+                    }
+                }
+
+                // if found 'red edge' has mincut higher then weight of edge 'e' we found good candidate!
+                auto eCapacity = aWeights.at(e);
+                if (maxMincutOfRedEdge > eCapacity) break;
             }
 
-            return std::pair{maxMcRedEdge, redEdge};
+            return std::pair{maxMincutOfRedEdge, maxRedEdge};
         }
 
         /**
@@ -360,11 +381,8 @@ namespace Graph::Fasp {
             // 1. Remove an edge of interest 'aEdge' and find all connected components bigger than 1
             //    They consist from edges which are cycles not belonging only to aEdge so remove them.
             aGraph.removeEdge(aEdge);
-            const auto scc = stronglyConnectedComponents(aGraph);
+            const auto scc = stronglyConnectedComponents(aGraph, true);
             for (const auto &s : scc) {
-                // If SCC contain single vertex then continue
-                if (s.size() == 1) continue;
-
                 // we get sets of vertices from SCC, find all edges connecting vertices in given SCC and remove
                 for (const auto &v : s) {
                     const auto outVertices = aGraph.getOutVertices(v);
@@ -384,11 +402,8 @@ namespace Graph::Fasp {
 
             // 3. Check if there is stil a path from head to tail of aEdge, if yes we have
             //    isolated cycles.
-            if (pathExistsDFS(aGraph, aEdge.dst, aEdge.src)) return true;
-
-            return false;
+            return pathExistsDFS(aGraph, aEdge.dst, aEdge.src);
         }
-
     };
 
     // ------------------------------------------------------------------------
@@ -488,7 +503,6 @@ namespace Graph::Fasp {
         //auto [dummy1, grEdges] = Fasp::GR(g, aWeights); int faspSize = grEdges.size(); numEdgesToRemoveInitVal = faspSize == 0 ? 1 : g.getNumOfEdges() / faspSize / 2;
 //        std::cout << "EDGES TO REMOVE INIT VAL = " << numEdgesToRemoveInitVal << std::endl;
         int numEdgesToRemove = numEdgesToRemoveInitVal;
-        [[maybe_unused]] int cnt = 1;
         while (true) {
 
 //            std::cout << "----- loop=" << cnt++ << "\n";
@@ -547,9 +561,9 @@ namespace Graph::Fasp {
                     if (i == 0) { tt.stop_timer(); }
 
                     if (i == 0) tt.start_timer("2 - prepare path hero");
-                    auto vertices = workGraph.getVertices();
-                    auto maxId = std::max_element(vertices.begin(), vertices.end());
-                    GraphSpeedUtils<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
+                    auto vertices2 = workGraph.getVertices();
+                    auto maxId2 = std::max_element(vertices2.begin(), vertices2.end());
+                    GraphSpeedUtils<VERTEX_TYPE> path(maxId2 == vertices2.end() ? 1 : *maxId2 + 1); // maxId included
                     if (i == 0) tt.stop_timer();
 
                     if (i == 0) tt.start_timer("3 - random subgraph");
