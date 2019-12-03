@@ -169,7 +169,6 @@ namespace Graph::Fasp {
                       const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
                       const typename Graph<VERTEX_TYPE>::Vertex &aDst,
                       const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
-            assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
             auto maxFlow = HIPR().runHipr(aGraph, aSrc, aDst, aWeights, parents);
             return maxFlow;
         }
@@ -340,7 +339,7 @@ namespace Graph::Fasp {
 
                 // find 'red edges' in a found path
                 std::vector<Edge> redEdges;
-                for (std::size_t i = 0; i < path.size(); ++i) {
+                for (std::size_t i = 1; i < path.size(); ++i) {
                     for (auto &s : scc) {
                         // if edge is a part of any connected component it is a 'red edge'!
                         if (s.find(path[i - 1]) != s.end() && s.find(path[i]) != s.end()) {
@@ -408,56 +407,63 @@ namespace Graph::Fasp {
 
     // ------------------------------------------------------------------------
 
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
-    static auto superAlgorithmBlue(Graph<VERTEX_TYPE> &outGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, GraphSpeedUtils<VERTEX_TYPE> &path, bool aUseWeights = false, bool relaxSA = false) {
-        assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
-        typename Graph<VERTEX_TYPE>::Edges removedEdgesSA;
-        typename Graph<VERTEX_TYPE>::Edges removedEdgesGR;
+    template<bool aUseWeights = true, typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
+    static auto isoCut(Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, GraphSpeedUtils<VERTEX_TYPE> &aUtils, bool aUseRelaxApproach = false) {
+        typename Graph<VERTEX_TYPE>::Edges removedEdges;
+        EdgesSet<VERTEX_TYPE> blueEdges;
 
-        EdgesSet<VERTEX_TYPE> setOfEdges{};
-
-        int cnt = 0;
         while(true) {
-            cnt++;
             bool wasGraphModified = false;
 
-            setOfEdges.clear();
+            blueEdges.clear();
 
-            for (const auto &e : outGraph.getEdges()) {
-                if (setOfEdges.find(e) != setOfEdges.end()) continue; // e is in 'blue edges' set
+            for (const auto &e : aGraph.getEdges()) {
+                if (blueEdges.find(e) != blueEdges.end()) continue; // e is in 'blue edges' set
 
                 // Optimization, if there is no path back from dst to src, then edge has no cycles.
-                if (!path.pathExistsDFS(outGraph, e.dst, e.src)) continue;
+                if (!aUtils.pathExistsDFS(aGraph, e.dst, e.src)) continue;
 
-                auto workGraph{outGraph};
-                if (!path.findIsolatedCycles(workGraph, e, setOfEdges, aUseWeights)) continue;
+                // Find isolated cycles of edge 'e'. If there are no iso-cycles then continue with next edge.
+                auto isoCyclesOfCurrentEdge{aGraph};
+                if (!aUtils.findIsolatedCycles(isoCyclesOfCurrentEdge, e, blueEdges, aUseWeights)) continue;
 
                 // If we have weights assigned to edges then we need to do min-cut, if not it is always safe to remove current edge
-                bool shouldRemoveCurrentEdge = true;
+                bool shouldRemoveCurrentEdge = true; // default for non weighted graphs
                 if (aUseWeights) {
-                    auto mc = path.minStCut(workGraph, e.dst, e.src, aWeights);
-                    if (mc < aWeights.at(e)) {
-                        // Do not remove that edge
-                        shouldRemoveCurrentEdge = false;
-                    }
+                    // Check if edge should be removed
+                    auto mc = aUtils.minStCut(isoCyclesOfCurrentEdge, e.dst, e.src, aWeights);
+                    if (mc < aWeights.at(e)) shouldRemoveCurrentEdge = false;
                 }
 
+                // If there is edge to remove we should also set flag to repeat whole edges loop.
+                // Removing one edge can cause that other edges have isolated cycles.
                 if (shouldRemoveCurrentEdge) {
                     wasGraphModified = true;
-                    outGraph.removeEdge(e);
-                    removedEdgesSA.emplace_back(e);
+                    aGraph.removeEdge(e);
+                    removedEdges.emplace_back(e);
                 }
             }
             if (!wasGraphModified) break;
         }
-        if (removedEdgesSA.size() == 0 && relaxSA) {
-            auto [maxMcRedEdge, redEdge] = path.getRedEdge(outGraph, aWeights, outGraph.getEdges());
+
+        // If we have not found any edge we will use guess to find best candidate in relax mode.
+        typename Graph<VERTEX_TYPE>::Edges removedEdgesRelaxed;
+        if (removedEdges.size() == 0 && aUseRelaxApproach) {
+            auto [maxMcRedEdge, redEdge] = aUtils.getRedEdge(aGraph, aWeights, aGraph.getEdges());
             if (maxMcRedEdge > 0) {
-                removedEdgesGR.push_back(redEdge);
+                removedEdgesRelaxed.push_back(redEdge);
             }
         }
-        return std::tuple{removedEdgesSA, setOfEdges, removedEdgesGR};
+
+        return std::tuple{removedEdges, blueEdges, removedEdgesRelaxed};
     }
+
+    template<typename VERTEX_TYPE>
+    static auto isoCut(Graph<VERTEX_TYPE> &aGraph, GraphSpeedUtils<VERTEX_TYPE> &aUtils, bool aUseRelaxApproach = false) {
+        return isoCut<false>(aGraph, Ext::getEdgeProperties(aGraph, 1), aUtils, aUseRelaxApproach);
+    }
+
+    // ------------------------------------------------------------------------
 
     /**
      * Working original idea of how random FASP heuristic should work
@@ -492,7 +498,7 @@ namespace Graph::Fasp {
         int saRndEdgesCnt = 0;
         int redRndEdgesCnt = 0;
         // initial run of superAlgorithm (SA)
-        auto [edgesToRemove, blueEdgesx, dummy2] = superAlgorithmBlue(g, aWeights, path, WEIGHTED);
+        auto [edgesToRemove, blueEdgesx, dummy2] = WEIGHTED ? isoCut(g, aWeights, path) : isoCut(g, path);
         auto blueEdges = blueEdgesx;
         g.removeEdges(edgesToRemove);
         saEdgesCnt += edgesToRemove.size();
@@ -540,7 +546,7 @@ namespace Graph::Fasp {
                              if (i == 0) tt.stop_timer();
 
                              if (i == 0) tt.start_timer("4 - SA blue");
-                             auto [edgesSA, _, edgesGR] = superAlgorithmBlue(workGraph, props[i], path, false, true);
+                             auto [edgesSA, _, edgesGR] = WEIGHTED ? isoCut(workGraph, props[i], path, true) : isoCut(workGraph, path, true);
                              if (i == 0) tt.stop_timer();
                              return std::pair{edgesSA, edgesGR};
                          });
@@ -571,7 +577,7 @@ namespace Graph::Fasp {
                     if (i == 0) tt.stop_timer();
 
                     if (i == 0) tt.start_timer("4 - SA blue");
-                    auto[edgesSA, _, edgesGR] = superAlgorithmBlue(workGraph, aWeights, path, WEIGHTED, true);
+                    auto[edgesSA, _, edgesGR] = WEIGHTED ? isoCut(workGraph, aWeights, path, true) : isoCut(workGraph, path, true);
                     if (i == 0) tt.stop_timer();
 
                     if (i == 0) tt.start_timer("5 - Getting edges");
@@ -601,7 +607,7 @@ namespace Graph::Fasp {
             }
 
             // Try to solve the rest with superAlgoritm - maybe it will now succeed!
-            auto [edgesToRemove, blueEdges2, dummy3] = superAlgorithmBlue(g, aWeights, path, WEIGHTED);
+            auto [edgesToRemove, blueEdges2, dummy3] = WEIGHTED ? isoCut(g, aWeights, path) : isoCut(g, path);
             blueEdges = blueEdges2;
             g.removeEdges(edgesToRemove);
             saEdgesCnt += edgesToRemove.size();
@@ -610,7 +616,8 @@ namespace Graph::Fasp {
         }
 
         EDGE_PROP_TYPE capacity = 0;
-        for (const auto &e : removedEdges) { capacity += aWeights.at(e); }
+        std::cout << aWeights << std::endl;
+        for (const auto &e : removedEdges) { std::cout << " " << e ; capacity += aWeights.at(e); }
 
         return std::tuple{capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt};
     }

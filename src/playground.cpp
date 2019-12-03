@@ -108,7 +108,7 @@ void test(const char *inputDir) {
 
     FaspSolutionResult fsr;
     Timer<true, false> t{};
-    [[maybe_unused]] int limitCnt = 23;
+    [[maybe_unused]] int limitCnt = 1;
     int cnt = 0;
 
 
@@ -127,7 +127,7 @@ void test(const char *inputDir) {
 //        graphFile = "random-1463-410-533.al"; // 0.1s
 //        graphFile = "random-1833-500-700.al"; // 1s
 //        graphFile = "random-1224-350-700.al"; // 15s
-
+//        graphFile = "random-0024-30-130.al";
         auto solutionFile{graphFile}; Tools::replace(solutionFile, ".al", ".mfas");
         auto timeoutFile{graphFile}; Tools::replace(timeoutFile, ".al", ".timeout");
         auto timingFile{graphFile}; Tools::replace(timingFile, ".al", ".timing");

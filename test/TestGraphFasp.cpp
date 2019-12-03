@@ -294,6 +294,30 @@ namespace {
             ASSERT_EQ(e2, Edge(4, 5) );
         }
     }
+
+    TEST(TestGraphFasp, testIsoCut) {
+        using VERTEX_TYPE = int;
+        Graph::Fasp::GraphSpeedUtils<VERTEX_TYPE> u{7};
+        // Test graph:
+        //           /---> 2
+        //          /---> 4
+        //  0 ---> 1 ---> 3 ---> 5 ---> 6
+        //                ^-------------
+
+        using Edge = typename Graph::Graph<VERTEX_TYPE>::Edge;
+
+        Graph::Graph<VERTEX_TYPE> g;
+        for (int i = 0; i < 7; ++i) g.addVertex(i);
+        g.addEdge({0, 1});
+        g.addEdge({1, 2});
+        g.addEdge({1, 3});
+        g.addEdge({1, 4});
+        g.addEdge({3, 5});
+        g.addEdge({5, 6});
+        g.addEdge({6, 3});
+
+        std::cout << Graph::Fasp::isoCut(g, u) << std::endl;
+    }
 }
 
 

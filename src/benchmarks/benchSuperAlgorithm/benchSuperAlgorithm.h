@@ -46,7 +46,7 @@ void benchSuperAlgorithmConstWeightVarFaspConstVE(const std::string &outputDir, 
 
             f1.put("vertices", g.getNumOfVertices());
             f1.put("edges", g.getNumOfEdges());
-            auto [edgesSA, _, edgesGR] = superAlgorithmBlue(g, c, path, false, false);
+            auto [edgesSA, _, edgesGR] = isoCut(g, path, false);
             f1.put("sa", edgesSA.size());
             f1.put("exact", faspSize);
         }
