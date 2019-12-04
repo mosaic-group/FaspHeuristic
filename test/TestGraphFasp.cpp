@@ -297,26 +297,61 @@ namespace {
 
     TEST(TestGraphFasp, testIsoCut) {
         using VERTEX_TYPE = int;
-        Graph::Fasp::GraphSpeedUtils<VERTEX_TYPE> u{7};
-        // Test graph:
-        //           /---> 2
-        //          /---> 4
-        //  0 ---> 1 ---> 3 ---> 5 ---> 6
-        //                ^-------------
-
-        using Edge = typename Graph::Graph<VERTEX_TYPE>::Edge;
-
         Graph::Graph<VERTEX_TYPE> g;
-        for (int i = 0; i < 7; ++i) g.addVertex(i);
+        Graph::Fasp::GraphSpeedUtils<VERTEX_TYPE> u{8};
+        for (int i = 0; i < 8; ++i) g.addVertex(i);
         g.addEdge({0, 1});
         g.addEdge({1, 2});
-        g.addEdge({1, 3});
-        g.addEdge({1, 4});
-        g.addEdge({3, 5});
-        g.addEdge({5, 6});
-        g.addEdge({6, 3});
+        g.addEdge({2, 3});
+        g.addEdge({3, 4});
+        g.addEdge({4, 5});
+        g.addEdge({5, 0});
 
-        std::cout << Graph::Fasp::isoCut(g, u) << std::endl;
+        g.addEdge({3, 6});
+        g.addEdge({6, 2});
+
+        g.addEdge({5, 7});
+        g.addEdge({7, 4});
+
+
+        {   // easy case - no weights, 2 edges are exect solution
+            // edges are not checked since different impl. of unordered_map can give different solutions
+            auto gg{g};
+            auto[edges, blueEdges, guessEdges] = Graph::Fasp::isoCut(gg, u);
+            ASSERT_TRUE(guessEdges.empty());
+            ASSERT_TRUE(blueEdges.empty());
+            ASSERT_EQ(edges.size(), 2);
+            ASSERT_TRUE(u.isAcyclic(gg));
+        }
+        {   // easy case - no weights, 2 edges are exect solution
+            // edges are not checked since different impl. of unordered_map can give different solutions
+            auto gg{g};
+            auto ep = Graph::Ext::getEdgeProperties(g, 1);
+            ep[{2, 3}] = 2;
+            ep[{3, 6}] = 1;
+            ep[{6, 2}] = 1;
+            ep[{4, 5}] = 2;
+            ep[{5, 7}] = 1;
+            ep[{7, 4}] = 1;
+            auto[edges, blueEdges, guessEdges] = Graph::Fasp::isoCut(gg, ep, u, true);
+            std::cout << edges << " " << blueEdges << " " << guessEdges << std::endl;
+//            ASSERT_TRUE(guessEdges.empty());
+//            ASSERT_TRUE(blueEdges.empty());
+//            ASSERT_EQ(edges.size(), 2);
+//            ASSERT_TRUE(u.isAcyclic(gg));
+        }
+        {
+            auto gg{g};
+            auto ep = Graph::Ext::getEdgeProperties(g, 1);
+            ep[{2, 3}] = 2;
+            ep[{3, 6}] = 1;
+            ep[{6, 2}] = 1;
+            ep[{4, 5}] = 2;
+            ep[{5, 7}] = 1;
+            ep[{7, 4}] = 1;
+            std::cout << "\n----------\n";
+            std::cout << Graph::Fasp::randomFASP<VERTEX_TYPE, int, true>(gg, ep) << std::endl;
+        }
     }
 }
 

@@ -331,7 +331,8 @@ namespace Graph::Fasp {
                 // find any path being a part of cycle for this edge
                 const auto [pathExists, path] = findPathDFS(aGraph, e.dst, e.src);
                 if (!pathExists) continue;
-
+                std::cout << "e: " << e << std::endl;
+                std::cout << "    " << path << std::endl;
                 // find SCCs not including edge 'e'
                 aGraph.removeEdge(e);
                 auto scc = stronglyConnectedComponents(aGraph, true);
@@ -349,10 +350,12 @@ namespace Graph::Fasp {
                     }
                 }
 
+                std::cout << "    " << redEdges << std::endl;
                 // find the 'red edge' with highest mincut
                 for (auto &redEdge : redEdges) {
                     auto mc = minStCut(aGraph, redEdge.dst, redEdge.src, aWeights);
-                    if (mc > maxMincutOfRedEdge) {
+                    std::cout << "    " << mc << std::endl;
+                    if (mc > maxMincutOfRedEdge && mc > aWeights.at(redEdge)) {
                         maxMincutOfRedEdge = mc;
                         maxRedEdge = redEdge;
                     }
@@ -362,7 +365,7 @@ namespace Graph::Fasp {
                 auto eCapacity = aWeights.at(e);
                 if (maxMincutOfRedEdge > eCapacity) break;
             }
-
+            std::cout << "RED: " <<  std::pair{maxMincutOfRedEdge, maxRedEdge} << std::endl;
             return std::pair{maxMincutOfRedEdge, maxRedEdge};
         }
 
@@ -408,7 +411,7 @@ namespace Graph::Fasp {
     // ------------------------------------------------------------------------
 
     template<bool aUseWeights = true, typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
-    static auto isoCut(Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, GraphSpeedUtils<VERTEX_TYPE> &aUtils, bool aUseRelaxApproach = false) {
+    static auto isoCut(Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, GraphSpeedUtils<VERTEX_TYPE> &aUtils, bool aUseRelaxedApproach = false) {
         typename Graph<VERTEX_TYPE>::Edges removedEdges;
         EdgesSet<VERTEX_TYPE> blueEdges;
 
@@ -448,7 +451,7 @@ namespace Graph::Fasp {
 
         // If we have not found any edge we will use guess to find best candidate in relax mode.
         typename Graph<VERTEX_TYPE>::Edges removedEdgesRelaxed;
-        if (removedEdges.size() == 0 && aUseRelaxApproach) {
+        if (removedEdges.size() == 0 && aUseRelaxedApproach) {
             auto [maxMcRedEdge, redEdge] = aUtils.getRedEdge(aGraph, aWeights, aGraph.getEdges());
             if (maxMcRedEdge > 0) {
                 removedEdgesRelaxed.push_back(redEdge);
@@ -459,8 +462,8 @@ namespace Graph::Fasp {
     }
 
     template<typename VERTEX_TYPE>
-    static auto isoCut(Graph<VERTEX_TYPE> &aGraph, GraphSpeedUtils<VERTEX_TYPE> &aUtils, bool aUseRelaxApproach = false) {
-        return isoCut<false>(aGraph, Ext::getEdgeProperties(aGraph, 1), aUtils, aUseRelaxApproach);
+    static auto isoCut(Graph<VERTEX_TYPE> &aGraph, GraphSpeedUtils<VERTEX_TYPE> &aUtils, bool aUseRelaxedApproach = false) {
+        return isoCut<false>(aGraph, Ext::getEdgeProperties(aGraph, 1), aUtils, aUseRelaxedApproach);
     }
 
     // ------------------------------------------------------------------------
@@ -616,8 +619,7 @@ namespace Graph::Fasp {
         }
 
         EDGE_PROP_TYPE capacity = 0;
-        std::cout << aWeights << std::endl;
-        for (const auto &e : removedEdges) { std::cout << " " << e ; capacity += aWeights.at(e); }
+        for (const auto &e : removedEdges) { std::cout << "___" << e ; capacity += aWeights.at(e); }
 
         return std::tuple{capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt};
     }
