@@ -11,7 +11,7 @@ include_directories(${HDF5_INCLUDE_DIRS})
 set(USE_LTO OFF)
 
 # Setup all needed compilation flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -pg -std=c++17")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -std=c++17") #-pg
 if(CMAKE_COMPILER_IS_GNUCC)
     set(CMAKE_CXX_FLAGS_RELEASE "-O4 -DNDEBUG -pthread -g")
     if(${USE_LTO})
