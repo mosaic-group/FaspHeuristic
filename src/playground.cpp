@@ -126,7 +126,7 @@ void test(const char *inputDir) {
 
 //        graphFile = "random-1463-410-533.al"; // 0.1s
 //        graphFile = "random-1833-500-700.al"; // 1s
-//        graphFile = "random-1224-350-700.al"; // 15s
+        graphFile = "random-1224-350-700.al"; // 15s
 //        graphFile = "random-0024-30-130.al";
         auto solutionFile{graphFile}; Tools::replace(solutionFile, ".al", ".mfas");
         auto timeoutFile{graphFile}; Tools::replace(timeoutFile, ".al", ".timeout");
@@ -137,7 +137,7 @@ void test(const char *inputDir) {
             continue;
         }
 
-//        if (limitCnt-- == 0) break;
+        if (limitCnt-- == 0) break;
 
         Graph::Graph g = Graph::IO::graphFromFile<int16_t>(dir + "/" + graphFile);
         auto c = Graph::Ext::getEdgeProperties<int16_t>(g, 1);
@@ -155,7 +155,7 @@ void test(const char *inputDir) {
         timeExact += timeExactOfGraph;
 
         t.start_timer("--------RANDOM new");
-        auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::Fasp::randomFASP(g, c);
+        auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::Fasp::tightCut<false, true>(g, c);
         auto thisStep = t.stop_timer();
         LOG(DEBUG) << "SA / SA RND / RED RND edges: " << saEdgesCnt << " / " << saRndEdgesCnt << " / " << redRndEdgesCnt;
         LOG(DEBUG) << "FASP(RAND)  capacity = " << capacity << " edgeCnt = " << removedEdges.size() << " edgeList = " << removedEdges;

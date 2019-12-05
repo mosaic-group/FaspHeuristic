@@ -10,6 +10,8 @@
 #include <chrono>
 #include <ostream>
 #include <string>
+#include <sstream>
+
 
 /**
  * Very simple but usefull timer class. Usage:

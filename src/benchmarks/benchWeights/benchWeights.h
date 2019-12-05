@@ -50,7 +50,7 @@ void benchTimingVarWeightVarFaspConstVE(const std::string &outputDir, int numOfV
             auto grTime = t.stop_timer();
 
             t.start_timer("random");
-            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::Fasp::randomFASP<int, int, true>(g, c);
+            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::Fasp::tightCut<true, false, int, int>(g, c);
             auto randomTime = t.stop_timer();
 
             Graph::IO::graphWithWeightsToFile(outputDir + "/" + "xl-" + Tools::convertToStrWithLeadingZeros(fidx) + "-" + std::to_string(numOfVertices) + "-" + std::to_string(numOfEdges)+"-"+std::to_string(faspSize)+".al", g, c);

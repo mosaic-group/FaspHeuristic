@@ -325,14 +325,12 @@ namespace Graph::Fasp {
             using Edge = typename Graph<VERTEX_TYPE>::Edge;
 
             Edge maxRedEdge{};
-            int maxMincutOfRedEdge = 0;
+            EDGE_PROP_TYPE maxMincutOfRedEdge = 0;
 
             for (const auto &e : aEdges) {
                 // find any path being a part of cycle for this edge
                 const auto [pathExists, path] = findPathDFS(aGraph, e.dst, e.src);
                 if (!pathExists) continue;
-                std::cout << "e: " << e << std::endl;
-                std::cout << "    " << path << std::endl;
                 // find SCCs not including edge 'e'
                 aGraph.removeEdge(e);
                 auto scc = stronglyConnectedComponents(aGraph, true);
@@ -350,22 +348,18 @@ namespace Graph::Fasp {
                     }
                 }
 
-                std::cout << "    " << redEdges << std::endl;
                 // find the 'red edge' with highest mincut
                 for (auto &redEdge : redEdges) {
                     auto mc = minStCut(aGraph, redEdge.dst, redEdge.src, aWeights);
-                    std::cout << "    " << mc << std::endl;
-                    if (mc > maxMincutOfRedEdge && mc > aWeights.at(redEdge)) {
+                    if (mc > maxMincutOfRedEdge && mc >= aWeights.at(redEdge)) {
                         maxMincutOfRedEdge = mc;
                         maxRedEdge = redEdge;
                     }
                 }
 
-                // if found 'red edge' has mincut higher then weight of edge 'e' we found good candidate!
-                auto eCapacity = aWeights.at(e);
-                if (maxMincutOfRedEdge > eCapacity) break;
+                // if we found good candidate then end!
+                if (maxMincutOfRedEdge > 0) break;
             }
-            std::cout << "RED: " <<  std::pair{maxMincutOfRedEdge, maxRedEdge} << std::endl;
             return std::pair{maxMincutOfRedEdge, maxRedEdge};
         }
 
@@ -467,160 +461,142 @@ namespace Graph::Fasp {
     }
 
     // ------------------------------------------------------------------------
+    template <typename Arg, typename... Args>
+    void print(std::ostream& out, Arg&& arg, Args&&... args)
+    {
+        out << std::forward<Arg>(arg);
+        ((out << ',' << std::forward<Args>(args)), ...);
+    }
 
-    /**
-     * Working original idea of how random FASP heuristic should work
-     */
-    template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE, bool WEIGHTED = false, bool PARALLELIZED=false>
-    static auto randomFASP(const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
-        if (WEIGHTED) std::cout << "Graph with WEIGHTS!\n";
-        auto cleanGraphWithScc = [](Graph<VERTEX_TYPE> &aGraph, GraphSpeedUtils<VERTEX_TYPE> &path) {
-            int cnt1 = 0, cntBig = 0;
-            auto scc = path.stronglyConnectedComponents(aGraph);
+    template<bool WEIGHTED = false, bool PARALLELIZED=false, typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
+    static auto tightCut(const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
+        // Cleans graph from single vertex SCCs (they cannot be part of any cycle), it also (because of removing vertices) removes
+        // edges connected to this vertices. It significantly increase speed of algorithm.
+        auto cleanGraphWithScc = [](Graph<VERTEX_TYPE> &aGraph, GraphSpeedUtils<VERTEX_TYPE> &aUtils) {
+            auto scc = aUtils.stronglyConnectedComponents(aGraph);
             for (const auto &s : scc) {
-                if (s.size() == 1) {cnt1++; aGraph.removeVertex(*s.begin());}
-                else cntBig++;
+                if (s.size() == 1) {aGraph.removeVertex(*s.begin());}
             }
         };
 
-        constexpr int numOfReps = 20;
-
-
-
+        // Copy input graph, later graph 'g' will be modified and processed
         auto g{aGraph};
+
         // find max vertex id in graph and setup GraphSpeedUtils
         auto vertices = g.getVertices();
         auto maxId = std::max_element(vertices.begin(), vertices.end());
-        GraphSpeedUtils<VERTEX_TYPE> path{static_cast<std::size_t>(maxId == vertices.end() ? 1 : *maxId + 1)};
+        GraphSpeedUtils<VERTEX_TYPE> utils{static_cast<std::size_t>(maxId == vertices.end() ? 1 : *maxId + 1)};
 
-        cleanGraphWithScc(g, path);
+        // ------------------ Beginning of the algorithm ----------------------
+        // Parameters of the algorithm:
+        constexpr int numberOfRandomGraphs = 20;    // number of random subgraph to process for good guess
+        constexpr int numEdgesToRemoveInitVal = 3;  // initial number of edges removed randomly for random subgraph
 
+        // Result and statistics of algorithm
         typename Graph<VERTEX_TYPE>::Edges removedEdges;
-
         int saEdgesCnt = 0;
         int saRndEdgesCnt = 0;
         int redRndEdgesCnt = 0;
+
+        // initial clean of input graph
+        cleanGraphWithScc(g, utils);
+
         // initial run of superAlgorithm (SA)
-        auto [edgesToRemove, blueEdgesx, dummy2] = WEIGHTED ? isoCut(g, aWeights, path) : isoCut(g, path);
-        auto blueEdges = blueEdgesx;
+        auto [edgesToRemove, blueEdgesRes, dummy2] = WEIGHTED ? isoCut(g, aWeights, utils) : isoCut(g, utils);
+        auto &blueEdges = blueEdgesRes;
         g.removeEdges(edgesToRemove);
         saEdgesCnt += edgesToRemove.size();
-        removedEdges.reserve(removedEdges.size() + edgesToRemove.size());
         removedEdges.insert(removedEdges.begin(), edgesToRemove.begin(), edgesToRemove.end());
 
-        int numEdgesToRemoveInitVal = 3;
-        //auto [dummy1, grEdges] = Fasp::GR(g, aWeights); int faspSize = grEdges.size(); numEdgesToRemoveInitVal = faspSize == 0 ? 1 : g.getNumOfEdges() / faspSize / 2;
-//        std::cout << "EDGES TO REMOVE INIT VAL = " << numEdgesToRemoveInitVal << std::endl;
         int numEdgesToRemove = numEdgesToRemoveInitVal;
         while (true) {
+            // Did we found solution - if yes end the algorithm
+            if (utils.isAcyclic(g)) break;
 
-//            std::cout << "----- loop=" << cnt++ << "\n";
-            if (path.isAcyclic(g)) break;
-
-            cleanGraphWithScc(g, path);
+            // Clean graph - after removing next edge we can remove a lot of unnecessary cylce-less vertices/edges
+            cleanGraphWithScc(g, utils);
 
             // if we are here there are still cycles not handled by SA
-            std::unordered_map<typename Graph<VERTEX_TYPE>::Edge, int, Ext::EdgeHasher<VERTEX_TYPE>> edgesCnt;
-            std::unordered_map<typename Graph<VERTEX_TYPE>::Edge, int, Ext::EdgeHasher<VERTEX_TYPE>> edgesCntGR;
+            using EdgeCounter = std::unordered_map<typename Graph<VERTEX_TYPE>::Edge, int, Ext::EdgeHasher<VERTEX_TYPE>>;
+            EdgeCounter edgesCntIsoCut;
+            EdgeCounter edgesCntRedEdges;
 
             // Run each randomly generated graph in seperate thread and later collect all solutions found
             if (PARALLELIZED) {
-                alignas(64) Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> props[numOfReps];
-                for (auto &p : props) p = aWeights;
-                alignas(64) std::future<std::pair<typename Graph<VERTEX_TYPE>::Edges, typename Graph<VERTEX_TYPE>::Edges>> tasks[numOfReps];
+                std::vector<Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE>> weights{numberOfRandomGraphs, aWeights};
+                std::vector<std::future<std::pair<typename Graph<VERTEX_TYPE>::Edges, typename Graph<VERTEX_TYPE>::Edges>>> tasks{numberOfRandomGraphs};
                 int i = 0;
                 for (auto &task : tasks) {
+                    task = std::async(std::launch::async,
+                              [&, i, numEdgesToRemove] () {
+                                  // copy graph
+                                  auto workGraph{g};
+                                  // prepare utils
+                                  auto vertices = workGraph.getVertices();
+                                  auto maxId = std::max_element(vertices.begin(), vertices.end());
+                                  GraphSpeedUtils<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
+                                  // generate random subgraph
+                                  path.getRandomSubgraph(workGraph, numEdgesToRemove, blueEdges);
+                                  // find edge(s) to cut
+                                  auto [edgesSA, _, edgesGR] = WEIGHTED ? isoCut(workGraph, weights[i], path, true) : isoCut(workGraph, path, true);
 
-                    task= std::async(std::launch::async,
-                         [&, i, numEdgesToRemove] () {
-                             Timer<false, false> tt{};
-                             if (i == 0) tt.start_timer("1 - copy graph");
-                             auto workGraph{g};
-                             if (i == 0) {tt.stop_timer();}
-
-                             if (i == 0) tt.start_timer("2 - prepare path hero");
-                             auto vertices = workGraph.getVertices();
-                             auto maxId = std::max_element(vertices.begin(), vertices.end());
-                             GraphSpeedUtils<VERTEX_TYPE> path(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
-                             if (i == 0) tt.stop_timer();
-
-                             if (i == 0) tt.start_timer("3 - random subgraph");
-                             path.getRandomSubgraph(workGraph, numEdgesToRemove, blueEdges);
-                             if (i == 0) tt.stop_timer();
-
-                             if (i == 0) tt.start_timer("4 - SA blue");
-                             auto [edgesSA, _, edgesGR] = WEIGHTED ? isoCut(workGraph, props[i], path, true) : isoCut(workGraph, path, true);
-                             if (i == 0) tt.stop_timer();
-                             return std::pair{edgesSA, edgesGR};
-                         });
+                                  return std::pair{edgesSA, edgesGR};
+                              });
                     i++;
                 }
 
+                // Get answers from all tasks and put them into edge counters
                 for (auto &task : tasks) {
                     auto [edgesToRemove, edgesToRemoveGR] = task.get();
-                    for (auto &e : edgesToRemove) edgesCnt.try_emplace(e, 0).first->second++;
-                    for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
+                    for (auto &e : edgesToRemove) edgesCntIsoCut.try_emplace(e, 0).first->second++;
+                    for (auto &e : edgesToRemoveGR) edgesCntRedEdges.try_emplace(e, 0).first->second++;
                 }
             }
             else {
-                for (int i = 0; i < numOfReps; ++i) {
-                    Timer<false, false, false> tt("RAND_GRAPHS");
-                    if (i == 0) tt.start_timer("1 - copy graph");
+                for (int i = 0; i < numberOfRandomGraphs; ++i) {
+                    // copy graph
                     auto workGraph{g};
-                    if (i == 0) { tt.stop_timer(); }
+                    // generate random subgraph
+                    utils.getRandomSubgraph(workGraph, numEdgesToRemove, blueEdges);
+                    // find edge(s) to cut
+                    auto[edgesSA, _, edgesGR] = WEIGHTED ? isoCut(workGraph, aWeights, utils, true) : isoCut(workGraph, utils, true);
 
-                    if (i == 0) tt.start_timer("2 - prepare path hero");
-                    auto vertices2 = workGraph.getVertices();
-                    auto maxId2 = std::max_element(vertices2.begin(), vertices2.end());
-                    GraphSpeedUtils<VERTEX_TYPE> path(maxId2 == vertices2.end() ? 1 : *maxId2 + 1); // maxId included
-                    if (i == 0) tt.stop_timer();
-
-                    if (i == 0) tt.start_timer("3 - random subgraph");
-                    path.getRandomSubgraph(workGraph, numEdgesToRemove, blueEdges);
-                    if (i == 0) tt.stop_timer();
-
-                    if (i == 0) tt.start_timer("4 - SA blue");
-                    auto[edgesSA, _, edgesGR] = WEIGHTED ? isoCut(workGraph, aWeights, path, true) : isoCut(workGraph, path, true);
-                    if (i == 0) tt.stop_timer();
-
-                    if (i == 0) tt.start_timer("5 - Getting edges");
                     auto[edgesToRemove, edgesToRemoveGR] = std::pair{edgesSA, edgesGR};
-                    for (auto &e : edgesToRemove) edgesCnt.try_emplace(e, 0).first->second++;
-                    for (auto &e : edgesToRemoveGR) edgesCntGR.try_emplace(e, 0).first->second++;
-                    if (i == 0) tt.stop_timer();
+                    for (auto &e : edgesToRemove) edgesCntIsoCut.try_emplace(e, 0).first->second++;
+                    for (auto &e : edgesToRemoveGR) edgesCntRedEdges.try_emplace(e, 0).first->second++;
                 }
             }
 
-            if (edgesCnt.size() > 0) saRndEdgesCnt++;
-            else if (edgesCntGR.size() > 0) redRndEdgesCnt++;
-            if (edgesCnt.size() == 0) {
-                edgesCnt.swap(edgesCntGR); // In case when SA didn't find any edges use these from GR heuristic
+            if (edgesCntIsoCut.size() > 0) saRndEdgesCnt++;
+            else if (edgesCntRedEdges.size() > 0) redRndEdgesCnt++;
+            if (edgesCntIsoCut.size() == 0) {
+                edgesCntIsoCut.swap(edgesCntRedEdges); // In case when SA didn't find any edges use these from GR heuristic
             }
-            if (edgesCnt.size() == 0) {
+            if (edgesCntIsoCut.size() == 0) {
                 numEdgesToRemove++;
                 continue; // reapeat loop - we have not found any solutions
             }
             numEdgesToRemove = numEdgesToRemoveInitVal;
 
-            if (edgesCnt.size() > 0) {
-                auto maxCnt = std::max_element(edgesCnt.begin(), edgesCnt.end(), [](const auto &a, const auto &b) -> bool { return a.second < b.second; });
+            if (edgesCntIsoCut.size() > 0) {
+                auto maxCnt = std::max_element(edgesCntIsoCut.begin(), edgesCntIsoCut.end(), [](const auto &a, const auto &b) -> bool { return a.second < b.second; });
                 // Remove best candidate
                 g.removeEdge(maxCnt->first);
                 removedEdges.emplace_back(std::move(maxCnt->first));
             }
 
             // Try to solve the rest with superAlgoritm - maybe it will now succeed!
-            auto [edgesToRemove, blueEdges2, dummy3] = WEIGHTED ? isoCut(g, aWeights, path) : isoCut(g, path);
+            auto [edgesToRemove, blueEdges2, dummy3] = WEIGHTED ? isoCut(g, aWeights, utils) : isoCut(g, utils);
             blueEdges = blueEdges2;
             g.removeEdges(edgesToRemove);
             saEdgesCnt += edgesToRemove.size();
-            removedEdges.reserve(removedEdges.size() + edgesToRemove.size());
             removedEdges.insert(removedEdges.begin(), edgesToRemove.begin(), edgesToRemove.end());
         }
+        // ------------------ End of the algorithm ----------------------
 
         EDGE_PROP_TYPE capacity = 0;
-        for (const auto &e : removedEdges) { std::cout << "___" << e ; capacity += aWeights.at(e); }
-
+        for (const auto &e : removedEdges) { capacity += aWeights.at(e); }
+        print(std::cout, "\n", capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt, "\n");
         return std::tuple{capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt};
     }
 }

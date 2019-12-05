@@ -323,8 +323,8 @@ namespace {
             ASSERT_EQ(edges.size(), 2);
             ASSERT_TRUE(u.isAcyclic(gg));
         }
-        {   // easy case - no weights, 2 edges are exect solution
-            // edges are not checked since different impl. of unordered_map can give different solutions
+        {   // weights - not possible to use regular iso-cut and we expect guess (edge is not checked since
+            // it may vary for different implementations of unordered_map).
             auto gg{g};
             auto ep = Graph::Ext::getEdgeProperties(g, 1);
             ep[{2, 3}] = 2;
@@ -334,23 +334,56 @@ namespace {
             ep[{5, 7}] = 1;
             ep[{7, 4}] = 1;
             auto[edges, blueEdges, guessEdges] = Graph::Fasp::isoCut(gg, ep, u, true);
-            std::cout << edges << " " << blueEdges << " " << guessEdges << std::endl;
-//            ASSERT_TRUE(guessEdges.empty());
-//            ASSERT_TRUE(blueEdges.empty());
-//            ASSERT_EQ(edges.size(), 2);
-//            ASSERT_TRUE(u.isAcyclic(gg));
+            ASSERT_FALSE(guessEdges.empty());
+            ASSERT_TRUE(blueEdges.empty());
+            ASSERT_TRUE(edges.empty());
+            ASSERT_FALSE(u.isAcyclic(gg));
         }
-        {
+    }
+
+    TEST(TestGraphFasp, testTightCut) {
+        using VERTEX_TYPE = int;
+
+        Graph::Graph<VERTEX_TYPE> g;
+        Graph::Fasp::GraphSpeedUtils<VERTEX_TYPE> u{8};
+        for (int i = 0; i < 8; ++i) g.addVertex(i);
+        g.addEdge({0, 1});
+        g.addEdge({1, 2});
+        g.addEdge({2, 3});
+        g.addEdge({3, 4});
+        g.addEdge({4, 5});
+        g.addEdge({5, 0});
+
+        g.addEdge({3, 6});
+        g.addEdge({6, 2});
+
+        g.addEdge({5, 7});
+        g.addEdge({7, 4});
+        {   // no weighted graph - should give soluttion FASP size/capacity = 2
             auto gg{g};
             auto ep = Graph::Ext::getEdgeProperties(g, 1);
-            ep[{2, 3}] = 2;
+            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::Fasp::tightCut<true, false, VERTEX_TYPE, int>(gg, ep);
+            ASSERT_EQ(capacity, 2);
+            ASSERT_EQ(removedEdges.size(), 2);
+            ASSERT_EQ(saEdgesCnt, 2);
+            ASSERT_EQ(saRndEdgesCnt, 0);
+            ASSERT_EQ(redRndEdgesCnt, 0);
+        }
+        {   // weighted graph - should give soluttion FASP size/capacity = 3
+            auto gg{g};
+            auto ep = Graph::Ext::getEdgeProperties(g, 1);
+            ep[{2, 3}] = 3;
             ep[{3, 6}] = 1;
             ep[{6, 2}] = 1;
-            ep[{4, 5}] = 2;
+            ep[{4, 5}] = 3;
             ep[{5, 7}] = 1;
             ep[{7, 4}] = 1;
-            std::cout << "\n----------\n";
-            std::cout << Graph::Fasp::randomFASP<VERTEX_TYPE, int, true>(gg, ep) << std::endl;
+            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::Fasp::tightCut<true, true, VERTEX_TYPE, int>(gg, ep);
+            ASSERT_EQ(capacity, 3);
+            ASSERT_EQ(removedEdges.size(), 3);
+            ASSERT_EQ(saEdgesCnt, 1);
+            ASSERT_EQ(saRndEdgesCnt, 2);
+            ASSERT_EQ(redRndEdgesCnt, 0);
         }
     }
 }
