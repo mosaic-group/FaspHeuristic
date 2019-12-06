@@ -15,7 +15,7 @@
 
 namespace Graph::Fasp {
 
-    template <typename VERTEX_TYPE>
+    template<typename VERTEX_TYPE>
     using EdgesSet = std::unordered_set<typename Graph<VERTEX_TYPE>::Edge, Ext::EdgeHasher<VERTEX_TYPE>>;
 
     /**
@@ -28,8 +28,8 @@ namespace Graph::Fasp {
     class alignas(64) GraphSpeedUtils {
 
         // Allocation of structures/memory/containers shared by all algorithms from GraphSpeedUtils class
-        DynamicBitset <uint32_t, VERTEX_TYPE> iVisited;
-        Stack <VERTEX_TYPE> stack;
+        DynamicBitset<uint32_t, VERTEX_TYPE> iVisited;
+        Stack<VERTEX_TYPE> stack;
         std::vector<VERTEX_TYPE> parents;
         std::vector<VERTEX_TYPE> lowLinks;
         std::vector<VERTEX_TYPE> index;
@@ -49,8 +49,8 @@ namespace Graph::Fasp {
          * @param aDst destination vertex
          * @return true if path from src to dst exists
          */
-        template<bool FORWARD_SEARCH=true>
-        bool pathExistsDFS(const Graph <VERTEX_TYPE> &aGraph,
+        template<bool FORWARD_SEARCH = true>
+        bool pathExistsDFS(const Graph<VERTEX_TYPE> &aGraph,
                            const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
                            const typename Graph<VERTEX_TYPE>::Vertex &aDst) {
             // If we are already in destination job is done
@@ -86,7 +86,7 @@ namespace Graph::Fasp {
          * @param aDst destination vertex
          * @return pair [pathExist, path] if (pathExist) then path contain vertices of path from src to dst, otherwise path may contain garbage
          */
-        auto findPathDFS(const Graph <VERTEX_TYPE> &aGraph,
+        auto findPathDFS(const Graph<VERTEX_TYPE> &aGraph,
                          const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
                          const typename Graph<VERTEX_TYPE>::Vertex &aDst) {
 
@@ -136,7 +136,7 @@ namespace Graph::Fasp {
          * @param aGraph input graph
          * @return true if graph is acyclic
          */
-        bool isAcyclic(const Graph <VERTEX_TYPE> &aGraph) {
+        bool isAcyclic(const Graph<VERTEX_TYPE> &aGraph) {
             for (const auto &e : aGraph.getEdges()) {
                 if (pathExistsDFS(aGraph, e.dst, e.src)) return false;
             }
@@ -149,7 +149,7 @@ namespace Graph::Fasp {
          * @param aGraph input graph
          * @return container with edges
          */
-        auto findEdgesWithCycles(const Graph <VERTEX_TYPE> &aGraph) {
+        auto findEdgesWithCycles(const Graph<VERTEX_TYPE> &aGraph) {
             typename Graph<VERTEX_TYPE>::Edges edges;
             for (const auto &e : aGraph.getEdges()) {
                 if (pathExistsDFS(aGraph, e.dst, e.src)) {
@@ -165,10 +165,10 @@ namespace Graph::Fasp {
          * @return maxFlow value
          */
         template<typename EDGE_PROP_TYPE>
-        auto minStCut(const Graph <VERTEX_TYPE> &aGraph,
+        auto minStCut(const Graph<VERTEX_TYPE> &aGraph,
                       const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
                       const typename Graph<VERTEX_TYPE>::Vertex &aDst,
-                      const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
+                      const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
             auto maxFlow = HIPR().runHipr(aGraph, aSrc, aDst, aWeights, parents);
             return maxFlow;
         }
@@ -197,7 +197,8 @@ namespace Graph::Fasp {
 
             for (auto &lowLink : lowLinks) lowLink = unprocessedVertex;
 
-            std::vector<std::unordered_set<VERTEX_TYPE>> result; result.reserve(numOfV);
+            std::vector<std::unordered_set<VERTEX_TYPE>> result;
+            result.reserve(numOfV);
 
             std::function<void(const VERTEX_TYPE &)> strongconnect = [&](const VERTEX_TYPE &node) {
 
@@ -207,16 +208,18 @@ namespace Graph::Fasp {
                 struct S {
                     VERTEX_TYPE vertex;
                     VERTEX_TYPE childIndex;
+
                     S(VERTEX_TYPE aV, VERTEX_TYPE aIdx) : vertex(aV), childIndex(aIdx) {}
                 };
-                std::vector<S> state; state.reserve(numOfV);
+                std::vector<S> state;
+                state.reserve(numOfV);
                 state.push_back(S{node, 0});
 
                 bool initRun = true;
 
                 while (state.size() > 0) {
                     // we have process all the children so roll back to previous state
-                    auto [currentNode, currChildIndex] = state.back();
+                    auto[currentNode, currChildIndex] = state.back();
                     state.pop_back();
 
                     // Yes, this is label for 'goto'. You cannot blame me if you do not try to write
@@ -232,7 +235,7 @@ namespace Graph::Fasp {
                         initRun = false;
                     }
                     auto ov = aGraph.getOutVertices(currentNode);
-                    for(std::size_t i = currChildIndex; i < ov.size(); ++i) {
+                    for (std::size_t i = currChildIndex; i < ov.size(); ++i) {
                         auto successor = ov[i];
                         if (lowLinks[successor] == unprocessedVertex) {
                             // save the state (it would be recurrent call in default version of Trajan's algorithm)
@@ -242,8 +245,7 @@ namespace Graph::Fasp {
                             currChildIndex = 0;
                             initRun = true;
                             goto processSuccessor;
-                        }
-                        else if (iVisited.test(successor)) {
+                        } else if (iVisited.test(successor)) {
                             // the successor is in the stack and hence in the current strongly connected component (SCC)
                             lowLinks[currentNode] = std::min(lowLinks[currentNode], index[successor]);
                         }
@@ -251,7 +253,8 @@ namespace Graph::Fasp {
 
                     // If `node` is a root node, pop the stack and generate an SCC
                     if (lowLinks[currentNode] == index[currentNode]) {
-                        std::unordered_set<VERTEX_TYPE> connectedComponent; connectedComponent.reserve(stack.size());
+                        std::unordered_set<VERTEX_TYPE> connectedComponent;
+                        connectedComponent.reserve(stack.size());
 
                         while (true) {
                             auto successor = stack.pop();
@@ -284,7 +287,7 @@ namespace Graph::Fasp {
          * @param[in] aNumEdgesToRemove number of edges to be removed (migh be less if not sufficient number of edges with cycles).
          * @param[in]aBlueEdges edges that should not be removed
          */
-        void getRandomSubgraph(Graph <VERTEX_TYPE> &aGraph, int aNumEdgesToRemove, const EdgesSet<VERTEX_TYPE> &aBlueEdges) {
+        void getRandomSubgraph(Graph<VERTEX_TYPE> &aGraph, int aNumEdgesToRemove, const EdgesSet<VERTEX_TYPE> &aBlueEdges) {
             int edgesRemovedCnt = 0;
             typename Graph<VERTEX_TYPE>::Edge lastRemovedRndEdge{};
 
@@ -293,7 +296,7 @@ namespace Graph::Fasp {
                 // From found edges remove 'blue edges' which should not be processed
                 auto edgesWithCycles = findEdgesWithCycles(aGraph);
                 edgesWithCycles.erase(
-                        std::remove_if(edgesWithCycles.begin(), edgesWithCycles.end(), [&aBlueEdges] (const typename EdgesSet<VERTEX_TYPE>::value_type &edge) { return aBlueEdges.find(edge) != aBlueEdges.end(); }),
+                        std::remove_if(edgesWithCycles.begin(), edgesWithCycles.end(), [&aBlueEdges](const typename EdgesSet<VERTEX_TYPE>::value_type &edge) { return aBlueEdges.find(edge) != aBlueEdges.end(); }),
                         edgesWithCycles.end());
 
                 auto n = edgesWithCycles.size();
@@ -329,7 +332,7 @@ namespace Graph::Fasp {
 
             for (const auto &e : aEdges) {
                 // find any path being a part of cycle for this edge
-                const auto [pathExists, path] = findPathDFS(aGraph, e.dst, e.src);
+                const auto[pathExists, path] = findPathDFS(aGraph, e.dst, e.src);
                 if (!pathExists) continue;
                 // find SCCs not including edge 'e'
                 aGraph.removeEdge(e);
@@ -373,7 +376,7 @@ namespace Graph::Fasp {
          * @param weighted - set to true if graph is weighted (skips 'blue edges' optimization)
          * @return true if isolated cycles found, false otherwise
          */
-        bool findIsolatedCycles(Graph <VERTEX_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge, EdgesSet<VERTEX_TYPE> &aBlueEdges, bool weighted) {
+        bool findIsolatedCycles(Graph<VERTEX_TYPE> &aGraph, const typename Graph<VERTEX_TYPE>::Edge &aEdge, EdgesSet<VERTEX_TYPE> &aBlueEdges, bool weighted) {
             // 1. Remove an edge of interest 'aEdge' and find all connected components bigger than 1
             //    They consist from edges which are cycles not belonging only to aEdge so remove them.
             aGraph.removeEdge(aEdge);
@@ -409,7 +412,7 @@ namespace Graph::Fasp {
         typename Graph<VERTEX_TYPE>::Edges removedEdges;
         EdgesSet<VERTEX_TYPE> blueEdges;
 
-        while(true) {
+        while (true) {
             bool wasGraphModified = false;
 
             blueEdges.clear();
@@ -446,7 +449,7 @@ namespace Graph::Fasp {
         // If we have not found any edge we will use guess to find best candidate in relax mode.
         typename Graph<VERTEX_TYPE>::Edges removedEdgesRelaxed;
         if (removedEdges.size() == 0 && aUseRelaxedApproach) {
-            auto [maxMcRedEdge, redEdge] = aUtils.getRedEdge(aGraph, aWeights, aGraph.getEdges());
+            auto[maxMcRedEdge, redEdge] = aUtils.getRedEdge(aGraph, aWeights, aGraph.getEdges());
             if (maxMcRedEdge > 0) {
                 removedEdgesRelaxed.push_back(redEdge);
             }
@@ -460,22 +463,26 @@ namespace Graph::Fasp {
         return isoCut<false>(aGraph, Ext::getEdgeProperties(aGraph, 1), aUtils, aUseRelaxedApproach);
     }
 
-    // ------------------------------------------------------------------------
-    template <typename Arg, typename... Args>
-    void print(std::ostream& out, Arg&& arg, Args&&... args)
-    {
-        out << std::forward<Arg>(arg);
-        ((out << ',' << std::forward<Args>(args)), ...);
-    }
-
-    template<bool WEIGHTED = false, bool PARALLELIZED=false, typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
-    static auto tightCut(const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
+    /**
+     * tightCut heuristic for solving FASP problem
+     * @tparam WEIGHTED - true if graph is weighted, false otherwise
+     * @tparam PARALLELIZED - true to use paralelized code in solver
+     * @tparam EDGE_PROP_TYPE - type of edge properties/weights
+     * @tparam VERTEX_TYPE - type of vertices
+     * @param aGraph - input graph
+     * @param aWeights - weights of edges (if graph is not weighted this can be ommited)
+     * @return tuple of: capacity of FASP edges, removed edges, and statistics for isoCut, isoCutRnd and redEdgesRnd
+     *
+     * NOTE: if there are only isoCut edges counted in output statistics then solution is guaranteed to be exact
+     */
+    template<bool WEIGHTED = false, bool PARALLELIZED = false, typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
+    static auto tightCut(const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights = Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE>{}) {
         // Cleans graph from single vertex SCCs (they cannot be part of any cycle), it also (because of removing vertices) removes
         // edges connected to this vertices. It significantly increase speed of algorithm.
         auto cleanGraphWithScc = [](Graph<VERTEX_TYPE> &aGraph, GraphSpeedUtils<VERTEX_TYPE> &aUtils) {
             auto scc = aUtils.stronglyConnectedComponents(aGraph);
             for (const auto &s : scc) {
-                if (s.size() == 1) {aGraph.removeVertex(*s.begin());}
+                if (s.size() == 1) { aGraph.removeVertex(*s.begin()); }
             }
         };
 
@@ -501,8 +508,8 @@ namespace Graph::Fasp {
         // initial clean of input graph
         cleanGraphWithScc(g, utils);
 
-        // initial run of superAlgorithm (SA)
-        auto [edgesToRemove, blueEdges, dummy2] = WEIGHTED ? isoCut(g, aWeights, utils) : isoCut(g, utils);
+        // initial run of isoCut
+        auto[edgesToRemove, blueEdges, dummy2] = WEIGHTED ? isoCut(g, aWeights, utils) : isoCut(g, utils);
         g.removeEdges(edgesToRemove);
         isoCutEdgesCnt += edgesToRemove.size();
         removedEdges.insert(removedEdges.begin(), edgesToRemove.begin(), edgesToRemove.end());
@@ -522,34 +529,35 @@ namespace Graph::Fasp {
 
             // Run each randomly generated graph in seperate thread and later collect all solutions found
             if (PARALLELIZED) {
-                using EdgePropertiesType = Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE>;
+                using EdgePropertiesType = Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE>;
                 std::vector<EdgePropertiesType> weights{numberOfRandomGraphs, aWeights};
                 using TaskType = std::future<std::pair<typename Graph<VERTEX_TYPE>::Edges, typename Graph<VERTEX_TYPE>::Edges>>;
                 std::vector<TaskType> tasks{numberOfRandomGraphs};
                 int i = 0;
                 for (auto &task : tasks) {
                     task = std::async(std::launch::async,
-                          [i, numEdgesToRemove, g, utils, blueEdges = blueEdges, &weights] () mutable {
-                              // 'g' and 'utils' inside lambda is a copy of orignal value
+                            // 'blueEdges = blueEdges' copies blueEdges into lambda, it cannot be captured as the rest since it is output
+                            // of structured binding that is producing name but not variable.
+                                      [i, numEdgesToRemove, g, utils, blueEdges = blueEdges, &weights]() mutable {
+                                          // 'g' and 'utils' inside lambda is a copy of orignal value
 
-                              // generate random subgraph
-                              utils.getRandomSubgraph(g, numEdgesToRemove, blueEdges);
-                              // find edge(s) to cut
-                              auto [edgesIsoCut, _, edgesRedEdges] = WEIGHTED ? isoCut(g, weights[i], utils, true) : isoCut(g, utils, true);
+                                          // generate random subgraph
+                                          utils.getRandomSubgraph(g, numEdgesToRemove, blueEdges);
+                                          // find edge(s) to cut
+                                          auto[edgesIsoCut, _, edgesRedEdges] = WEIGHTED ? isoCut(g, weights[i], utils, true) : isoCut(g, utils, true);
 
-                              return std::pair{edgesIsoCut, edgesRedEdges};
-                          });
+                                          return std::pair{edgesIsoCut, edgesRedEdges};
+                                      });
                     i++;
                 }
 
                 // Get answers from all tasks and put them into edge counters
                 for (auto &task : tasks) {
-                    auto [edgesIsoCut, edgesRedEdges] = task.get();
+                    auto[edgesIsoCut, edgesRedEdges] = task.get();
                     for (auto &e : edgesIsoCut) edgesCntIsoCut.try_emplace(e, 0).first->second++;
                     if (edgesCntIsoCut.size() == 0) for (auto &e : edgesRedEdges) edgesCntRedEdges.try_emplace(e, 0).first->second++;
                 }
-            }
-            else {
+            } else {
                 for (int i = 0; i < numberOfRandomGraphs; ++i) {
                     // copy graph
                     auto workGraph{g};
@@ -567,19 +575,21 @@ namespace Graph::Fasp {
             if (edgesCntIsoCut.size() > 0) isoCutRndEdgesCnt++;
             else if (edgesCntRedEdges.size() > 0) redRndEdgesCnt++;
 
+            // In case when isoCut didn't find any edges use these from 'red edges' heuristic
             if (edgesCntIsoCut.size() == 0) {
-                edgesCntIsoCut.swap(edgesCntRedEdges); // In case when isoCut didn't find any edges use these from 'red edges' heuristic
+                edgesCntIsoCut.swap(edgesCntRedEdges);
             }
 
+            // In case we get nothing (very rare) we increase a nubmer of edges to remove for random subgraphs and continue
             if (edgesCntIsoCut.size() == 0) {
                 numEdgesToRemove++;
                 continue; // reapeat loop - we have not found any solutions
             }
             numEdgesToRemove = numEdgesToRemoveInitVal;
 
+            // Remove best candidate from guesses
             if (edgesCntIsoCut.size() > 0) {
                 auto maxCnt = std::max_element(edgesCntIsoCut.begin(), edgesCntIsoCut.end(), [](const auto &a, const auto &b) -> bool { return a.second < b.second; });
-                // Remove best candidate
                 g.removeEdge(maxCnt->first);
                 removedEdges.emplace_back(std::move(maxCnt->first));
             }
@@ -594,10 +604,25 @@ namespace Graph::Fasp {
 
         // Calculate capacity of removed edges
         EDGE_PROP_TYPE capacity = 0;
-        for (const auto &e : removedEdges) { capacity += aWeights.at(e); }
+        if (WEIGHTED) for (const auto &e : removedEdges) { capacity += aWeights.at(e); }
+        else capacity = removedEdges.size();
 
         return std::tuple{capacity, removedEdges, isoCutEdgesCnt, isoCutRndEdgesCnt, redRndEdgesCnt};
     }
-}
 
+    /**
+     * tightCut heuristic for solving FASP problem
+     * @tparam PARALLELIZED - true to use paralelized code in solver
+     * @tparam VERTEX_TYPE - type of vertices
+     * @param aGraph - input graph
+     * @return tuple of: capacity of FASP edges, removed edges, and statistics for isoCut, isoCutRnd and redEdgesRnd
+     *
+     * NOTE: if there are only isoCut edges counted in output statistics then solution is guaranteed to be exact
+     */
+    template<bool PARALLELIZED = false, typename VERTEX_TYPE>
+    static auto tightCut(const Graph<VERTEX_TYPE> &aGraph) {
+        return tightCut<false, PARALLELIZED, int, int>(aGraph);
+    }
+
+}
 #endif

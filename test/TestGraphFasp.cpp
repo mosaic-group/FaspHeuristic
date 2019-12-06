@@ -361,8 +361,7 @@ namespace {
         g.addEdge({7, 4});
         {   // no weighted graph - should give soluttion FASP size/capacity = 2
             auto gg{g};
-            auto ep = Graph::Ext::getEdgeProperties(g, 1);
-            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::Fasp::tightCut<true, false, VERTEX_TYPE, int>(gg, ep);
+            auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::Fasp::tightCut<false>(gg);
             ASSERT_EQ(capacity, 2);
             ASSERT_EQ(removedEdges.size(), 2);
             ASSERT_EQ(saEdgesCnt, 2);
