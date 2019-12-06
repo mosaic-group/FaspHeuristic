@@ -502,8 +502,7 @@ namespace Graph::Fasp {
         cleanGraphWithScc(g, utils);
 
         // initial run of superAlgorithm (SA)
-        auto [edgesToRemove, blueEdgesRes, dummy2] = WEIGHTED ? isoCut(g, aWeights, utils) : isoCut(g, utils);
-        auto &blueEdges = blueEdgesRes;
+        auto [edgesToRemove, blueEdges, dummy2] = WEIGHTED ? isoCut(g, aWeights, utils) : isoCut(g, utils);
         g.removeEdges(edgesToRemove);
         isoCutEdgesCnt += edgesToRemove.size();
         removedEdges.insert(removedEdges.begin(), edgesToRemove.begin(), edgesToRemove.end());
@@ -530,7 +529,7 @@ namespace Graph::Fasp {
                 int i = 0;
                 for (auto &task : tasks) {
                     task = std::async(std::launch::async,
-                          [i, numEdgesToRemove, g, utils, blueEdges, &weights] () mutable {
+                          [i, numEdgesToRemove, g, utils, blueEdges = blueEdges, &weights] () mutable {
                               // 'g' and 'utils' inside lambda is a copy of orignal value
 
                               // generate random subgraph
@@ -586,8 +585,7 @@ namespace Graph::Fasp {
             }
 
             // Try to solve the rest with isoCut - maybe it will now succeed!
-            auto [edgesToRemove, blueEdges2, dummy3] = WEIGHTED ? isoCut(g, aWeights, utils) : isoCut(g, utils);
-            blueEdges = blueEdges2;
+            std::tie(edgesToRemove, blueEdges, std::ignore) = WEIGHTED ? isoCut(g, aWeights, utils) : isoCut(g, utils);
             g.removeEdges(edgesToRemove);
             isoCutEdgesCnt += edgesToRemove.size();
             removedEdges.insert(removedEdges.begin(), edgesToRemove.begin(), edgesToRemove.end());
