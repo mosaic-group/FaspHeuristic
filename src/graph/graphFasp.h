@@ -67,8 +67,8 @@ void aligned_free(void* ptr){
         pointer allocate (size_type num, const void* = 0) {
             // print message and allocate memory with global new
 //            std::cerr << "allocate " << num << " element(s)" << " of size " << sizeof(T) << std::endl;
-//            pointer ret = (pointer)(::operator new(num*sizeof(T)));
-            pointer ret = (pointer)(aligned_alloc(64, num*sizeof(T)));
+            pointer ret = (pointer)(::operator new(num*sizeof(T), (std::align_val_t)64));
+//            pointer ret = (pointer)(aligned_alloc(64, num*sizeof(T)));
 //            std::cerr << " allocated at: " << (void*)ret << std::endl;
             return ret;
         }
@@ -89,8 +89,8 @@ void aligned_free(void* ptr){
         void deallocate (pointer p, size_type num) {
             // print message and deallocate memory with global delete
 //            std::cerr << "deallocate " << num << " element(s)" << " of size " << sizeof(T) << " at: " << (void*)p << std::endl;
-//            ::operator delete((void*)p);
-            aligned_free((void*)p);
+            ::operator delete((void*)p);
+//            aligned_free((void*)p);
         }
     };
 
@@ -602,8 +602,10 @@ void aligned_free(void* ptr){
 
             // Run each randomly generated graph in seperate thread and later collect all solutions found
             if (PARALLELIZED) {
-                std::vector<Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE>> weights{numberOfRandomGraphs, aWeights};
-                std::vector<std::future<std::pair<typename Graph<VERTEX_TYPE>::Edges, typename Graph<VERTEX_TYPE>::Edges>>> tasks{numberOfRandomGraphs};
+                using EdgePropertiesType = Ext::EdgeProperties <VERTEX_TYPE, EDGE_PROP_TYPE>;
+                std::vector<EdgePropertiesType, MyAlloc<EdgePropertiesType>> weights{numberOfRandomGraphs, aWeights};
+                using TaskType = std::future<std::pair<typename Graph<VERTEX_TYPE>::Edges, typename Graph<VERTEX_TYPE>::Edges>>;
+                std::vector<TaskType, MyAlloc<TaskType>> tasks{numberOfRandomGraphs};
                 int i = 0;
                 for (auto &task : tasks) {
                     task = std::async(std::launch::async,
