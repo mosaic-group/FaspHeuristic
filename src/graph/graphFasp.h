@@ -530,8 +530,8 @@ namespace Graph::Fasp {
                 int i = 0;
                 for (auto &task : tasks) {
                     task = std::async(std::launch::async,
-                          [&, i, numEdgesToRemove, g, utils] () mutable {
-                              // 'g' inside lambda is a copy of orignal value
+                          [i, numEdgesToRemove, g, utils, blueEdges, &weights] () mutable {
+                              // 'g' and 'utils' inside lambda is a copy of orignal value
 
                               // generate random subgraph
                               utils.getRandomSubgraph(g, numEdgesToRemove, blueEdges);
