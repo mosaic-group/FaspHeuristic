@@ -31,6 +31,11 @@ public:
      */
     explicit Stack(IDX aSize) : iSize(aSize), iData(new ELEMENT_TYPE[aSize]) {}
 
+    Stack(const Stack &obj) : iIdx(obj.iIdx), iSize(obj.iSize) {
+        iData.reset(new ELEMENT_TYPE[iSize]);
+        memcpy(iData.get(), obj.iData.get(), sizeof(ELEMENT_TYPE) * iSize);
+    }
+
     /**
      * @return true if stack is empty
      */

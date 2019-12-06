@@ -44,6 +44,11 @@ public:
         clearAll();
     }
 
+    DynamicBitset(const DynamicBitset &obj) : iSize(obj.iSize), iNumOfElements(obj.iNumOfElements) {
+        iData.reset(new ELEMENT_TYPE[iNumOfElements]);
+        memcpy(iData.get(), obj.iData.get(), sizeof(ELEMENT_TYPE) * iNumOfElements);
+    }
+
     IDX getSize() const {return iSize;}
 
     /**
