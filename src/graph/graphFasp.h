@@ -494,8 +494,8 @@ namespace Graph::Fasp {
 
         // Result and statistics of algorithm
         typename Graph<VERTEX_TYPE>::Edges removedEdges;
-        int saEdgesCnt = 0;
-        int saRndEdgesCnt = 0;
+        int isoCutEdgesCnt = 0;
+        int isoCutRndEdgesCnt = 0;
         int redRndEdgesCnt = 0;
 
         // initial clean of input graph
@@ -505,7 +505,7 @@ namespace Graph::Fasp {
         auto [edgesToRemove, blueEdgesRes, dummy2] = WEIGHTED ? isoCut(g, aWeights, utils) : isoCut(g, utils);
         auto &blueEdges = blueEdgesRes;
         g.removeEdges(edgesToRemove);
-        saEdgesCnt += edgesToRemove.size();
+        isoCutEdgesCnt += edgesToRemove.size();
         removedEdges.insert(removedEdges.begin(), edgesToRemove.begin(), edgesToRemove.end());
 
         int numEdgesToRemove = numEdgesToRemoveInitVal;
@@ -532,10 +532,7 @@ namespace Graph::Fasp {
                     task = std::async(std::launch::async,
                           [&, i, numEdgesToRemove, g, utils] () mutable {
                               // 'g' inside lambda is a copy of orignal value
-                              // prepare utils
-//                              auto vertices = g.getVertices();
-//                              auto maxId = std::max_element(vertices.begin(), vertices.end());
-//                              GraphSpeedUtils<VERTEX_TYPE> gsu(maxId == vertices.end() ? 1 : *maxId + 1); // maxId included
+
                               // generate random subgraph
                               utils.getRandomSubgraph(g, numEdgesToRemove, blueEdges);
                               // find edge(s) to cut
@@ -548,9 +545,9 @@ namespace Graph::Fasp {
 
                 // Get answers from all tasks and put them into edge counters
                 for (auto &task : tasks) {
-                    auto [edgesToRemove, edgesToRemoveGR] = task.get();
-                    for (auto &e : edgesToRemove) edgesCntIsoCut.try_emplace(e, 0).first->second++;
-                    for (auto &e : edgesToRemoveGR) edgesCntRedEdges.try_emplace(e, 0).first->second++;
+                    auto [edgesIsoCut, edgesRedEdges] = task.get();
+                    for (auto &e : edgesIsoCut) edgesCntIsoCut.try_emplace(e, 0).first->second++;
+                    if (edgesCntIsoCut.size() == 0) for (auto &e : edgesRedEdges) edgesCntRedEdges.try_emplace(e, 0).first->second++;
                 }
             }
             else {
@@ -560,19 +557,21 @@ namespace Graph::Fasp {
                     // generate random subgraph
                     utils.getRandomSubgraph(workGraph, numEdgesToRemove, blueEdges);
                     // find edge(s) to cut
-                    auto[edgesSA, _, edgesGR] = WEIGHTED ? isoCut(workGraph, aWeights, utils, true) : isoCut(workGraph, utils, true);
+                    auto[edgesIsoCut, _, edgesRedEdges] = WEIGHTED ? isoCut(workGraph, aWeights, utils, true) : isoCut(workGraph, utils, true);
 
-                    auto[edgesToRemove, edgesToRemoveGR] = std::pair{edgesSA, edgesGR};
-                    for (auto &e : edgesToRemove) edgesCntIsoCut.try_emplace(e, 0).first->second++;
-                    for (auto &e : edgesToRemoveGR) edgesCntRedEdges.try_emplace(e, 0).first->second++;
+                    for (auto &e : edgesIsoCut) edgesCntIsoCut.try_emplace(e, 0).first->second++;
+                    if (edgesCntIsoCut.size() == 0) for (auto &e : edgesRedEdges) edgesCntRedEdges.try_emplace(e, 0).first->second++;
                 }
             }
 
-            if (edgesCntIsoCut.size() > 0) saRndEdgesCnt++;
+            // Statistics - we will remove only one edge either coming from isoCut or red edges heuristic
+            if (edgesCntIsoCut.size() > 0) isoCutRndEdgesCnt++;
             else if (edgesCntRedEdges.size() > 0) redRndEdgesCnt++;
+
             if (edgesCntIsoCut.size() == 0) {
-                edgesCntIsoCut.swap(edgesCntRedEdges); // In case when SA didn't find any edges use these from GR heuristic
+                edgesCntIsoCut.swap(edgesCntRedEdges); // In case when isoCut didn't find any edges use these from 'red edges' heuristic
             }
+
             if (edgesCntIsoCut.size() == 0) {
                 numEdgesToRemove++;
                 continue; // reapeat loop - we have not found any solutions
@@ -586,19 +585,20 @@ namespace Graph::Fasp {
                 removedEdges.emplace_back(std::move(maxCnt->first));
             }
 
-            // Try to solve the rest with superAlgoritm - maybe it will now succeed!
+            // Try to solve the rest with isoCut - maybe it will now succeed!
             auto [edgesToRemove, blueEdges2, dummy3] = WEIGHTED ? isoCut(g, aWeights, utils) : isoCut(g, utils);
             blueEdges = blueEdges2;
             g.removeEdges(edgesToRemove);
-            saEdgesCnt += edgesToRemove.size();
+            isoCutEdgesCnt += edgesToRemove.size();
             removedEdges.insert(removedEdges.begin(), edgesToRemove.begin(), edgesToRemove.end());
         }
         // ------------------ End of the algorithm ----------------------
 
+        // Calculate capacity of removed edges
         EDGE_PROP_TYPE capacity = 0;
         for (const auto &e : removedEdges) { capacity += aWeights.at(e); }
-        print(std::cout, "\n", capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt, "\n");
-        return std::tuple{capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt};
+
+        return std::tuple{capacity, removedEdges, isoCutEdgesCnt, isoCutRndEdgesCnt, redRndEdgesCnt};
     }
 }
 
