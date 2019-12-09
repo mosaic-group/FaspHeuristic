@@ -11,6 +11,7 @@
 #include "benchmarks/benchTiming/benchTiming.h"
 #include "benchmarks/benchWeights/benchWeights.h"
 #include "benchmarks/benchImaseItoh/benchImaseItoh.h"
+#include "benchmarks/benchILPvsHEURISTIC/benchILPvsHEURISTIC.h"
 
 
 INITIALIZE_EASYLOGGINGPP
@@ -32,10 +33,6 @@ void configureLogger() {
     el::Loggers::reconfigureLogger("default", defaultConf);
 }
 
-void playground(int v) {
-    std::cout << "Playground " << v << "\n";
-}
-
 [[maybe_unused]] auto PrintAppArgs = [](int argc, char **argv) {std::cout << argc; for (int i = 0; i < argc; ++i) std::cout << " [" << argv[i] << "]"; std::cout << "\n";};
 
 template <typename T>
@@ -55,7 +52,7 @@ int main(int argc, char **argv) {
 
         // Mandatory field
         std::vector<std::string> allowedBenchmarks;
-        allowedBenchmarks.push_back("playground");
+        allowedBenchmarks.push_back("benchILPvsHEURISTIC");
         allowedBenchmarks.push_back("benchSuperAlgorithmConstWeightVarFaspConstVE");
         allowedBenchmarks.push_back("benchHeuristicsConstWeightVarFaspConstVE");
         allowedBenchmarks.push_back("benchBruijnGraphs");
@@ -72,6 +69,7 @@ int main(int argc, char **argv) {
 
         // Helper fields - they will be checked later on per-benchmark basis (each benchmark may req. different set of those fields)
         TCLAP::ValueArg<std::string> dirArg("d", "outputDirectory", "directory where output files will be saved", false, "", "outputDirectory");
+        TCLAP::ValueArg<std::string> filenameArg("n", "fileName", "name of the output file", false, "", "outputDirectory");
 
         TCLAP::ValueArg<std::string> dirInArg("i", "inputDirectory", "directory where graphs are stored", false, "", "inputDirectory");
 
@@ -97,6 +95,7 @@ int main(int argc, char **argv) {
         TCLAP::SwitchArg logArg("l", "logScale", "Use log distributed range", false);
 
         cmd.add(dirArg);
+        cmd.add(filenameArg);
         cmd.add(dirInArg);
 
         cmd.add(vArg);
@@ -123,47 +122,35 @@ int main(int argc, char **argv) {
         cmd.parse( argc, argv );
 
 
-//        auto reqArgHdl = [] (TCLAP::ValueArg<int> &arg) {
-//            if (!arg.isSet()) {
-//                LOG(ERROR) << "Argument: [" << arg.longID("") << " " << arg.getDescription() << "] is required!";
-//                exit(-1);
-//            }
-//            return arg.getValue();
-//        };
-        auto dirArgHdl = [] (TCLAP::ValueArg<std::string> &arg) {
-            return arg.getValue();
-        };
-
-
         if (benchmarkName.getValue() == allowedBenchmarks[0]) { // playground
-            playground(reqArgHdl(vArg));
+            benchILPvsHEURISTIC(reqArgHdl(dirInArg), reqArgHdl(dirArg), reqArgHdl((filenameArg)));
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[1]) {
-            benchSuperAlgorithmConstWeightVarFaspConstVE(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
+            benchSuperAlgorithmConstWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[2]) {
-            benchHeuristicsConstWeightVarFaspConstVE(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
+            benchHeuristicsConstWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[3]) {
-            benchBruijnGraphs(dirArgHdl(dirArg));
+            benchBruijnGraphs(reqArgHdl(dirArg));
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[4]) {
-            benchGraphsFromPaper1(dirArgHdl(dirArg), dirArgHdl(dirInArg));
+            benchGraphsFromPaper1(reqArgHdl(dirArg), reqArgHdl(dirInArg));
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[5]) {
-            benchResultsDistr(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
+            benchResultsDistr(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[6]) {
-            benchTimingConstWeightVarFaspConstVE(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
+            benchTimingConstWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[7]) {
-            benchTimingConstDensityAndFaspGrowingsize(dirArgHdl(dirArg), reqArgHdl(vMinArg), reqArgHdl(vMaxArg), reqArgHdl(dArg), reqArgHdl(fArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
+            benchTimingConstDensityAndFaspGrowingsize(reqArgHdl(dirArg), reqArgHdl(vMinArg), reqArgHdl(vMaxArg), reqArgHdl(dArg), reqArgHdl(fArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[8]) {
-            benchTimingVarWeightVarFaspConstVE(dirArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
+            benchTimingVarWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[9]) {
-            benchImaseItoh(dirArgHdl(dirArg), dirArgHdl(dirInArg));
+            benchImaseItoh(reqArgHdl(dirArg), reqArgHdl(dirInArg));
         }
         else {
 
