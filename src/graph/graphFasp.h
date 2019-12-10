@@ -296,7 +296,7 @@ namespace Graph::Fasp {
                 // From found edges remove 'blue edges' which should not be processed
                 auto edgesWithCycles = findEdgesWithCycles(aGraph);
                 edgesWithCycles.erase(
-                        std::remove_if(edgesWithCycles.begin(), edgesWithCycles.end(), [&aBlueEdges](const typename EdgesSet<VERTEX_TYPE>::value_type &edge) { return aBlueEdges.find(edge) != aBlueEdges.end(); }),
+                        std::remove_if(edgesWithCycles.begin(), edgesWithCycles.end(), [&aBlueEdges](const auto &edge) { return aBlueEdges.find(edge) != aBlueEdges.end(); }),
                         edgesWithCycles.end());
 
                 auto n = edgesWithCycles.size();
