@@ -14,6 +14,9 @@
 /*
  * Benchmarks of graphs from this paper:
  * "An exact method for the minimum feedback arc set problem" Ali Baharev et al.
+ *
+ * Example cmd line to run it:
+ * benchmark benchGraphsFromPaper1 --outputDirectory . --inputDirectory ../src/benchmarks/benchGraphsFromPaper1/data/
  */
 
 std::string getFilenameOfBenchGraphsFromPaper1() {
