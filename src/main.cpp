@@ -3,14 +3,9 @@
 #include "tools/prettyprint.h"
 
 
-#include "benchmarks/benchSuperAlgorithm/benchSuperAlgorithm.h"
+#include "benchmarks/benchIsoCut/benchIsoCut.h"
 #include "benchmarks/benchHeuristics/benchHeuristics.h"
-#include "benchmarks/benchBruijnGraphs/benchBruijnGraphs.h"
 #include "benchmarks/benchGraphsFromPaper1/benchGraphsFromPaper1.h"
-#include "benchmarks/benchResultsDistribution/benchResultsDistribution.h"
-#include "benchmarks/benchTiming/benchTiming.h"
-#include "benchmarks/benchWeights/benchWeights.h"
-#include "benchmarks/benchImaseItoh/benchImaseItoh.h"
 #include "benchmarks/benchILPvsHEURISTIC/benchILPvsHEURISTIC.h"
 
 
@@ -53,15 +48,12 @@ int main(int argc, char **argv) {
         // Mandatory field
         std::vector<std::string> allowedBenchmarks;
         allowedBenchmarks.push_back("benchILPvsHEURISTIC");
-        allowedBenchmarks.push_back("benchSuperAlgorithmConstWeightVarFaspConstVE");
+        allowedBenchmarks.push_back("benchIsoCutConstWeightVarFaspConstVE");
         allowedBenchmarks.push_back("benchHeuristicsConstWeightVarFaspConstVE");
-        allowedBenchmarks.push_back("benchBruijnGraphs");
         allowedBenchmarks.push_back("benchGraphsFromPaper1");
-        allowedBenchmarks.push_back("benchResultsDistribution");
         allowedBenchmarks.push_back("benchTimingConstWeightVarFaspConstVE");
         allowedBenchmarks.push_back("benchTimingConstDensityAndFaspGrowingsize");
         allowedBenchmarks.push_back("benchTimingVarWeightVarFaspConstVE");
-        allowedBenchmarks.push_back("benchImaseItoh");
 
         TCLAP::ValuesConstraint<std::string> allowedVals( allowedBenchmarks );
         TCLAP::UnlabeledValueArg<std::string>  benchmarkName("benchmarkName", "name of benchmark to run", true, "", &allowedVals);
@@ -122,35 +114,26 @@ int main(int argc, char **argv) {
         cmd.parse( argc, argv );
 
 
-        if (benchmarkName.getValue() == allowedBenchmarks[0]) { // playground
+        if (benchmarkName.getValue() == allowedBenchmarks[0]) {
             benchILPvsHEURISTIC(reqArgHdl(dirInArg), reqArgHdl(dirArg), reqArgHdl((filenameArg)));
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[1]) {
-            benchSuperAlgorithmConstWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
+            benchIsoCutConstWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[2]) {
             benchHeuristicsConstWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[3]) {
-            benchBruijnGraphs(reqArgHdl(dirArg));
-        }
-        else if (benchmarkName.getValue() == allowedBenchmarks[4]) {
             benchGraphsFromPaper1(reqArgHdl(dirArg), reqArgHdl(dirInArg));
         }
-        else if (benchmarkName.getValue() == allowedBenchmarks[5]) {
-            benchResultsDistr(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
-        }
-        else if (benchmarkName.getValue() == allowedBenchmarks[6]) {
+        else if (benchmarkName.getValue() == allowedBenchmarks[4]) {
             benchTimingConstWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
-        else if (benchmarkName.getValue() == allowedBenchmarks[7]) {
+        else if (benchmarkName.getValue() == allowedBenchmarks[5]) {
             benchTimingConstDensityAndFaspGrowingsize(reqArgHdl(dirArg), reqArgHdl(vMinArg), reqArgHdl(vMaxArg), reqArgHdl(dArg), reqArgHdl(fArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
-        else if (benchmarkName.getValue() == allowedBenchmarks[8]) {
+        else if (benchmarkName.getValue() == allowedBenchmarks[6]) {
             benchTimingVarWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
-        }
-        else if (benchmarkName.getValue() == allowedBenchmarks[9]) {
-            benchImaseItoh(reqArgHdl(dirArg), reqArgHdl(dirInArg));
         }
         else {
 

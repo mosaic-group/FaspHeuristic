@@ -407,7 +407,18 @@ namespace Graph::Fasp {
 
     // ------------------------------------------------------------------------
 
-    template<bool aUseWeights = true, typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
+    /**
+     * Runs ISO-CUT algorithm on provided weighted graph. If needed relaxed approach is used - in case when no
+     * suitable edge is found then 'red edges' algorithm output is provided with best guessed edge.
+     * @tparam USE_WEIGHTS - can be set tu false to ignore provided weights (behaves like in case non-weighted graph)
+     * @tparam VERTEX_TYPE
+     * @param aGraph - input graph
+     * @param aWeights - weights of edges of aGraph
+     * @param aUtils - utils for fast graph processing
+     * @param aUseRelaxedApproach - if true relaxed version of ISO-CUT is used
+     * @return tuple of edges removed by ISO-CUT, 'blue edges' and edges removed by relaxed approach
+     */
+    template<bool USE_WEIGHTS = true, typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
     static auto isoCut(Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights, GraphSpeedUtils<VERTEX_TYPE> &aUtils, bool aUseRelaxedApproach = false) {
         typename Graph<VERTEX_TYPE>::Edges removedEdges;
         EdgesSet<VERTEX_TYPE> blueEdges;
@@ -425,11 +436,11 @@ namespace Graph::Fasp {
 
                 // Find isolated cycles of edge 'e'. If there are no iso-cycles then continue with next edge.
                 auto isoCyclesOfCurrentEdge{aGraph};
-                if (!aUtils.findIsolatedCycles(isoCyclesOfCurrentEdge, e, blueEdges, aUseWeights)) continue;
+                if (!aUtils.findIsolatedCycles(isoCyclesOfCurrentEdge, e, blueEdges, USE_WEIGHTS)) continue;
 
                 // If we have weights assigned to edges then we need to do min-cut, if not it is always safe to remove current edge
                 bool shouldRemoveCurrentEdge = true; // default for non weighted graphs
-                if (aUseWeights) {
+                if (USE_WEIGHTS) {
                     // Check if edge should be removed
                     auto mc = aUtils.minStCut(isoCyclesOfCurrentEdge, e.dst, e.src, aWeights);
                     if (mc < aWeights.at(e)) shouldRemoveCurrentEdge = false;
@@ -458,6 +469,15 @@ namespace Graph::Fasp {
         return std::tuple{removedEdges, blueEdges, removedEdgesRelaxed};
     }
 
+    /**
+     * Runs ISO-CUT algorithm on provided not weighted graph. If needed relaxed approach is used - in case when no
+     * suitable edge is found then 'red edges' algorithm output is provided with best guessed edge.
+     * @tparam VERTEX_TYPE
+     * @param aGraph - input graph
+     * @param aUtils - utils for fast graph processing
+     * @param aUseRelaxedApproach - if true relaxed version of ISO-CUT is used
+     * @return tuple of edges removed by ISO-CUT, 'blue edges' and edges removed by relaxed approach
+     */
     template<typename VERTEX_TYPE>
     static auto isoCut(Graph<VERTEX_TYPE> &aGraph, GraphSpeedUtils<VERTEX_TYPE> &aUtils, bool aUseRelaxedApproach = false) {
         return isoCut<false>(aGraph, Ext::getEdgeProperties(aGraph, 1), aUtils, aUseRelaxedApproach);

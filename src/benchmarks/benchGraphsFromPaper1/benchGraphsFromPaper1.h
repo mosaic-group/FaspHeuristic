@@ -13,6 +13,7 @@
 #include "graph/graph.h"
 #include "graph/graphFaspTools.h"
 #include "graph/graphFasp.h"
+#include "graph/graphIO.h"
 #include <regex>
 
 /*
