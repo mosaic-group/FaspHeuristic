@@ -49,9 +49,8 @@ int main(int argc, char **argv) {
         std::vector<std::string> allowedBenchmarks;
         allowedBenchmarks.push_back("benchILPvsHEURISTIC");
         allowedBenchmarks.push_back("benchIsoCutConstWeightVarFaspConstVE");
-        allowedBenchmarks.push_back("benchHeuristicsConstWeightVarFaspConstVE");
         allowedBenchmarks.push_back("benchGraphsFromPaper1");
-        allowedBenchmarks.push_back("benchTimingConstWeightVarFaspConstVE");
+        allowedBenchmarks.push_back("benchVarFaspConstWeightVE");
         allowedBenchmarks.push_back("benchTimingConstDensityAndFaspGrowingsize");
         allowedBenchmarks.push_back("benchTimingVarWeightVarFaspConstVE");
 
@@ -121,22 +120,18 @@ int main(int argc, char **argv) {
             benchIsoCutConstWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[2]) {
-            benchHeuristicsConstWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
-        }
-        else if (benchmarkName.getValue() == allowedBenchmarks[3]) {
             benchGraphsFromPaper1(reqArgHdl(dirArg), reqArgHdl(dirInArg));
         }
-        else if (benchmarkName.getValue() == allowedBenchmarks[4]) {
-            benchTimingConstWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
+        else if (benchmarkName.getValue() == allowedBenchmarks[3]) {
+            benchVarFaspConstWeightVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
-        else if (benchmarkName.getValue() == allowedBenchmarks[5]) {
+        else if (benchmarkName.getValue() == allowedBenchmarks[4]) {
             benchTimingConstDensityAndFaspGrowingsize(reqArgHdl(dirArg), reqArgHdl(vMinArg), reqArgHdl(vMaxArg), reqArgHdl(dArg), reqArgHdl(fArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
-        else if (benchmarkName.getValue() == allowedBenchmarks[6]) {
+        else if (benchmarkName.getValue() == allowedBenchmarks[5]) {
             benchTimingVarWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else {
-
             std::cerr << "Not known name of benchmark! \n";
         }
     }
