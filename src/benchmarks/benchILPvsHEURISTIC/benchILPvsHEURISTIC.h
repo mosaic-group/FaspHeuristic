@@ -69,14 +69,14 @@ void benchILPvsHEURISTIC(const std::string &inputDir, const std::string &outputD
         auto grTime = t.stop_timer();
 
         // Save all data
+        f.put("vertices", g.getNumOfVertices());
+        f.put("edges", g.getNumOfEdges());
         f.put("gr", gr.first);
         f.put("grTime", grTime);
         f.put("random", capacity);
         f.put("randomTime", thisStep);
         f.put("exact", solution);
         f.put("exactTime", timeExactOfGraph);
-        f.put("vertices", g.getNumOfVertices());
-        f.put("edges", g.getNumOfEdges());
         f.put("fileName", graphFile);
         f.put("saEdges", saEdgesCnt);
         f.put("saRndEdges", saRndEdgesCnt);

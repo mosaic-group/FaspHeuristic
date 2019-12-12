@@ -51,8 +51,8 @@ int main(int argc, char **argv) {
         allowedBenchmarks.push_back("benchIsoCutConstWeightVarFaspConstVE");
         allowedBenchmarks.push_back("benchGraphsFromPaper1");
         allowedBenchmarks.push_back("benchVarFaspConstWeightVE");
-        allowedBenchmarks.push_back("benchTimingConstDensityAndFaspGrowingsize");
-        allowedBenchmarks.push_back("benchTimingVarWeightVarFaspConstVE");
+        allowedBenchmarks.push_back("benchVarVConstDensityFaspWeight");
+        allowedBenchmarks.push_back("benchVarWeightFaspConstVE");
 
         TCLAP::ValuesConstraint<std::string> allowedVals( allowedBenchmarks );
         TCLAP::UnlabeledValueArg<std::string>  benchmarkName("benchmarkName", "name of benchmark to run", true, "", &allowedVals);
@@ -126,10 +126,12 @@ int main(int argc, char **argv) {
             benchVarFaspConstWeightVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[4]) {
-            benchTimingConstDensityAndFaspGrowingsize(reqArgHdl(dirArg), reqArgHdl(vMinArg), reqArgHdl(vMaxArg), reqArgHdl(dArg), reqArgHdl(fArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
+            benchVarVConstDensityFaspWeight(reqArgHdl(dirArg), reqArgHdl(vMinArg), reqArgHdl(vMaxArg), reqArgHdl(dArg),
+                                            reqArgHdl(fArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else if (benchmarkName.getValue() == allowedBenchmarks[5]) {
-            benchTimingVarWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
+            benchVarWeightFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg),
+                                      reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
         else {
             std::cerr << "Not known name of benchmark! \n";

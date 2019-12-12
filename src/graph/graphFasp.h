@@ -495,7 +495,7 @@ namespace Graph::Fasp {
      *
      * NOTE: if there are only isoCut edges counted in output statistics then solution is guaranteed to be exact
      */
-    template<bool WEIGHTED = false, bool PARALLELIZED = false, typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
+    template<bool WEIGHTED = true, bool PARALLELIZED = false, typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
     static auto tightCut(const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights = Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE>{}) {
         // Cleans graph from single vertex SCCs (they cannot be part of any cycle), it also (because of removing vertices) removes
         // edges connected to this vertices. It significantly increase speed of algorithm.
