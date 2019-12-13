@@ -9,7 +9,7 @@
 #include "graph/graphFaspTools.h"
 #include "graph/graphFasp.h"
 #include "graph/graphIO.h"
-
+#include <sstream>
 
 /**
  * Benchmark for testing heuristics using graphs with  const weights, const number of vertices and edges, and changing fasp size according provided data.
@@ -103,7 +103,8 @@ void benchVarVConstDensityFaspWeight(const std::string &outputDir, int minNumOfV
     LOG(TRACE) << "Running benchVarVConstDensityFaspWeight. Params: vmin=" << minNumOfVertices << " vmax=" << maxNumOfVertices << " d=" << density << " f=" << faspSize << " steps=" << numOfSteps << " reps=" << numOfReps;
 
     // get density string with limited precision and underscore instead of dot (4.3751 becomes "4_37")
-    std::string densityStr = (std::ostringstream{} << std::fixed << std::setprecision(2) << density).str();
+    std::ostringstream tmpStr; tmpStr << std::fixed << std::setprecision(2) << density;
+    std::string densityStr = tmpStr.str();
     std::replace(densityStr.begin(), densityStr.end(), '.', '_');
 
     auto outputFile = outputDir + "/" +

@@ -9,7 +9,6 @@
 #include "graph.h"
 #include "graphExt.h"
 #include "tools/tools.h"
-#include "tools/easylogging++.h"
 #include "tools/prettyprint.h"
 #include "tools/timer.h"
 #include <algorithm>
@@ -231,7 +230,7 @@ namespace Graph::FaspTools {
         bool wrongNumOfRequestedEdgesTooLow = aNumOfEdges < 2 * aFaspCapacity; // requested num of edges lower than needed to generate fasp
         bool wrongNumOfRequestedEdgesTooHigh = aNumOfEdges > maxNumOfEdges/2 + aFaspCapacity; // requested num of edges higher than sum of leftward edges and max number of rightward edges
         if (wrongMaxNumberOfLeftwardEdges || wrongNumOfRequestedEdgesTooLow || wrongNumOfRequestedEdgesTooHigh) {
-                LOG(ERROR) << "Graph not generated!!! " << wrongMaxNumberOfLeftwardEdges << "/" << wrongNumOfRequestedEdgesTooLow << "/" << wrongNumOfRequestedEdgesTooHigh;
+                std::cerr << "Graph not generated!!! " << wrongMaxNumberOfLeftwardEdges << "/" << wrongNumOfRequestedEdgesTooLow << "/" << wrongNumOfRequestedEdgesTooHigh << std::endl;
                 return std::pair{g, c};
         }
 

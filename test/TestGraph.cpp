@@ -4,6 +4,8 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
+#include "tools/easylogging++.h"
+
 #include <random>
 
 using ::testing::ElementsAre;

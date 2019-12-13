@@ -11,6 +11,9 @@
 
 INITIALIZE_EASYLOGGINGPP
 
+/**
+ * Configuration for easy logging.
+ */
 void configureLogger() {
     el::Configurations defaultConf;
     defaultConf.setToDefault();
@@ -28,8 +31,10 @@ void configureLogger() {
     el::Loggers::reconfigureLogger("default", defaultConf);
 }
 
-[[maybe_unused]] auto PrintAppArgs = [](int argc, char **argv) {std::cout << argc; for (int i = 0; i < argc; ++i) std::cout << " [" << argv[i] << "]"; std::cout << "\n";};
-
+/**
+ * Checks if mandatory argument for benchmark was set. If no, complain to user and exit.
+ * @return value of argument if it was set correctly
+ */
 template <typename T>
 auto reqArgHdl(TCLAP::ValueArg<T> &arg) {
     if (!arg.isSet()) {
@@ -39,24 +44,18 @@ auto reqArgHdl(TCLAP::ValueArg<T> &arg) {
     return arg.getValue();
 }
 
+/**
+ * Simple code for running benchmarks from command line.
+ *
+ * NOTICE: This code is kept as easy as possible and it's not perfect.
+ * So it defines all needed arguments and verifies *later* (after parsing the command line) which field is mandatory for chosen
+ * benchmark.
+ */
 int main(int argc, char **argv) {
     configureLogger();
 
     try {
         TCLAP::CmdLine cmd("FASP heuristic benchamarks", ' ', "1.0", true);
-
-        // Mandatory field
-        std::vector<std::string> allowedBenchmarks;
-        allowedBenchmarks.push_back("benchILPvsHEURISTIC");
-        allowedBenchmarks.push_back("benchIsoCutConstWeightVarFaspConstVE");
-        allowedBenchmarks.push_back("benchGraphsFromPaper1");
-        allowedBenchmarks.push_back("benchVarFaspConstWeightVE");
-        allowedBenchmarks.push_back("benchVarVConstDensityFaspWeight");
-        allowedBenchmarks.push_back("benchVarWeightFaspConstVE");
-
-        TCLAP::ValuesConstraint<std::string> allowedVals( allowedBenchmarks );
-        TCLAP::UnlabeledValueArg<std::string>  benchmarkName("benchmarkName", "name of benchmark to run", true, "", &allowedVals);
-        cmd.add(benchmarkName);
 
         // Helper fields - they will be checked later on per-benchmark basis (each benchmark may req. different set of those fields)
         TCLAP::ValueArg<std::string> dirArg("d", "outputDirectory", "directory where output files will be saved", false, "", "outputDirectory");
@@ -110,26 +109,41 @@ int main(int argc, char **argv) {
 
         cmd.add(logArg);
 
+        // Mandatory field - define new benchmarks.
+        std::string ilpVsHeuristic{"benchILPvsHEURISTIC"};
+        std::string isoCutConstWeightVarFaspConstVE{"benchIsoCutConstWeightVarFaspConstVE"};
+        std::string graphsFromPaper1{"benchGraphsFromPaper1"};
+        std::string varFaspConstWeightVE{"benchVarFaspConstWeightVE"};
+        std::string varVConstDensityFaspWeight{"benchVarVConstDensityFaspWeight"};
+        std::string varWeightFaspConstVE{"benchVarWeightFaspConstVE"};
+
+        std::vector<std::string> allowedBenchmarks{ilpVsHeuristic, isoCutConstWeightVarFaspConstVE, graphsFromPaper1, varFaspConstWeightVE, varVConstDensityFaspWeight, varWeightFaspConstVE};
+        TCLAP::ValuesConstraint<std::string> allowedVals( allowedBenchmarks );
+        TCLAP::UnlabeledValueArg<std::string>  benchmarkName("benchmarkName", "name of benchmark to run", true, "", &allowedVals);
+        cmd.add(benchmarkName);
+
+        // ---------- PARSER ------------------
         cmd.parse( argc, argv );
 
 
-        if (benchmarkName.getValue() == allowedBenchmarks[0]) {
+        // run chosen benchmark
+        if (benchmarkName.getValue() == ilpVsHeuristic) {
             benchILPvsHEURISTIC(reqArgHdl(dirInArg), reqArgHdl(dirArg), reqArgHdl((filenameArg)));
         }
-        else if (benchmarkName.getValue() == allowedBenchmarks[1]) {
+        else if (benchmarkName.getValue() == isoCutConstWeightVarFaspConstVE) {
             benchIsoCutConstWeightVarFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
-        else if (benchmarkName.getValue() == allowedBenchmarks[2]) {
+        else if (benchmarkName.getValue() == graphsFromPaper1) {
             benchGraphsFromPaper1(reqArgHdl(dirArg), reqArgHdl(dirInArg));
         }
-        else if (benchmarkName.getValue() == allowedBenchmarks[3]) {
+        else if (benchmarkName.getValue() == varFaspConstWeightVE) {
             benchVarFaspConstWeightVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg), reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
-        else if (benchmarkName.getValue() == allowedBenchmarks[4]) {
+        else if (benchmarkName.getValue() == varVConstDensityFaspWeight) {
             benchVarVConstDensityFaspWeight(reqArgHdl(dirArg), reqArgHdl(vMinArg), reqArgHdl(vMaxArg), reqArgHdl(dArg),
                                             reqArgHdl(fArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
-        else if (benchmarkName.getValue() == allowedBenchmarks[5]) {
+        else if (benchmarkName.getValue() == varWeightFaspConstVE) {
             benchVarWeightFaspConstVE(reqArgHdl(dirArg), reqArgHdl(vArg), reqArgHdl(eArg), reqArgHdl(fMinArg),
                                       reqArgHdl(fMaxArg), reqArgHdl(stepsArg), reqArgHdl(repsArg), logArg.getValue());
         }
@@ -139,6 +153,7 @@ int main(int argc, char **argv) {
     }
     catch (TCLAP::ArgException &e) {
         LOG(ERROR) << "Cmd line error: " << e.error() << " for arg " << e.argId();
+        return -1;
     }
 
     return 0;
