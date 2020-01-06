@@ -34,29 +34,52 @@ include_directories(src/tools)
 
 
 ###############################################################################
-# Benchmarks
+# Lib needed for tests and benchmarks
 ###############################################################################
 add_library(testObjLib OBJECT src/tools/easylogging++.cc)
 set(FASP_BENCHMARK_LIB benchmarkLib)
 add_library(${FASP_BENCHMARK_LIB} STATIC $<TARGET_OBJECTS:testObjLib>)
-add_executable(benchmark src/main.cpp)
-target_link_libraries(benchmark PRIVATE ${FASP_BENCHMARK_LIB} ${HDF5_LIBRARIES})
+
+
+###############################################################################
+# Benchmarks
+###############################################################################
+if (FASP_HEURISTIC_BUILD_BENCHMARKS)
+    message(STATUS "FASP: Building benchmarks")
+    add_executable(benchmark src/main.cpp)
+    target_link_libraries(benchmark PRIVATE ${FASP_BENCHMARK_LIB} ${HDF5_LIBRARIES})
+endif()
 
 
 ###############################################################################
 # Tests
 ###############################################################################
-message(STATUS "Building tests")
-set(BUILD_GMOCK ON CACHE BOOL "" FORCE)
-set(BUILD_GTEST ON CACHE BOOL "" FORCE)
-set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
-set(TEST_BUILD_LIBRARY ${FASP_BENCHMARK_LIB})
-add_subdirectory("libs/googletest")
-include_directories(libs/googletest/googlemock/include)
-set(GTEST_LIBRARIES gtest gmock_main)
-enable_testing()
-add_subdirectory(test)
+if (FASP_HEURISTIC_BUILD_TESTS)
+    message(STATUS "FASP: Building tests")
+    set(BUILD_GMOCK ON CACHE BOOL "" FORCE)
+    set(BUILD_GTEST ON CACHE BOOL "" FORCE)
+    set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
+    set(TEST_BUILD_LIBRARY ${FASP_BENCHMARK_LIB})
+    add_subdirectory("libs/googletest")
+    include_directories(libs/googletest/googlemock/include)
+    set(GTEST_LIBRARIES gtest gmock_main)
+    enable_testing()
+    add_subdirectory(test)
+endif()
 
+###############################################################################
+# Install
+###############################################################################
+add_library(FASP_LIB INTERFACE)
+target_include_directories(FASP_LIB INTERFACE
+        "${PROJECT_SOURCE_DIR}/src/"
+)
+set(INSTALL_INCLUDE_DIR include CACHE PATH "Installation directory for header files")
+set(INSTALL_INCLUDE_PROJECT_DIR ${INSTALL_INCLUDE_DIR}/FASP_LIB CACHE PATH "Installation directory for header files")
+
+message(STATUS "APR: Install library in [${CMAKE_INSTALL_PREFIX}]")
+
+install(DIRECTORY ${INC_DIRS} DESTINATION ${INSTALL_INCLUDE_PROJECT_DIR} COMPONENT DEV FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h")
 
 #message(STATUS "---------------------- VARS BEG ---------------------")
 #get_cmake_property(_variableNames VARIABLES)
