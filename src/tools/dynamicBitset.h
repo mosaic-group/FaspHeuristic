@@ -28,7 +28,7 @@ class DynamicBitset {
     auto get(IDX aBitNum) {
         IDX idx = aBitNum / BitsPerElement;
         IDX off = aBitNum % BitsPerElement;
-        assert(idx >= 0 && idx < iNumOfElements && "Wrong index (bit number too big)");
+        assert(idx >= 0 && idx < static_cast<IDX>(iNumOfElements) && "Wrong index (bit number too big)");
         assert(idx * BitsPerElement + off < iSize && "Wrong offset (bit number too big)");
         return std::pair{std::ref(iData[idx]), Bit << off};
     }
