@@ -2,11 +2,11 @@
 # FASP heuristic
 ###############################################################################
 cmake_minimum_required(VERSION 3.10)
-project(FaspHeuristic)
+project(FaspTightCut VERSION 1.0.0 LANGUAGES C CXX)
 
 #project options
 option(FASP_HEURISTIC_BUILD_TESTS "Build tests?" ON)
-option(FASP_HEURISTIC_BUILD_BENCHMARKS "Build benchmarks?" ON)
+option(FASP_HEURISTIC_BUILD_BENCHMARKS "Build benchmarks?" OFF)
 option(FASP_HEURISTIC_INSTALL "Install FaspHeuristic?" OFF)
 
 ###############################################################################
@@ -56,13 +56,13 @@ endif()
 ###############################################################################
 if (FASP_HEURISTIC_BUILD_TESTS)
     message(STATUS "FASP: Building tests")
-    set(BUILD_GMOCK ON CACHE BOOL "" FORCE)
-    set(BUILD_GTEST ON CACHE BOOL "" FORCE)
-    set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
+#    set(BUILD_GMOCK ON CACHE BOOL "" FORCE)
+#    set(BUILD_GTEST ON CACHE BOOL "" FORCE)
+#    set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
     set(TEST_BUILD_LIBRARY ${FASP_BENCHMARK_LIB})
-    add_subdirectory("libs/googletest")
-    include_directories(libs/googletest/googlemock/include)
-    set(GTEST_LIBRARIES gtest gmock_main)
+#    add_subdirectory("libs/googletest")
+#    include_directories(libs/googletest/googlemock/include)
+#    set(GTEST_LIBRARIES gtest gmock_main)
     enable_testing()
     add_subdirectory(test)
 endif()

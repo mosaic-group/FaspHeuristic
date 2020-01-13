@@ -1,8 +1,8 @@
 #include "graph/graphFasp.h"
 #include "graph/graph.h"
 
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 #include <iostream>
 
 using ::testing::UnorderedElementsAreArray;
