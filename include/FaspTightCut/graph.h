@@ -5,8 +5,6 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#include "tools/prettyprint.h"
-#include "tools/tools.h"
 #include <vector>
 #include <set>
 #include <map>

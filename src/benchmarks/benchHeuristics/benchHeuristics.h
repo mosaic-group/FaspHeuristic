@@ -5,9 +5,9 @@
 #include "prettyprint.h"
 #include "tools/easylogging++.h"
 #include "hdf5/dataHdf5.h"
-#include "graph/graph.h"
+#include "../../../include/FaspTightCut/graph.h"
 #include "graph/graphFaspTools.h"
-#include "graph/graphFasp.h"
+#include "../../../include/FaspTightCut/graphFasp.h"
 #include "graph/graphIO.h"
 #include <sstream>
 

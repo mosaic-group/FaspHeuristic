@@ -22,8 +22,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "graph/graph.h"
-#include "graph/graphExt.h"
+#include "../graph.h"
+#include "../graphExt.h"
 
 namespace Graph {
 

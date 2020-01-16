@@ -6,8 +6,8 @@
 #define GRAPHFASPTOOLS_H
 
 
-#include "graph.h"
-#include "graphExt.h"
+#include "FaspTightCut/graph.h"
+#include "FaspTightCut/graphExt.h"
 #include "tools/tools.h"
 #include "tools/prettyprint.h"
 #include "tools/timer.h"

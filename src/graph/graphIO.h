@@ -2,8 +2,8 @@
 #define GRAPHIO_H
 
 
-#include "graph.h"
-#include "graphExt.h"
+#include "../../include/FaspTightCut/graph.h"
+#include "../../include/FaspTightCut/graphExt.h"
 #include <dirent.h>
 
 namespace Graph::IO {

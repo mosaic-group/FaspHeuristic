@@ -11,7 +11,7 @@
 #include <bitset>
 #include <memory>
 #include <cstring>
-
+#include <utility>
 
 template <typename ELEMENT_TYPE = uint8_t, typename IDX=uint32_t>
 class DynamicBitset {

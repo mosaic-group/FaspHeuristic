@@ -1,4 +1,4 @@
-#include "graph/graph.h"
+#include "../include/FaspTightCut/graph.h"
 #include "graph/graphFaspTools.h"
 
 #include "gtest/gtest.h"

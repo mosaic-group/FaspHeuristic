@@ -2,7 +2,7 @@
 // Created by gonciarz on 2019-04-02.
 //
 
-#include "tools/dynamicBitset.h"
+#include "FaspTightCut/tools/dynamicBitset.h"
 
 #include "gtest/gtest.h"
 

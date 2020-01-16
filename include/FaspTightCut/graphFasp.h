@@ -2,16 +2,18 @@
 #define GRAPHFASP_H
 
 
-#include "graph/graph.h"
-#include "graph/graphExt.h"
-#include "graph/graphFaspTools.h"
+#include "graph.h"
+#include "graphExt.h"
+#include "hipr/hi_pr.h"
 #include "tools/dynamicBitset.h"
 #include "tools/stack.h"
-#include "tools/tools.h"
 #include <future>
 #include <cstddef>
 #include <vector>
-#include "graph/hipr/hi_pr.h"
+#include <unordered_map>
+#include <unordered_set>
+#include <random>
+
 
 namespace Graph::Fasp {
 
@@ -280,6 +282,11 @@ namespace Graph::Fasp {
             return result;
         }
 
+        auto randInt(int min, int max) {
+            static std::mt19937 mt(std::random_device{}());
+            return std::uniform_int_distribution<>(min, max)(mt);
+        }
+
         /**
          * Generates subgraph of input graph (modifies it) by removing wanted number of edges with cycles.
          * There will be one cycle left in a input graph (if there was at least one cycle in input graph).
@@ -306,7 +313,7 @@ namespace Graph::Fasp {
                     if (edgesRemovedCnt > 0) aGraph.addEdge(lastRemovedRndEdge);
                     return;
                 } else {
-                    lastRemovedRndEdge = edgesWithCycles[::Tools::randInt(0, n - 1)];
+                    lastRemovedRndEdge = edgesWithCycles[randInt(0, n - 1)];
                     aGraph.removeEdge(lastRemovedRndEdge);
                     ++edgesRemovedCnt;
                 }
