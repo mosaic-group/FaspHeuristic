@@ -2,9 +2,8 @@
 
 Library implementing **TIGHT-CUT** heuristic for solving **FASP** (Feedback Arc Set Problem).
 
-For algorithm description and benchmarks or use in an academic context, please cite the following paper:
-
-_Michael Hecht, Krzysztof Gonciarz, Szabolcs Horvát_ [Tight Localizations of Feedback Sets](Tight Localizations of Feedback Sets)
+If you use this library in an academic context, please cite the following paper:
+- *Michael Hecht, Krzysztof Gonciarz, Szabolcs Horvát* [Tight Localizations of Feedback Sets](https://arxiv.org/abs/2001.01440)
 
 To see 
 ### How to clone code
