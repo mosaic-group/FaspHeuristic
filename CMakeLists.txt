@@ -23,6 +23,9 @@ target_include_directories(${LIB_NAME} INTERFACE
 target_compile_options(${LIB_NAME} INTERFACE -Werror -Wall -pedantic)
 target_compile_features(${LIB_NAME} INTERFACE cxx_std_17)
 
+#Add an alias so that library can be used inside the build tree, e.g. when testing
+add_library(${LIB_NAMESPACE}::${LIB_NAME} ALIAS ${LIB_NAME})
+
 ###############################################################################
 # Install FASP TightCut
 ###############################################################################
@@ -54,9 +57,6 @@ if (FASP_HEURISTIC_INSTALL)
             ${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}ConfigVersion.cmake
             DESTINATION
             lib/cmake/${LIB_NAME})
-
-    #Add an alias so that library can be used inside the build tree, e.g. when testing
-    add_library(${LIB_NAMESPACE}::${LIB_NAME} ALIAS ${LIB_NAME})
 endif()
 
 ###############################################################################
