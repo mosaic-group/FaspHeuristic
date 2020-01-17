@@ -1,9 +1,5 @@
-//
-// Created by gonciarz on 2019-04-02.
-//
-
-#ifndef TEST_DYNAMICBITSET_H
-#define TEST_DYNAMICBITSET_H
+#ifndef DYNAMICBITSET_H
+#define DYNAMICBITSET_H
 
 #include <sstream>
 #include <iostream>

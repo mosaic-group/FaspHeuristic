@@ -1,5 +1,5 @@
-#include "../include/FaspTightCut/graphFasp.h"
-#include "../include/FaspTightCut/graph.h"
+#include "FaspTightCut/graphFasp.h"
+#include "FaspTightCut/graph.h"
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>

@@ -1,10 +1,7 @@
-#include "../include/FaspTightCut/graph.h"
-#include "graph/graphFaspTools.h"
+#include "FaspTightCut/graph.h"
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-
-#include "tools/easylogging++.h"
 
 #include <random>
 
@@ -190,8 +187,6 @@ namespace {
 #endif
 
 }
-
-INITIALIZE_EASYLOGGINGPP
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);

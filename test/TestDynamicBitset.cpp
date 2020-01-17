@@ -1,9 +1,4 @@
-//
-// Created by gonciarz on 2019-04-02.
-//
-
 #include "FaspTightCut/tools/dynamicBitset.h"
-
 #include "gtest/gtest.h"
 
 template <typename T>

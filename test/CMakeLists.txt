@@ -1,10 +1,14 @@
+project(FaspTightCutTest VERSION 1.0.0 LANGUAGES C CXX)
+
+message(STATUS "FASP: Building tests")
+
 # =============================================================================
 # Download and build googletest
 # =============================================================================
 
 set(GOOGLETEST_DIRECTORY ${PROJECT_BINARY_DIR}/googletest)
 
-configure_file(${PROJECT_SOURCE_DIR}/cmake/GoogleTestCMakeLists.txt.in ${GOOGLETEST_DIRECTORY}/CMakeLists.txt)
+configure_file(cmake/GoogleTestCMakeLists.txt.in ${GOOGLETEST_DIRECTORY}/CMakeLists.txt)
 
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" . RESULT_VARIABLE result WORKING_DIRECTORY ${GOOGLETEST_DIRECTORY})
 if(result)
@@ -25,7 +29,8 @@ add_subdirectory(${GOOGLETEST_DIRECTORY}/src ${GOOGLETEST_DIRECTORY}/build EXCLU
 
 macro(buildTarget TARGET SRC ADD_TO_TESTSUITE)
     add_executable(${TARGET} ${SRC})
-    target_link_libraries(${TARGET} ${TEST_BUILD_LIBRARY} gtest_main gmock_main)
+    target_link_libraries(${TARGET}  gtest_main gmock_main ${LIB_NAMESPACE}::${LIB_NAME})
+    target_compile_features(${TARGET} PRIVATE cxx_std_17)
     if (${ADD_TO_TESTSUITE})
         add_test(${TARGET} ${TARGET})
     endif()

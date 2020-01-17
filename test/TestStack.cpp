@@ -2,8 +2,6 @@
 
 #include "gtest/gtest.h"
 
-#include <iostream>
-
 namespace {
 
     TEST(TestStack, testStack) {

@@ -43,13 +43,13 @@ namespace Graph::Fasp {
         }
 
         /**
-         * Checks if there is a path from src to dst in given graph
+         * Checks if there is a path from benchmark to dst in given graph
          * @tparam FORWARD_SEARCH if false search is done by going from head to tail of each edge instead
          *                         of normal direction
          * @param aGraph input graph
          * @param aSrc start vertex
          * @param aDst destination vertex
-         * @return true if path from src to dst exists
+         * @return true if path from benchmark to dst exists
          */
         template<bool FORWARD_SEARCH = true>
         bool pathExistsDFS(const Graph<VERTEX_TYPE> &aGraph,
@@ -82,11 +82,11 @@ namespace Graph::Fasp {
         }
 
         /**
-         * Checks if there is a path from src to dst in given graph
+         * Checks if there is a path from benchmark to dst in given graph
          * @param aGraph input graph
          * @param aSrc start vertex
          * @param aDst destination vertex
-         * @return pair [pathExist, path] if (pathExist) then path contain vertices of path from src to dst, otherwise path may contain garbage
+         * @return pair [pathExist, path] if (pathExist) then path contain vertices of path from benchmark to dst, otherwise path may contain garbage
          */
         auto findPathDFS(const Graph<VERTEX_TYPE> &aGraph,
                          const typename Graph<VERTEX_TYPE>::Vertex &aSrc,
@@ -115,7 +115,7 @@ namespace Graph::Fasp {
                             path.emplace_back(currentVertex);
                             if (currentVertex == aSrc) break;
                         }
-                        // Finally reverse it to have path from src to dst
+                        // Finally reverse it to have path from benchmark to dst
                         std::reverse(path.begin(), path.end());
                         return std::pair{true, path};
                     }
@@ -438,7 +438,7 @@ namespace Graph::Fasp {
             for (const auto &e : aGraph.getEdges()) {
                 if (blueEdges.find(e) != blueEdges.end()) continue; // e is in 'blue edges' set
 
-                // Optimization, if there is no path back from dst to src, then edge has no cycles.
+                // Optimization, if there is no path back from dst to benchmark, then edge has no cycles.
                 if (!aUtils.pathExistsDFS(aGraph, e.dst, e.src)) continue;
 
                 // Find isolated cycles of edge 'e'. If there are no iso-cycles then continue with next edge.

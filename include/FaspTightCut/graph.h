@@ -1,7 +1,3 @@
-//
-// Created by gonciarz on 2019-03-04.
-//
-
 #ifndef GRAPH_H
 #define GRAPH_H
 

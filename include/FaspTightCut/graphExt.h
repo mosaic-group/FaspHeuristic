@@ -1,7 +1,3 @@
-//
-// Created by gonciarz on 2019-03-18.
-//
-
 #ifndef GRAPHEXT_H
 #define GRAPHEXT_H
 

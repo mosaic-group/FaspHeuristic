@@ -1,5 +1,5 @@
-#include "../include/FaspTightCut/graph.h"
-#include "graph/graphIO.h"
+#include "FaspTightCut/graphIO.h"
+#include "FaspTightCut/graph.h"
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
