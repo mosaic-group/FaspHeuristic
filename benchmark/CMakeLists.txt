@@ -6,7 +6,7 @@ find_package(HDF5 REQUIRED)
 
 add_executable(benchmark main.cpp tools/easylogging++.cc)
 target_link_libraries(benchmark PRIVATE ${HDF5_LIBRARIES} ${LIB_NAMESPACE}::${LIB_NAME})
-target_include_directories(benchmark PRIVATE .)
+target_include_directories(benchmark PRIVATE . ${HDF5_INCLUDE_DIR})
 
 if(CMAKE_COMPILER_IS_GNUCC)
     target_compile_options(benchmark PUBLIC $<$<CONFIG:Debug>:-O0 -g>)
