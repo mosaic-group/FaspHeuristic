@@ -30,7 +30,6 @@ add_subdirectory(${GOOGLETEST_DIRECTORY}/src ${GOOGLETEST_DIRECTORY}/build EXCLU
 macro(buildTarget TARGET SRC ADD_TO_TESTSUITE)
     add_executable(${TARGET} ${SRC})
     target_link_libraries(${TARGET}  gtest_main gmock_main ${LIB_NAMESPACE}::${LIB_NAME})
-    target_compile_features(${TARGET} PRIVATE cxx_std_17)
     if (${ADD_TO_TESTSUITE})
         add_test(${TARGET} ${TARGET})
     endif()
