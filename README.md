@@ -1,4 +1,4 @@
-## TIGHT-CUT FASP heuristic
+## TIGHT-CUT heuristic
 
 Library implementing **TIGHT-CUT** heuristic for solving **FASP** (Feedback Arc Set Problem).
 
