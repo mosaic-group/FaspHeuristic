@@ -24,4 +24,4 @@ build:
 test:
   stage: test
   script:
-    - ctest
+    - cd build; ctest
