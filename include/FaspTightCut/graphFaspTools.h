@@ -21,7 +21,7 @@ namespace Graph::FaspTools {
      * @return capacity of cut edges
      */
     template<typename EDGE_PROP_TYPE, typename VERTEX_TYPE>
-    static auto GR(const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<EDGE_PROP_TYPE, VERTEX_TYPE> &aWeights) {
+    static auto GR(const Graph<VERTEX_TYPE> &aGraph, const Ext::EdgeProperties<VERTEX_TYPE, EDGE_PROP_TYPE> &aWeights) {
         assert(std::is_signed<EDGE_PROP_TYPE>::value && "Weights are expected to be signed type");
 
         typename Graph<VERTEX_TYPE>::Vertices s1, s2;

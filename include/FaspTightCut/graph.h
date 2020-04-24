@@ -156,8 +156,8 @@ namespace Graph {
             Vertices &from = graph[aE.dst].from;
 
             // Check if there is no such a edge already (no duplication allowed)
-            assert(std::find(to.begin(), to.end(), aE.dst) == to.end() && "Destination vertex exists!");
-            assert(std::find(from.begin(), from.end(), aE.src) == from.end() && "Source vertex exists!");
+            assert(std::find(to.begin(), to.end(), aE.dst) == to.end() && "'to' edge exists!");
+            assert(std::find(from.begin(), from.end(), aE.src) == from.end() && "'from' edge exists!");
 
             to.emplace_back(aE.dst);
             from.emplace_back(aE.src);
