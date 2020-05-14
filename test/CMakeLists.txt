@@ -21,7 +21,9 @@ endif()
 
 # Add googletest directly to build. This defines the gtest and gtest_main targets.
 add_subdirectory(${GOOGLETEST_DIRECTORY}/src ${GOOGLETEST_DIRECTORY}/build EXCLUDE_FROM_ALL)
-
+# This is needed for clang (latest gcc-9 by default supports c++11)
+target_compile_features(gtest PUBLIC cxx_std_11)
+target_compile_features(gtest_main PUBLIC cxx_std_11)
 
 # =============================================================================
 # Build tests
