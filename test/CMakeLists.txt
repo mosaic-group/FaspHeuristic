@@ -28,6 +28,8 @@ target_compile_features(gtest_main PUBLIC cxx_std_11)
 # =============================================================================
 # Build tests
 # =============================================================================
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
 
 macro(buildTarget TARGET SRC ADD_TO_TESTSUITE)
     add_executable(${TARGET} ${SRC})
@@ -35,6 +37,9 @@ macro(buildTarget TARGET SRC ADD_TO_TESTSUITE)
     if (${ADD_TO_TESTSUITE})
         add_test(${TARGET} ${TARGET})
     endif()
+
+    target_link_libraries(${TARGET} Threads::Threads)
+
 endmacro(buildTarget)
 
 buildTarget(testGraph TestGraph.cpp ON)
