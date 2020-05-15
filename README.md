@@ -8,12 +8,12 @@ If you use this library in an academic context, please cite the following paper:
 ### How to clone code
 Run from command line following command:
 ```bash
-git clone https://github.com/krzysg/FaspHeuristic.git
+git clone https://git.mpi-cbg.de/mosaic/FaspHeuristic.git
 ```
 
 of if you prefere to access github with SSH keys:
 ```bash
-git clone git@github.com:krzysg/FaspHeuristic.git
+git clone git@git.mpi-cbg.de:mosaic/FaspHeuristic.git
 ```
 
 ### How to compile
