@@ -19,24 +19,68 @@ git clone git@github.com:krzysg/FaspHeuristic.git
 ### How to compile
 Library has these options available:
 ```
+FASP_HEURISTIC_INSTALL (default: ON)
+FASP_HEURISTIC_BUILD_TOOLS (default: ON)
 FASP_HEURISTIC_BUILD_TESTS (default: OFF)
 FASP_HEURISTIC_BUILD_BENCHMARKS (default: OFF)
-FASP_HEURISTIC_INSTALL (default: ON)
 ```
 
-To compile, test and install it in default location please execute following commands (starting in root directory after downloading):
+To compile, build tools and install it in default location please execute following commands (starting in root directory after downloading):
 ```bash
 mkdir build
 cd build
-cmake -DFASP_HEURISTIC_BUILD_TESTS=ON -DCMAKE_BUILD_TYPE=Release ..
+cmake -DCMAKE_BUILD_TYPE=Release ..
 make
-ctest
 make install
 ```
 
 To install library in non default location in `cmake` line provide also prefix for install direcotry:
 ```bash
 -DCMAKE_INSTALL_PREFIX=/user/specified/install/directory
+```
+### Tools
+Two command line tools are available one for unweighted and one for weighted graphs:
+- ```tightCut```
+- ```tightCutWeighted```
+
+Both accept graph provided from standard input.
+
+Format of input graph for unweighted case is a:  
+```<src vertex> <optional dst vertex1> <optional dst vertex 2> ...```
+
+For example:
+```asm
+1 3 4 5
+3 6
+7
+6 7
+7 1
+```
+
+If above definition of graph is saved in a file with name ```graph.def``` then to calculate FASP run:
+```asm
+$ tightCut < graph.def 
+Input graph: #vertices=6 #edges=6
+FASP size (#edges to cut): 1
+```
+
+Format of input graph for weighted case is:  
+```<vertex>```  
+```<src vertex> <dst vertex> <weight of edge>```  
+
+For example:
+```asm
+1 2 5
+2 3 4
+8
+3 1 10
+```
+
+Output with above definition of graph:
+```asm
+$ tightCutWeighted < graph.def 
+Input graph: #vertices=4 #edges=3
+FASP size (#edges to cut): 1, capacity of edges: 4
 ```
 
 ### How to use in your project

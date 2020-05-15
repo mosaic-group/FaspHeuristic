@@ -5,9 +5,11 @@ cmake_minimum_required(VERSION 3.10)
 project(FaspTightCut VERSION 1.0.0 LANGUAGES C CXX)
 
 #project options
+option(FASP_HEURISTIC_INSTALL "Install FaspHeuristic?" ON)
+option(FASP_HEURISTIC_BUILD_TOOLS "Build tools?" ON)
 option(FASP_HEURISTIC_BUILD_TESTS "Build tests?" OFF)
 option(FASP_HEURISTIC_BUILD_BENCHMARKS "Build benchmarks?" OFF)
-option(FASP_HEURISTIC_INSTALL "Install FaspHeuristic?" ON)
+
 
 ###############################################################################
 # Create FASP TightCut library
@@ -57,6 +59,13 @@ if (FASP_HEURISTIC_INSTALL)
             ${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}ConfigVersion.cmake
             DESTINATION
             lib/cmake/${LIB_NAME})
+endif()
+
+###############################################################################
+# Tools
+###############################################################################
+if (FASP_HEURISTIC_BUILD_TOOLS)
+    add_subdirectory(tools)
 endif()
 
 ###############################################################################
