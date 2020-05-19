@@ -29,7 +29,7 @@ To compile, build tools and install it in default location please execute follow
 ```bash
 mkdir build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake ..
 make
 make install
 ```
