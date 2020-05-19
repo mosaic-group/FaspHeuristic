@@ -4,12 +4,21 @@
 cmake_minimum_required(VERSION 3.10)
 project(FaspTightCut VERSION 1.0.0 LANGUAGES C CXX)
 
-#project options
+# project options
 option(FASP_HEURISTIC_INSTALL "Install FaspHeuristic?" ON)
 option(FASP_HEURISTIC_BUILD_TOOLS "Build tools?" ON)
 option(FASP_HEURISTIC_BUILD_TESTS "Build tests?" OFF)
 option(FASP_HEURISTIC_BUILD_BENCHMARKS "Build benchmarks?" OFF)
 
+# build type
+# Set a default build type if none was specified
+set(FASP_HEURISTIC_DEFAULT_BUILD_TYPE "Release")
+if (NOT CMAKE_BUILD_TYPE)
+    message(STATUS "Setting build type to: '${FASP_HEURISTIC_DEFAULT_BUILD_TYPE}'")
+    set(CMAKE_BUILD_TYPE "${FASP_HEURISTIC_DEFAULT_BUILD_TYPE}" CACHE STRING "" FORCE)
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif()
+message(STATUS "FASP: Build type [" ${CMAKE_BUILD_TYPE} "]")
 
 ###############################################################################
 # Create FASP TightCut library
