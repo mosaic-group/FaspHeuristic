@@ -25,7 +25,7 @@ FASP_HEURISTIC_BUILD_TESTS (default: OFF)
 FASP_HEURISTIC_BUILD_BENCHMARKS (default: OFF)
 ```
 
-To build the tools, execute following commands (starting in the root directory after downloading):
+To build the tools, execute the following commands (starting in the root directory after downloading):
 ```bash
 mkdir build
 cd build
@@ -33,29 +33,31 @@ cmake ..
 make
 ```
 
-The command line tools will be placed in `build/tools`.
+The command-line tools will be placed in `build/tools`.
 
 To install the library in the default location, execute:
 ```bash
 make install
 ```
 
-To install library in a different location, provide the prefix for the installation directory when running `cmake`:
+To install the library in a different location, provide the prefix for the installation directory when running `cmake`:
 ```bash
 cmake -DCMAKE_INSTALL_PREFIX=/user/specified/install/directory ..
 ```
 
-### Command line tools
-Two command line tools are provided for convenience, one for unweighted and one for weighted graphs:
+### Command-line tools
+Two command-line tools are provided for convenience, one for unweighted and one for weighted graphs:
 - ```tightCut```
 - ```tightCutWeighted```
 
-Both tools read the graph from the standard input. 
+Both tools read the graph from the standard input.
 
 Vertices are specified as non-negative integers. Any integer may be used, regardless of the total number of vertices.
 
-The format of the input graph for the unweighted case is an adjacency list:  
-```<source vertex> <optional destination vertex1> <optional destination vertex 2> ...```
+The format of the input graph for the unweighted case is an adjacency list:
+```plain
+<src vertex> <optional dst vertex 1> <optional dst vertex 2> ...
+```
 
 For example:
 ```plain
@@ -81,10 +83,9 @@ The format of the input graph for the weighted case is as follows. Each line mus
 ```plain
 <vertex>
 ```
-
-or an edge followed by the edge weight:
+Or an edge followed by the edge weight:
 ```plain
-<source vertex> <destination vertex> <weight of edge>
+<src vertex> <dst vertex> <weight of edge>
 ```
 
 For example:
