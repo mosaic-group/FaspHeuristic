@@ -25,57 +25,72 @@ FASP_HEURISTIC_BUILD_TESTS (default: OFF)
 FASP_HEURISTIC_BUILD_BENCHMARKS (default: OFF)
 ```
 
-To build and install the tools in the default location please execute following commands (starting in root directory after downloading):
+To build the tools, execute following commands (starting in the root directory after downloading):
 ```bash
 mkdir build
 cd build
 cmake ..
 make
+```
+
+The command line tools will be placed in `build/tools`.
+
+To install the library in the default location, execute:
+```bash
 make install
 ```
 
-To install library in a different location, provide the prefix for the installation directory on the `cmake` command line:
+To install library in a different location, provide the prefix for the installation directory when running `cmake`:
 ```bash
--DCMAKE_INSTALL_PREFIX=/user/specified/install/directory
+cmake -DCMAKE_INSTALL_PREFIX=/user/specified/install/directory ..
 ```
-### Tools
+
+### Command line tools
 Two command line tools are provided for convenience, one for unweighted and one for weighted graphs:
 - ```tightCut```
 - ```tightCutWeighted```
 
-Both tools read the graph from the standard input.
+Both tools read the graph from the standard input. 
+
+Vertices are specified as non-negative integers. Any integer may be used, regardless of the total number of vertices.
 
 The format of the input graph for the unweighted case is an adjacency list:  
 ```<source vertex> <optional destination vertex1> <optional destination vertex 2> ...```
 
-The vertices are specified as integers. Any integer may be used, regardless of the size of the graph.
-
 For example:
 ```plain
-1 3 4 5
-3 6
-7
-6 7
-7 1
+1 2 3 6
+2 3
+3 4 6
+4 1
+5
+6 3
 ```
 
 If above definition of graph is saved in a file with name ```graph.def``` then to calculate FASP run:
 ```plain
 $ tightCut < graph.def
-Input graph: #vertices=6 #edges=6
-FASP size (#edges to cut): 1
+# Input graph: #vertices=6 #edges=8
+# FASP size (#edges to cut): 2
+# Feedback arcs:
+6 3
+3 4
 ```
 
 The format of the input graph for the weighted case is as follows. Each line must either contain a single vertex:  
-```<vertex>```  
+```plain
+<vertex>
+```
 
 or an edge followed by the edge weight:
-```<source vertex> <destination vertex> <weight of edge>```  
+```plain
+<source vertex> <destination vertex> <weight of edge>
+```
 
 For example:
 ```plain
 1 2 5
-2 3 4
+2 3 4.5
 8
 3 1 10
 ```
@@ -83,8 +98,10 @@ For example:
 Output with above definition of graph:
 ```plain
 $ tightCutWeighted < graph.def
-Input graph: #vertices=4 #edges=3
-FASP size (#edges to cut): 1, capacity of edges: 4
+# Input graph: #vertices=4 #edges=3
+# FASP size (#edges to cut): 1, capacity of edges: 4.5
+# Feedback arcs:
+2 3
 ```
 
 ### How to use in your project
