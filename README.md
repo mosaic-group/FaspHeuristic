@@ -5,19 +5,19 @@ Library implementing **TIGHT-CUT** heuristic for solving **FASP** (Feedback Arc 
 If you use this library in an academic context, please cite the following paper:
 - *Michael Hecht, Krzysztof Gonciarz, Szabolcs Horvát* [Tight Localizations of Feedback Sets](https://arxiv.org/abs/2001.01440)
 
-### How to clone code
-Run from command line following command:
+### How to obtain the code
+Clone the git repository by running the following command from the command line:
 ```bash
 git clone https://git.mpi-cbg.de/mosaic/FaspHeuristic.git
 ```
 
-of if you prefere to access github with SSH keys:
+If you prefer to access GitLab with SSH keys, use:
 ```bash
 git clone git@git.mpi-cbg.de:mosaic/FaspHeuristic.git
 ```
 
 ### How to compile
-Library has these options available:
+The library has these options available:
 ```
 FASP_HEURISTIC_INSTALL (default: ON)
 FASP_HEURISTIC_BUILD_TOOLS (default: ON)
@@ -25,7 +25,7 @@ FASP_HEURISTIC_BUILD_TESTS (default: OFF)
 FASP_HEURISTIC_BUILD_BENCHMARKS (default: OFF)
 ```
 
-To compile, build tools and install it in default location please execute following commands (starting in root directory after downloading):
+To build and install the tools in the default location please execute following commands (starting in root directory after downloading):
 ```bash
 mkdir build
 cd build
@@ -34,22 +34,24 @@ make
 make install
 ```
 
-To install library in non default location in `cmake` line provide also prefix for install direcotry:
+To install library in a different location, provide the prefix for the installation directory on the `cmake` command line:
 ```bash
 -DCMAKE_INSTALL_PREFIX=/user/specified/install/directory
 ```
 ### Tools
-Two command line tools are available one for unweighted and one for weighted graphs:
+Two command line tools are provided for convenience, one for unweighted and one for weighted graphs:
 - ```tightCut```
 - ```tightCutWeighted```
 
-Both accept graph provided from standard input.
+Both tools read the graph from the standard input.
 
-Format of input graph for unweighted case is a:  
-```<src vertex> <optional dst vertex1> <optional dst vertex 2> ...```
+The format of the input graph for the unweighted case is an adjacency list:  
+```<source vertex> <optional destination vertex1> <optional destination vertex 2> ...```
+
+The vertices are specified as integers. Any integer may be used, regardless of the size of the graph.
 
 For example:
-```asm
+```plain
 1 3 4 5
 3 6
 7
@@ -58,18 +60,20 @@ For example:
 ```
 
 If above definition of graph is saved in a file with name ```graph.def``` then to calculate FASP run:
-```asm
-$ tightCut < graph.def 
+```plain
+$ tightCut < graph.def
 Input graph: #vertices=6 #edges=6
 FASP size (#edges to cut): 1
 ```
 
-Format of input graph for weighted case is:  
+The format of the input graph for the weighted case is as follows. Each line must either contain a single vertex:  
 ```<vertex>```  
-```<src vertex> <dst vertex> <weight of edge>```  
+
+or an edge followed by the edge weight:
+```<source vertex> <destination vertex> <weight of edge>```  
 
 For example:
-```asm
+```plain
 1 2 5
 2 3 4
 8
@@ -77,8 +81,8 @@ For example:
 ```
 
 Output with above definition of graph:
-```asm
-$ tightCutWeighted < graph.def 
+```plain
+$ tightCutWeighted < graph.def
 Input graph: #vertices=4 #edges=3
 FASP size (#edges to cut): 1, capacity of edges: 4
 ```
@@ -87,7 +91,7 @@ FASP size (#edges to cut): 1, capacity of edges: 4
 TIGHT-CUT library can be used as a submodule of your project or can be used as a regular installed library.
 
 ### Simple example
-Simple project using installed TIGHT-CUT library requires only two files `main.cpp` with a code and simple configuration `CMakeLists.txt` file.
+Simple project using installed TIGHT-CUT library requires only two files: `main.cpp` with the code and a simple configuration `CMakeLists.txt` file.
 
 **main.cpp**
 ```c++
@@ -143,4 +147,3 @@ find_package(FaspTightCut REQUIRED)
 add_executable(main main.cpp)
 target_link_libraries(main FaspTightCut::FaspTightCut)
 ```
-
