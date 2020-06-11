@@ -51,13 +51,16 @@ int main() {
     }
 
     // Print info about read graph
-    std::cout << "Input graph: #vertices=" << graph.getNumOfVertices() << " #edges=" << graph.getNumOfEdges() << std::endl;
+    std::cout << "# Input graph: #vertices=" << graph.getNumOfVertices() << " #edges=" << graph.getNumOfEdges() << std::endl;
 
     // Run TIGHT-CUT heuristic
     auto [capacity, removedEdges, saEdgesCnt, saRndEdgesCnt, redRndEdgesCnt] = Graph::Fasp::tightCut<true, VERTEX_TYPE>(graph);
 
     // Print result
-    std::cout << "FASP size (#edges to cut): " << capacity << std::endl;
+    std::cout << "# FASP size (#edges to cut): " << capacity << std::endl;
+    std::cout << "# Feedback arcs:" << std::endl;
+    for (const auto &edge : removedEdges)
+        std::cout << edge.src << ' ' << edge.dst << '\n';
 
     return 0;
 }
