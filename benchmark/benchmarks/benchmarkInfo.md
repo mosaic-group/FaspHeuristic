@@ -3,7 +3,7 @@ Description of what is where in directories.
 
 ### FASP-benchmarks
 Generated graphs used in benchmarks. FASP of this graphs is precomputed using exact ILP solver.
- 
+
 ### benchILPvsHEURISTIC
 Benchmarks TIGHT-CUT and GR heuristics using precomputed graphs from FASP-benchmarks directory.
 
@@ -26,6 +26,8 @@ Some results showing how time needed by solver as:
 
 ### benchIsoCut
 Benchmarks ability of pure ISO-CUT to solve the FASP problem.
-It shows percentage of cut FASP edges vs FASP size. 
-(NOTE: generated benchmarks have old naming, previous name of ISO-CUT was... SuperALgorithm)
+It shows percentage of cut FASP edges vs FASP size.
+(NOTE: generated benchmarks have old naming, previous name of ISO-CUT was... SuperAlgorithm)
 
+### benchCircuit
+Results for graphs generated from circuit testing datasets (ISCAS and ISPD98). Graphs sourced from https://github.com/alidasdan/graph-benchmarks.
